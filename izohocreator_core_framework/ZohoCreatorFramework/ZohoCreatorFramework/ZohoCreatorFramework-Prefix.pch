@@ -1,7 +1,0 @@
-//
-// Prefix header for all source files of the 'ZohoCreatorFramework' target in the 'ZohoCreatorFramework' project
-//
-
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-#endif
