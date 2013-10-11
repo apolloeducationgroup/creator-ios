@@ -10,7 +10,7 @@
 
 @implementation ZCSections
 
-@synthesize sectionList=_sectionList,visibleSectionCount=_visibleSectionCount,visibleSectionList=_visibleSectionList,sectionsDict;
+@synthesize sectionList=_sectionList,visibleSectionCount=_visibleSectionCount,visibleSectionList=_visibleSectionList,sectionsDict,hasLicense=_hasLicense;
 
 - (ZCSections*) initZCSections
 {

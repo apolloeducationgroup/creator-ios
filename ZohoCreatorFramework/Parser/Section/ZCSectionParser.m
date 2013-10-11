@@ -39,11 +39,13 @@
 -(void)parserDidStartDocument:(NSXMLParser *)parser  {
         
     self->_zcSections = [[ZCSections alloc] initZCSections];
+    [_zcSections setHasLicense:YES];
     columnDict = [[NSMutableDictionary alloc]init];
     rowsDict = [[NSMutableDictionary alloc]init];
     sectionsArray = [[NSMutableArray alloc]init];
     sectionsDict = [[NSMutableDictionary alloc]init];
     layoutType = ZCLayoutCreator;
+
     /*
      ZCLayoutCreator = 1,
      ZCLayoutSliderMenu = 2,
@@ -52,6 +54,7 @@
      ZCLayoutTapMenuTop = 5,
      ZCLayoutPlainList = 6,
      */
+    
     columnsArray = [[NSMutableArray alloc]init];
 }
 
@@ -98,6 +101,9 @@
     {
         if([elementName isEqualToString:@"Sections"])  {
             _baseElement = BASE_SECTIONS;
+        }
+        else if([elementName isEqualToString:@"LicenseEnabled"]) {
+            _hasLicense = YES;
         }
     }
     _currentElementName = elementName;
@@ -148,6 +154,14 @@
             }
         }
     }
+    else if(_hasLicense == YES) {
+        if([string isEqualToString:@"false"]) {
+            [_zcSections setHasLicense:NO];
+        }
+        else {
+            [_zcSections setHasLicense:YES];
+        }
+    }
     ////// //NSLog(@"Coming out");
 }
 
@@ -184,12 +198,14 @@
             [columnsArray addObject:[columnDict mutableCopy]];
         }
         
-        
         if([_zcComponent type] == [ZCComponent COMPONENT_FORM] || [_zcComponent type] == [ZCComponent COMPONENT_VIEW] || [_zcComponent type] == [ZCComponent COMPONENT_CALENDAR] || [_zcComponent type] == [ZCComponent COMPONENT_HTML]) {
             [_zcSection addZCComponent:_zcComponent];
         }
        _sectionElement= SECTION_SECTION;
-    }    
+    }
+    else if([elementName isEqualToString:@"LicenseEnabled"]) {
+        _hasLicense = NO;
+    }
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {

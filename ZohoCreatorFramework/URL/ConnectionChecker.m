@@ -36,6 +36,7 @@
     else {
         // //////// //NSLog(@"isReachable NO");
     }
+    NSLog(@"Rechablity %d",isReachable);
     return isReachable;
 }
 

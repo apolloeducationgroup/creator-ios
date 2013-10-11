@@ -41,6 +41,7 @@ enum FIELDLIST {
     FORMULA=15,
     NEW_DROPDOWN=29,
     EXTERNAL=95,
+    PAYMENT=511,
     
     NEW_DISPLAY_DROPDOWN = 1100,
     NEW_DISPLAY_RADIO = 1101,
@@ -82,6 +83,7 @@ enum FIELDLIST {
 + (int) ZCNewRadio;
 + (int) ZCNewCheckbox;
 + (int) ZCNewMultiSelect;
++ (int) ZCPayment;
 
 + (BOOL) isSkipField : (NSInteger) fieldType;
 + (NSInteger) getFieldInteger : (NSString*) fieldString;

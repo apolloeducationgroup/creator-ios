@@ -79,6 +79,22 @@
     return imageFields;
 }
 
+- (NSInteger) hasUpComingField {
+    
+    for(NSInteger index=0;index<[_fields count];index++) {
+        ZCField *_field = [_fields objectAtIndex:index];
+        NSLog(@"Field typeeeeeeeeeeeeeee %d",[_field fieldType]);
+        if([_field fieldType] == [ZCFieldList ZCCrm]) {
+            NSLog(@"returning field type  CRM");
+            return UPCOMING_CRM;
+        }
+        else if([_field fieldType] == [ZCFieldList ZCPayment]) {
+            return UPCOMING_PAYMENT;
+        }
+    }
+    return UPCOMING_NONE;
+}
+
 
 - (id) copyWithZone:(NSZone *)zone {
     ZCForm *copyForm = [[ZCForm alloc] initZCForm];

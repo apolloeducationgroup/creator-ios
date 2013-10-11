@@ -20,6 +20,8 @@
 
 @implementation ZCUserParser
 
+@synthesize userObject=_userObject;
+
 - (ZCUserParser*) initZCUserParser : (NSString*) xmlString;
 {
     self = [super init];
@@ -32,6 +34,7 @@
 
 -(void)parserDidStartDocument:(NSXMLParser *)parser  {
     
+    _userObject = [[ZOHOUser alloc] initZOHOUserObject];
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict   {
@@ -64,7 +67,7 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     
-    
+    _userObject = [ZOHOUser userObject];
 }
 
 

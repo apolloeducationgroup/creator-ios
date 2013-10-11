@@ -245,7 +245,6 @@
     }
     [recordXML appendString:@"</view></viewlist></application></applicationlist></ZohoCreator>"];
     return recordXML;
-    
 }
 
 + (NSString*) bulkDeleteRecordStringXML: (NSString*) appLinkName : (NSString*) formLinkName : (NSMutableArray*) idValues {

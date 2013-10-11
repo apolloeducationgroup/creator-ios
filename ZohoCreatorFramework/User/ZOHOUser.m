@@ -108,6 +108,15 @@ static ZOHOUser *userCredential = nil;
     return self;
 }
 
+
+- (id) initZOHOUserObject {
+    
+    self = [super init];
+    if (self) {
+    }
+    return self;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self->_userName=[aDecoder decodeObjectForKey:@"userName"];

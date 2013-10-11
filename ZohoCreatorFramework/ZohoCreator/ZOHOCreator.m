@@ -18,8 +18,13 @@ static ZOHOCreator *creatorObject = nil;
 
 + (ZOHOCreator*) getObject {
     
+
     if([ZOHOUser userObject] != nil) {
+        if(creatorObject==nil) {
+            [ZOHOCreator constructZOHOCreator:[ZOHOUser userObject]];
+        }
         return creatorObject;
+
     }
     else {
         [NSException raise:@"ZOHO Creator" format:@"User Authrntication not present"];
@@ -353,8 +358,9 @@ static ZOHOCreator *creatorObject = nil;
 + (NSMutableArray*) updateRecordWithIDs : (ZCForm*) form : (NSMutableArray*) records
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    NSString *updateRecord = [URLConstructor submitRecordURL];;
-    NSString *updateRecordString = [URLConstructor postAuthTokenWithAppOwner];
+    NSString *updateRecord = [URLConstructor submitRecordURL];
+    
+    NSString *updateRecordString = [URLConstructor postAuthTokenWithAppOwner:[[form application] appOwner]];
     updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@",[ZCRecordString bulKUpdateRcordStringXML:form :records]];
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:updateRecord :updateRecordString :[URLConnector POSTMETHOD]];
     NSString *response = [urlConnect apiResponse];

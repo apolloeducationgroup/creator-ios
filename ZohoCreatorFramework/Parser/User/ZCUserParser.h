@@ -16,6 +16,8 @@
 @private NSString *_currentElementName;
 }
 
+@property (nonatomic,retain) ZOHOUser *userObject;
+
 - (ZCUserParser*) initZCUserParser : (NSString*) xmlString;
 
 @end

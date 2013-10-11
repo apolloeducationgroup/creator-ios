@@ -12,6 +12,8 @@
 #import "ZCUserParser.h"
 @implementation ZCUserDetailsFetcher
 
+@synthesize userObject=_userObject;
+
 - (ZCUserDetailsFetcher*) initUserDetailFetcher {
     
     self = [super init];
@@ -22,16 +24,13 @@
             NSString * urlString=[URLConstructor userDetailsURL];
             URLConnector *connector = [[URLConnector alloc] initFetcher:urlString];
             ZCUserParser *parser = [[ZCUserParser alloc]initZCUserParser:[connector apiResponse] ];
+            _userObject = [parser userObject];
             [ZOHOCreator constructZOHOCreator:[ZOHOUser userObject]];
             NSString *filePath = [ArchiveUtil archiveFilePath:@"Login"];
             [EncodeObject encode:filePath :@"Login" :[ZOHOUser userObject]];
-            
         }
         else
         {
-            //// //NSLog(@"\n\nnot net\n\n");
-            
-            //self->_applicationList = (ZCApplicationList*) [DecodeObject decode :zcAppListFile:@"MyAppList"];
             [NSException raise:@"Network Unavailable" format:@"No network available to connnect to setver"];
         }
     }

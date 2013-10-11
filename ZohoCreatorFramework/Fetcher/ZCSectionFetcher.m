@@ -111,7 +111,7 @@
         URLConnector *connection = [[URLConnector alloc] initFetcher:sectionURL];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         NSString *sectionXML = [connection apiResponse];
-        //NSLog(@"Section XML %@",sectionXML);
+        NSLog(@"Section XML %@",sectionXML);
         @try {
             
             ZCSectionParser *parser = [[ZCSectionParser alloc] initZCSectionParser:sectionXML:_application];

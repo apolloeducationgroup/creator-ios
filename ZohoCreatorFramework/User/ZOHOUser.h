@@ -27,10 +27,10 @@
 @property (nonatomic,retain) NSArray *emailIds;
 @property (nonatomic,retain) NSString *userLocale;
 
-
 + (ZOHOUser*) userObject;
 - (id) init;
 - (ZOHOUser*) initZOHOUser : (NSString*) userName : (NSString*) password;
 - (void) removeZCuser;
+- (id) initZOHOUserObject;
 
 @end

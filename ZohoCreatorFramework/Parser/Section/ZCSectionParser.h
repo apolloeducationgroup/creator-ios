@@ -72,6 +72,7 @@ enum SECTION {
     NSInteger _sectionElement;
     ZCSection *_zcSection;
     ZCComponent *_zcComponent;
+    BOOL _hasLicense;
 @private ZCApplication *_application;
 }
 

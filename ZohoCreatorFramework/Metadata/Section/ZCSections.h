@@ -11,9 +11,9 @@
 
 @interface ZCSections : NSObject  {
     
-    
 }
 
+@property BOOL hasLicense;
 @property (nonatomic,retain) NSMutableArray *sectionList;
 @property (nonatomic,retain) NSMutableArray *visibleSectionList;
 @property (getter = visibleSectinoCount) NSInteger visibleSectionCount;

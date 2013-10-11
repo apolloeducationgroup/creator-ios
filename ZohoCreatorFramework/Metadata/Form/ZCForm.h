@@ -13,8 +13,18 @@
 
 @class ZCApplication,ZCButton;
 
+
+enum UPCOMING_FIELDS {
+    
+    UPCOMING_CRM = 1,
+    UPCOMING_PAYMENT=2,
+    UPCOMING_NONE = -1,
+};
+
+
 @interface ZCForm : ZCComponent <NSCopying> {
     
+ 
 }
 
 @property BOOL hasOnLoad;
@@ -36,5 +46,6 @@
 - (NSArray*) getFileUploadFields;
 - (NSArray*) getImageFields;
 - (NSArray*) getFieldsByType : (NSInteger) fieldType;
+- (NSInteger) hasUpComingField;
 
 @end

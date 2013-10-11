@@ -148,6 +148,10 @@
     return NEW_DISPLAY_MULTISELECT;
 }
 
++ (int)ZCPayment {
+    return PAYMENT;
+}
+
 + (BOOL) isSkipField : (NSInteger) fieldType {
     
     if(fieldType == [ZCFieldList ZCAutoNumber] || fieldType == [ZCFieldList ZCFormula] || fieldType==[ZCFieldList ZCCrm] || fieldType == [ZCFieldList ZCExternal]) {

@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ZOHOUser.h"
 
 @interface ZCUserDetailsFetcher : NSObject
+@property (nonatomic,retain) ZOHOUser *userObject;
 - (ZCUserDetailsFetcher*) initUserDetailFetcher;
 @end
