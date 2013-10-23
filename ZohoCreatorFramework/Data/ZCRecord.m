@@ -130,8 +130,13 @@
             if(newImage != nil) {
                 
                 NSString *uploadURL = [URLConstructor uploadURL:[self.form.application appLinkName] :[self.form linkName] :fieldName :recordID :@"file" :[self.form.application appOwner]];
+                
+                NSLog(@"file name %@",fieldName);
+                NSLog(@"URL for Image Upload   %@",uploadURL);
+                
+                
                 URLConnector *url = [[URLConnector alloc] initFetcherPostImage:uploadURL :newImage :[URLConnector MULTIPARTPOST]];
-                [url apiResponse];
+                NSLog(@" Image Response %@",[url apiResponse]);
             }
         }
     }
@@ -139,6 +144,8 @@
 }
 
 - (BOOL)  uploadFiles : (NSString*) recordID {
+    
+    NSLog(@"Coming to upload files11111");
     
     NSArray *imageFields = [self.form getFileUploadFields];
     if(imageFields != nil && imageFields.count > 0) {
@@ -155,7 +162,7 @@
                 
                 
                 URLConnector *url = [[URLConnector alloc] initFetcherPostImage:uploadURL :newImage :[URLConnector MULTIPARTPOST]];
-                [url apiResponse];
+                NSLog(@" Image Response %@",[url apiResponse]);
             }
         }
     }
