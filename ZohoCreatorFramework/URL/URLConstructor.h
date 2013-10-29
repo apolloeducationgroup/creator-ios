@@ -14,6 +14,8 @@
 
 @interface URLConstructor : NSObject
 
++ (NSString*) formURL : (NSString*) appLinkName formName : (NSString*) formLinkName withApplicationOwner: (NSString *) appOwner;
+
 + (NSString*) appListURL;
 + (NSString*) sharedAppListURL;
 + (NSString*) sharedAppListURL : (NSString *) groupid;

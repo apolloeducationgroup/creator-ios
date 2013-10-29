@@ -8,6 +8,7 @@
 
 #import "FormParser.h"
 
+
 @interface FormParser (hidden)
 
 - (void) formParserXML;
@@ -563,11 +564,9 @@
 
 @end
 
-/****
  
- private implementation
+// private implementation
  
- ****/
 
 @implementation FormParser (hidden)
 
@@ -581,13 +580,7 @@
     [_xmlParser parse];
 }
 
-
-
 @end
-
-
-
-
 
 
 

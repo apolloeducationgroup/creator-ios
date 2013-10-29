@@ -23,6 +23,18 @@ static NSString *SERVICE_NAME;
 
 @implementation URLConstructor
 
++ (NSString*) formURL : (NSString*) appLinkName formName : (NSString*) formLinkName withApplicationOwner: (NSString *) appOwner {
+    
+    NSString *formURL = [NSString stringWithFormat:@"/api/%@/json/%@/form/%@/fields/",appOwner,appLinkName,formLinkName];
+    formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
+    formURL = [URLConstructor appendAuthToken:formURL];
+    formURL = [formURL stringByAppendingString:@"&metaData=complete"];
+//    formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
+    NSLog(@"form New URL %@",formURL);
+    return formURL;
+}
+
+
 + (NSString*) appListURL  {
     
     NSString *appList = @"/api/xml/applications/";
