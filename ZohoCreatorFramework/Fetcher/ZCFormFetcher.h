@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ConnectionChecker.h"
 #import "ZCForm.h"
+#import "FormJSONParser.h"
 #import "URLConstructor.h"
 #import "URLConnector.h"
 #import "FormParser.h"

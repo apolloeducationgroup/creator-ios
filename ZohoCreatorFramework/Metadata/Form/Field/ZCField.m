@@ -13,8 +13,9 @@
 @synthesize fieldName=_fieldName,fieldType=_fieldType,maxCharacter=_maxCharacter,fieldDisplayName=_fieldDisplayName,initialValues=_initialValues,isRequired=_isRequired,options=_options;
 @synthesize relatedComponent=_relatedComponent,hasOnUserScript=_hasOnUserScript,addNewLinkText=_addNewLinkText,currencyType=_currencyType,subForm=_subForm;
 @synthesize hasSubFormOnUserScript=_hasSubFormOnUserScript,hasSubFormAddEvent=_hasSubFormAddEvent,hasSubFormDeleteEvent=_hasSubFormDeleteEvent,optionkeys=_optionkeys;
-@synthesize hasInvolvedInFormula=_hasInvolvedInFormula,isHidden=_isHidden;
-@synthesize subformRecords=_subformRecords;
+@synthesize hasInvolvedInFormula=_hasInvolvedInFormula,isHidden=_isHidden,isUnique=_isUnique,isAdminOnly=_isAdminOnly;
+@synthesize subformRecords=_subformRecords,toolTip=_toolTip,isLookupField=_isLookupField,hasAllowNewEntries=_hasAllowNewEntries,decimalLength=_decimalLength;
+@synthesize currencyDisplay=_currencyDisplay,currencyName=_currencyName,isUrlLinkName=_isUrlLinkName,isUrlTitle=_isUrlTitle,hasVisiblity=_hasVisiblity;
 - (ZCField*) initZCField {
     
     self = [super init];
@@ -24,6 +25,7 @@
         self->_isRequired = YES;
         self->_initialValues = nil;
         self->_options = [[NSMutableArray alloc] init];
+        self->_optionkeys = [[NSMutableArray alloc] init];
     }
     return self;
 }

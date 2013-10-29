@@ -17,6 +17,7 @@
 
 @class ZCForm;
 
+
 enum RESULT
 {
     RESULT_DISPLAYNAME=1,
@@ -80,5 +81,5 @@ enum FIELD_ELEMENT
 
 - (FormParser*) initFormParser:(NSString *) xmlString  : (ZCComponent*) component;
 
-
 @end
+

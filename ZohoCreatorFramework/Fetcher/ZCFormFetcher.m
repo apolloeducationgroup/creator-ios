@@ -228,9 +228,9 @@
     return form;
 }
 
-
 - (ZCForm*) fetchFromServer {
     
+    NSLog(@"Coming to ZCForm ");
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSString *formMetaURL;
     if(_recordLinkID != nil) {
@@ -244,15 +244,21 @@
         }
         else
         {
-            formMetaURL = [URLConstructor formMetaURL:_appLinkName :[_component linkName] appOwner:_appOwner];
+            formMetaURL = [URLConstructor formURL:_appLinkName formName:[_component linkName] withApplicationOwner:_appOwner];
         }
     }
+    NSLog(@"Coming to get json");
     URLConnector *connector = [[URLConnector alloc] initFetcher:formMetaURL];
     NSString *formMetaXML = [connector apiResponse];
+    NSLog(@"form json String %@",formMetaXML);
+    FormJSONParser *_jsonParser = [[FormJSONParser alloc] initFormJSONParser:formMetaXML];
+
     //NSLog(@"formMetaXML %@",formMetaXML);
-    FormParser *parser = [[FormParser alloc] initFormParser:formMetaXML :_component ];
+//    FormParser *parser = [[FormParser alloc] initFormParser:formMetaXML :_component ];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    return [parser zcForm];
+  //  return [parser zcForm];
+    NSLog(@"Form JSON Object %@",[_jsonParser zcForm]);
+    return [_jsonParser zcForm];
 }
 
 //&
