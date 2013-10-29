@@ -27,12 +27,14 @@
     NSString *_sectionName;
     NSString *_appowner;
     ZCApplication *_application;
+    BOOL _actionEnabled;
 }
 
 @property (nonatomic,retain) ZCSection *zcSection;
 @property (nonatomic,retain) ZCSections *zcSections;
 
 - (ZCSectionFetcher*) initSectionFetcher : (ZCApplication*) _localApplication;
+- (ZCSectionFetcher*) initSectionFetcherForSharedApp : (ZCApplication*) _localApplication;
 - (ZCSectionFetcher*) initSectionFetcher : (NSString*) appLinkName appOwner:(NSString *) appOwner;
 - (ZCSectionFetcher*) initSectionFetcher : (NSString*) appLinkName sectionName: (NSString*) sectionName appOwner:(NSString *) appOwner;
 

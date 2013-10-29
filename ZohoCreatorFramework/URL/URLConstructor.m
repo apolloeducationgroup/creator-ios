@@ -28,7 +28,9 @@ static NSString *SERVICE_NAME;
     NSString *appList = @"/api/xml/applications/";
     appList = [[URLConstructor serverURL:false] stringByAppendingString:appList];
     appList = [URLConstructor appendAuthToken:appList];
-    ////// //NSLog(@"applicario url %@",appList);
+    appList = [appList stringByAppendingString:@"&action=license"];
+    NSLog(@"gee appListURL %@",appList);
+
     return appList;
 }
 
@@ -38,7 +40,9 @@ static NSString *SERVICE_NAME;
     NSString *appList = @"/api/xml/sharedapps/";
     appList = [[URLConstructor serverURL:false] stringByAppendingString:appList];
     appList = [URLConstructor appendAuthToken:appList];
-    //// //NSLog(@"shared app url %@",appList);
+    appList = [appList stringByAppendingString:@"&action=license"];
+    NSLog(@"gee sharedAppListURL %@",appList);
+
     return appList;
 }
 
@@ -48,6 +52,8 @@ static NSString *SERVICE_NAME;
     appList = [[URLConstructor serverURL:false] stringByAppendingString:appList];
     appList = [URLConstructor appendAuthToken:appList];
     appList = [appList stringByAppendingFormat:@"&groupid=%@",groupid];
+    NSLog(@"gee sharedAppListURL %@",appList);
+
     return appList;
 }
 
@@ -56,7 +62,10 @@ static NSString *SERVICE_NAME;
     NSString *appList = @"/api/xml/workspaceapps/";
     appList = [[URLConstructor serverURL:false] stringByAppendingString:appList];
     appList = [URLConstructor appendAuthToken:appList];
+    appList = [appList stringByAppendingString:@"&action=license"];
     appList = [appList stringByAppendingFormat:@"&workSpaceOwner=%@",workspaceowner];
+    NSLog(@"gee workSpaceAppListURL %@",appList);
+
     return appList;
 }
 
@@ -65,6 +74,8 @@ static NSString *SERVICE_NAME;
     NSString *appList = @"/api/xml/allappscategory/";
     appList = [[URLConstructor serverURL:false] stringByAppendingString:appList];
     appList = [URLConstructor appendAuthToken:appList];
+    NSLog(@"gee allAppsCategoryListURL %@",appList);
+
     return appList;
 }
 
@@ -74,6 +85,7 @@ static NSString *SERVICE_NAME;
     sectionMeta = [[URLConstructor serverURL:false] stringByAppendingString:sectionMeta];
     sectionMeta = [URLConstructor appendAuthToken:sectionMeta];
     sectionMeta = [sectionMeta stringByAppendingFormat:@"&sharedBy=%@",appOwner];
+
     //// //NSLog(@"Section Meta URL %@",sectionMeta);
     return sectionMeta;
 }
@@ -92,6 +104,7 @@ static NSString *SERVICE_NAME;
     NSString *sectionMeta = [NSString stringWithFormat:@"/api/mobile/xml/%@/sections/",appLinkName];
     sectionMeta = [[URLConstructor serverURL:false] stringByAppendingString:sectionMeta];
     sectionMeta = [URLConstructor appendAuthToken:sectionMeta];
+
     // sectionMeta = [sectionMeta stringByAppendingFormat:@"&appowner=%@",appOwner];
     return sectionMeta;
 }

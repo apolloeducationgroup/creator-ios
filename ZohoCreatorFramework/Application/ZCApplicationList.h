@@ -15,6 +15,9 @@
 
 @property (nonatomic,retain) NSMutableArray *applicationList;
 @property (nonatomic,retain) NSMutableArray *appOwnersList;
+@property (nonatomic, assign) BOOL licenseEnabled;
+@property (nonatomic, assign) NSInteger evaluationDays;
+
 
 - (void) addZCApplication : (ZCApplication*) application;
 - (void) addZCApplicationOwner:(NSString *)appOwner;

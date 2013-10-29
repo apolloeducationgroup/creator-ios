@@ -36,6 +36,25 @@
     return self;
 }
 
+- (ZCSectionFetcher*) initSectionFetcherForSharedApp : (ZCApplication*) _localApplication {
+    
+    self= [super init];
+    if(self) {
+        self->_application = _localApplication;
+        self->_appLinkName = [_localApplication appLinkName];
+        self->_appowner = [_localApplication appOwner];
+        self->_actionEnabled = TRUE;
+        if([ConnectionChecker isServerActive]) {
+            self->_zcSections = [self fetchFromServer];
+        }
+        else
+        {
+            [NSException raise:@"Network Unavailable" format:@"No network available to connnect to setver"];
+        }
+    }
+    return self;
+}
+
 - (ZCSectionFetcher*) initSectionFetcher : (NSString*) appLinkName appOwner:(NSString *) appOwner{
     
     //// //NSLog(@"%@",[NSThread callStackSymbols]);
@@ -105,8 +124,14 @@
     if(_sectionName == NULL)
     {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        
         NSString *sectionURL = [URLConstructor sectionMetaURL:_appLinkName appOwner:_appowner];
-        //NSLog(@"Section URL %@",sectionURL);
+        
+        if (_actionEnabled) {
+            sectionURL = [sectionURL stringByAppendingString:@"&action=license"];
+        }
+        
+        NSLog(@"Section URL %@",sectionURL);
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         URLConnector *connection = [[URLConnector alloc] initFetcher:sectionURL];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -129,6 +154,11 @@
     else
     {
         NSString *sectionURL = [URLConstructor sectionMetaURL:_appLinkName:_sectionName appOwner:_appowner];
+        
+        if (_actionEnabled) {
+            sectionURL = [sectionURL stringByAppendingString:@"&action=license"];
+        }
+        
         URLConnector *connection = [[URLConnector alloc] initFetcher:sectionURL];
         NSString *sectionXML = [connection apiResponse];
         ZCSectionParser *parser = [[ZCSectionParser alloc] initZCSectionParser:sectionXML:_application];

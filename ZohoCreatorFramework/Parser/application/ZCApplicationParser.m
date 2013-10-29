@@ -91,9 +91,23 @@
         }
     }
     else {
+        
         if([_currentElementName isEqualToString:@"application_owner"]) {
             [_applicationList addZCApplicationOwner:string];
             _appOwner=string;
+        }
+        else if([_currentElementName isEqualToString:@"license_enabled"]) {
+            
+            if ([string isEqualToString:@"true"]) {
+                [_applicationList setLicenseEnabled:TRUE];
+            }
+            else {
+                [_applicationList setLicenseEnabled:FALSE];
+            }
+        }
+        else if([_currentElementName isEqualToString:@"evaluationDays"]) {
+            
+            [_applicationList setEvaluationDays:[string intValue]];
         }
     }
 }
@@ -118,7 +132,6 @@
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-    
     
 }
 

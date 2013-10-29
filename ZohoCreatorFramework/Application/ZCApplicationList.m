@@ -10,6 +10,7 @@
 
 @implementation ZCApplicationList
 
+@synthesize licenseEnabled = _licenseEnabled, evaluationDays = _evaluationDays;
 
 - (ZCApplicationList*) initZCApplicationList  {
     
@@ -17,6 +18,8 @@
     if(self) {
         self->_applicationList = [[NSMutableArray alloc] init];
         self->_appOwnersList = [[NSMutableArray alloc] init];
+        _evaluationDays = -1;
+        _licenseEnabled = FALSE;
     }
     return self;
 }

@@ -22,7 +22,6 @@
         {
             NSLog(@"Coming inside");
             NSString *myappListURL = [URLConstructor appListURL];
-            //// //NSLog(@"my url %@",myappListURL);
             URLConnector *fetcher = [[URLConnector alloc] initFetcherPost:myappListURL:[URLConnector GETMETHOD]];
             NSString *xmlString = [fetcher apiResponse];
             NSLog(@"xml string %@",xmlString);

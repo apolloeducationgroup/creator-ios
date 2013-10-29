@@ -60,6 +60,14 @@
     
 }
 
+- (ZCSections*) getSectionsForSharedApp:(BOOL)fromServer {
+    
+    ZCSectionFetcher *fetcher = [[ZCSectionFetcher alloc] initSectionFetcherForSharedApp:self];
+    _sections = [fetcher zcSections];
+    return _sections;
+    
+}
+
 - (ZCForm*) getForm: (NSString *)formLinkName {
     
     if([self hasFormObject:formLinkName]) {
