@@ -16,10 +16,9 @@
     
 @private NSString *onUserURL;
     
-    
 }
 
-- (FieldOnUser*) initFieldOnUser :  (NSString*) application : (NSString*) form : (NSString*) field : (NSString*) paramString : (id) delegate;
+- (FieldOnUser*) initFieldOnUser :  (NSString*) application : (NSString*) form : (NSString*) field : (NSString*) paramString : (id) delegate : (NSString*) appOwner;
 - (DelugeTasks*) execute;
 
 @end

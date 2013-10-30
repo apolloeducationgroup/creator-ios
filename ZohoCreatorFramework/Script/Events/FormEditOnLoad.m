@@ -21,6 +21,8 @@
         NSString *paramString  = [DelugeEvent getParamXMLString:_record:[applicationLocal appOwner]];
         [super setCallerDelegate:delegate];
         [super setDelugeURL:[URLConstructor formEditOnLoad:[applicationLocal appLinkName] :[formLocal linkName] : paramString:[applicationLocal appOwner]]];
+        
+
     }
     return self;
 }
@@ -32,7 +34,8 @@
         self->_application = applicationLocal;
         self->_form = formLocal;
         [super setCallerDelegate:delegate];
-        [super setDelugeURL:[URLConstructor formOnLoad:[applicationLocal appLinkName] :[formLocal linkName]: @"":[applicationLocal appOwner]]];
+        [super setDelugeURL:[URLConstructor formOnLoadWithJSON:[applicationLocal appLinkName] :[formLocal linkName]: @"":[applicationLocal appOwner]]];
+//        formOnLoadWithJSON        
     }
     return self;
 }

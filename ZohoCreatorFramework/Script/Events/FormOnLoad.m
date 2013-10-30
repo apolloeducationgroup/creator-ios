@@ -32,7 +32,10 @@
         self->_application = applicationLocal;
         self->_form = formLocal;
         [super setCallerDelegate:delegate];
-        [super setDelugeURL:[URLConstructor formOnLoad:[applicationLocal appLinkName] :[formLocal linkName]: @"":[applicationLocal appOwner]]];
+        [super setDelugeURL:[URLConstructor delugeURL]];
+        [super setDelugeParams:[URLConstructor formOnLoadWithJSON:[applicationLocal appLinkName] :[formLocal linkName]: nil:[applicationLocal appOwner]]];
+//          [super setDelugeURL:[URLConstructor formOnLoadWithJSON:[applicationLocal appLinkName] :[formLocal linkName]: @"":[applicationLocal appOwner]]];
+//        [super setDelugeURL:[URLConstructor formOnLoad:[applicationLocal appLinkName] :[formLocal linkName]: @"":[applicationLocal appOwner]]];
     }
     return self;
 }

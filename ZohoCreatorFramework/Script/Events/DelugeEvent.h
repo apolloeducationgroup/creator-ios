@@ -13,6 +13,7 @@
 #import "ZCForm.h"
 #import "ZCRecord.h"
 #import "CustomActionResponse.h"
+#import "ScriptJSONParser.h"
 
 @class ZCApplication,ZCForm;
 
@@ -42,6 +43,7 @@
 }
 
 @property (nonatomic,retain) NSString *delugeURL;
+@property (nonatomic,retain) NSString *delugeParams;
 @property (nonatomic,retain) ZCRecord *parameter;
 @property (nonatomic,retain) id<DelugeDelegate> callerDelegate;
 
@@ -53,5 +55,6 @@
 + (NSString*) getParamXMLString : (ZCRecord*) _record : (NSString*) sharerdBy;
 + (NSString*) getParamStringByZCRecord  : (ZCRecord*) _record;
 + (NSString*) getParamStringByDict : (NSMutableDictionary*) _dictionary;
++ (NSString*) getParamString: (ZCRecord*) _zcRecord;
 
 @end

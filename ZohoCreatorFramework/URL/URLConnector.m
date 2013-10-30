@@ -29,6 +29,7 @@
 {
     self = [super init];
     if (self) {
+        NSLog(@"Coming to post");
         zohoFormAPIURL = ZohoFormAPIURL;
         //// //NSLog(@"url riyaz \n\n %@\n\n",ZohoFormAPIURL);
         //NSLog(@"PARMS STRING RIYAZ:: %@",paramString);
@@ -68,6 +69,7 @@
 
 -(void) prepareConnection
 {
+    NSLog(@"Coming to prepare connection %d",requestMethod);
     isRequestCompleted = NO;
     receivedData = [[NSMutableData alloc] init];
     apiURLRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:zohoFormAPIURL]];
@@ -77,8 +79,11 @@
     }
     else if(requestMethod == 2)
     {
+        NSLog(@"post method has applied");
         [apiURLRequest setHTTPMethod:@"POST"];
         [apiURLRequest setTimeoutInterval:75.0];
+        NSLog(@"POST PARAMETER %@",_paramString);
+        
         if(_paramString != nil)
         {
             NSMutableString *postString = [NSMutableString string];

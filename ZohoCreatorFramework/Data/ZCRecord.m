@@ -65,7 +65,7 @@
     }
     NSString *newRecord = [URLConstructor newsubmitRecordURL];
     NSString *newRecordString = [URLConstructor postAuthTokenWithApplication:[_form application]];
-    newRecordString = [newRecordString stringByAppendingFormat:@"&%@&errorLog=true",[ZCRecordString newRecordStringXML:self->_form :self]];
+    newRecordString = [newRecordString stringByAppendingFormat:@"&%@&errorLog=true&zcRefValue=true",[ZCRecordString newRecordStringXML:self->_form :self]];
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
     
     NSString *response = [urlConnect apiResponse];
@@ -88,7 +88,7 @@
     [idFieldData setFieldName:@"ID"];
     [idFieldData setFieldValue:self.recordID];
     [self addZCFieldData:idFieldData];
-    updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@",[ZCRecordString updateRcordStringXML:self->_form :self]];
+    updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@&zcRefValue=true",[ZCRecordString updateRcordStringXML:self->_form :self]];
     NSLog(@"Update record string %@",updateRecordString);
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:updateRecord :updateRecordString :[URLConnector POSTMETHOD]];
     NSString *response = [urlConnect apiResponse];

@@ -23,7 +23,6 @@
 #import "DeSelectValueTask.h"
 #import "OpenUrlTask.h"
 
-
 @interface ScriptJSONParser : NSObject {
     
 @private NSString *_jsonString;

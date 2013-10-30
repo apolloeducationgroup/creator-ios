@@ -269,7 +269,7 @@ static ZOHOCreator *creatorObject = nil;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSString *newRecord = [URLConstructor newsubmitRecordURL];
     NSString *newRecordString = [URLConstructor postAuthTokenWithAppOwner];
-    newRecordString = [newRecordString stringByAppendingFormat:@"&%@",[ZCRecordString newRecordStringXML:appLinkName :formLinkName :dataDict]];
+    newRecordString = [newRecordString stringByAppendingFormat:@"&%@&zcRefValue=true",[ZCRecordString newRecordStringXML:appLinkName :formLinkName :dataDict]];
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
     [urlConnect apiResponse];
     //NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:nil];
@@ -344,7 +344,7 @@ static ZOHOCreator *creatorObject = nil;
     NSString *updateRecord = [URLConstructor submitRecordURL];
     //// //NSLog(@"view link name %@",viewLinkName);
     NSString *updateRecordString = [URLConstructor postAuthTokenWithApplication:[[ZOHOCreator getObject] getApplication:applicationName]];
-    updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@",[ZCRecordString bulkDeleteRecordStringXML:applicationName withViewLinkName:viewLinkName :records]];
+    updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@&zcRefValue=true",[ZCRecordString bulkDeleteRecordStringXML:applicationName withViewLinkName:viewLinkName :records]];
     NSLog(@"Bulk edit request %@",updateRecordString);
     //// //NSLog(@"\n update rec string \n   %@   \n",updateRecordString);
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:updateRecord :updateRecordString :[URLConnector POSTMETHOD]];
@@ -361,7 +361,7 @@ static ZOHOCreator *creatorObject = nil;
     NSString *updateRecord = [URLConstructor submitRecordURL];
     
     NSString *updateRecordString = [URLConstructor postAuthTokenWithAppOwner:[[form application] appOwner]];
-    updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@",[ZCRecordString bulKUpdateRcordStringXML:form :records]];
+    updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@&zcRefValue=true",[ZCRecordString bulKUpdateRcordStringXML:form :records]];
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:updateRecord :updateRecordString :[URLConnector POSTMETHOD]];
     NSString *response = [urlConnect apiResponse];
     if(form != nil) {
@@ -383,16 +383,13 @@ static ZOHOCreator *creatorObject = nil;
     NSString *newRecord = [URLConstructor submitRecordURL];
     NSString *newRecordString = [URLConstructor postAuthTokenWithAppOwner:appOwner];
     
-    newRecordString = [newRecordString  stringByAppendingFormat:@"&%@",[ZCRecordString newDuplicateRecords:viewLinkName withApplication:appLinkName AndRecords:records]];
+    newRecordString = [newRecordString  stringByAppendingFormat:@"&%@&zcRefValue=true",[ZCRecordString newDuplicateRecords:viewLinkName withApplication:appLinkName AndRecords:records]];
     
     //    newRecordString = [newRecordString stringByAppendingFormat:@"&%@",[ZCRecordString duplicateRecords:viewLinkName withApplication:appLinkName AndRecords:records]];
     
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     //NSLog(@"xml response for duplicate record %@",[urlConnect apiResponse]);
-    
-    
-    
     
     return [NSArray arrayWithObject:[urlConnect apiResponse]];
 }
@@ -402,7 +399,7 @@ static ZOHOCreator *creatorObject = nil;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSString *newRecord = [URLConstructor submitRecordURL];
     NSString *newRecordString = [URLConstructor postAuthTokenWithAppOwner:appOwner];
-    newRecordString = [newRecordString stringByAppendingFormat:@"&%@",[ZCRecordString duplicateRecords:viewLinkName withApplication:appLinkName AndRecords:records]];
+    newRecordString = [newRecordString stringByAppendingFormat:@"&%@&zcRefValue=true",[ZCRecordString duplicateRecords:viewLinkName withApplication:appLinkName AndRecords:records]];
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [urlConnect apiResponse];
@@ -417,7 +414,7 @@ static ZOHOCreator *creatorObject = nil;
     ZOHOCreator *zohoCreator = [ZOHOCreator getObject];
     ZCApplication *app = [zohoCreator getApplication:appLinkName];
     ZCForm *formObject = [app getForm:formLinkName];
-    newRecordString = [newRecordString stringByAppendingFormat:@"&%@",[ZCRecordString newRecordsStringXML:formObject:records]];
+    newRecordString = [newRecordString stringByAppendingFormat:@"&%@&zcRefValue=true",[ZCRecordString newRecordsStringXML:formObject:records]];
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
     [urlConnect apiResponse];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];

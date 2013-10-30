@@ -11,7 +11,7 @@
 
 @implementation DelugeEvent
 
-@synthesize delugeURL=_delugeURL,callerDelegate=_callerDelegate;
+@synthesize delugeURL=_delugeURL,callerDelegate=_callerDelegate,delugeParams=_delugeParams;
 
 - (DelugeEvent*) initDelugeEvent : (NSString*) appLinkName withFormLinkName : (NSString*) formLinkName {
     
@@ -36,7 +36,8 @@
 - (CustomActionResponse*) executeCustomAction {
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    URLConnector *connector = [[URLConnector alloc] initFetcher:_delugeURL];
+    NSLog(@"Post has commented");
+    URLConnector *connector = [[URLConnector alloc] initFetcherPost:_delugeURL :[URLConnector POSTMETHOD]];
     NSString *formMetaXML = [connector apiResponse];
     CustomActionParser *parser = [[CustomActionParser alloc] initScriptParser:formMetaXML];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -45,6 +46,7 @@
 
 - (void) executeActions {
     
+    NSLog(@"coming to execute Action");
     if([_delugeTasks noScript]==NO) {
         
         NSMutableArray *taskList = [_delugeTasks taskList];
@@ -145,11 +147,16 @@
 - (DelugeTasks*)  execute {
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    URLConnector *connector = [[URLConnector alloc] initFetcher:_delugeURL];
+    
+    URLConnector *connector = [[URLConnector alloc] initFetcherPostParam:_delugeURL :_delugeParams :[URLConnector POSTMETHOD]];
     NSString *formMetaXML = [connector apiResponse];
     //// //NSLog(@"deluge form Meta XML %@ ",formMetaXML);
-    ScriptParser *parser = [[ScriptParser alloc] initScriptParser:formMetaXML];
+    
+    ScriptJSONParser *parser = [[ScriptJSONParser alloc] initScriptJSONParser:formMetaXML];
+//    ScriptParser *parser = [[ScriptParser alloc] initScriptParser:formMetaXML];
+    
     _delugeTasks = [parser delugeTasks];
+    NSLog(@"deluge tasks %@",_delugeTasks.taskList);
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [self performSelectorOnMainThread:@selector(executeActions) withObject:self waitUntilDone:NO];
     return _delugeTasks;
@@ -161,8 +168,28 @@
 }
 
 + (NSString*) getParamXMLString : (ZCRecord*) _record  : (NSString*) sharedBy {
-    //// //NSLog(@"In getParamXMLString");
-    
+
+    NSDictionary *_dictionary = [_record record];
+    NSMutableString *paramString = [NSMutableString string];
+    NSEnumerator *keyEnum = [_dictionary keyEnumerator];
+    NSString *keyName;
+    while((keyName = [keyEnum nextObject]) != nil) {
+        ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
+        id keyValue = [fieldDate fieldValue];
+        if(keyValue != nil) {
+            if([keyValue isKindOfClass:[NSString class]]) {
+                [paramString appendFormat:@"&%@=%@",keyName,keyValue];
+            }
+            else if([keyValue isKindOfClass:[NSMutableArray class]]) {
+                
+                for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
+                    NSLog(@"coming to index");
+                    [paramString appendFormat:@"&%@=%@",keyName,[keyValue objectAtIndex:optIndex]];
+                }
+            }
+        }
+    }
+    /*
     NSMutableString *paramString = [NSMutableString string];
     NSMutableDictionary *_dictionary = [_record record];
     
@@ -189,9 +216,34 @@
         }
     }
     [paramString appendString:@"</fields>"];
-    [paramString appendFormat:@"&sharedBy=%@",sharedBy];
+    [paramString appendFormat:@"&sharedBy=%@",sharedBy]; */
+    
     return [paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
+
++ (NSString*) getParamString: (ZCRecord*) _zcRecord {
+    
+    NSDictionary *_dictionary = [_zcRecord record];
+    NSMutableString *paramString = [NSMutableString string];
+    NSEnumerator *keyEnum = [_dictionary keyEnumerator];
+    NSString *keyName;
+    while((keyName = [keyEnum nextObject]) != nil) {
+        ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
+        id keyValue = [fieldDate fieldValue];
+        if(keyValue != nil) {
+            if([keyValue isKindOfClass:[NSString class]]) {
+                 [paramString appendFormat:@"%@=%@",keyName,keyValue];
+            }
+            else if([keyValue isKindOfClass:[NSMutableArray class]]) {
+                
+            }
+        }
+    }
+    return paramString;
+}
+
+
+
 
 + (NSString*) getParamStringByDict : (NSMutableDictionary*) _dictionary {
     

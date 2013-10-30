@@ -11,6 +11,7 @@
 #import "ZCViewParam.h"
 #import "ZCCriteria.h"
 #import "ZCApplication.h"
+#import "ZCRecord.h"
 
 @interface URLConstructor : NSObject
 
@@ -61,5 +62,8 @@
 +(NSString *)authenticationUrl;
 + (NSString*) subFormOnuser : (NSString*) appLinkName : (NSString*) formLinkName : (NSString*) fieldName : (NSString*) refAppName : (NSString*) refFormName : (NSString*) refFieldName : (NSString*) paramString : (NSString*) appOwner;
 + (NSString*) fieldOnUserFormaula:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) fieldLinkName : (NSString*) paramString;
++ (NSString*) delugeURL;
++ (NSString*) formOnLoadWithJSON :(NSString*) appLinkName : (NSString*) formLinkName : (ZCRecord*) _zcRecord : (NSString*) appOwner;
++ (NSString*) fieldOnUserWithJSON:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) fieldLinkName : (NSString*) paramString : (NSString*) appOwner;
 
 @end

@@ -30,7 +30,6 @@ static NSString *SERVICE_NAME;
     formURL = [URLConstructor appendAuthToken:formURL];
     formURL = [formURL stringByAppendingString:@"&metaData=complete"];
 //    formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
-    NSLog(@"form New URL %@",formURL);
     return formURL;
 }
 
@@ -186,11 +185,20 @@ static NSString *SERVICE_NAME;
     
     
     //https://creator.localzoho.com/api/xml/sub/Sub_form/fields/authtoken=030563f44dd1c5b258c67c5b7623766f&scope=creatorapi&complete=true&isSubFormMeta=true&combinedLookup=true&zc_ownername=riyaz.mohammed&
-    
-    
-    
-    
+
 }
+
+
++ (NSString*) editFormMetaJSON : (NSString*) _appLinkName : (NSString*) _viewLinkName : (NSString*) _recordLinkID : (NSString*) appOwner {
+    
+    NSString *formURL = [NSString stringWithFormat:@"/api/%@/json/%@/view/%@/record/%@/edit",appOwner,_appLinkName,_viewLinkName,_recordLinkID];
+    formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
+    formURL = [URLConstructor appendAuthToken:formURL];
+    formURL = [formURL stringByAppendingString:@"&metaData=complete"];
+    return formURL;
+}
+
+
 + (NSString*) editFormMetaURL1 : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName recordLinkID : (NSString*) _recordLinkID appOwner: (NSString *) appOwner{
     
     NSString *formURL = [NSString stringWithFormat:@"/api/xml/%@/%@/fields/",appLinkName,formLinkName];
@@ -202,6 +210,8 @@ static NSString *SERVICE_NAME;
 }
 
 
+//https://creator.zoho.com/api/<ownername>/<format>/<applicationName>/view/<viewname>/record/<recordlinkid>/edit
+
 + (NSString*) editFormMetaURL : (NSString*) appLinkName : (NSString*) formLinkName recordLinkID : (NSString*) _recordLinkID appOwner: (NSString *) appOwner{
     
     NSString *formURL = [NSString stringWithFormat:@"/api/xml/%@/%@/fields/",appLinkName,formLinkName];
@@ -209,6 +219,22 @@ static NSString *SERVICE_NAME;
     formURL = [URLConstructor appendAuthToken:formURL];
     formURL = [formURL stringByAppendingFormat:@"&complete=true&combinedLookup=true&recLinkID=%@",_recordLinkID];
     formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
+    return formURL;
+}
+
++ (NSString*) delugeURL {
+    
+    NSString *formURL = @"/generateJSAPI.do";
+    formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
+    return formURL;
+}
+
++ (NSString*) formOnLoadWithJSON :(NSString*) appLinkName : (NSString*) formLinkName : (NSString*) _zcRecord : (NSString*) appOwner {
+    
+    NSString *formURL = [NSString stringWithFormat:@"sharedBy=%@&linkNameBased=true&appLinkName=%@&formLinkName=%@&",appOwner,appLinkName,formLinkName];
+    formURL = [URLConstructor appendAuthToken:formURL];
+    NSLog(@"new json url %@",formURL);
+//    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     return formURL;
 }
 
@@ -255,7 +281,6 @@ static NSString *SERVICE_NAME;
 }
 
 
-
 + (NSString*) fieldOnUser:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) fieldLinkName : (NSString*) paramString {
     
     NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/OnUser/%@/",appLinkName,formLinkName,fieldLinkName];
@@ -263,6 +288,16 @@ static NSString *SERVICE_NAME;
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
         formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    }
+    return formURL;
+}
+
++ (NSString*) fieldOnUserWithJSON:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) fieldLinkName : (NSString*) paramString : (NSString*) appOwner {
+    
+    NSString *formURL = [NSString stringWithFormat:@"sharedBy=%@&linkNameBased=true&appLinkName=%@&formLinkName=%@&fieldName=%@&",appOwner,appLinkName,formLinkName,fieldLinkName];
+    formURL = [URLConstructor appendAuthToken:formURL];
+    if(paramString != nil) {
+        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     }
     return formURL;
 }
@@ -308,6 +343,10 @@ static NSString *SERVICE_NAME;
     paymentURL = [URLConstructor appendAuthToken:paymentURL];
     return paymentURL;
 }
+
+
+
+
 
 + (NSString*) newsubmitRecordURL {
     
