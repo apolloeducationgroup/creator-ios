@@ -21,11 +21,12 @@
 
 @synthesize zcForm=_zcForm;
 
-- (FormJSONParser*) initFormJSONParser : (NSString*) jsonString {
+- (FormJSONParser*) initFormJSONParser : (NSString*) jsonString : (ZCApplication*) application {
     
     self = [super init];
     if(self) {
         _jsonString = jsonString;
+        _application = application;
         _zcForm = [[ZCForm alloc] initZCForm];
         [self convertJSONToZCForm];
     }
@@ -224,10 +225,13 @@
         }
 
         tempValue = [_fieldDict objectForKey:@"refapplication"];
+        NSLog(@"ref application %@",tempValue);
         if(tempValue != nil) {
             ZCApplication *_refApp = [[ZCApplication alloc] init];
             [_refApp setAppDisplayName:tempValue];
             [_refApp setAppLinkName:tempValue];
+            NSLog(@"Application Owner %@",[_application appOwner]);
+            [_refApp setAppOwner:[_application appOwner]];
             tempValue = [_fieldDict objectForKey:@"refform"];
             ZCComponent *_relatedComp = [[ZCComponent alloc] init];
             [_relatedComp setZcApplication:_refApp];
@@ -235,9 +239,16 @@
             [_relatedComp setDisplayName:tempValue];
             [_field setRelatedComponent:_relatedComp];
         }
-        NSLog(@"Coming to add field");
+        
+        tempValue = [_fieldDict objectForKey:@"subformfields"];
+        if(tempValue != nil) {
+            
+            ZCForm *_subFormData = [[ZCForm alloc] initZCForm];
+            [self getFieldInfo:tempValue :_subFormData];
+            [_field setSubForm:_subFormData];
+            NSLog(@"SubForm Data has added");
+        }
         [_localForm addZCField:_field];
-        NSLog(@"_zcForm field has added %@",[_field fieldDisplayName]);
     }
     
     /*

@@ -251,7 +251,10 @@
     URLConnector *connector = [[URLConnector alloc] initFetcher:formMetaURL];
     NSString *formMetaXML = [connector apiResponse];
     NSLog(@"form json String %@",formMetaXML);
-    FormJSONParser *_jsonParser = [[FormJSONParser alloc] initFormJSONParser:formMetaXML];
+    ZCApplication *tempApp = [[ZCApplication alloc] init];
+    [tempApp setAppLinkName:_appLinkName];
+    [tempApp setAppOwner:_appOwner];
+    FormJSONParser *_jsonParser = [[FormJSONParser alloc] initFormJSONParser:formMetaXML:tempApp];
 
     //NSLog(@"formMetaXML %@",formMetaXML);
 //    FormParser *parser = [[FormParser alloc] initFormParser:formMetaXML :_component ];

@@ -21,10 +21,11 @@
     
     @private NSString *_jsonString;
     @private NSDictionary *_jsonDictionary;
+    @private ZCApplication *_application;
 }
 
 @property (nonatomic,retain) ZCForm *zcForm;
 
-- (FormJSONParser*) initFormJSONParser : (NSString*) jsonString;
+- (FormJSONParser*) initFormJSONParser : (NSString*) jsonString : (ZCApplication*) application;
 
 @end
