@@ -120,12 +120,12 @@
         viewURL = [URLConstructor viewURL: _appLinkName :[_component linkName] withParam : self->_zcViewParam appOwner:_appOwner];
     }
     
-    // //NSLog(@"View URL %@",viewURL);
+    NSLog(@"View URL %@",viewURL);
     
     URLConnector *connector = [[URLConnector alloc] initFetcher:viewURL];
     NSString *formMetaXML = [connector apiResponse];
     
-    //NSLog(@"view Xml Meta %@",formMetaXML);
+    NSLog(@"view Xml Meta %@",formMetaXML);
     
     ViewRecordParser *view = [[ViewRecordParser alloc] initViewRecordParser:formMetaXML :_component ];
     [[view zcView] setViewParam:_zcViewParam];

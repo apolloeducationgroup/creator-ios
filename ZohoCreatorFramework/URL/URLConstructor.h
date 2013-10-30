@@ -57,6 +57,7 @@
 + (NSString*) paymentDetails : (NSString*) ownerName;
 + (NSString*) downloadFile : (NSString*) filePath viewLinkName : (NSString*) viewLinkName  : (NSString*) appLinkName : (NSString*) appOwner;
 + (NSString*) htmlView : (NSString*) appLinkName htmlViewLinkName : (NSString*) htmlViewLinkName applicationOwner : (NSString*) appOwner;
++ (NSString*) editFormMetaJSON : (NSString*) _appLinkName : (NSString*) _viewLinkName : (NSString*) _recordLinkID : (NSString*) appOwner;
 + (NSString*) editFormMetaURL : (NSString*) appLinkName : (NSString*) formLinkName recordLinkID : (NSString*) _recordLinkID appOwner: (NSString *) appOwner;
 + (NSString*) editFormMetaURL1 : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName recordLinkID : (NSString*) _recordLinkID appOwner: (NSString *) appOwner;
 +(NSString *)authenticationUrl;

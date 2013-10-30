@@ -234,7 +234,8 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSString *formMetaURL;
     if(_recordLinkID != nil) {
-        formMetaURL = [URLConstructor editFormMetaURL1:_appLinkName :[_component linkName] viewLinkName:_viewLinkName recordLinkID:_recordLinkID appOwner:_appOwner];
+        formMetaURL = [URLConstructor editFormMetaJSON:_appLinkName :_viewLinkName :_recordLinkID :_appOwner];
+        NSLog(@"form meta URL : %@",formMetaURL);
     }
     else {
         

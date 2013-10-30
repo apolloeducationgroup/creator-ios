@@ -248,6 +248,11 @@
             [_field setSubForm:_subFormData];
             NSLog(@"SubForm Data has added");
         }
+        
+        tempValue = [_fieldDict objectForKey:@"value"];
+        if(tempValue != nil) {
+            [_field setInitialValues:tempValue];
+        }
         [_localForm addZCField:_field];
     }
     

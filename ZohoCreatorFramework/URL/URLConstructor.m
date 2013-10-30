@@ -187,7 +187,7 @@ static NSString *SERVICE_NAME;
 
 + (NSString*) editFormMetaJSON : (NSString*) _appLinkName : (NSString*) _viewLinkName : (NSString*) _recordLinkID : (NSString*) appOwner {
     
-    NSString *formURL = [NSString stringWithFormat:@"/api/%@/json/%@/view/%@/record/%@/edit",appOwner,_appLinkName,_viewLinkName,_recordLinkID];
+    NSString *formURL = [NSString stringWithFormat:@"/api/%@/json/%@/view/%@/record/%@/edit/",appOwner,_appLinkName,_viewLinkName,_recordLinkID];
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     formURL = [formURL stringByAppendingString:@"&metaData=complete"];

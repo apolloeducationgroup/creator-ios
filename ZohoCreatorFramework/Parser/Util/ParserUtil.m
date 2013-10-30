@@ -157,30 +157,31 @@
 
 + (NSString*) getImageLocation : (NSString*) rawString {
     
-    //////// //NSLog(@" Raw String %@",rawString);
+    NSLog(@" Raw String %@",rawString);
+    
     if(rawString != nil && ![rawString isEqualToString:@"(null)"]) {
         
-        NSRange srange = [rawString rangeOfString:@"src = "];
-        NSRange erange = [rawString rangeOfString:@" border ="];
+//        NSRange srange = [rawString rangeOfString:@"src = "];
+//        NSRange erange = [rawString rangeOfString:@" border ="];
+//        
+//        if(srange.length == 0) {
+//            return nil;
+//            //            [NSException raise:@"Image Error" format:@"Invalid String"];
+//        }
+//        NSRange range;
+//        range.location =srange.location + srange.length + 1;
+//        range.length = erange.location - (srange.location + srange.length + 2);
+//        
+//        
+//        NSString * stringtoPArse=[rawString substringWithRange:range];
         
-        if(srange.length == 0) {
-            return nil;
-            //            [NSException raise:@"Image Error" format:@"Invalid String"];
-        }
-        NSRange range;
-        range.location =srange.location + srange.length + 1;
-        range.length = erange.location - (srange.location + srange.length + 2);
         
         
-        NSString * stringtoPArse=[rawString substringWithRange:range];
-        
-        
-        
-        NSArray * stringarray=[stringtoPArse componentsSeparatedByString:@"/"];
+        NSArray * stringarray=[rawString componentsSeparatedByString:@"/"];
         
         
         //        //NSLog(@"stigs %@",stringarray);
-        return [NSString stringWithFormat:@"/%@",[stringarray objectAtIndex:[stringarray count]-1]];
+        return [NSString stringWithFormat:@"/%@",[stringarray lastObject]];
         //        return [rawString substringWithRange:range];
         
     }
