@@ -182,11 +182,7 @@ static NSString *SERVICE_NAME;
     return formURL;
     
     
-    
-    
-    //https://creator.localzoho.com/api/xml/sub/Sub_form/fields/authtoken=030563f44dd1c5b258c67c5b7623766f&scope=creatorapi&complete=true&isSubFormMeta=true&combinedLookup=true&zc_ownername=riyaz.mohammed&
-
-}
+    }
 
 
 + (NSString*) editFormMetaJSON : (NSString*) _appLinkName : (NSString*) _viewLinkName : (NSString*) _recordLinkID : (NSString*) appOwner {
