@@ -202,6 +202,7 @@
     _apiRawData=receivedData;
     apiResponse = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
     NSLog(@"request url riyaz \n\n\n %@\n\n\n",apiURLRequest.URL.absoluteString);
+
     NSLog(@"response riyaz \n\n\n %@\n\n\n",apiResponse);
 }
 
