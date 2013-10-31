@@ -12,6 +12,7 @@
 @property (nonatomic,retain) NSMutableArray * recordsToUpdate;
 @property (nonatomic,retain) NSMutableArray * recordsToAdd;
 @property (nonatomic,retain) NSMutableArray * recordsToDelete;
+@property (nonatomic,retain) ZCForm * zcSubForm;
 -(void)addRecordToAdd:(ZCRecord *)record;
 -(void)addRecordToUpdate:(ZCRecord *)record;
 -(void)addRecordToDelete:(ZCRecord *)record;

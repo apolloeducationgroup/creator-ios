@@ -10,7 +10,7 @@
 #import "ZCRecord.h"
 
 @implementation ZCSubFormRecords
-@synthesize recordsToAdd=_recordsToAdd,recordsToUpdate=_recordsToUpdate,recordsToDelete=_recordsToDelete;
+@synthesize recordsToAdd=_recordsToAdd,recordsToUpdate=_recordsToUpdate,recordsToDelete=_recordsToDelete,zcSubForm=_zcSubForm;
 -(id)init{
     self=[super init];
     if (self) {
