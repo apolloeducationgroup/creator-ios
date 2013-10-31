@@ -303,6 +303,21 @@ static NSString *SERVICE_NAME;
     }
     return formURL;
 }
++ (NSString*) subFormOnuserWithJSON : (NSString*) appLinkName : (NSString*) formLinkName : (NSString*) fieldName : (NSString*) refAppName : (NSString*) refFormName : (NSString*) refFieldName : (NSString*) paramString : (NSString*) appOwner {
+    
+//    NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/SubOnUser/%@/",appLinkName,formLinkName,fieldName];
+    
+    NSString *formURL = [NSString stringWithFormat:@"sharedBy=%@&linkNameBased=true&appLinkName=%@&formLinkName=%@&fieldName=%@&",appOwner,appLinkName,formLinkName,fieldName];
+
+    formURL = [formURL stringByAppendingFormat:@"&refAppLinkName=%@&refFormLinkName=%@&refFieldName=%@",refAppName,refFormName,refFieldName];
+    formURL = [URLConstructor appendAuthToken:formURL];
+    if(paramString != nil) {
+        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    }
+    
+    return formURL;
+}
+
 
 + (NSString*) fieldOnUserFormaula:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) fieldLinkName : (NSString*) paramString {
     

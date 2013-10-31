@@ -15,7 +15,14 @@
     self = [super init];
     if(self) {
         [super setCallerDelegate:delegate];
-        [super setDelugeURL:[URLConstructor subFormOnuser:_appLocal :_formLocal :_fieldLocal :refAppName :refFormName :refFieldName :paramString :appOwner]];
+//        [super setDelugeURL:[URLConstructor subFormOnuser:_appLocal :_formLocal :_fieldLocal :refAppName :refFormName :refFieldName :paramString :appOwner]];
+        
+//        [super setCallerDelegate:delegate];
+        [super setDelugeParams:[URLConstructor subFormOnuserWithJSON:_appLocal :_formLocal :_fieldLocal :refAppName :refFormName :refFieldName :paramString :appOwner]];
+        [super setDelugeURL:[URLConstructor delugeURL]];
+
+        
+        
     }
     return self;
 }
