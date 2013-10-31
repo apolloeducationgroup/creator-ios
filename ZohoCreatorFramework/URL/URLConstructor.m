@@ -33,6 +33,12 @@ static NSString *SERVICE_NAME;
     return formURL;
 }
 
++ (NSString*) formURL : (NSString*) appLinkName formName : (NSString*) formLinkName viewName:(NSString*) viewLinkName withApplicationOwner: (NSString *) appOwner
+{
+    NSString *formURL = [self formURL:appLinkName formName:formLinkName withApplicationOwner:appOwner];
+    formURL = [formURL stringByAppendingString:[NSString stringWithFormat:@"&viewLinkName=%@&formAccessType=%d",viewLinkName,2]];
+    return formURL;
+}
 
 + (NSString*) appListURL  {
     

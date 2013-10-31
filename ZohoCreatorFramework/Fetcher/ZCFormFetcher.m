@@ -62,6 +62,17 @@
     return fetcher;
 }
 
++ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName appOwner : (NSString *) appOwner
+{
+    ZCComponent *_comp = [[ZCComponent alloc] init];
+    [_comp setLinkName:formLinkName];
+    [_comp setDisplayName:formLinkName];
+    [_comp setType:1];
+    ZCFormFetcher *fetcher = [[ZCFormFetcher alloc] initFormFetcher:appLinkName :viewLinkName :_comp appOwner:appOwner];
+    return fetcher;
+
+}
+
 - (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (ZCComponent*) component viewLinkName : (NSString*) viewLinkName recordLinkID : (NSString*) recordLinkID appOwner : (NSString *) appOwner {
     
     self = [super init];
@@ -173,6 +184,43 @@
     return self;
 }
 
+- (ZCFormFetcher *) initFormFetcher:(NSString *)appLinkName :(NSString *)viewLinkName :(ZCComponent *)component appOwner:(NSString *)appOwner
+{
+    self = [super init];
+    if(self) {
+        
+        self->_appLinkName = appLinkName;
+        self->_component = component;
+        self->_appOwner = appOwner;
+        self->_viewLinkName = viewLinkName;
+        
+        if([ConnectionChecker isServerActive]) {
+            
+            ZOHOCreator *creator = [ZOHOCreator getObject];
+            ZCApplication *application = [creator getApplication:appLinkName];
+            if(application != nil) {
+                [self->_component setZcApplication:application];
+            }
+            else {
+                application = [[ZCApplication alloc] init];
+                [application setAppLinkName:appLinkName];
+                [application setAppOwner:appOwner];
+                
+                [self->_component setZcApplication:application];
+            }
+            self->_zcForm = [self fetchFromServer];
+            [self->_zcForm setApplication:application];
+            [self encodeZCForm];
+        }
+        else
+        {
+            [NSException raise:@"Network Unavailable" format:@"No network available to connnect to setver"];
+            // self->_zcForm = [self fetchFromLocal];
+        }
+    }
+    return self;
+}
+
 - (ZCFormFetcher*) initSubFormFetcher : (NSString*) appLinkName : (ZCComponent*) component appOwner : (NSString *) appOwner subformmode:(BOOL)subformmode mainAppLinkname:(NSString *)mainAppLinkname mainFormLinkname:(NSString *)mainFormLinkname subformFieldLinkname:(NSString *)subformFieldLinkname {
     
     self = [super init];
@@ -235,7 +283,6 @@
     NSString *formMetaURL;
     if(_recordLinkID != nil) {
         formMetaURL = [URLConstructor editFormMetaJSON:_appLinkName :_viewLinkName :_recordLinkID :_appOwner];
-        NSLog(@"form meta URL : %@",formMetaURL);
     }
     else {
         
@@ -245,9 +292,17 @@
         }
         else
         {
-            formMetaURL = [URLConstructor formURL:_appLinkName formName:[_component linkName] withApplicationOwner:_appOwner];
+            if (_viewLinkName==NULL||_viewLinkName==nil||[_viewLinkName isEqualToString:@""]) {
+                
+                formMetaURL = [URLConstructor formURL:_appLinkName formName:[_component linkName] withApplicationOwner:_appOwner];
+            }
+            else{
+                formMetaURL = [URLConstructor formURL:_appLinkName formName:[_component linkName] viewName:_viewLinkName withApplicationOwner:_appOwner];
+            }
+            NSLog(@"form meta url : %@",formMetaURL);
         }
     }
+    
     NSLog(@"Coming to get json");
     URLConnector *connector = [[URLConnector alloc] initFetcher:formMetaURL];
     NSString *formMetaXML = [connector apiResponse];
