@@ -13,7 +13,6 @@
 NSXMLParser *_xmlParser;
 NSString *_xmlString;
 NSString *_currentElementName;
-    NSString *fieldname;
     BOOL inchoices;
     
     NSString * key;

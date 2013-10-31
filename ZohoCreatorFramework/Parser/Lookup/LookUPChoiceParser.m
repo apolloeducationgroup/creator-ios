@@ -15,8 +15,6 @@
     self = [super init];
     if (self) {
         self->_xmlString = xmlString;
-        _choiceKeys=[[NSMutableArray alloc]init];
-        _choiceValues=[[NSMutableArray alloc]init];
         _lookUpChoicesParm=[[ZCLookUpChoices alloc]initLookUpChoicesParm];
     
     }
@@ -33,7 +31,6 @@
 {
     if ([elementName isEqualToString:@"field"]) {
         
-        fieldname= [attributeDict objectForKey:@"name"];
         [_lookUpChoicesParm setLookUpField:[attributeDict objectForKey:@"name"]];
         inchoices=NO;
 
@@ -49,7 +46,6 @@
      
      
      
-     [_choiceKeys addObject:[attributeDict objectForKey:@"value"]];
      
      key=[attributeDict objectForKey:@"value"];
      
@@ -69,7 +65,6 @@
         
         [_lookUpChoicesParm  addLookupChoice:string key:key];
         
-        [_choiceValues addObject:string];
         
     }
 
@@ -82,7 +77,6 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     
-    NSLog(@"LOOKUP CHOICES keys %@ valuew %@ fieldname %@ ",_choiceKeys,_choiceValues,fieldname);
     
     NSLog(@"LOOKUP CHOICES keys %@ valuew %@ choices %@ fieldname %@ ",[_lookUpChoicesParm lookUPKeysInOrder],[_lookUpChoicesParm lookUPChoicesInOrder],[_lookUpChoicesParm LookupChoices ],[_lookUpChoicesParm lookUpField]);
 
