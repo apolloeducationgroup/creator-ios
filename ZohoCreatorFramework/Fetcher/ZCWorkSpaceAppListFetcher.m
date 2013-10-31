@@ -20,7 +20,6 @@
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
         NSString *zcAppListFile = [ArchiveUtil appListPath];
-        //////// //NSLog(@"Coming to App Fetcher");
         if([ConnectionChecker isServerActive])
         {
             NSString *myappListURL = [URLConstructor workSpaceAppListURL:workspaceowner];

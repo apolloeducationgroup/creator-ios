@@ -130,6 +130,9 @@
     ViewRecordParser *view = [[ViewRecordParser alloc] initViewRecordParser:formMetaXML :_component ];
     [[view zcView] setViewParam:_zcViewParam];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    
+    NSLog(@"view parsing finished..");
+    
     return [view zcView];
 }
 

@@ -418,7 +418,7 @@ static NSString *SERVICE_NAME;
 + (NSString*) postAuthTokenWithAppOwner : (NSString*) appOwner {
     
     ZOHOUser *user = [ZOHOUser userObject];
-    NSString *urlString = [NSString stringWithFormat:@"authtoken=%@&scope=creatorapi&sharedBy=%@",[user authToken],appOwner];
+    NSString *urlString = [NSString stringWithFormat:@"authtoken=%@&scope=creatorapi&zc_ownername=%@",[user authToken],appOwner];
     return urlString;
 }
 

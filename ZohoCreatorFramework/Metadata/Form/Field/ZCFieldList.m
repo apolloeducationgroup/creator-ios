@@ -193,7 +193,7 @@
     else if([fieldString isEqualToString:@"TIME"]) {
         return 11;
     }
-    else if([fieldString isEqualToString:@"SINGLE_SELECT"]) {
+    else if([fieldString isEqualToString:@"SINGLE_SELECT"]||[fieldString isEqualToString:@"INLINE_SINGLE_SELECT"]) {
         return 12;
     }
     else if([fieldString isEqualToString:@"MULTI_SELECT"]) {

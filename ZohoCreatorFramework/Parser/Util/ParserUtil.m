@@ -29,34 +29,37 @@
 
 + (NSMutableDictionary*) getURLString : (NSString*) rawString {
     
+    NSLog(@"raw string : %@",rawString);
+    
     NSMutableDictionary *returnList = [[NSMutableDictionary alloc] init];
     if(rawString != nil && ![rawString isEqualToString:@"(null)"]) {
         
-        NSRange srange = [rawString rangeOfString:@"href= \""];
-        NSRange erange = [rawString rangeOfString:@" target = \""];
-        NSRange erange1 = [rawString rangeOfString:@" title = \""];
+        NSRange href_range = [rawString rangeOfString:@"href= \""];
+        NSRange target_range = [rawString rangeOfString:@" target = \""];
+        NSRange title_range = [rawString rangeOfString:@" title = \""];
         
-        
+        NSLog(@"title range : %@",NSStringFromRange(title_range));
         // <a href= "http://zoho.com" target = "_blank">zoho.com</a>
         
-        if(srange.length == 0) {
+        if(href_range.length == 0) {
             return nil;
             //            [NSException raise:@"URL" format:@"Invalid String"];
         }
+        
         NSRange range;
-        range.location =srange.location + srange.length;
+        range.location =href_range.location + href_range.length;
         
         NSRange titleRange1 = [rawString rangeOfString:@">" ];
         NSRange titleRange2 = [rawString rangeOfString:@"</a>"];
         
         
-        if(erange1.length != 0) {
-            range.length = erange1.location - (srange.location + srange.length + 1);
+        if(title_range.length != 0) {
+            range.length = title_range.location - (href_range.location + href_range.length + 1);
             
             
         }
-        else if(erange.length != 0) {
-            range.length = erange.location - (srange.location + srange.length + 1);
+        else if(target_range.length != 0) {
+            range.length = target_range.location - (href_range.location + href_range.length + 1);
         }
         else {
             range.length = 0;
@@ -69,14 +72,14 @@
         
         NSRange target;
         
-        target.location = erange.location+1;
+        target.location = target_range.location+1;
         
         
-        if (!erange.length == 0)
+        if (!target_range.length == 0)
             
         {
             
-            target.length = titleRange1.location - (erange.location+erange.length+1);
+            target.length = titleRange1.location - (target_range.location+target_range.length+1);
             
             ////NSLog(@"target length value is : %d",target.length);
             
@@ -90,20 +93,23 @@
             
         }
         
-        NSRange titleRange;
-        
-        
-        titleRange.location = erange1.location+erange1.length;
-        
-        
-        titleRange.length = titleRange1.location - (erange1.location+erange1.length+erange.length+target.length+2);
-        
-        
-        ////NSLog(@"title length value is :%d",titleRange.length);
-        
-        [returnList setObject:[rawString substringWithRange:titleRange] forKey:@"title"];
-        
-        //NSLog(@"title %@",[rawString substringWithRange:titleRange]);
+        if (title_range.location!=NSNotFound) {
+            
+            NSRange titleRange;
+            
+            titleRange.location = title_range.location+title_range.length;
+            
+            
+            titleRange.length = titleRange1.location - (title_range.location+title_range.length+target_range.length+target.length+2);
+            
+            
+            NSLog(@"title length value is :%d",titleRange.length);
+            
+            [returnList setObject:[rawString substringWithRange:titleRange] forKey:@"title"];
+            
+            NSLog(@"title gee %@",[rawString substringWithRange:titleRange]);
+
+        }
         
         NSRange linkRange;
         

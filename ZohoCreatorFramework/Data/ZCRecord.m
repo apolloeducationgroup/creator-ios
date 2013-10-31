@@ -83,6 +83,7 @@
     NSLog(@"%@",self.recordID);
     NSString *updateRecord = [URLConstructor submitRecordURL];
     NSString *updateRecordString = [URLConstructor postAuthTokenWithAppOwner:[[self->_form application] appOwner]];
+    updateRecordString = [updateRecordString stringByAppendingString:@"&viewLinkName=test_View&formAccessType=2"];
     
     ZCFieldData *idFieldData = [[ZCFieldData alloc] init];
     [idFieldData setFieldName:@"ID"];
