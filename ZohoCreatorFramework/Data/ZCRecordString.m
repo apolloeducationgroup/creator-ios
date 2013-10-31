@@ -598,6 +598,7 @@
                 NSMutableArray * subFormRectoAdd=[NSMutableArray arrayWithArray:[[fieldData fieldValue]recordsToAdd ]];
                 NSMutableArray * subFormRectoupdate=[NSMutableArray arrayWithArray:[[fieldData fieldValue]recordsToUpdate ]];
                 NSMutableArray * subFormRectodelete=[NSMutableArray arrayWithArray:[[fieldData fieldValue]recordsToDelete ]];
+                ZCForm * zcSubform=[[fieldData fieldValue]zcSubForm];
                 int addrecCount=0;
                 int updatateRecordCount=0;
                 int deleteREcordCount=0;
@@ -640,11 +641,14 @@
                 while (addrecCount<subFormRectoAdd.count)
                 {
                     ZCRecord *SubFOrmRecord = [subFormRectoAdd objectAtIndex:addrecCount];
-                    ZCApplication *application =    [form application];
-                    ZCForm* zcForm =     [application getForm:[[field relatedComponent]  linkName]];
+//                    ZCApplication *application =    [form application];
+//                    ZCForm* zcForm =     [application getForm:[[field relatedComponent]  linkName]];
+                    
+                    
+                    
                     NSMutableString *SubFormrecordXML = [[NSMutableString alloc] init];
                     [SubFormrecordXML appendFormat:@"<add>"];
-                    NSString * SubFormRecordString=[NSString stringWithFormat:@"%@", [ZCRecordString recordXMLforSubformRecord:zcForm :SubFOrmRecord]];
+                    NSString * SubFormRecordString=[NSString stringWithFormat:@"%@", [ZCRecordString recordXMLforSubformRecord:zcSubform :SubFOrmRecord]];
                     [SubFormrecordXML appendString:SubFormRecordString];
                     [SubFormrecordXML appendString:@"</add>"];
                     ////// //NSLog(@"\n\n subform string %@\n\n",SubFormrecordXML);
@@ -738,6 +742,7 @@
         NSLog(@"fieldnamerecordvaluexml %@", fieldName);
         
         ZCFieldData *fieldData = [[record record] objectForKey:fieldName];
+        
         if([fieldData fieldValue] != nil) {
             
             if(fieldType == [ZCFieldList ZCMultiSelect] || fieldType==[ZCFieldList ZCCheckbox])
@@ -786,7 +791,8 @@
                 //   ZCField * fieldLocal=[form getFieldByName:[field fieldName]];
                 
                 NSLog(@"record to add %@",[[fieldData fieldValue] recordsToAdd]);
-                
+                ZCForm * zcSubform=[[fieldData fieldValue]zcSubForm];
+
                 NSMutableArray * subFormRec=[NSMutableArray arrayWithArray:[[fieldData fieldValue] recordsToAdd]];
                 
                 int recCount=0;
@@ -796,11 +802,11 @@
                 while (recCount<subFormRec.count)
                 {
                     ZCRecord *SubFOrmRecord = [subFormRec objectAtIndex:recCount];
-                    ZCApplication *application =    [form application];
-                    ZCForm* zcForm =     [application getForm:[[field relatedComponent]  linkName]];
+//                    ZCApplication *application =    [form application];
+//                    ZCForm* zcForm =     [application getForm:[[field relatedComponent]  linkName]];
                     NSMutableString *SubFormrecordXML = [[NSMutableString alloc] init];
                     [SubFormrecordXML appendFormat:@"<add>"];
-                    NSString * SubFormRecordString=[NSString stringWithFormat:@"%@", [ZCRecordString recordXMLforSubformRecord:zcForm :SubFOrmRecord]];
+                    NSString * SubFormRecordString=[NSString stringWithFormat:@"%@", [ZCRecordString recordXMLforSubformRecord:zcSubform :SubFOrmRecord]];
                     [SubFormrecordXML appendString:SubFormRecordString];
                     [SubFormrecordXML appendString:@"</add>"];
                     ////// //NSLog(@"\n\n subform string %@\n\n",SubFormrecordXML);

@@ -253,6 +253,16 @@
         if(tempValue != nil) {
             [_field setInitialValues:tempValue];
         }
+        
+        tempValue = [_fieldDict objectForKey:@"subformrecords"];
+        if(tempValue != nil) {
+
+            [_field setSubformRecords:[self getSubformRecords:tempValue]];
+
+        
+        }
+        
+        
         [_localForm addZCField:_field];
     }
     
@@ -267,6 +277,29 @@
      unique = 0;
      */
     
+}
+-(NSMutableArray *)getSubformRecords:(NSArray *)recordsRawArray
+{
+    NSMutableArray * records=[[NSMutableArray alloc]init];
+    
+ for(NSDictionary * recDict in recordsRawArray)
+ {
+
+     ZCRecord * subrec=[[ZCRecord alloc]initZCRecord];
+    for (NSString * key_fieldname in [recDict allKeys])
+     
+     {
+     
+         ZCFieldData * data=[[ZCFieldData alloc]init];
+         [data setFieldValue:[recDict objectForKey:key_fieldname]];
+         [data setFieldName:key_fieldname ];
+         [subrec addZCFieldData:data];
+     
+     }
+     [records addObject:subrec];
+ }
+    return records;
+
 }
 
 @end
