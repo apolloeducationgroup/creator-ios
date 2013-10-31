@@ -7,6 +7,7 @@
 //
 
 #import "ZOHOCreator.h"
+#import "LookUPChoiceParser.h"
 
 static ZOHOCreator *creatorObject = nil;
 
@@ -429,6 +430,32 @@ static ZOHOCreator *creatorObject = nil;
     //    NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:nil];
     //    [parser recordStatus];
 }
++(ZCLookUpChoices *)getLookupChoicesWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit
+{
+    
+    
+    
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    NSString *url = [URLConstructor construckLookupChoicesURLWithAppLinkname:appLinkName formLinkname:formLinkName lookUpFieldLinkName:lookupFieldName appOwner:appOwner subformComponent:subformComponent searchString:searchString startindex:startIndex limit:limit];
+    URLConnector *urlConnect = [[URLConnector alloc] initFetcher:url];
+    
+    [urlConnect apiResponse];
+    
+    NSLog(@"api response %@",[urlConnect apiResponse]);
+    
+    LookUPChoiceParser * lookupparser=[[LookUPChoiceParser alloc]initLookUPChoiceParser:[urlConnect apiResponse]];
+    
+    
+    
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    
+    
+    return [lookupparser lookUpChoicesParm];
+    
+}
+
 
 
 + (void) logout {
