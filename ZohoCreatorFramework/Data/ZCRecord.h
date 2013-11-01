@@ -33,10 +33,11 @@
 - (ZCFieldData*) getFieldData : (NSString*) fieldName;
 - (ZCFieldData*) getFieldDataByIndex : (NSInteger) index;
 - (ZCRecordStatus*) addRecord;
-- (ZCRecordStatus*) updateRecord;
+- (ZCRecordStatus*) updateRecordFromView:(NSString*) viewLinkName;
 - (ZCRecordStatus*) deleteRecord;
 - (ZCRecordStatus*) duplicateRecord;
 - (BOOL) uploadImages : (NSString*)  recordID;
 - (BOOL) uploadFiles : (NSString*)  recordID;
 -(id)copyWithZone:(NSZone *)zone;
+
 @end

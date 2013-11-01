@@ -112,16 +112,17 @@
 }
 
 
-+ (NSString*) updateRcordStringXML : (ZCForm*) form : (ZCRecord*) record {
++ (NSString*) newUpdateRcordStringXML : (ZCForm*) form : (ZCRecord*) record : (NSString*) viewLinkName {
     
+    NSLog(@"newUpdateRecordStringXML");
     NSMutableString *recordXML = [[NSMutableString alloc] init];
-    [recordXML appendFormat:@"XMLString=<ZohoCreator><applicationlist><application name='%@'><formlist><form name='%@'><update>",[[form application] appLinkName],[form linkName]];
+    [recordXML appendFormat:@"XMLString=<ZohoCreator><applicationlist><application name='%@'><viewlist><view name='%@'><update>",[[form application] appLinkName],viewLinkName];
     ZCFieldData *fieldData = [record getFieldData:@"ID"];
     [recordXML appendString:[ZCRecordString editRecordCriteria:[fieldData fieldValue]]];
     //    [recordXML appendString:[ZCRecordString editRecordCriteria:[record recordID]]];
     [recordXML appendString:@"<newvalues>"];
     [recordXML appendString:[ZCRecordString updateRecordValueXML:form :record]];
-    [recordXML appendString:@"</newvalues></update></form></formlist></application></applicationlist></ZohoCreator>"];
+    [recordXML appendString:@"</newvalues></update></view></viewlist></application></applicationlist></ZohoCreator>"];
     return  recordXML;
 }
 

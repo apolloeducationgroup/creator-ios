@@ -21,7 +21,7 @@
 + (NSString*) newRecordStringXML : (ZCForm*) form : (ZCRecord*) record;
 + (NSString*) editRecordCriteria : (NSString*) idValue;
 + (NSString*) deleteRecordCriteria : (NSString*) idValue;
-+ (NSString*) updateRcordStringXML : (ZCForm*) form : (ZCRecord*) record;
++ (NSString*) newUpdateRcordStringXML : (ZCForm*) form : (ZCRecord*) record : (NSString*) viewLinkName;
 + (NSString*) updateRcordStringXML : (NSString*) appLinkName  : (NSString*) formLinkName : (NSDictionary*) dataDict;
 + (NSString*) deleteRecordStringXML : (ZCForm*) form : (ZCRecord*) record;
 + (NSString*) deleteRecordStringXML: (NSString*) appLinkName : (NSString*) formLinkName : (NSString*) idValue;
@@ -29,7 +29,7 @@
 + (NSString*) newRecordsStringXML : (ZCForm*) form : (NSMutableArray*) records;
 + (NSString*) bulKUpdateRcordStringXML : (ZCForm*) form : (NSMutableArray*) records;
 + (NSString*) newDeleteRecordStringXML : (ZCView*) view : (ZCRecord*) record;
-+ (NSString*) newUpdateRcordStringXML : (ZCView*) view : (ZCRecord*) record;
++ (NSString*) newUpdateRcordStringXML : (ZCView*) view : (ZCRecord*) record ;
 + (NSString*) recordXMLforSubformRecord : (ZCForm*) form : (ZCRecord*) record;
 + (NSString*) bulkDeleteRecordStringXML: (NSString*) appLinkName withViewLinkName : (NSString*) viewLinkName : (NSMutableArray*) idValues;
 + (NSString*) deleteRecordStringXML: (NSString*) appLinkName withViewName: (NSString*) viewLinkName : (NSString*) idValue;

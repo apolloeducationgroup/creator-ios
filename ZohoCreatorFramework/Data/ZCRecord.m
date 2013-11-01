@@ -74,22 +74,20 @@
     return [parser recordStatus];
 }
 
-- (ZCRecordStatus*) updateRecord {
+- (ZCRecordStatus*) updateRecordFromView:(NSString *)viewLinkName {
     
     if([self->_form application] == nil) {
         [NSException raise:@"Application" format:@"Application Object Missing"];
         return NO;
     }
-    NSLog(@"%@",self.recordID);
     NSString *updateRecord = [URLConstructor submitRecordURL];
     NSString *updateRecordString = [URLConstructor postAuthTokenWithAppOwner:[[self->_form application] appOwner]];
-    updateRecordString = [updateRecordString stringByAppendingString:@"&viewLinkName=test_View&formAccessType=2"];
     
     ZCFieldData *idFieldData = [[ZCFieldData alloc] init];
     [idFieldData setFieldName:@"ID"];
     [idFieldData setFieldValue:self.recordID];
     [self addZCFieldData:idFieldData];
-    updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@&zcRefValue=true",[ZCRecordString updateRcordStringXML:self->_form :self]];
+    updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@&zcRefValue=true",[ZCRecordString newUpdateRcordStringXML:self->_form :self :viewLinkName]];
     NSLog(@"Update record string %@",updateRecordString);
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:updateRecord :updateRecordString :[URLConnector POSTMETHOD]];
     NSString *response = [urlConnect apiResponse];
