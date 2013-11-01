@@ -38,6 +38,8 @@
         NSRange target_range = [rawString rangeOfString:@" target = \""];
         NSRange title_range = [rawString rangeOfString:@" title = \""];
         
+        NSLog(@"href range : %@",NSStringFromRange(href_range));
+        NSLog(@"target range : %@",NSStringFromRange(target_range));
         NSLog(@"title range : %@",NSStringFromRange(title_range));
         // <a href= "http://zoho.com" target = "_blank">zoho.com</a>
         
@@ -55,19 +57,18 @@
         
         if(title_range.length != 0) {
             range.length = title_range.location - (href_range.location + href_range.length + 1);
-            
-            
         }
         else if(target_range.length != 0) {
             range.length = target_range.location - (href_range.location + href_range.length + 1);
         }
         else {
-            range.length = 0;
+            range.length = titleRange1.location - (href_range.location + href_range.length +1);
         }
         
         [returnList setObject:[rawString substringWithRange:range] forKey:@"url"];
         
-        ////// //NSLog(@"Url String %@",[rawString substringWithRange:range]);
+        NSLog(@"Url subString range : %@",NSStringFromRange(range));
+        NSLog(@"Url subString %@",[rawString substringWithRange:range]);
         
         
         NSRange target;
@@ -117,7 +118,7 @@
         
         linkRange.length = titleRange2.location - (titleRange1.location + titleRange1.length);
         
-        [returnList setObject:[rawString substringWithRange:linkRange] forKey:@"linkname"];
+        [returnList setObject:[rawString substringWithRange:linkRange] forKey:@"urllinkname"];
         
         //NSLog(@"link %@",[rawString substringWithRange:linkRange]);
         
