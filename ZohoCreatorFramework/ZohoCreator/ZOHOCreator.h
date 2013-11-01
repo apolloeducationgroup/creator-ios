@@ -16,6 +16,8 @@
 #import "ZCWorkSpaceAppListFetcher.h"
 #import "ZCAppsCategoryListFetcher.h"
 #import "ZCAllAppsCategory.h"
+#import "LookUPChoiceParser.h"
+#import "ZCLookUpChoices.h"
 
 @class ZOHOUser,ZCForm,ZCView,ZCApplication,ZCViewParam;
 
@@ -73,5 +75,8 @@
 + (ZCForm*) getEditForm : (NSString*) appLinkName : (NSString*) formLinkName recordLinkID : (NSString*) recordLinkID appOwner : (NSString *) appOwner;
 + (NSArray*) newDuplicateRecordForView : (NSString*) viewLinkName  WithApplication: (NSString*) appLinkName AndRecords : (NSMutableArray*) records AndAppOwner : (NSString*) appOwner;
 + (ZCForm*) getEditFormWithView : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName recordLinkID : (NSString*) recordLinkID appOwner : (NSString *) appOwner;
+
+
++(ZCLookUpChoices *)getLookupChoicesWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit;
 
 @end

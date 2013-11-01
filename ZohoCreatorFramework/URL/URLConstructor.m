@@ -613,6 +613,24 @@ static NSString *SERVICE_NAME;
     
     return authenticationUrl;
 }
++(NSString *)construckLookupChoicesURLWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit
+{
+    NSString * lookUpchoiceURL=[NSString stringWithFormat:@"/api/%@/xml/%@/form/%@/lookup/%@/options//",appOwner,appLinkName,formLinkName,lookupFieldName];
+    lookUpchoiceURL = [URLConstructor appendAuthToken:lookUpchoiceURL];
+    
+    lookUpchoiceURL =[lookUpchoiceURL stringByAppendingFormat:@"&limit=%i&appendRows=true&startindex=%i&zcRefValue=true&searchValue=%@",limit,startIndex,searchString];
+    
+    
+    lookUpchoiceURL = [[URLConstructor serverURL:false] stringByAppendingString:lookUpchoiceURL];
+    
+    
+    return lookUpchoiceURL;
+    
+    //https://creator.localzoho.com/api/charles/xml/sales-data123/form/Lookup_testing/lookup/Sales_Data/options//authtoken=eb7285f9bd1b913cd8ebb8b1abb25d4b&scope=creatorapi&limit=50&appendRows=true&startindex=0&zcRefValue=true&searchValue=cha
+    
+    
+}
+
 @end
 @implementation URLConstructor(hidden)
 
