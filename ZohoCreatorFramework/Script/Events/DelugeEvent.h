@@ -20,14 +20,14 @@
 @protocol DelugeDelegate <NSObject>
 
 @required -(void) showAlert : (NSString*) message;
-@required -(void) enableField : (NSString*) formName : (NSString*) fieldName;
-@required -(void) disableField: (NSString*) formName : (NSString*) fieldName;
-@required -(void) showField: (NSString*) formName : (NSString*) fieldName;
-@required -(void) hideField: (NSString*) formName : (NSString*) fieldName;
+@required -(void) enableField : (NSString*) formName : (NSString*) fieldName subformName:(NSString *)subformname;
+@required -(void) disableField: (NSString*) formName : (NSString*) fieldName subformName:(NSString *)subformname;
+@required -(void) showField: (NSString*) formName : (NSString*) fieldName subformName:(NSString *)subformname;
+@required -(void) hideField: (NSString*) formName : (NSString*) fieldName subformName:(NSString *)subformname;
 @required -(void) addValues : (NSString*) formName : (NSString*) fieldName : (NSMutableArray*) valueList;
 @required -(void) clearValue : (NSString*) formName : (NSString*) fieldValue;
 @required -(void) noScript : (NSString*) message;
-@required -(void) setFieldValue : (NSString*) formName  : (NSString*) fieldName : (id) fieldValue;
+@required -(void) setFieldValue : (NSString*) formName  : (NSString*) fieldName : (id) fieldValue rowNumberForSubform:(int)rownumber;
 @required -(void) openUrl : (NSString*) urlString withWindowType : (NSString*) windowsType andParameter : (NSString*) parameter;
 @required -(void) reloadForm : (NSString*) formName;
 @required -(void) selectValue : (NSString*) formName withFieldName : (NSString*) fieldName andValues : (NSMutableArray*) selectValues;

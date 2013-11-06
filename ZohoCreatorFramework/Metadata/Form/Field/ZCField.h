@@ -43,7 +43,7 @@
 @property (nonatomic) NSInteger currencyType;
 @property (nonatomic,retain) NSString *currencyDisplay;
 @property (nonatomic,retain) NSString *currencyName;
-
+@property(nonatomic,assign) NSInteger hasmaximumNumberOfRows;
 -(ZCField*) initZCField;
 
 @end

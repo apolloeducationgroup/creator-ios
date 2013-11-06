@@ -152,6 +152,22 @@
             [_field setHasOnUserScript:[tempValue boolValue]];
         }
         
+        
+        tempValue = [_fieldDict objectForKey:@"onaddrowexists"];
+        if(tempValue != nil) {
+            [_field setHasSubFormAddEvent:[tempValue boolValue]];
+        }
+        tempValue = [_fieldDict objectForKey:@"ondeleterowexists"];
+        if(tempValue != nil) {
+            [_field setHasSubFormDeleteEvent:[tempValue boolValue]];
+        }
+
+        
+        tempValue = [_fieldDict objectForKey:@"maximumrows"];
+        if(tempValue != nil) {
+            [_field setHasmaximumNumberOfRows:[tempValue integerValue]];
+        }
+
         tempValue = [_fieldDict objectForKey:@"choices"];
         if(tempValue != nil) {
             

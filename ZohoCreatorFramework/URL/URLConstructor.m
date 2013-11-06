@@ -633,24 +633,79 @@ static NSString *SERVICE_NAME;
     
 }
 
--(NSString *)subFormAddRowWithAppLinkname:(NSString *)appLinkName formLinkName:(NSString *)formLinkName fieldLinkName:(NSString *)fieldLinkName numberofsubformEntries:(int)numberofsubformEntries appOwner:(NSString *)appOwner recordParm:(NSString *)params
++(NSString *)subFormAddRowWithAppLinkname:(NSString *)appLinkName formLinkName:(NSString *)formLinkName fieldLinkName:(NSString *)fieldLinkName numberofsubformEntries:(int)numberofsubformEntries appOwner:(NSString *)appOwner recordParm:(NSString *)params  
 {
-    NSString * paramString;
-    
-           paramString=[paramString stringByAppendingString:[URLConstructor postAuthToken]];
-    
-               paramString =[paramString stringByAppendingFormat:@"&added=SF(SubForm).FD(t::row_%i).SV(record::status)",numberofsubformEntries];
-               
+    NSString * paramString=[[NSString alloc]init];
+    paramString=[paramString stringByAppendingString:[URLConstructor postAuthToken]];
+    NSLog(@"param  string %@",paramString);
+
+    paramString =[paramString stringByAppendingString:params];
+
                paramString =[paramString stringByAppendingFormat:@"&sharedBy=%@",appOwner];
+//    NSLog(@"param  string %@",paramString);
+
+    
                paramString =[paramString stringByAppendingFormat:@"&appLinkName=%@",appLinkName];
+//    NSLog(@"param  string %@",paramString);
+
                paramString =[paramString stringByAppendingFormat:@"&formLinkName=%@",formLinkName];
+//    NSLog(@"param  string %@",paramString);
+
                paramString =[paramString stringByAppendingFormat:@"&linkNameBased=true"];
+//    NSLog(@"param  string %@",paramString);
+
                paramString =[paramString stringByAppendingFormat:@"&rowactiontype=onaddrow"];
+//    NSLog(@"param  string %@",paramString);
+
                paramString =[paramString stringByAppendingFormat:@"&rowseqid=t::row_%i=",numberofsubformEntries];
+//    NSLog(@"param  string %@",paramString);
+
+//    NSLog(@"param  string %@",paramString);
+    
+    
+//        [param appendFormat:@"&rowseqid=t::row_%i",records.count];
     
 
+    
+    
+    
     return paramString;
 }
+
++(NSString *)subFormONDELETERowWithAppLinkname:(NSString *)appLinkName formLinkName:(NSString *)formLinkName fieldLinkName:(NSString *)fieldLinkName deleteRowNumber:(int)deleteRowNumber appOwner:(NSString *)appOwner recordParm:(NSString *)params {
+    NSString * paramString=[[NSString alloc]init];
+    paramString=[paramString stringByAppendingString:[URLConstructor postAuthToken]];
+//    NSLog(@"param  string %@",paramString);
+    
+    paramString =[paramString stringByAppendingString:params];
+    
+    paramString =[paramString stringByAppendingFormat:@"&sharedBy=%@",appOwner];
+//    NSLog(@"param  string %@",paramString);
+    
+    
+    paramString =[paramString stringByAppendingFormat:@"&appLinkName=%@",appLinkName];
+//    NSLog(@"param  string %@",paramString);
+    
+    paramString =[paramString stringByAppendingFormat:@"&formLinkName=%@",formLinkName];
+//    NSLog(@"param  string %@",paramString);
+    
+    paramString =[paramString stringByAppendingFormat:@"&linkNameBased=true"];
+//    NSLog(@"param  string %@",paramString);
+    
+    paramString =[paramString stringByAppendingFormat:@"&rowactiontype=ondeleterow"];
+//    NSLog(@"param  string %@",paramString);
+    
+      paramString =[paramString stringByAppendingFormat:@"&rowseqid=t::row_%i=",deleteRowNumber];
+
+    
+    
+    
+    
+    
+    
+    return paramString;
+}
+
 @end
 @implementation URLConstructor(hidden)
 

@@ -10,7 +10,7 @@
 #import "ZCRecord.h"
 
 @implementation ZCSubFormRecords
-@synthesize recordsToAdd=_recordsToAdd,recordsToUpdate=_recordsToUpdate,recordsToDelete=_recordsToDelete,zcSubForm=_zcSubForm;
+@synthesize recordsToAdd=_recordsToAdd,recordsToUpdate=_recordsToUpdate,recordsToDelete=_recordsToDelete,zcSubForm=_zcSubForm,temporaryRecords=_temporaryRecords;
 -(id)init{
     self=[super init];
     if (self) {
@@ -18,6 +18,8 @@
         _recordsToUpdate=[[NSMutableArray alloc]init];
         _recordsToAdd=[[NSMutableArray alloc]init];
         _recordsToDelete=[[NSMutableArray alloc]init];
+        _temporaryRecords=[[NSMutableArray alloc]init];
+        
     }
     return self;
     
@@ -35,5 +37,14 @@
 -(void)addRecordToDelete:(ZCRecord *)record
 {
     [_recordsToDelete addObject:record];
+}
+-(void)addTemporaryRecords:(ZCRecord *)record
+{
+
+    [_temporaryRecords addObject:record];
+}
+-(void)clearTemporaryRecords
+{
+    [_temporaryRecords removeAllObjects];    
 }
 @end

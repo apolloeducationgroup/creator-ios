@@ -122,9 +122,31 @@
     [setVariable setFieldName:[setVariableDic objectForKey:@"fieldName"]];
     [setVariable setFormName:[setVariableDic objectForKey:@"formName"]];
     id fieldValue = [setVariableDic objectForKey:@"fieldValue"];
+    
+    NSString * rowDetails;
+    
+    
+    rowDetails= [setVariableDic objectForKey:@"rowNo"];
+    if (rowDetails.length) {
+        
+        NSString * string=[[rowDetails componentsSeparatedByString:@"t::row_"]objectAtIndex:1];
+        [setVariable setRowNumber_Subform:[string integerValue ]];
+    }
+
     if(fieldValue != nil) {
             [setVariable setFieldValue:fieldValue];
     }
+    
+    
+//    compType = 3;
+//    fieldName = "Multi_Line";
+//    fieldValue = "";
+//    formName = "Untitled_Form";
+//    rowNo = "t::row_1";
+//    subFormName = SubForm;
+//    task = 12;
+//    
+    
     return setVariable;
 }
 
@@ -135,6 +157,12 @@
     [_enableField setTaskType:@"enable"];
     [_enableField setFormName:[enableDict objectForKey:@"formName"]];
     [_enableField setFieldName:[enableDict objectForKey:@"fieldName"]];
+    
+    NSString * subformName= [enableDict objectForKey:@"subFormName"];
+
+    if (subformName !=Nil) {
+    [_enableField setSubFormName:subformName];
+    }
     return _enableField;
 }
 
@@ -144,6 +172,12 @@
     [_disableField setTaskType:@"disable"];
     [_disableField setFormName:[disableDict objectForKey:@"formName"]];
     [_disableField setFieldName:[disableDict objectForKey:@"fieldName"]];
+    NSString * subformName= [disableDict objectForKey:@"subFormName"];
+    
+    if (subformName !=Nil) {
+        [_disableField setSubFormName:subformName];
+    }
+
     return _disableField;
 }
 
@@ -153,6 +187,12 @@
     [_showTask setTaskType:@"show"];
     [_showTask setFormName:[showDict objectForKey:@"formName"]];
     [_showTask setFieldName:[showDict objectForKey:@"fieldName"]];
+    NSString * subformName= [showDict objectForKey:@"subFormName"];
+    
+    if (subformName !=Nil) {
+        [_showTask setSubFormName:subformName];
+    }
+
     return _showTask;
     
 }
@@ -161,8 +201,24 @@
     
     HideTask *_hideField = [[HideTask alloc] init];
     [_hideField setTaskType:@"hide"];
+    
+//    compType = 3;
+//    fieldName = "Multi_Line";
+//    formName = "Untitled_Form";
+//    subFormName = SubForm;
+//    task = 10;
+//
+//    
+    
     [_hideField setFormName:[hideDict objectForKey:@"formName"]];
     [_hideField setFieldName:[hideDict objectForKey:@"fieldName"]];
+    NSString * subformName= [hideDict objectForKey:@"subFormName"];
+    
+    if (subformName !=Nil) {
+        [_hideField setSubFormName:subformName];
+    }
+
+    
     return _hideField;
 }
 

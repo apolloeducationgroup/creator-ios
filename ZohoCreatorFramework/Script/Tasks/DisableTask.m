@@ -11,5 +11,6 @@
 @implementation DisableTask
 
 @synthesize fieldName=_fieldName,formName=_formName;
+@synthesize subFormName=_subFormName;
 
 @end

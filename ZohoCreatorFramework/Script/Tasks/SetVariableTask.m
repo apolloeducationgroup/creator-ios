@@ -10,6 +10,6 @@
 
 @implementation SetVariableTask
 
-@synthesize fieldName=_fieldName,fieldValue=_fieldValue,formName=_formName;
+@synthesize fieldName=_fieldName,fieldValue=_fieldValue,formName=_formName,rowNumber_Subform;
 
 @end

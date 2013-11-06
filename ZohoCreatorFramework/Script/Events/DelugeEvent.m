@@ -8,7 +8,7 @@
 
 #import "DelugeEvent.h"
 
-
+#import "ZCSubFormRecords.h"
 @implementation DelugeEvent
 
 @synthesize delugeURL=_delugeURL,callerDelegate=_callerDelegate,delugeParams=_delugeParams;
@@ -70,22 +70,22 @@
             else if([taskType isEqualToString:@"show"]) {
                 
                 ShowTask *showTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate showField:[showTask formName] :[showTask fieldName]];
+                [_callerDelegate showField:[showTask formName] :[showTask fieldName] subformName:[showTask subFormName]];
             }
             else if([taskType isEqualToString:@"hide"]) {
                 
                 HideTask *showTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate hideField:[showTask formName] :[showTask fieldName]];
+                [_callerDelegate hideField:[showTask formName] :[showTask fieldName]  subformName:[showTask subFormName]];
             }
             else if([taskType isEqualToString:@"enable"]) {
                 
                 ShowTask *enableTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate enableField:[enableTask formName] :[enableTask fieldName]];
+                [_callerDelegate enableField:[enableTask formName] :[enableTask fieldName] subformName:[enableTask subFormName]];
             }
             else if([taskType isEqualToString:@"disable"]) {
                 
                 DisableTask *showTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate disableField:[showTask formName] :[showTask fieldName]];
+                [_callerDelegate disableField:[showTask formName] :[showTask fieldName] subformName:[showTask subFormName]];
             }
             else if([taskType isEqualToString:@"addvalue"]) {
                 
@@ -110,7 +110,7 @@
             }
             else if([taskType isEqualToString:@"setvalue"]) {
                 SetVariableTask *setVariable = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate setFieldValue:[setVariable formName]: [ setVariable fieldName]:[setVariable fieldValue]];
+                [_callerDelegate setFieldValue:[setVariable formName]: [ setVariable fieldName]:[setVariable fieldValue] rowNumberForSubform:[setVariable rowNumber_Subform] ];
             }
             else if([taskType isEqualToString:@"openurl"]) {
                 ////// //NSLog(@"Coming to openurl task");
@@ -149,6 +149,9 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     URLConnector *connector = [[URLConnector alloc] initFetcherPostParam:_delugeURL :_delugeParams :[URLConnector POSTMETHOD]];
+    
+    
+    NSLog(@"deluge params %@",_delugeParams);
     NSString *formMetaXML = [connector apiResponse];
     //// //NSLog(@"deluge form Meta XML %@ ",formMetaXML);
     
@@ -173,11 +176,17 @@
     NSMutableString *paramString = [NSMutableString string];
     NSEnumerator *keyEnum = [_dictionary keyEnumerator];
     NSString *keyName;
+    
+//    [paramString appendString:@"&SF(SubForm).FD(t::row_0).SV(record::status):added&SF(SubForm).FD(t::row_0).SV(Multi_Line):&SF(SubForm).FD(t::row_0).SV(Single_Line):riyaz"];
+    
+
+    
     while((keyName = [keyEnum nextObject]) != nil) {
         ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
         id keyValue = [fieldDate fieldValue];
         if(keyValue != nil) {
             if([keyValue isKindOfClass:[NSString class]]) {
+                
                 [paramString appendFormat:@"&%@=%@",keyName,keyValue];
             }
             else if([keyValue isKindOfClass:[NSMutableArray class]]) {
@@ -185,6 +194,22 @@
                 for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
                     NSLog(@"coming to index");
                     [paramString appendFormat:@"&%@=%@",keyName,[keyValue objectAtIndex:optIndex]];
+                }
+            }
+            else if ([keyValue isKindOfClass:[ZCSubFormRecords class]])
+            {
+                
+                NSLog(@"subform records riyaz");
+                NSMutableArray * recordstoAdd=[[NSMutableArray alloc]init];
+               [recordstoAdd addObjectsFromArray:[keyValue recordsToAdd]];
+                [recordstoAdd addObjectsFromArray:[keyValue recordsToUpdate]];
+                [recordstoAdd addObjectsFromArray:[keyValue temporaryRecords]];
+
+                if (recordstoAdd.count)
+                {
+                
+             [paramString appendString:[DelugeEvent getsubformRecordParam:recordstoAdd fieldlinkname:[fieldDate fieldName]]];
+                [paramString appendFormat:@"&fieldName=%@",keyName];
                 }
             }
         }
@@ -217,8 +242,204 @@
     }
     [paramString appendString:@"</fields>"];
     [paramString appendFormat:@"&sharedBy=%@",sharedBy]; */
+
+    return  paramString;
+//    return [paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+}
++(NSString *)getsubformRecordParam:(NSMutableArray *)records fieldlinkname:(NSString *)fieldlinkname
+{
+
     
-    return [paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSMutableString * param=[[NSMutableString alloc]init];
+    
+    
+    
+//    [param appendString:@"&SF(SubForm).FD(t::row_0).SV(record::status)=added&SF(SubForm).FD(t::row_0).SV(Multi_Line):&SF(SubForm).FD(t::row_0).SV(Single_Line):"];
+
+    
+//    [param appendFormat:@"&SF(%@).FD(t::row_0).SV(record::status)=added",fieldlinkname];
+/*
+    
+    if (records.count) {
+        
+
+    
+    NSDictionary *_dictionary = [[records objectAtIndex:0 ]record];
+    NSEnumerator *keyEnum = [_dictionary keyEnumerator];
+    NSString *keyName;
+        [param appendFormat:@"&SF(%@).FD(t::row_0).SV(record::status)=added",fieldlinkname];
+
+    while((keyName = [keyEnum nextObject]) != nil) {
+
+        ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
+        id keyValue = [fieldDate fieldValue];
+        if(keyValue != nil) {
+            if([keyValue isKindOfClass:[NSString class]]) {
+                //                [paramString appendFormat:@"&%@=%@",keyName,keyValue];
+                
+                
+                
+                //   SF(SubForm_1).FD(t::row_1).SV(Single_Line_1):1111
+
+                
+                
+                [param appendFormat:@"&SF(%@).FD(t::row_0).SV(%@):%@",fieldlinkname,[fieldDate fieldName ],[fieldDate fieldValue]];
+                
+                
+    
+                
+            }
+            
+        }}
+    */
+    
+    
+        
+//        zccpn=b5822429-c393-4d06-9246-856e20473a4b
+//        &name=sadsadasdsadsadasd
+//        &=%23Form%3Amain_form
+//        &SF(SubForm_1).FD(t::row_0).SV(record::status)=added
+//        &SF(SubForm_1).FD(t::row_0).SV(Single_Line_1)=
+//        &SF(SubForm_1).FD(t::row_0).SV(Single_Line)=
+//        &SF(SubForm_1).FD(t::row_1).SV(record::status)=added
+//        &SF(SubForm_1).FD(t::row_1).SV(Single_Line_1)=1111
+//        &SF(SubForm_1).FD(t::row_1).SV(Single_Line)=asd
+//        &SF(SubForm_1).FD(t::row_1).MV(Checkbox)=Choice%202
+//        &SF(SubForm_1).FD(t::row_2).SV(record::status)=added
+//        &SF(SubForm_1).FD(t::row_2).SV(Single_Line_1)=
+//        &SF(SubForm_1).FD(t::row_2).SV(Single_Line)=
+//        &SF(SubForm_1).FD(t::row_2).MV(Checkbox)=Choice%201
+//        &SF(SubForm_1).FD(t::row_2).MV(Checkbox)=Choice%202
+//        &SF(SubForm_1).FD(t::row_2).MV(Checkbox)=Choice%203
+//        &SF(SubForm_1).FD(t::row_3).SV(record::status)=added
+//        &SF(SubForm_1).FD(t::row_3).SV(Single_Line_1)=
+//        &SF(SubForm_1).FD(t::row_3).SV(Single_Line)=
+//        &SF(SubForm_1).FD(t::row_4).SV(record::status)=added
+//        &SF(SubForm_1).FD(t::row_4).SV(Single_Line_1)=
+//        &SF(SubForm_1).FD(t::row_4).SV(Single_Line)=
+//        &zc-mobile=
+//        &formid=1411560000000310009
+//        &formLinkId=178
+//        &formLinkName=main_form
+//        &tableName=t_1411560000000310009
+//        &lookupFieldName=
+//        &childFormAccessType=
+//        &childFieldLabelName=
+//        &childFormLinkName=
+//        &childAppLinkName=
+//        &childFormPrivateLink=
+//        &isFromSubForm=
+//        &rowNo=
+//        &subFormAppName=
+//        &subFormLinkName=
+//        &recType=1
+//        &viewLinkName=
+//        &pkValue=
+//        &dateFormat=dd-MMM-yyyy
+//        &timeZone=America%2FLos_Angeles
+//        
+//        &uiDateFormat=%25d-%25b-%25Y
+//        &fromIDX=
+//        &privatelink=
+//        &viewPrivateLink=
+//        &appLinkName=subform-app
+//        &sharedBy=riyazmd
+//        &isNewTypeSubform=
+//        &childSubformField=
+//        &zc_lookupCount=
+//        &fcid=1411560000000310127
+//        &fcname=SubForm_1
+//        &rowseqid=t::row_4
+//        &rowactiontype=onaddrow
+//        Response Headersview source
+//
+    
+    
+//    
+//    SF(SubForm_1).FD(t::row_0).SV(record::status):added
+//    SF(SubForm_1).FD(t::row_0).SV(Single_Line_1):
+//    SF(SubForm_1).FD(t::row_0).SV(Single_Line):
+//    
+//    
+//    SF(SubForm_1).FD(t::row_1).SV(record::status):added
+//    SF(SubForm_1).FD(t::row_1).SV(Single_Line_1):1111
+//    SF(SubForm_1).FD(t::row_1).SV(Single_Line):asd
+//    SF(SubForm_1).FD(t::row_1).MV(Checkbox):Choice 2
+//    
+//    
+//    SF(SubForm_1).FD(t::row_2).SV(record::status):added
+//    SF(SubForm_1).FD(t::row_2).SV(Single_Line_1):
+//    SF(SubForm_1).FD(t::row_2).SV(Single_Line):
+//    SF(SubForm_1).FD(t::row_2).MV(Checkbox):Choice 1
+//    SF(SubForm_1).FD(t::row_2).MV(Checkbox):Choice 2
+//    SF(SubForm_1).FD(t::row_2).MV(Checkbox):Choice 3
+//    
+//    
+//    SF(SubForm_1).FD(t::row_3).SV(record::status):added
+//    SF(SubForm_1).FD(t::row_3).SV(Single_Line_1):
+//    SF(SubForm_1).FD(t::row_3).SV(Single_Line):
+
+    
+    for (int recindex=0;recindex<[records count];recindex++) {
+        
+        
+        ZCRecord * record =  [records objectAtIndex:recindex];
+
+    NSDictionary *_dictionary = [record record];
+    NSEnumerator *keyEnum = [_dictionary keyEnumerator];
+    NSString *keyName;
+        [param appendFormat:@"&SF(%@).FD(t::row_%i).SV(record::status)=added",fieldlinkname,recindex+1];
+    while((keyName = [keyEnum nextObject]) != nil) {
+        ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
+        id keyValue = [fieldDate fieldValue];
+        if(keyValue != nil) {
+            if([keyValue isKindOfClass:[NSString class]]) {
+//                [paramString appendFormat:@"&%@=%@",keyName,keyValue];
+                
+                
+                
+           //   SF(SubForm_1).FD(t::row_1).SV(Single_Line_1):1111
+                
+                
+                
+                [param appendFormat:@"&SF(%@).FD(t::row_%i).SV(%@)=%@",fieldlinkname,recindex+1,[fieldDate fieldName ],[fieldDate fieldValue]];
+                
+                
+                
+
+            }
+            else if([keyValue isKindOfClass:[NSMutableArray class]]) {
+                
+                for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
+                    
+                    
+                    
+                    [param appendFormat:@"&SF(%@).FD(t::row_%i).MV(%@)=%@",fieldlinkname,recindex+1,[fieldDate fieldName ],[keyValue objectAtIndex:optIndex]];
+
+//                    [paramString appendFormat:@"&%@=%@",keyName,[keyValue objectAtIndex:optIndex]];
+                }
+            }
+        }
+    }
+
+
+        
+        
+        
+
+
+
+    
+    
+    }
+    //param= [param stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+
+    NSLog(@"subformREcordPArm riyaz %@",param);
+    return param;
+
+    
 }
 
 + (NSString*) getParamString: (ZCRecord*) _zcRecord {

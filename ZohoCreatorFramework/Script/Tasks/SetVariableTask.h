@@ -15,6 +15,6 @@
 @property (nonatomic,retain) NSString *fieldName;
 @property (nonatomic,retain) id fieldValue;
 
-
+@property (nonatomic,assign) int rowNumber_Subform;
 
 @end
