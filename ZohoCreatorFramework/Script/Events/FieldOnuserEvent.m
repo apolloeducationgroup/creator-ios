@@ -16,8 +16,9 @@
         if (subform) {
             //            [super setDelugeURL:[URLConstructor fieldOnUser:_appLocal :_formLocal:_fieldLocal:paramString]];
             _subform=YES;
-            subformOnuser=[[SubFormOnUser alloc]initSubFormOnUser:_appLocal :_formLocal :_fieldLocal :mainAppLinkname :mainFormLinkname :subformFieldLinkname :paramString :appowner :delegate  ];
-            
+//            subformOnuser=[[SubFormOnUser alloc]initSubFormOnUser:_appLocal :_formLocal :_fieldLocal :mainAppLinkname :mainFormLinkname :subformFieldLinkname :paramString :appowner :delegate  ];
+            fieldonuser=[[FieldOnUser alloc]initFieldOnUser:_appLocal :_formLocal :_fieldLocal :paramString :delegate:appowner ];
+
         }
         else
         {
