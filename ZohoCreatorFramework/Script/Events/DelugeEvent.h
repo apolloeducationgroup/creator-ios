@@ -52,6 +52,7 @@
 - (DelugeTasks*)  execute;
 - (CustomActionResponse*) executeCustomAction;
 
+
 + (NSString*) getParamXMLString : (ZCRecord*) _record : (NSString*) sharerdBy;
 + (NSString*) getParamStringByZCRecord  : (ZCRecord*) _record;
 + (NSString*) getParamStringByDict : (NSMutableDictionary*) _dictionary;

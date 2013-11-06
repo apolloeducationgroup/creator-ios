@@ -150,6 +150,8 @@ static NSString *SERVICE_NAME;
     NSString *downloadURL = [NSString stringWithFormat:@"/DownloadFileFromMig.do?filepath=%@&appLinkName=%@&viewLinkName=%@&sharedBy=%@&",filePath,appLinkName,viewLinkName,appOwner];
     downloadURL = [[URLConstructor serverURL:false] stringByAppendingString:downloadURL];
     downloadURL = [URLConstructor appendAuthToken:downloadURL];
+    
+    NSLog(@"image download url %@",downloadURL);
     return downloadURL;
 }
 
@@ -631,6 +633,24 @@ static NSString *SERVICE_NAME;
     
 }
 
+-(NSString *)subFormAddRowWithAppLinkname:(NSString *)appLinkName formLinkName:(NSString *)formLinkName fieldLinkName:(NSString *)fieldLinkName numberofsubformEntries:(int)numberofsubformEntries appOwner:(NSString *)appOwner recordParm:(NSString *)params
+{
+    NSString * paramString;
+    
+           paramString=[paramString stringByAppendingString:[URLConstructor postAuthToken]];
+    
+               paramString =[paramString stringByAppendingFormat:@"&added=SF(SubForm).FD(t::row_%i).SV(record::status)",numberofsubformEntries];
+               
+               paramString =[paramString stringByAppendingFormat:@"&sharedBy=%@",appOwner];
+               paramString =[paramString stringByAppendingFormat:@"&appLinkName=%@",appLinkName];
+               paramString =[paramString stringByAppendingFormat:@"&formLinkName=%@",formLinkName];
+               paramString =[paramString stringByAppendingFormat:@"&linkNameBased=true"];
+               paramString =[paramString stringByAppendingFormat:@"&rowactiontype=onaddrow"];
+               paramString =[paramString stringByAppendingFormat:@"&rowseqid=t::row_%i=",numberofsubformEntries];
+    
+
+    return paramString;
+}
 @end
 @implementation URLConstructor(hidden)
 

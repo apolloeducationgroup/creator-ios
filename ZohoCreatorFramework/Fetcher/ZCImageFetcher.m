@@ -12,7 +12,9 @@
 
 +  (NSData*) fetchImageWITHFilePath: (NSString*) FilePath withViewLinkName : (NSString*) viewLinkName appLinkName:(NSString *)appLinkname appOwner : (NSString *) appOwner {
     
-    NSString * urlString=[URLConstructor downloadFile:FilePath viewLinkName:viewLinkName :appLinkname :appOwner ];
+    NSString * urlString=[URLConstructor
+                          downloadFile :[NSString stringWithCString:[FilePath cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding]viewLinkName:viewLinkName :appLinkname :appOwner ];
+    
     
     URLConnector *connector = [[URLConnector alloc] initFetcher:urlString];
     //NSLog(@"raw data %@",[connector apiRawData]);
