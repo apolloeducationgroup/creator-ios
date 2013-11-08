@@ -13,5 +13,4 @@
 
 @property (nonatomic,retain) NSString *fieldName;
 @property (nonatomic,retain) NSString *formName;
-@property (nonatomic,retain) NSString *subFormName;
 @end

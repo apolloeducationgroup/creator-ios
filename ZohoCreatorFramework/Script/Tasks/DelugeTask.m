@@ -10,6 +10,6 @@
 
 @implementation DelugeTask
 
-@synthesize taskType=_taskType;
+@synthesize taskType=_taskType,subformName=_subformName,rowNumber_Subform=_rowNumber_Subform;
 
 @end

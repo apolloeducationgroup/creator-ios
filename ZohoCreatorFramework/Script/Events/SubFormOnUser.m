@@ -19,12 +19,24 @@ self = [super init];
 //        [super setDelugeURL:[URLConstructor subFormOnuser:_appLocal :_formLocal :_fieldLocal :refAppName :refFormName :refFieldName :paramString :appOwner]];
         
 //        [super setCallerDelegate:delegate];
-        [super setDelugeParams:[URLConstructor subFormOnuserWithJSON:_appLocal :_formLocal :_fieldLocal :refAppName :refFormName :refFieldName :paramString :appOwner]];
-        [super setDelugeURL:[URLConstructor delugeURL]];
+//        [super setDelugeParams:[URLConstructor subFormOnuserWithJSON:_appLocal :_formLocal :_fieldLocal :refAppName :refFormName :refFieldName :paramString :appOwner]];
+//        [super setDelugeURL:[URLConstructor delugeURL]];
 
         
         
     }
+    return self;
+}
+- (SubFormOnUser*) initSubFormOnUser:(NSString *)_appLocal formname:(NSString *)_formLocal fieldname:(NSString *)_fieldLocal param:(NSString *)paramString appowner:(NSString *)appOwner :(id)delegate subformFieldName:(NSString *)subformFieldname rowNumberincaseOFsubofrmField:(int)rownum{
+    
+    self = [super init];
+    if(self) {
+        [super setCallerDelegate:delegate];
+
+    [super setDelugeParams:[URLConstructor subFormOnuserWithJSON:_appLocal formLinkname:_formLocal fieldlinkname:_fieldLocal subformFieldName:subformFieldname rowNumberincaseOFsubofrmField:rownum param:paramString appowner:appOwner]];
+     [super setDelugeURL:[URLConstructor delugeURL]];
+
+}
     return self;
 }
 

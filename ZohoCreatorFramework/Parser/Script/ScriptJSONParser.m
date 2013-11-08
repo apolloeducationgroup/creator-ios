@@ -138,6 +138,13 @@
     }
     
     
+    NSString * subformName= [setVariableDic objectForKey:@"subFormName"];
+    
+    if (subformName !=Nil) {
+        [setVariable setSubformName:subformName];
+    }
+    
+
 //    compType = 3;
 //    fieldName = "Multi_Line";
 //    fieldValue = "";
@@ -161,8 +168,9 @@
     NSString * subformName= [enableDict objectForKey:@"subFormName"];
 
     if (subformName !=Nil) {
-    [_enableField setSubFormName:subformName];
+    [_enableField setSubformName:subformName];
     }
+    
     return _enableField;
 }
 
@@ -175,7 +183,7 @@
     NSString * subformName= [disableDict objectForKey:@"subFormName"];
     
     if (subformName !=Nil) {
-        [_disableField setSubFormName:subformName];
+        [_disableField setSubformName:subformName];
     }
 
     return _disableField;
@@ -190,7 +198,7 @@
     NSString * subformName= [showDict objectForKey:@"subFormName"];
     
     if (subformName !=Nil) {
-        [_showTask setSubFormName:subformName];
+        [_showTask setSubformName:subformName];
     }
 
     return _showTask;
@@ -215,7 +223,7 @@
     NSString * subformName= [hideDict objectForKey:@"subFormName"];
     
     if (subformName !=Nil) {
-        [_hideField setSubFormName:subformName];
+        [_hideField setSubformName:subformName];
     }
 
     
@@ -228,6 +236,24 @@
     [_clearField setTaskType:@"clear"];
     [_clearField setFormName:[clearDict objectForKey:@"formName"]];
     [_clearField setFieldName:[clearDict objectForKey:@"fieldName"]];
+    
+    
+    NSString * subformName= [clearDict objectForKey:@"subFormName"];
+    
+    if (subformName !=Nil) {
+        [_clearField setSubformName:subformName];
+    }
+    NSString * rowDetails;
+    
+    
+    rowDetails= [clearDict objectForKey:@"rowNo"];
+    if (rowDetails.length) {
+        
+        NSString * string=[[rowDetails componentsSeparatedByString:@"t::row_"]objectAtIndex:1];
+        [_clearField setRowNumber_Subform:[string integerValue ]];
+    }
+
+
     return _clearField;
 }
 
@@ -236,6 +262,24 @@
     ReloadFormTask *_reloadTask = [[ReloadFormTask alloc] init];
     [_reloadTask setTaskType:@"reloadform"];
     [_reloadTask setFormName:[reloadFormDict objectForKey:@"formName"]];
+    NSString * subformName= [reloadFormDict objectForKey:@"subFormName"];
+    
+    if (subformName !=Nil) {
+        [_reloadTask setSubformName:subformName];
+    }
+    
+    NSString * rowDetails;
+    
+    
+    rowDetails= [reloadFormDict objectForKey:@"rowNo"];
+    if (rowDetails.length) {
+        
+        NSString * string=[[rowDetails componentsSeparatedByString:@"t::row_"]objectAtIndex:1];
+        [_reloadTask setRowNumber_Subform:[string integerValue ]];
+    }
+    
+
+
     return _reloadTask;
 }
 
@@ -246,7 +290,31 @@
     [_addValue setFormName:[addValueDict objectForKey:@"formName"]];
     [_addValue setFieldName:[addValueDict objectForKey:@"fieldName"]];
     NSMutableArray *_fieldValueList = [addValueDict objectForKey:@"fieldValue"];
+    
+    NSString * subformName= [addValueDict objectForKey:@"subFormName"];
+    
+    if (subformName !=Nil) {
+        [_addValue setSubformName:subformName];
+    }
+    
+
+    
+    NSString * rowDetails;
+    
+    
+    rowDetails= [addValueDict objectForKey:@"rowNo"];
+    if (rowDetails.length) {
+        
+        NSString * string=[[rowDetails componentsSeparatedByString:@"t::row_"]objectAtIndex:1];
+        [_addValue setRowNumber_Subform:[string integerValue ]];
+    }
+    
+
+    
+    
+    
     [_addValue setFieldValues:_fieldValueList];
+    
     return _addValue;
 }
 
@@ -256,6 +324,24 @@
     [_selectAll setTaskType:@"selectall"];
     [_selectAll setFieldName:[selectAllDict objectForKey:@"fieldName"]];
     [_selectAll setFormName:[selectAllDict objectForKey:@"formName"]];
+    NSString * subformName= [selectAllDict objectForKey:@"subFormName"];
+    
+    if (subformName !=Nil) {
+        [_selectAll setSubformName:subformName];
+    }
+    
+    NSString * rowDetails;
+    
+    
+    rowDetails= [selectAllDict objectForKey:@"rowNo"];
+    if (rowDetails.length) {
+        
+        NSString * string=[[rowDetails componentsSeparatedByString:@"t::row_"]objectAtIndex:1];
+        [_selectAll setRowNumber_Subform:[string integerValue ]];
+    }
+    
+
+
     return _selectAll;
 }
 
@@ -265,6 +351,25 @@
     [_deSelectAll setTaskType:@"deselectall"];
     [_deSelectAll setFieldName:[deSelectAllDict objectForKey:@"fieldName"]];
     [_deSelectAll setFormName:[deSelectAllDict objectForKey:@"formName"]];
+    
+    NSString * subformName= [deSelectAllDict objectForKey:@"subFormName"];
+    
+    if (subformName !=Nil) {
+        [_deSelectAll setSubformName:subformName];
+    }
+    
+    NSString * rowDetails;
+    
+    
+    rowDetails= [deSelectAllDict objectForKey:@"rowNo"];
+    if (rowDetails.length) {
+        
+        NSString * string=[[rowDetails componentsSeparatedByString:@"t::row_"]objectAtIndex:1];
+        [_deSelectAll setRowNumber_Subform:[string integerValue ]];
+    }
+    
+
+
     return _deSelectAll;
 }
 
@@ -275,6 +380,25 @@
     [_selectValue setFormName:[selectValueDict objectForKey:@"formName"]];
     [_selectValue setFieldName:[selectValueDict objectForKey:@"fieldName"]];
     NSMutableArray *_fieldValue = [selectValueDict objectForKey:@"fieldValue"];
+    
+    NSString * subformName= [selectValueDict objectForKey:@"subFormName"];
+    
+    if (subformName !=Nil) {
+        [_selectValue setSubformName:subformName];
+    }
+    
+
+    NSString * rowDetails;
+    
+    
+    rowDetails= [selectValueDict objectForKey:@"rowNo"];
+    if (rowDetails.length) {
+        
+        NSString * string=[[rowDetails componentsSeparatedByString:@"t::row_"]objectAtIndex:1];
+        [_selectValue setRowNumber_Subform:[string integerValue ]];
+    }
+    
+
     if(_fieldValue != nil) {
         [_selectValue setSelectValues:_fieldValue];
     }
@@ -291,6 +415,25 @@
     if(_fieldValue != nil) {
         [_deSelectValue setDeSelectValues:_fieldValue];
     }
+    
+    NSString * subformName= [deSelectValueDict objectForKey:@"subFormName"];
+    
+    if (subformName !=Nil) {
+        [_deSelectValue setSubformName:subformName];
+    }
+    
+
+    NSString * rowDetails;
+    
+    
+    rowDetails= [deSelectValueDict objectForKey:@"rowNo"];
+    if (rowDetails.length) {
+        
+        NSString * string=[[rowDetails componentsSeparatedByString:@"t::row_"]objectAtIndex:1];
+        [_deSelectValue setRowNumber_Subform:[string integerValue ]];
+    }
+    
+
     return _deSelectValue;
 }
 
@@ -301,6 +444,24 @@
     [_openUrl setWindowType:[openUrlDict objectForKey:@"windowType"]];
     [_openUrl setUrlString:[openUrlDict objectForKey:@"urlString"]];
     [_openUrl setWindowParameters:[openUrlDict objectForKey:@"windowSpecificArgument"]];
+    
+    
+    NSString * subformName= [openUrlDict objectForKey:@"subFormName"];
+    
+    if (subformName !=Nil) {
+        [_openUrl setSubformName:subformName];
+    }
+    
+    NSString * rowDetails;
+    
+    
+    rowDetails= [openUrlDict objectForKey:@"rowNo"];
+    if (rowDetails.length) {
+        
+        NSString * string=[[rowDetails componentsSeparatedByString:@"t::row_"]objectAtIndex:1];
+        [_openUrl setRowNumber_Subform:[string integerValue ]];
+    }
+    
     
     return _openUrl;
 }

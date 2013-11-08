@@ -11,5 +11,6 @@
 @interface DelugeTask : NSObject
 
 @property (nonatomic,retain) NSString *taskType;
-
+@property (nonatomic,retain)NSString *subformName;
+@property (nonatomic,assign) int rowNumber_Subform;
 @end

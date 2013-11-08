@@ -18,7 +18,7 @@
     
 }
 
-- (FieldOnUser*) initFieldOnUser :  (NSString*) application : (NSString*) form : (NSString*) field : (NSString*) paramString : (id) delegate : (NSString*) appOwner;
+- (FieldOnUser*) initFieldOnUser :  (NSString*) application formname: (NSString*) form fieldname: (NSString*) field paramstring: (NSString*) paramString delegate: (id) delegate appowner: (NSString*) appOwner;
 - (DelugeTasks*) execute;
 
 @end

@@ -9,8 +9,9 @@
 #import "FieldOnUser.h"
 
 @implementation FieldOnUser
+- (FieldOnUser*) initFieldOnUser :  (NSString*) _appLocal formname: (NSString*) _formLocal fieldname: (NSString*) _fieldLocal paramstring: (NSString*) paramString delegate: (id) delegate appowner: (NSString*) appOwner
+{
 
-- (FieldOnUser*) initFieldOnUser : (NSString*) _appLocal : (NSString*) _formLocal : (NSString*) _fieldLocal : (NSString*) paramString : (id) delegate : (NSString*) appOwner {
     self = [super init];
     if(self) {
         [super setCallerDelegate:delegate];
@@ -21,7 +22,7 @@
 }
 
 - (DelugeTasks*) execute {
-    
+    NSLog(@"fieldonuser");
     return [super execute];
 }
 

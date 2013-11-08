@@ -70,22 +70,22 @@
             else if([taskType isEqualToString:@"show"]) {
                 
                 ShowTask *showTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate showField:[showTask formName] :[showTask fieldName] subformName:[showTask subFormName]];
+                [_callerDelegate showField:[showTask formName] :[showTask fieldName] subformName:[showTask subformName]];
             }
             else if([taskType isEqualToString:@"hide"]) {
                 
                 HideTask *showTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate hideField:[showTask formName] :[showTask fieldName]  subformName:[showTask subFormName]];
+                [_callerDelegate hideField:[showTask formName] :[showTask fieldName]  subformName:[showTask subformName]];
             }
             else if([taskType isEqualToString:@"enable"]) {
                 
                 ShowTask *enableTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate enableField:[enableTask formName] :[enableTask fieldName] subformName:[enableTask subFormName]];
+                [_callerDelegate enableField:[enableTask formName] :[enableTask fieldName] subformName:[enableTask subformName]];
             }
             else if([taskType isEqualToString:@"disable"]) {
                 
                 DisableTask *showTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate disableField:[showTask formName] :[showTask fieldName] subformName:[showTask subFormName]];
+                [_callerDelegate disableField:[showTask formName] :[showTask fieldName] subformName:[showTask subformName]];
             }
             else if([taskType isEqualToString:@"addvalue"]) {
                 
@@ -94,7 +94,7 @@
                 // //NSLog(@"%@addvalue fieldvalue is :",[addValue fieldValues]);
                 // //NSLog(@"%@addvalue fieldname is :",[addValue fieldName]);
                 
-                [_callerDelegate addValues:[addValue formName] :[addValue fieldName] :[addValue fieldValues]];
+                [_callerDelegate addValues:[addValue formName] :[addValue fieldName] :[addValue fieldValues] rowNumberForSubform:[addValue rowNumber_Subform] subformName:[ addValue subformName]];
                 
                 
             }
@@ -102,40 +102,40 @@
                 
                 AddValueTask *addValue = [taskList objectAtIndex:taskIndex];
                 
-                [_callerDelegate addValues:[addValue formName] :[addValue fieldName] :[addValue fieldValues]];
+                [_callerDelegate addValues:[addValue formName] :[addValue fieldName] :[addValue fieldValues] rowNumberForSubform:[addValue rowNumber_Subform] subformName:[ addValue subformName]];
             }
             else if([taskType isEqualToString:@"clear"]) {
                 ClearTask *clearTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate clearValue:[clearTask formName] :[clearTask fieldName]];
+                [_callerDelegate clearValue:[clearTask formName] :[clearTask fieldName] rowNumberForSubform:[clearTask rowNumber_Subform] subformName:[ clearTask subformName]];
             }
             else if([taskType isEqualToString:@"setvalue"]) {
                 SetVariableTask *setVariable = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate setFieldValue:[setVariable formName]: [ setVariable fieldName]:[setVariable fieldValue] rowNumberForSubform:[setVariable rowNumber_Subform] ];
+                [_callerDelegate setFieldValue:[setVariable formName]: [ setVariable fieldName]:[setVariable fieldValue] rowNumberForSubform:[setVariable rowNumber_Subform] subformName:[ setVariable subformName] ];
             }
             else if([taskType isEqualToString:@"openurl"]) {
                 ////// //NSLog(@"Coming to openurl task");
                 OpenUrlTask *openUrlTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate openUrl : [openUrlTask urlString] withWindowType : [openUrlTask windowType] andParameter : [openUrlTask windowParameters]];
+                [_callerDelegate openUrl : [openUrlTask urlString] withWindowType : [openUrlTask windowType] andParameter : [openUrlTask windowParameters]rowNumberForSubform:[openUrlTask rowNumber_Subform] subformName:[ openUrlTask subformName]];
             }
             else if([taskType isEqualToString:@"reloadform"]) {
                 ReloadFormTask *reloadTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate reloadForm: [reloadTask formName]];
+                [_callerDelegate reloadForm: [reloadTask formName]rowNumberForSubform:[reloadTask rowNumber_Subform] subformName:[ reloadTask subformName]];
             }
             else if([taskType isEqualToString:@"select"]) {
                 SelectValueTask *selectValueTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate selectValue:[selectValueTask formName] withFieldName:[selectValueTask fieldName] andValues:[selectValueTask selectValues]];
+                [_callerDelegate selectValue:[selectValueTask formName] withFieldName:[selectValueTask fieldName] andValues:[selectValueTask selectValues]rowNumberForSubform:[selectValueTask rowNumber_Subform] subformName:[ selectValueTask subformName]];
             }
             else if([taskType isEqualToString:@"selectall"]) {
                 SelectAllTask *selectAllTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate selectAllValues:[selectAllTask formName] withFieldName:[selectAllTask fieldName]];
+                [_callerDelegate selectAllValues:[selectAllTask formName] withFieldName:[selectAllTask fieldName]rowNumberForSubform:[selectAllTask rowNumber_Subform] subformName:[ selectAllTask subformName]];
             }
             else if([taskType isEqualToString:@"deselect"]) {
                 DeSelectValueTask *deSelectTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate deSelectValue:[deSelectTask formName] withFieldName:[deSelectTask fieldName] andValues:[deSelectTask deSelectValues]];
+                [_callerDelegate deSelectValue:[deSelectTask formName] withFieldName:[deSelectTask fieldName] andValues:[deSelectTask deSelectValues]rowNumberForSubform:[deSelectTask rowNumber_Subform] subformName:[ deSelectTask subformName]];
             }
             else if([taskType isEqualToString:@"deselectall"]) {
                 DeSelectAll *deSelectAllTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate deSelectAllValues:[deSelectAllTask formName] withFieldName:[deSelectAllTask fieldName]];
+                [_callerDelegate deSelectAllValues:[deSelectAllTask formName] withFieldName:[deSelectAllTask fieldName]rowNumberForSubform:[deSelectAllTask rowNumber_Subform] subformName:[ deSelectAllTask subformName]];
             }
         }
     }
@@ -201,15 +201,19 @@
                 
                 NSLog(@"subform records riyaz");
                 NSMutableArray * recordstoAdd=[[NSMutableArray alloc]init];
-               [recordstoAdd addObjectsFromArray:[keyValue recordsToAdd]];
-                [recordstoAdd addObjectsFromArray:[keyValue recordsToUpdate]];
+//               [recordstoAdd addObjectsFromArray:[keyValue recordsToAdd]];
+//                [recordstoAdd addObjectsFromArray:[keyValue recordsToUpdate]];
+//                [recordstoAdd addObjectsFromArray:[keyValue temporaryRecords]];
+                
+                
+                [recordstoAdd addObjectsFromArray:[keyValue allRecordsInOrder]];
                 [recordstoAdd addObjectsFromArray:[keyValue temporaryRecords]];
 
                 if (recordstoAdd.count)
                 {
                 
              [paramString appendString:[DelugeEvent getsubformRecordParam:recordstoAdd fieldlinkname:[fieldDate fieldName]]];
-                [paramString appendFormat:@"&fieldName=%@",keyName];
+//                [paramString appendFormat:@"&fieldName=%@",keyName];
                 }
             }
         }

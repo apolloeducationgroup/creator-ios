@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "ZCRecord.h"
 @interface ZCSubFormRecords : NSObject
-@property (nonatomic,retain) NSMutableArray * recordsToUpdate;
-@property (nonatomic,retain) NSMutableArray * recordsToAdd;
-@property (nonatomic,retain) NSMutableArray * recordsToDelete;
-@property (nonatomic,retain) NSMutableArray * temporaryRecords;
+@property (nonatomic,retain) NSMutableArray *recordsToUpdate;
+@property (nonatomic,retain) NSMutableArray *recordsToAdd;
+@property (nonatomic,retain) NSMutableArray *recordsToDelete;
+@property (nonatomic,retain) NSMutableArray *temporaryRecords;
+@property (nonatomic,retain) NSMutableArray *allRecordsInOrder;
 @property (nonatomic,retain) ZCForm * zcSubForm;
 -(void)addRecordToAdd:(ZCRecord *)record;
 -(void)addRecordToUpdate:(ZCRecord *)record;

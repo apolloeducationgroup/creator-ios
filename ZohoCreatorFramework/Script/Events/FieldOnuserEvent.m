@@ -16,17 +16,51 @@
         if (subform) {
             //            [super setDelugeURL:[URLConstructor fieldOnUser:_appLocal :_formLocal:_fieldLocal:paramString]];
             _subform=YES;
-//            subformOnuser=[[SubFormOnUser alloc]initSubFormOnUser:_appLocal :_formLocal :_fieldLocal :mainAppLinkname :mainFormLinkname :subformFieldLinkname :paramString :appowner :delegate  ];
-            fieldonuser=[[FieldOnUser alloc]initFieldOnUser:_appLocal :_formLocal :_fieldLocal :paramString :delegate:appowner ];
-
+      subformOnuser=[[SubFormOnUser alloc]initSubFormOnUser:_appLocal :_formLocal :_fieldLocal :mainAppLinkname :mainFormLinkname :subformFieldLinkname :paramString :appowner :delegate  ];
+            
         }
         else
         {
-            fieldonuser=[[FieldOnUser alloc]initFieldOnUser:_appLocal :_formLocal :_fieldLocal :paramString :delegate:appowner ];
+            fieldonuser=[[FieldOnUser alloc]initFieldOnUser:_appLocal formname:_formLocal fieldname:_fieldLocal paramstring:paramString delegate:delegate appowner:appowner ];
+//            fieldonuser=[[FieldOnUser alloc]initFieldOnUser:_appLocal :_formLocal :_fieldLocal :paramString :delegate:appowner ];
         }
     }
     return self;
 }
+
+- (FieldOnuserEvent*) initFieldOnUserEventWithFieldAppname: (NSString*) _appLocal fieldFormName: (NSString*) _formLocal fieldName:(NSString*) _fieldLocal parmString:(NSString*) paramString delegate:(id) delegate rowNumberincaseOFsubofrmField:(int)rownum subformFieldName:(NSString *)subformFieldname appOwner:(NSString *)appowner
+
+
+{
+
+    
+    self = [super init];
+
+    if(self) {
+        
+
+        if (rownum) {
+            //            [super setDelugeURL:[URLConstructor fieldOnUser:_appLocal :_formLocal:_fieldLocal:paramString]];
+            _subform=YES;
+//                subformOnuser=[[SubFormOnUser alloc]initSubFormOnUser:_appLocal :_formLocal :_fieldLocal :paramString :appowner :delegate subformFieldName:subformFieldname rowNumberincaseOFsubofrmField:rownum];
+        subformOnuser=[[SubFormOnUser alloc]initSubFormOnUser:_appLocal formname:_formLocal fieldname:_fieldLocal param:paramString appowner:appowner :delegate subformFieldName:subformFieldname rowNumberincaseOFsubofrmField:rownum];
+//            fieldonuser=[[FieldOnUser alloc]initFieldOnUser:_appLocal :_formLocal :_fieldLocal :paramString :delegate:appowner ];
+            
+        }
+        else
+            
+            
+        {
+            fieldonuser=[[FieldOnUser alloc]initFieldOnUser:_appLocal formname:_formLocal fieldname:_fieldLocal paramstring:paramString delegate:delegate appowner:appowner ];
+        }
+    }
+    return self;
+    
+
+
+
+}
+
 //- (FieldOnuserEvent*) initFieldOnUser : (NSString*) _appLocal : (NSString*) _formLocal : (NSString*) _fieldLocal : (NSString*) paramString : (id) delegate {
 //    self = [super init];
 //    if(self) {
@@ -42,6 +76,7 @@
     if (_subform) {
         
         return [subformOnuser execute];
+
     }
     else
     {

@@ -24,16 +24,16 @@
 @required -(void) disableField: (NSString*) formName : (NSString*) fieldName subformName:(NSString *)subformname;
 @required -(void) showField: (NSString*) formName : (NSString*) fieldName subformName:(NSString *)subformname;
 @required -(void) hideField: (NSString*) formName : (NSString*) fieldName subformName:(NSString *)subformname;
-@required -(void) addValues : (NSString*) formName : (NSString*) fieldName : (NSMutableArray*) valueList;
-@required -(void) clearValue : (NSString*) formName : (NSString*) fieldValue;
+@required -(void) addValues : (NSString*) formName : (NSString*) fieldName : (NSMutableArray*) valueList rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
+@required -(void) clearValue : (NSString*) formName : (NSString*) fieldValue rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
 @required -(void) noScript : (NSString*) message;
-@required -(void) setFieldValue : (NSString*) formName  : (NSString*) fieldName : (id) fieldValue rowNumberForSubform:(int)rownumber;
-@required -(void) openUrl : (NSString*) urlString withWindowType : (NSString*) windowsType andParameter : (NSString*) parameter;
-@required -(void) reloadForm : (NSString*) formName;
-@required -(void) selectValue : (NSString*) formName withFieldName : (NSString*) fieldName andValues : (NSMutableArray*) selectValues;
-@required -(void) selectAllValues : (NSString*) fieldName withFieldName : (NSString*) fieldName;
-@required -(void) deSelectValue : (NSString*) formName withFieldName : (NSString*) fieldName andValues : (NSMutableArray*) selectValues;
-@required -(void) deSelectAllValues : (NSString*) fieldName withFieldName : (NSString*) fieldName;
+@required -(void) setFieldValue : (NSString*) formName  : (NSString*) fieldName : (id) fieldValue rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
+@required -(void) openUrl : (NSString*) urlString withWindowType : (NSString*) windowsType andParameter : (NSString*) parameter rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
+@required -(void) reloadForm : (NSString*) formName rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
+@required -(void) selectValue : (NSString*) formName withFieldName : (NSString*) fieldName andValues : (NSMutableArray*) selectValues rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
+@required -(void) selectAllValues : (NSString*) fieldName withFieldName : (NSString*) fieldName rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
+@required -(void) deSelectValue : (NSString*) formName withFieldName : (NSString*) fieldName andValues : (NSMutableArray*) selectValues rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
+@required -(void) deSelectAllValues : (NSString*) fieldName withFieldName : (NSString*) fieldName rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
 
 @end
 
