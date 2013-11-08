@@ -115,11 +115,11 @@
             else if([taskType isEqualToString:@"openurl"]) {
                 ////// //NSLog(@"Coming to openurl task");
                 OpenUrlTask *openUrlTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate openUrl : [openUrlTask urlString] withWindowType : [openUrlTask windowType] andParameter : [openUrlTask windowParameters]rowNumberForSubform:[openUrlTask rowNumber_Subform] subformName:[ openUrlTask subformName]];
+                [_callerDelegate openUrl : [openUrlTask urlString] withWindowType : [openUrlTask windowType] andParameter : [openUrlTask windowParameters]];
             }
             else if([taskType isEqualToString:@"reloadform"]) {
                 ReloadFormTask *reloadTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate reloadForm: [reloadTask formName]rowNumberForSubform:[reloadTask rowNumber_Subform] subformName:[ reloadTask subformName]];
+                [_callerDelegate reloadForm: [reloadTask formName]];
             }
             else if([taskType isEqualToString:@"select"]) {
                 SelectValueTask *selectValueTask = [taskList objectAtIndex:taskIndex];
