@@ -18,7 +18,7 @@
     
 }
 
-- (ButtonOnClick*) initButtonOnClick:(NSString *) applicationName :(NSString *) formName : (NSString*) buttonName : (NSString*) paramString : (id) delegate;
+- (ButtonOnClick*) initButtonOnClickApplinkName:(NSString *) applicationName formName:(NSString *) formName buttonName: (NSString*) buttonName paramString: (NSString*) paramString delegate: (id) delegate  appOwner:(NSString *)appowner;
 - (DelugeTasks*) execute;
 
 @end

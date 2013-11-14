@@ -11,17 +11,32 @@
 
 @implementation ButtonOnClick
 
-- (ButtonOnClick*) initButtonOnClick:(NSString *) applicationName :(NSString *) formName : (NSString*) buttonName : (NSString*) paramString : (id) delegate {
-    
+//- (ButtonOnClick*) initButtonOnClick:(NSString *) applicationName :(NSString *) formName : (NSString*) buttonName : (NSString*) paramString : (id) delegate {
+//    
+//    self = [super init];
+//    if(self) {
+//        [super setDelugeURL:[URLConstructor buttonOnClick:applicationName:formName:buttonName:paramString]];
+//        NSLog(@"Deluge URL  %@", [super delugeURL]);
+//        [super setCallerDelegate:delegate];
+//    }
+//    return self;
+//}
+
+
+- (ButtonOnClick*) initButtonOnClickApplinkName:(NSString *) applicationName formName:(NSString *) formName buttonName: (NSString*) buttonName paramString: (NSString*) paramString delegate: (id) delegate  appOwner:(NSString *)appowner
+{
     self = [super init];
     if(self) {
-        [super setDelugeURL:[URLConstructor buttonOnClick:applicationName:formName:buttonName:paramString]];
-        NSLog(@"Deluge URL  %@", [super delugeURL]);
+        
+        
         [super setCallerDelegate:delegate];
+        [super setDelugeURL:[URLConstructor buttonOnClickApp:applicationName FormLinkname:formName buttonName:buttonName param:paramString appOwner:appowner]];
+         [super setDelugeURL:[URLConstructor delugeURL]];
+
+        
     }
     return self;
 }
-
 - (DelugeTasks*) execute {
     
     return [super execute];

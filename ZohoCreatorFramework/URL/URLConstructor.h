@@ -37,7 +37,7 @@
 + (NSString*) formEditOnLoad:(NSString*) appLinkName : (NSString*) formLinkName  : (NSString*) paramString : (NSString*) appOwner;
 + (NSString*) sunFormOnUser:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) subFormName : (NSString*) fieldLinkName;
 + (NSString*) fieldOnUser:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) fieldLinkName : (NSString*) paramString;
-+ (NSString*) buttonOnClick:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) buttonName : (NSString*) paramString;
++ (NSString*) buttonOnClickApp:(NSString *)appLinkName FormLinkname:(NSString *)formLinkName buttonName: (NSString*) buttonName param: (NSString*) paramString appOwner:(NSString *)appOwner;
 + (NSString*) subFormAddRow:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) fieldNamee : (NSString*) paramString;
 + (NSString*) subFormDeleteRow:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) fieldName : (NSString*) paramString;
 + (NSString*) customActionURL : (NSString*) appLinkName : (NSString*) viewLinkName : (NSString*) functionId : (NSString*) sharedBy : (NSMutableArray*) recordIds;

@@ -362,6 +362,8 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
 //    return @"Single_Line=&Single_Line1=&SF(SubForm).FD(t::row_1).SV(record::status)=added&SF(SubForm).FD(t::row_1).SV(Multi_Line)=&SF(SubForm).FD(t::row_1).SV(Single_Line)=riyazheehdh&authtoken=a6068ae81f07813b3c264276863792d4&scope=creatorapi&sharedBy=vignesh.rajamani&appLinkName=riyazsubformapp&formLinkName=Untitled_Form&linkNameBased=true&fieldName=SubForm&subformFieldName=Single_Line&subfcname=SF(SubForm).FD(t::row_1).SV(Single_Line)&rowseqid=t::row_1";
     return formURL;
 }
+
+
 + (NSString*) subFormOnuserWithJSON : (NSString*) appLinkName formLinkname: (NSString*) formLinkName fieldlinkname: (NSString*) fieldName subformFieldName:(NSString *)subformFieldname rowNumberincaseOFsubofrmField:(int)rownum param: (NSString*) paramString appowner: (NSString*) appOwner
 
 {
@@ -583,15 +585,35 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
     return accountURL;
 }
 
-+ (NSString*) buttonOnClick:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) buttonName : (NSString*) paramString
++ (NSString*) buttonOnClickApp:(NSString *)appLinkName FormLinkname:(NSString *)formLinkName buttonName: (NSString*) buttonName param: (NSString*) paramString appOwner:(NSString *)appOwner
+
 {
-    NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/OnClick/%@/",appLinkName,formLinkName,buttonName];
-    formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
+//    NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/OnClick/%@/",appLinkName,formLinkName,buttonName];
+//    formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
+//    formURL = [URLConstructor appendAuthToken:formURL];
+//    if(paramString != nil) {
+//        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+//    }
+//    return formURL;
+    
+    
+    
+    
+    NSString *formURL = [NSString stringWithFormat:@"sharedBy=%@&linkNameBased=true&appLinkName=%@&formLinkName=%@&buttonName=%@&",appOwner,appLinkName,formLinkName,buttonName];
+    
+//    formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
+    NSLog(@"forURL %@",formURL);
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        
+        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        
     }
+    
+    NSLog(@"forURL %@",formURL);
     return formURL;
+
+    
 }
 
 + (NSString*) subFormAddRow:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) fieldName : (NSString*) paramString {
