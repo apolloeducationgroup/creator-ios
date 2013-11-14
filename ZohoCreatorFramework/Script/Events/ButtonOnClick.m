@@ -30,7 +30,8 @@
         
         
         [super setCallerDelegate:delegate];
-        [super setDelugeURL:[URLConstructor buttonOnClickApp:applicationName FormLinkname:formName buttonName:buttonName param:paramString appOwner:appowner]];
+        [super setDelugeParams:[URLConstructor buttonOnClickApp:applicationName FormLinkname:formName buttonName:buttonName param:paramString appOwner:appowner]];
+        
          [super setDelugeURL:[URLConstructor delugeURL]];
 
         

@@ -148,10 +148,8 @@
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
+    NSLog(@"deluge param %@",_delugeParams);
     URLConnector *connector = [[URLConnector alloc] initFetcherPostParam:_delugeURL :_delugeParams :[URLConnector POSTMETHOD]];
-    
-    
-    NSLog(@"deluge params %@",_delugeParams);
     NSString *formMetaXML = [connector apiResponse];
     //// //NSLog(@"deluge form Meta XML %@ ",formMetaXML);
     

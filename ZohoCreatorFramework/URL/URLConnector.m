@@ -31,8 +31,8 @@
     if (self) {
         NSLog(@"Coming to post");
         zohoFormAPIURL = ZohoFormAPIURL;
-        //// //NSLog(@"url riyaz \n\n %@\n\n",ZohoFormAPIURL);
-        //NSLog(@"PARMS STRING RIYAZ:: %@",paramString);
+        NSLog(@"url riyaz \n\n %@\n\n",ZohoFormAPIURL);
+        NSLog(@"PARMS STRING RIYAZ:: %@",paramString);
         requestMethod = method;
         self->_paramString = paramString;
         [self prepareConnection];

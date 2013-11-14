@@ -588,21 +588,9 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
 + (NSString*) buttonOnClickApp:(NSString *)appLinkName FormLinkname:(NSString *)formLinkName buttonName: (NSString*) buttonName param: (NSString*) paramString appOwner:(NSString *)appOwner
 
 {
-//    NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/OnClick/%@/",appLinkName,formLinkName,buttonName];
-//    formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
-//    formURL = [URLConstructor appendAuthToken:formURL];
-//    if(paramString != nil) {
-//        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
-//    }
-//    return formURL;
-    
-    
-    
     
     NSString *formURL = [NSString stringWithFormat:@"sharedBy=%@&linkNameBased=true&appLinkName=%@&formLinkName=%@&buttonName=%@&",appOwner,appLinkName,formLinkName,buttonName];
-    
-//    formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
-    formURL = [URLConstructor appendAuthToken:formURL];
+        formURL = [URLConstructor appendAuthToken:formURL];
     NSLog(@"forURL %@",formURL);
     if(paramString != nil) {
         
