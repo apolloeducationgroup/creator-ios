@@ -333,7 +333,10 @@
                     {
                         NSString *optionValue =  [options objectAtIndex:opt];
                         optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
-                        [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
+                        
+                        NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+
+                        [returnString appendFormat:@"<option><![CDATA[%@]]></option>",escapedString];
                     }
                 }
                 [returnString appendString:@"</options>"];
@@ -343,7 +346,11 @@
             }
             else {
                 //                ////// //NSLog(@"Field Name %@ ==== %@",[fieldData fieldName],[fieldData fieldValue]);
-                [returnString appendFormat:@"<![CDATA[%@]]>",[fieldData fieldValue]];
+                NSString* cdata = [fieldData fieldValue];
+                
+                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+
+                [returnString appendFormat:@"<![CDATA[%@]]>",escapedString];
             }
             [returnString appendString:@"</field>"];
         }
@@ -441,7 +448,10 @@
                     for(NSInteger opt=0;opt<[fieldValue count];opt++) {
                         NSString *optionValue =  [fieldValue objectAtIndex:opt];
                         optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
-                        [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
+                        
+                        NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+
+                        [returnString appendFormat:@"<option><![CDATA[%@]]></option>",escapedString];
                     }
                     [returnString appendString:@"</options>"];
                 }
@@ -449,7 +459,10 @@
                     
                 }
                 else {
-                    [returnString appendFormat:@"<value><![CDATA[%@]]></value>",fieldValue];
+                    
+                    NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) fieldValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+
+                    [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
                     //                    [returnString appendString:@"</field>"];
                 }
             }
@@ -603,7 +616,10 @@
                 NSString *urltitle = [dic valueForKey:@"title"];
                 NSString *urlLinkname = [dic valueForKey:@"urllinkname"];
                 NSString *URLData = [NSString stringWithFormat:@"<a href=\"%@\" title=\"%@\">%@</a>",url,urltitle,urlLinkname];
-                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",URLData];
+                
+                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) URLData,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+
+                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
                 
             }
             else if(fieldType == [ZCFieldList ZCSubform] || fieldType ==[ZCFieldList ZCNewSubform])
@@ -789,7 +805,10 @@
                 NSString *urltitle = [dic valueForKey:@"title"];
                 NSString *urlLinkname = [dic valueForKey:@"urllinkname"];
                 NSString *URLData = [NSString stringWithFormat:@"<a href=\"%@\" title=\"%@\">%@</a>",url,urltitle,urlLinkname];
-                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",URLData];
+                
+                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) URLData,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+
+                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
                 [returnString appendString:@"</field>"];
                 
             }
@@ -838,7 +857,12 @@
                 [returnString appendFormat:@"<field name='%@'>",fieldName];
                 
                 NSLog(@"Field Name %@ ==== %@",[fieldData fieldName],[fieldData fieldValue]);
-                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",[fieldData fieldValue]];
+                
+                NSString* cdata = [fieldData fieldValue];
+                
+                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+                
+                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
                 [returnString appendString:@"</field>"];
                 
             }

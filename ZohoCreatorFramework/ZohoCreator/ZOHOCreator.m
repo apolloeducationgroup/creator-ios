@@ -299,7 +299,7 @@ static ZOHOCreator *creatorObject = nil;
 }
 
 + (ZCForm*) getForm : (NSString*) appLinkName : (NSString*) formLinkName :(NSString *)viewLinkName appOwner:(NSString *)appOwner {
-    
+
     ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcher:appLinkName :formLinkName viewLinkName:viewLinkName appOwner:appOwner];
     return [fetcher zcForm];
 }

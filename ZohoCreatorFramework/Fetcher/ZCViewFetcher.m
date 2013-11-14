@@ -91,6 +91,8 @@
 //        [self->_zcView setApplication:[creator getApplication:appLinkName]];
         [self->_zcView setApplication:[creator getApplication:appLinkName appOwner:appOwner]];
 
+//        [self->_zcView setApplication:[creator getApplication:appLinkName]];
+        NSLog(@"end of view fetcher...");
     }
     return self;
 }
@@ -131,11 +133,13 @@
     
     NSLog(@"view Xml Meta %@",formMetaXML);
     
+    if ([formMetaXML isEqualToString:@""]) {
+        [NSException raise:@"We are unable to fetch this data, sorry!" format:@"Report this problem to support@zohocreator.com"];
+    }
+    
     ViewRecordParser *view = [[ViewRecordParser alloc] initViewRecordParser:formMetaXML :_component ];
     [[view zcView] setViewParam:_zcViewParam];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    
-    NSLog(@"view parsing finished..");
     
     return [view zcView];
 }

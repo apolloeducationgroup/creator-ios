@@ -86,7 +86,10 @@
 - (ZCForm*) getBaseFormObject {
     
     if (_baseFormObject==nil) {
-        _baseFormObject = [ZOHOCreator getForm:[_application appLinkName] :_baseForm appOwner:[_application appOwner]];
+        
+        if ([_application appLinkName]&&[_application appOwner]) {
+            _baseFormObject = [ZOHOCreator getForm:[_application appLinkName] :_baseForm appOwner:[_application appOwner]];
+        }
     }
     return _baseFormObject;
 }
