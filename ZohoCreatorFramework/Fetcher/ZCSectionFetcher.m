@@ -119,7 +119,9 @@
 - (ZCSections*) fetchFromServer {
     
     if(_application == nil) {
-        _application = [[ZOHOCreator getObject] getApplication:_appLinkName];
+//        _application = [[ZOHOCreator getObject] getApplication:_appLinkName];
+            _application = [[ZOHOCreator getObject] getApplication:_appLinkName appOwner:_appowner];
+
     }
     if(_sectionName == NULL)
     {

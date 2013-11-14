@@ -35,7 +35,8 @@
 + (ZOHOCreator*) getObject;
 - (ZOHOCreator *) initZOHOCreator : (NSString*) userName : (NSString*) password;
 - (ZOHOCreator*) initZOHOCreator : (ZOHOUser*) zohoUser;
-- (ZCApplication*) getApplication : (NSString*) appLinkName;
+//- (ZCApplication*) getApplication : (NSString*) appLinkName;
+- (ZCApplication*) getApplication : (NSString*) appLinkName appOwner:(NSString *)appOwner;
 - (ZCApplicationList*) getApplicationList;
 - (ZCApplicationList*) getApplicationList : (BOOL) fromServer;
 - (ZCApplicationList*) getSharedApplicationList;
@@ -77,6 +78,6 @@
 + (ZCForm*) getEditFormWithView : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName recordLinkID : (NSString*) recordLinkID appOwner : (NSString *) appOwner;
 
 
-+(ZCLookUpChoices *)getLookupChoicesWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit;
-
++(ZCLookUpChoices *)getLookupChoicesWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit viewLinkname:(NSString *)ViewLinkname recordID:(NSString *)recordID;
++ (ZCForm*) getForAddToPickListappLinkName : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner baseApps:(NSArray *)baseApps baseForms:(NSArray *)baseforms LookUpField:(NSArray *)lookupfield  recordID:(NSString *)recordID viewLinkname:(NSString *)viewLinkname;
 @end

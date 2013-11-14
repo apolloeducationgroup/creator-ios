@@ -7,6 +7,7 @@
 //
 
 #import "ZCRecord.h"
+#import "ZCSharedAppsEventsParamsUtil.h"
 
 @implementation ZCRecord
 
@@ -66,6 +67,73 @@
     NSString *newRecord = [URLConstructor newsubmitRecordURL];
     NSString *newRecordString = [URLConstructor postAuthTokenWithApplication:[_form application]];
     newRecordString = [newRecordString stringByAppendingFormat:@"&%@&errorLog=true&zcRefValue=true",[ZCRecordString newRecordStringXML:self->_form :self]];
+    URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
+    
+    NSString *response = [urlConnect apiResponse];
+    NSLog(@"addrecord response \n \n %@ \n\n",response);
+    NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:_form];
+    return [parser recordStatus];
+}
+-(ZCRecordStatus*) addRecordWithViewLinkName:(NSString *)viewLinkname
+
+{
+
+
+    NSLog(@"In add record with ViewLinkname");
+    if([self->_form application] == nil) {
+        [NSException raise:@"Application" format:@"Application Object Missing"];
+        return NO;
+    }
+    NSString *newRecord = [URLConstructor newsubmitRecordURL];
+    NSString *newRecordString = [URLConstructor postAuthTokenWithApplication:[_form application]];
+    newRecordString = [newRecordString stringByAppendingFormat:@"&%@&errorLog=true&zcRefValue=true",[ZCRecordString newRecordStringXMLWithViewLinkname:viewLinkname form:self->_form record:self]];
+    URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
+    
+    NSString *response = [urlConnect apiResponse];
+    NSLog(@"addrecord response \n \n %@ \n\n",response);
+    NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:_form];
+    return [parser recordStatus];
+}
+- (ZCRecordStatus*) addRecordForFormInAddToPickListChildappNamesINORDER:(NSArray *)childappNamesINORDER childFormNameINORDER:(NSArray *)childFormNameINORDER baseFieldNameINORDER:(NSArray *)baseFieldNameINORDER recordID :(NSString *)recID viewLinkname:(NSString *)viewLinkname
+ {
+    
+    NSLog(@"In add record");
+    if([self->_form application] == nil) {
+        [NSException raise:@"Application" format:@"Application Object Missing"];
+        return NO;
+    }
+    NSString *newRecord = [URLConstructor newsubmitRecordURL];
+    NSString *newRecordString = [URLConstructor postAuthTokenWithAppOwner:[_form application].appOwner];
+     newRecordString = [newRecordString stringByAppendingFormat:@"&%@&errorLog=true&formAccessType=5",[ZCRecordString newRecordStringXML:self->_form :self]];
+     
+//    for(int appInd=0;appInd<childappNamesINORDER.count;appInd++)
+//    {
+//        
+//        
+//
+//        newRecordString = [newRecordString stringByAppendingFormat:@"&zc_childappname_%i=%@",appInd+1,[[childappNamesINORDER objectAtIndex:appInd]appLinkName] ];
+//        newRecordString = [newRecordString stringByAppendingFormat:@"&zc_childformname_%i=%@",appInd+1,[[childFormNameINORDER objectAtIndex:appInd]linkName] ];
+//        newRecordString = [newRecordString stringByAppendingFormat:@"&zc_childlabelname_%i=%@",appInd+1,[[baseFieldNameINORDER objectAtIndex:appInd]fieldName]];
+//    }
+//    
+//    newRecordString = [newRecordString stringByAppendingFormat:@"&zc_lookupCount=%i",childFormNameINORDER.count];
+//    newRecordString = [newRecordString stringByAppendingFormat:@"&formAccessType=5"];
+//    
+//    NSLog(@"recLinkID %@ %@",recID,viewLinkname);
+//    if (recID.length) {
+//        newRecordString = [newRecordString stringByAppendingFormat:@"&recLinkID=%@",recID];
+//    }
+//    if (viewLinkname.length) {
+//        
+//        newRecordString = [newRecordString stringByAppendingFormat:@"&viewLinkName=%@",viewLinkname];
+//        
+//    }
+    
+
+     newRecordString =[newRecordString stringByAppendingString:[ZCSharedAppsEventsParamsUtil getAddtoPickListParamsWithAPPS:childappNamesINORDER Forms:childFormNameINORDER fields:baseFieldNameINORDER viewLinkname:viewLinkname recordID:recID]];
+     
+    
+    
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
     
     NSString *response = [urlConnect apiResponse];

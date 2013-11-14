@@ -7,6 +7,7 @@
 //
 
 #import "FieldOnuserEvent.h"
+#import "ZCSharedAppsEventsParamsUtil.h"
 @implementation FieldOnuserEvent
 - (FieldOnuserEvent*) initFieldOnUserEventWithFieldAppname: (NSString*) _appLocal fieldFormName: (NSString*) _formLocal fieldName:(NSString*) _fieldLocal parmString:(NSString*) paramString delegate:(id) delegate  fieldBElongToSubForm:(BOOL)subform mainAppLinkname:(NSString *)mainAppLinkname mainFormLinkname:(NSString *)mainFormLinkname subformFieldLinkname:(NSString *)subformFieldLinkname appOwner:(NSString *)appowner   {
     
@@ -71,7 +72,39 @@
 //    }
 //    return self;
 //}
+- (FieldOnuserEvent*) initFieldOnUserEventWithFieldAppname: (NSString*) _appLocal fieldFormName: (NSString*) _formLocal fieldName:(NSString*) _fieldLocal parmString:(NSString*) paramString delegate:(id)delegate rowNumberincaseOFsubofrmField:(int)rownum subformFieldName:(NSString *)subformFieldname recordIDIncaseOFEDITFORM:(NSString *)recID viewLinkname:(NSString *)viewLinkname childAppsIncaseOFAddTOPickListForm:(NSArray *)apps childforms:(NSArray *)forms basefields:(NSArray *)fields appOwner:(NSString *)appowner
 
+{
+    
+self = [super init];
+    
+    if(self) {
+        
+          paramString=[paramString stringByAppendingString:[ZCSharedAppsEventsParamsUtil getAddtoPickListParamsWithAPPS:apps Forms:forms fields:fields viewLinkname:viewLinkname recordID:recID deluge:YES]];
+        
+
+        if (rownum) {
+            
+                        //            [super setDelugeURL:[URLConstructor fieldOnUser:_appLocal :_formLocal:_fieldLocal:paramString]];
+            _subform=YES;
+            //                subformOnuser=[[SubFormOnUser alloc]initSubFormOnUser:_appLocal :_formLocal :_fieldLocal :paramString :appowner :delegate subformFieldName:subformFieldname rowNumberincaseOFsubofrmField:rownum];
+            subformOnuser=[[SubFormOnUser alloc]initSubFormOnUser:_appLocal formname:_formLocal fieldname:_fieldLocal param:paramString appowner:appowner :delegate subformFieldName:subformFieldname rowNumberincaseOFsubofrmField:rownum];
+            //            fieldonuser=[[FieldOnUser alloc]initFieldOnUser:_appLocal :_formLocal :_fieldLocal :paramString :delegate:appowner ];
+            
+        }
+        else
+            
+            
+        {
+            fieldonuser=[[FieldOnUser alloc]initFieldOnUser:_appLocal formname:_formLocal fieldname:_fieldLocal paramstring:paramString delegate:delegate appowner:appowner ];
+        }
+    }
+    return self;
+
+    
+    
+    
+}
 - (DelugeTasks*) execute {
     if (_subform) {
         

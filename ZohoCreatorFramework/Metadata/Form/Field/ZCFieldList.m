@@ -170,22 +170,22 @@
         return 1;
     }
     else if([fieldString isEqualToString:@"TEXT_AREA"]) {
-        return 3;
+        return 2;
     }
     else if([fieldString isEqualToString:@"EMAIL_ADDRESS"]) {
-        return 4;
+        return 3;
     }
     else if([fieldString isEqualToString:@"NUMBER"]) {
         return 5;
     }
     else if([fieldString isEqualToString:@"CURRENCY"]) {
-        return 6;
+        return 8;
     }
     else if([fieldString isEqualToString:@"PERCENTAGE"]) {
         return 7;
     }
     else if([fieldString isEqualToString:@"CHECK_BOX"]) {
-        return 9;
+        return 15;
     }
     else if([fieldString isEqualToString:@"DATE"]) {
         return 10;
@@ -197,19 +197,19 @@
         return 12;
     }
     else if([fieldString isEqualToString:@"MULTI_SELECT"]) {
-        return 13;
-    }
-    else if([fieldString isEqualToString:@"PLAIN_TEXT"]) {
         return 14;
     }
+    else if([fieldString isEqualToString:@"PLAIN_TEXT"]) {
+        return 2;
+    }
     else if([fieldString isEqualToString:@"EXTERNAL_FIELD"]) {
-        return 25;
+        return 23;
     }
     else if([fieldString isEqualToString:@"EXTERNAL_LINK_FIELD"]) {
-        return 26;
+        return 23;
     }
     else if([fieldString isEqualToString:@"RICH_TEXT_AREA"]) {
-        return 24;
+        return 4;
     }
     else if([fieldString isEqualToString:@"EXTERNAL_MODULE"]) {
         return -1;
@@ -218,46 +218,143 @@
         return -1;
     }
     else if([fieldString isEqualToString:@"FLOAT"]) {
-        return 16;
+        return 1;
     }
     else if([fieldString isEqualToString:@"SCRIPT"]) {
-        return 15;
+        return 2;
     }
     else if([fieldString isEqualToString:@"FILE_UPLOAD"]) {
-        return 18;
+        return 19;
     }
     else if([fieldString isEqualToString:@"SYSTEM_LOOKUP"]) {
         return 30;
     }
     else if([fieldString isEqualToString:@"POPUP_SINGLE"]) {
-        return 95;
+        return 23;
     }
     else if([fieldString isEqualToString:@"PASSWORD"]) {
         return -1;
     }
     else if([fieldString isEqualToString:@"DECIMAL"]) {
-        return 19;
+        return 6;
     }
     else if([fieldString isEqualToString:@"URL"]) {
-        return 21;
+        return 17;
     }
     else if([fieldString isEqualToString:@"DATE_TIME"]) {
-        return 22;
+        return 11;
     }
     else if([fieldString isEqualToString:@"PICK_LIST"]) {
-        return 100;
+        return 12;
     }
     else if([fieldString isEqualToString:@"IMAGE"]) {
-        return 20;
+        return 18;
     }
     else if([fieldString isEqualToString:@"NOTES"]) {
-        return 100;
+        return 24;
     }
     else if([fieldString isEqualToString:@"AUTO_NUMBER"]) {
-        return 31;
+        return 9;
     }
     else {
         return -1;
     }
 }
+//
+//+ (NSInteger) getFieldInteger : (NSString*) fieldString {
+//    
+//    if([fieldString isEqualToString:@"TEXT"]) {
+//        return 1;
+//    }
+//    else if([fieldString isEqualToString:@"TEXT_AREA"]) {
+//        return 3;
+//    }
+//    else if([fieldString isEqualToString:@"EMAIL_ADDRESS"]) {
+//        return 4;
+//    }
+//    else if([fieldString isEqualToString:@"NUMBER"]) {
+//        return 5;
+//    }
+//    else if([fieldString isEqualToString:@"CURRENCY"]) {
+//        return 6;
+//    }
+//    else if([fieldString isEqualToString:@"PERCENTAGE"]) {
+//        return 7;
+//    }
+//    else if([fieldString isEqualToString:@"CHECK_BOX"]) {
+//        return 9;
+//    }
+//    else if([fieldString isEqualToString:@"DATE"]) {
+//        return 10;
+//    }
+//    else if([fieldString isEqualToString:@"TIME"]) {
+//        return 11;
+//    }
+//    else if([fieldString isEqualToString:@"SINGLE_SELECT"]||[fieldString isEqualToString:@"INLINE_SINGLE_SELECT"]) {
+//        return 12;
+//    }
+//    else if([fieldString isEqualToString:@"MULTI_SELECT"]) {
+//        return 13;
+//    }
+//    else if([fieldString isEqualToString:@"PLAIN_TEXT"]) {
+//        return 14;
+//    }
+//    else if([fieldString isEqualToString:@"EXTERNAL_FIELD"]) {
+//        return 25;
+//    }
+//    else if([fieldString isEqualToString:@"EXTERNAL_LINK_FIELD"]) {
+//        return 26;
+//    }
+//    else if([fieldString isEqualToString:@"RICH_TEXT_AREA"]) {
+//        return 24;
+//    }
+//    else if([fieldString isEqualToString:@"EXTERNAL_MODULE"]) {
+//        return -1;
+//    }
+//    else if([fieldString isEqualToString:@"FROMTO"]) {
+//        return -1;
+//    }
+//    else if([fieldString isEqualToString:@"FLOAT"]) {
+//        return 16;
+//    }
+//    else if([fieldString isEqualToString:@"SCRIPT"]) {
+//        return 15;
+//    }
+//    else if([fieldString isEqualToString:@"FILE_UPLOAD"]) {
+//        return 18;
+//    }
+//    else if([fieldString isEqualToString:@"SYSTEM_LOOKUP"]) {
+//        return 30;
+//    }
+//    else if([fieldString isEqualToString:@"POPUP_SINGLE"]) {
+//        return 95;
+//    }
+//    else if([fieldString isEqualToString:@"PASSWORD"]) {
+//        return -1;
+//    }
+//    else if([fieldString isEqualToString:@"DECIMAL"]) {
+//        return 19;
+//    }
+//    else if([fieldString isEqualToString:@"URL"]) {
+//        return 21;
+//    }
+//    else if([fieldString isEqualToString:@"DATE_TIME"]) {
+//        return 22;
+//    }
+//    else if([fieldString isEqualToString:@"PICK_LIST"]) {
+//        return 100;
+//    }
+//    else if([fieldString isEqualToString:@"IMAGE"]) {
+//        return 20;
+//    }
+//    else if([fieldString isEqualToString:@"NOTES"]) {
+//        return 100;
+//    }
+//    else if([fieldString isEqualToString:@"AUTO_NUMBER"]) {
+//        return 31;
+//    }
+//    else {
+//        return -1;
+//    }
+//}
 @end

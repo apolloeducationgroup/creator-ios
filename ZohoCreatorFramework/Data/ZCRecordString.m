@@ -81,6 +81,18 @@
     return  recordXML;
 }
 
+
+
++ (NSString*) newRecordStringXMLWithViewLinkname:(NSString *)viewLinkname form: (ZCForm*) form  record: (ZCRecord*) record  {
+    
+    NSMutableString *recordXML = [[NSMutableString alloc] init];
+    [recordXML appendFormat:@"XMLString=<ZohoCreator><applicationlist><application name='%@'><viewlist><view name='%@'><add>",[[form application] appLinkName],viewLinkname];
+    [recordXML appendString:[ZCRecordString recordValueXML:form :record]];
+    [recordXML appendString:@"</add></view></viewlist></application></applicationlist></ZohoCreator>"];
+    
+    return  recordXML;
+}
+
 + (NSString*) newRecordsStringXML : (ZCForm*) form : (NSMutableArray*) records {
     
     NSMutableString *recordXML = [[NSMutableString alloc] init];
@@ -273,7 +285,9 @@
     NSMutableString *recordXML = [[NSMutableString alloc] init];
     [recordXML appendFormat:@"XMLString=<ZohoCreator><applicationlist><application name='%@'><formlist><form name='%@'>",appLinkName,formLinkName];
     ZOHOCreator *object = [ZOHOCreator getObject];
-    [object getApplication:appLinkName];
+//    [object getApplication:appLinkName];
+    [object getApplication:appLinkName appOwner:[[object userObject]userName]];
+
     for(NSInteger index=0;index<[records count];index++) {
         ZCRecord *record = [records objectAtIndex:index];
         [recordXML appendString:[ZCRecordString recordValueXML:record.record]];

@@ -181,15 +181,22 @@ static ZOHOCreator *creatorObject = nil;
     }
 }
 
-- (ZCApplication*) getApplication : (NSString*) appLinkName {
+- (ZCApplication*) getApplication : (NSString*) appLinkName appOwner:(NSString *)appOwner {
     
     [self getApplicationList];
+    
+    NSLog(@"getapplication riyaz %@ ",appLinkName);
     if(_appList != nil) {
         for(NSInteger index=0;index<[[_appList applicationList] count];index++) {
             
             ZCApplication *app = [[_appList applicationList] objectAtIndex:index];
-            if([[app appLinkName] isEqualToString:appLinkName]) {
+            NSLog(@"getapplication riyaz %@  %@ %@",appLinkName,app ,app.appOwner);
+
+            if([[app appLinkName] isEqualToString:appLinkName] && [appOwner isEqualToString:[app appOwner]] ) {
                 _currentApp = app;
+                NSLog(@"getapplication riyaz found %@ %@  %@",appLinkName,app ,app.appOwner);
+
+                
                 return app;
             }
         }
@@ -233,6 +240,50 @@ static ZOHOCreator *creatorObject = nil;
     
     ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcher:appLinkName :formLinkName viewLinkName:viewLinkName recordLinkID:recordLinkID appOwner:appOwner];
     return [fetcher zcForm];
+}
+
+
++ (ZCForm*) getForAddToPickListappLinkName : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner baseApps:(NSArray *)baseApps baseForms:(NSArray *)baseforms LookUpField:(NSArray *)lookupfields  recordID:(NSString *)recordID viewLinkname:(NSString *)viewLinkname
+//                       childappNamesINORDER:(NSArray *)childappNamesINORDER childFormNameINORDER:(NSArray *)childFormNameINORDER baseFieldNameINORDER:(NSArray *)baseFieldNameINORDER;
+{
+    
+    
+//    NSLog(@"riyaz lookup %@",lookupfield);
+    
+    NSMutableArray *childappNamesINORDER=[[NSMutableArray alloc]init];
+    NSMutableArray *childFormNameINORDER=[[NSMutableArray alloc]init];
+
+    NSMutableArray *baseFieldNameINORDER=[[NSMutableArray alloc]init];
+    for (int index=lookupfields.count;index>0;index--) {
+        
+      ZCField * field=  [lookupfields objectAtIndex:index-1];
+        ZCForm * form=[baseforms objectAtIndex:index -1];
+        ZCApplication * app=[baseApps objectAtIndex:index -1];
+//     NSLog(@"field linkname  addtopic %@  form %@ %@",field.relatedComponent.linkName,field.relatedComponent.zcApplication.appLinkName,field.fieldName);
+        
+
+        [childappNamesINORDER addObject:[app appLinkName]];
+        [childFormNameINORDER addObject:form.linkName];
+        [baseFieldNameINORDER addObject:field.fieldName];
+
+        
+    }
+    
+    
+    
+
+    
+    
+    
+    ZCFormFetcher * fetcher=[ZCFormFetcher initFormFetcherformAddtoPickListForm:appLinkName formLinkname:formLinkName appOwner:appOwner childappsINORDER:baseApps childFormsINORDER:baseforms baseFieldsINORDER:lookupfields recordID:recordID viewLinkName:viewLinkname];
+
+//    ZCFormFetcher * fetcher=[ZCFormFetcher initFormFetcherformAddtoPickListForm:appLinkName formLinkname:formLinkName appOwner:appOwner childappsINORDER:baseApps childFormsINORDER:baseforms baseFieldsINORDER:lookupfields recordID:recordID viewLinkName:viewLinkname];
+
+    
+    
+//    -(ZCFormFetcher*) initFormFetcherformAddtoPickListForm : (NSString*) appLinkName : (ZCComponent*) component appOwner : (NSString *) appOwner childappNamesINORDER:(NSArray *)childappNamesINORDER childFormNameINORDER:(NSArray *)childFormNameINORDER baseFieldNameINORDER:(NSArray *)baseFieldNameINORDER
+    return [fetcher zcForm];
+
 }
 
 + (ZCForm*) getEditForm : (NSString*) appLinkName : (NSString*) formLinkName recordLinkID : (NSString*) recordLinkID appOwner : (NSString *) appOwner {
@@ -316,7 +367,9 @@ static ZOHOCreator *creatorObject = nil;
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSString *deleteRecord = [URLConstructor writeURL];
-    NSString *deleteCriteriaString = [URLConstructor postAuthTokenWithApplication:[[ZOHOCreator getObject] getApplication:appLinkName]];
+//    NSString *deleteCriteriaString = [URLConstructor postAuthTokenWithApplication:[[ZOHOCreator getObject] getApplication:appLinkName]];
+    NSString *deleteCriteriaString = [URLConstructor postAuthTokenWithApplication:[[ZOHOCreator getObject ]lastAccessedApp]];
+
     deleteCriteriaString = [deleteCriteriaString stringByAppendingFormat:@"&%@",[ZCRecordString bulkDeleteRecordStringXML:appLinkName withViewLinkName:viewName:recordLinkIDs]];
     //// //NSLog(@"delete criteria string %@",deleteCriteriaString);
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:deleteRecord :deleteCriteriaString :[URLConnector POSTMETHOD]];
@@ -331,8 +384,10 @@ static ZOHOCreator *creatorObject = nil;
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSString *deleteRecord = [URLConstructor writeURL];
-    NSString *deleteCriteriaString = [URLConstructor postAuthTokenWithApplication:[[ZOHOCreator getObject] getApplication:appLinkName]];
-    deleteCriteriaString = [deleteCriteriaString stringByAppendingFormat:@"&%@",[ZCRecordString bulkDeleteRecordStringXML:appLinkName:formName:recordLinkIDs]];
+//    deleteCriteriaString = [deleteCriteriaString stringByAppendingFormat:@"&%@",[ZCRecordString bulkDeleteRecordStringXML:appLinkName:formName:recordLinkIDs]];
+    
+    NSString *deleteCriteriaString = [URLConstructor postAuthTokenWithApplication:[[ZOHOCreator getObject] lastAccessedApp]];
+
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:deleteRecord :deleteCriteriaString :[URLConnector POSTMETHOD]];
     [urlConnect apiResponse];
     //NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:nil];
@@ -351,7 +406,9 @@ static ZOHOCreator *creatorObject = nil;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSString *updateRecord = [URLConstructor submitRecordURL];
     //// //NSLog(@"view link name %@",viewLinkName);
-    NSString *updateRecordString = [URLConstructor postAuthTokenWithApplication:[[ZOHOCreator getObject] getApplication:applicationName]];
+//    NSString *updateRecordString = [URLConstructor postAuthTokenWithApplication:[[ZOHOCreator getObject] getApplication:applicationName]];
+    NSString *updateRecordString = [URLConstructor postAuthTokenWithApplication:[[ZOHOCreator getObject] lastAccessedApp]];
+
     updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@&zcRefValue=true",[ZCRecordString bulkDeleteRecordStringXML:applicationName withViewLinkName:viewLinkName :records]];
     NSLog(@"Bulk edit request %@",updateRecordString);
     //// //NSLog(@"\n update rec string \n   %@   \n",updateRecordString);
@@ -420,7 +477,9 @@ static ZOHOCreator *creatorObject = nil;
     NSString *newRecord = [URLConstructor submitRecordURL];
     NSString *newRecordString = [URLConstructor postAuthTokenWithAppOwner];
     ZOHOCreator *zohoCreator = [ZOHOCreator getObject];
-    ZCApplication *app = [zohoCreator getApplication:appLinkName];
+//    ZCApplication *app = [zohoCreator getApplication:appLinkName];
+    ZCApplication *app = [zohoCreator lastAccessedApp];
+
     ZCForm *formObject = [app getForm:formLinkName];
     newRecordString = [newRecordString stringByAppendingFormat:@"&%@&zcRefValue=true",[ZCRecordString newRecordsStringXML:formObject:records]];
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
@@ -430,14 +489,14 @@ static ZOHOCreator *creatorObject = nil;
     //    NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:nil];
     //    [parser recordStatus];
 }
-+(ZCLookUpChoices *)getLookupChoicesWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit
++(ZCLookUpChoices *)getLookupChoicesWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit viewLinkname:(NSString *)ViewLinkname recordID:(NSString *)recordID
 {
     
     
     
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    NSString *url = [URLConstructor construckLookupChoicesURLWithAppLinkname:appLinkName formLinkname:formLinkName lookUpFieldLinkName:lookupFieldName appOwner:appOwner subformComponent:subformComponent searchString:searchString startindex:startIndex limit:limit];
+    NSString *url = [URLConstructor construckLookupChoicesURLWithAppLinkname:appLinkName formLinkname:formLinkName lookUpFieldLinkName:lookupFieldName appOwner:appOwner subformComponent:subformComponent searchString:searchString startindex:startIndex limit:limit viewLinkname:ViewLinkname recordID:recordID];
     URLConnector *urlConnect = [[URLConnector alloc] initFetcher:url];
     
     [urlConnect apiResponse];

@@ -37,6 +37,17 @@
     
     NSString *    subformFieldLinkname_forSubform;
     
+    
+    
+    
+    
+    NSArray * childappsINORDER_forAddtoPickList;
+    NSArray * childFormsINORDER_forAddtoPickList;
+    NSArray * baseFieldsINORDER_forAddtoPickList;
+
+    BOOL addtoPicklistForm;
+    
+    
 }
 
 @property (nonatomic,retain) ZCForm *zcForm;
@@ -50,5 +61,11 @@
 + (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName recordLinkID : (NSString*) _recLinkID appOwner : (NSString *) appOwner;
 - (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (ZCComponent*) component viewLinkName : (NSString*) viewLinkName recordLinkID : (NSString*) recordLinkID appOwner : (NSString *) appOwner;
 +(ZCFormFetcher *) initSubFormFetcher:(NSString *)appLinkName formLinkname:(NSString *)formLinkName subformmode:(BOOL)subformMode appOwner:(NSString *)appOwner  mainAppLinkname:(NSString *)mainAppLinkname mainFormLinkname:(NSString *)mainFormLinkname subformFieldLinkname:(NSString *)subformFieldLinkname;
+
+
+
+
++ (ZCFormFetcher*) initFormFetcherformAddtoPickListForm: (NSString*) appLinkName   formLinkname: (NSString*) formLinkName appOwner : (NSString *) appOwner childappsINORDER:(NSArray *)childappsINORDER childFormsINORDER:(NSArray *)childFormsINORDER baseFieldsINORDER:(NSArray *)baseFieldsINORDER recordID:(NSString *)recordID viewLinkName:(NSString *)viewLinkName;
+-(ZCFormFetcher*) initFormFetcherformAddtoPickListForm : (NSString*) appLinkName : (ZCComponent*) component appOwner : (NSString *) appOwner childappsINORDER:(NSArray *)childappsINORDER childFormsINORDER:(NSArray *)childFormsINORDER baseFieldsINORDER:(NSArray *)baseFieldsINORDER viewLinkName : (NSString*) viewLinkName recordLinkID : (NSString*) recordLinkID;
 
 @end

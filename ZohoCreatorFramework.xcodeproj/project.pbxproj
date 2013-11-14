@@ -123,6 +123,7 @@
 		717E3108182A4D1900993049 /* DelugeSubformEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 717E3107182A4D1900993049 /* DelugeSubformEvent.m */; };
 		717E310D182A4E4400993049 /* LookUPChoiceParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 717E310A182A4E4400993049 /* LookUPChoiceParser.m */; };
 		717E310E182A4E4400993049 /* ZCLookUpChoices.m in Sources */ = {isa = PBXBuildFile; fileRef = 717E310C182A4E4400993049 /* ZCLookUpChoices.m */; };
+		71CE1E5318335940000DEFDF /* ZCSharedAppsEventsParamsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CE1E521833593F000DEFDF /* ZCSharedAppsEventsParamsUtil.m */; };
 		863D04251819FBB900D10587 /* FormJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 863D04241819FBB900D10587 /* FormJSONParser.m */; };
 /* End PBXBuildFile section */
 
@@ -371,6 +372,8 @@
 		717E310A182A4E4400993049 /* LookUPChoiceParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookUPChoiceParser.m; sourceTree = "<group>"; };
 		717E310B182A4E4400993049 /* ZCLookUpChoices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCLookUpChoices.h; sourceTree = "<group>"; };
 		717E310C182A4E4400993049 /* ZCLookUpChoices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCLookUpChoices.m; sourceTree = "<group>"; };
+		71CE1E511833593F000DEFDF /* ZCSharedAppsEventsParamsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCSharedAppsEventsParamsUtil.h; sourceTree = "<group>"; };
+		71CE1E521833593F000DEFDF /* ZCSharedAppsEventsParamsUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCSharedAppsEventsParamsUtil.m; sourceTree = "<group>"; };
 		863D04231819FBB900D10587 /* FormJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FormJSONParser.h; path = JSON/FormJSONParser.h; sourceTree = "<group>"; };
 		863D04241819FBB900D10587 /* FormJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FormJSONParser.m; path = JSON/FormJSONParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -548,6 +551,7 @@
 		26F82A5417F468800048E85B /* Generator */ = {
 			isa = PBXGroup;
 			children = (
+				71CE1E5018335904000DEFDF /* SharedAppEventsParamUtil */,
 				26F82A5517F468800048E85B /* NewRecordXML.h */,
 				26F82A5617F468800048E85B /* NewRecordXML.m */,
 			);
@@ -986,6 +990,15 @@
 			path = Lookup;
 			sourceTree = "<group>";
 		};
+		71CE1E5018335904000DEFDF /* SharedAppEventsParamUtil */ = {
+			isa = PBXGroup;
+			children = (
+				71CE1E511833593F000DEFDF /* ZCSharedAppsEventsParamsUtil.h */,
+				71CE1E521833593F000DEFDF /* ZCSharedAppsEventsParamsUtil.m */,
+			);
+			name = SharedAppEventsParamUtil;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1101,6 +1114,7 @@
 				26F82B5417F468810048E85B /* ScriptJSONParser.m in Sources */,
 				26F82B5517F468810048E85B /* ScriptParser.m in Sources */,
 				26F82B5617F468810048E85B /* ZCSectionParser.m in Sources */,
+				71CE1E5318335940000DEFDF /* ZCSharedAppsEventsParamsUtil.m in Sources */,
 				26F82B5717F468810048E85B /* ZCPaymentParser.m in Sources */,
 				26F82B5817F468810048E85B /* ZCUserParser.m in Sources */,
 				26F82B5917F468810048E85B /* ParserUtil.m in Sources */,

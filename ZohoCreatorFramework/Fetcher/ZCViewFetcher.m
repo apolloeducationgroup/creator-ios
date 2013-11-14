@@ -62,7 +62,9 @@
             // self->_zcView = [self fetchFromLocal];
         }
         ZOHOCreator *creator = [ZOHOCreator getObject];
-        [self->_zcView setApplication:[creator getApplication:appLinkName]];
+//        [self->_zcView setApplication:[creator getApplication:appLinkName ]];
+        [self->_zcView setApplication:[creator getApplication:appLinkName appOwner:appOwner]];
+
     }
     return self;
 }
@@ -86,7 +88,9 @@
             [NSException raise:@"Network Unavailable" format:@"No network available to connnect to setver"];
         }
         ZOHOCreator *creator = [ZOHOCreator getObject];
-        [self->_zcView setApplication:[creator getApplication:appLinkName]];
+//        [self->_zcView setApplication:[creator getApplication:appLinkName]];
+        [self->_zcView setApplication:[creator getApplication:appLinkName appOwner:appOwner]];
+
     }
     return self;
 }

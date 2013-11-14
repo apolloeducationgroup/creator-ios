@@ -19,6 +19,7 @@
 + (NSString*) newRecordString : (ZCForm*) form : (ZCRecord*) record;
 + (NSString*) newRecordStringXML : (NSString*) appLinkName : (NSString*) formLinkName : (NSDictionary*) fieldDict;
 + (NSString*) newRecordStringXML : (ZCForm*) form : (ZCRecord*) record;
++ (NSString*) newRecordStringXMLWithViewLinkname:(NSString *)viewLinkname form: (ZCForm*) form  record: (ZCRecord*) record;
 + (NSString*) editRecordCriteria : (NSString*) idValue;
 + (NSString*) deleteRecordCriteria : (NSString*) idValue;
 + (NSString*) newUpdateRcordStringXML : (ZCForm*) form : (ZCRecord*) record : (NSString*) viewLinkName;

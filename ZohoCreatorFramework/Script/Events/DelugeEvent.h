@@ -31,7 +31,7 @@
 @required -(void) openUrl : (NSString*) urlString withWindowType : (NSString*) windowsType andParameter : (NSString*) parameter;
 @required -(void) reloadForm : (NSString*) formName;
 @required -(void) selectValue : (NSString*) formName withFieldName : (NSString*) fieldName andValues : (NSMutableArray*) selectValues rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
-@required -(void) selectAllValues : (NSString*) fieldName withFieldName : (NSString*) fieldName rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
+@required -(void) selectAllValues : (NSString*) formName withFieldName : (NSString*) fieldName rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
 @required -(void) deSelectValue : (NSString*) formName withFieldName : (NSString*) fieldName andValues : (NSMutableArray*) selectValues rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
 @required -(void) deSelectAllValues : (NSString*) formName withFieldName : (NSString*) fieldName rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
 

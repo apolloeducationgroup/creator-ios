@@ -7,7 +7,7 @@
 //
 
 #import "URLConstructor.h"
-
+#import "ZCSharedAppsEventsParamsUtil.h"
 @interface URLConstructor(hidden)
 
 + (NSString*) appendAuthToken : (NSString*) urlString;
@@ -21,6 +21,15 @@ static NSString *CREATOR_URL;
 static NSString *ACCOUNTS_URL;
 static NSString *SERVICE_NAME;
 
+/*
+formAccessType
+int FORM_ALONE =1;
+int VIEW_ADD_FORM =2;
+int VIEW_EDIT_FORM =3;
+int VIEW_BULK_EDIT_FORM =4;
+int FORM_LOOKUP_ADD_FORM =5;
+*/
+ 
 @implementation URLConstructor
 
 + (NSString*) formURL : (NSString*) appLinkName formName : (NSString*) formLinkName withApplicationOwner: (NSString *) appOwner {
@@ -29,8 +38,52 @@ static NSString *SERVICE_NAME;
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     formURL = [formURL stringByAppendingString:@"&metaData=complete"];
+    
+    
+    NSLog(@"frm URL %@",appOwner);
 //    formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
     return formURL;
+}
+
++(NSString *)formURLforAddTOFickListAppname:(NSString *)  appLinkName formName : (NSString*) formLinkName withApplicationOwner: (NSString *) appOwner childappsINORDER:(NSArray *)childappINORDER childFormsINORDER:(NSArray *)childFormsINORDER baseFieldsINORDER:(NSArray *)baseFieldsINORDER recordID :(NSString *)recID viewLinkname:(NSString *)viewLinkname;
+{
+
+    NSString * formURL=[URLConstructor formURL:appLinkName formName:formLinkName withApplicationOwner:appOwner];
+//    for(int appInd=0;appInd<childappNamesINORDER.count;appInd++)
+//    {
+//    
+//        formURL = [formURL stringByAppendingFormat:@"&zc_childappname_%i=%@",appInd+1,[childappNamesINORDER objectAtIndex:appInd]];
+//        formURL = [formURL stringByAppendingFormat:@"&zc_childformname_%i=%@",appInd+1,[childFormNameINORDER objectAtIndex:appInd]];
+//        formURL = [formURL stringByAppendingFormat:@"&zc_childlabelname_%i=%@",appInd+1,[baseFieldNameINORDER objectAtIndex:appInd]];
+//    }
+//    
+//    formURL = [formURL stringByAppendingFormat:@"&zc_lookupCount=%i",childFormNameINORDER.count];
+//    formURL = [formURL stringByAppendingFormat:@"&formAccessType=5"];
+//    
+//    NSLog(@"recLinkID %@ %@",recID,viewLinkname);
+//    if (recID.length) {
+//        formURL = [formURL stringByAppendingFormat:@"&recLinkID=%@",recID];
+//    }
+//    if (viewLinkname.length) {
+//        
+//        formURL = [formURL stringByAppendingFormat:@"&viewLinkName=%@",viewLinkname];
+//
+//    }
+    
+    formURL =[formURL stringByAppendingString:[ZCSharedAppsEventsParamsUtil getAddtoPickListParamsWithAPPS:childappINORDER Forms:childFormsINORDER fields:baseFieldsINORDER viewLinkname:viewLinkname recordID:recID]];
+    formURL = [formURL stringByAppendingFormat:@"&formAccessType=5"];
+    
+    return formURL;
+    
+//https://creator.zoho.com/api/riyazmd/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&formAccessType=5&zc_lookupCount=1&zc_childappname_1=all-fields&zc_childformname_1=Lookup&zc_childlabelname_1=Lookup_plus_add
+    
+    
+//https://creator.zoho.com/api/all-fields/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&zc_childappname_1=all-fields&zc_childformname_1=all-fields&zc_childlabelname_1=Lookup_plus_add&zc_lookupCount=1&formAccessType=5
+    
+//https://creator.zoho.com/api/all-fields/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&zc_childappname_1=Single_Line&zc_childformname_1=Single_Line&zc_childlabelname_1=Lookup_plus_add&zc_lookupCount=1&formAccessType=5
+//https://creator.zoho.com/api/all-fields/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&zc_childappname_1=Single_Line&zc_childformname_1=Single_Line&zc_childlabelname_1=Lookup_plus_add&zc_lookupCount=1&formAccessType=5
+
+
 }
 
 + (NSString*) formURL : (NSString*) appLinkName formName : (NSString*) formLinkName viewName:(NSString*) viewLinkName withApplicationOwner: (NSString *) appOwner
@@ -626,12 +679,27 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
     
     return authenticationUrl;
 }
-+(NSString *)construckLookupChoicesURLWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit
++(NSString *)construckLookupChoicesURLWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit viewLinkname:(NSString *)viewLinkname recordID:(NSString *)recordID
 {
     NSString * lookUpchoiceURL=[NSString stringWithFormat:@"/api/%@/xml/%@/form/%@/lookup/%@/options//",appOwner,appLinkName,formLinkName,lookupFieldName];
     lookUpchoiceURL = [URLConstructor appendAuthToken:lookUpchoiceURL];
     
     lookUpchoiceURL =[lookUpchoiceURL stringByAppendingFormat:@"&limit=%i&appendRows=true&startindex=%i&zcRefValue=true&searchValue=%@",limit,startIndex,searchString];
+    
+    int formAccestype=1;
+    if (viewLinkname.length) {
+        
+        lookUpchoiceURL =[lookUpchoiceURL stringByAppendingFormat:@"&viewLinkName=%@",viewLinkname];
+        formAccestype=2;
+    }
+
+    if (recordID.length) {
+        
+        formAccestype=3;
+    }
+
+    lookUpchoiceURL =[lookUpchoiceURL stringByAppendingFormat:@"&formAccessType=%i",formAccestype];
+
     
     
     lookUpchoiceURL = [[URLConstructor serverURL:false] stringByAppendingString:lookUpchoiceURL];

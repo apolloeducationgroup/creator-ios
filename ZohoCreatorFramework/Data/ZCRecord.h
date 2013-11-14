@@ -33,6 +33,8 @@
 - (ZCFieldData*) getFieldData : (NSString*) fieldName;
 - (ZCFieldData*) getFieldDataByIndex : (NSInteger) index;
 - (ZCRecordStatus*) addRecord;
+-(ZCRecordStatus*) addRecordWithViewLinkName:(NSString *)viewLinkname;
+- (ZCRecordStatus*) addRecordForFormInAddToPickListChildappNamesINORDER:(NSArray *)childappNamesINORDER childFormNameINORDER:(NSArray *)childFormNameINORDER baseFieldNameINORDER:(NSArray *)baseFieldNameINORDER recordID :(NSString *)recID viewLinkname:(NSString *)viewLinkname;
 - (ZCRecordStatus*) updateRecordFromView:(NSString*) viewLinkName;
 - (ZCRecordStatus*) deleteRecord;
 - (ZCRecordStatus*) duplicateRecord;

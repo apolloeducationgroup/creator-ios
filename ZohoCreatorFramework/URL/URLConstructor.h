@@ -13,6 +13,7 @@
 #import "ZCApplication.h"
 #import "ZCRecord.h"
 
+
 @interface URLConstructor : NSObject
 
 + (NSString*) formURL : (NSString*) appLinkName formName : (NSString*) formLinkName withApplicationOwner: (NSString *) appOwner;
@@ -67,7 +68,10 @@
 + (NSString*) formOnLoadWithJSON :(NSString*) appLinkName : (NSString*) formLinkName : (ZCRecord*) _zcRecord : (NSString*) appOwner;
 + (NSString*) fieldOnUserWithJSON:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) fieldLinkName : (NSString*) paramString : (NSString*) appOwner;
 + (NSString*) subFormOnuserWithJSON : (NSString*) appLinkName formLinkname: (NSString*) formLinkName fieldlinkname: (NSString*) fieldName subformFieldName:(NSString *)subformFieldname rowNumberincaseOFsubofrmField:(int)rownum param: (NSString*) paramString appowner: (NSString*) appOwner;
-+(NSString *)construckLookupChoicesURLWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit;
++(NSString *)construckLookupChoicesURLWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit viewLinkname:(NSString *)viewLinkname recordID:(NSString *)recordID;
 +(NSString *)subFormAddRowWithAppLinkname:(NSString *)appLinkName formLinkName:(NSString *)formLinkName fieldLinkName:(NSString *)fieldLinkName numberofsubformEntries:(int)numberofsubformEntries appOwner:(NSString *)appOwner recordParm:(NSString *)params;
 +(NSString *)subFormONDELETERowWithAppLinkname:(NSString *)appLinkName formLinkName:(NSString *)formLinkName fieldLinkName:(NSString *)fieldLinkName deleteRowNumber:(int)deleteRowNumber appOwner:(NSString *)appOwner recordParm:(NSString *)params;
+
+
++(NSString *)formURLforAddTOFickListAppname:(NSString *)  appLinkName formName : (NSString*) formLinkName withApplicationOwner: (NSString *) appOwner childappsINORDER:(NSArray *)childappINORDER childFormsINORDER:(NSArray *)childFormsINORDER baseFieldsINORDER:(NSArray *)baseFieldsINORDER recordID :(NSString *)recID viewLinkname:(NSString *)viewLinkname;
 @end
