@@ -59,8 +59,13 @@
         }
     }
     
+    if (forms.count) {
+        
+
     paramString = [paramString stringByAppendingFormat:@"&zc_lookupCount=%i",forms.count];
-    
+//           paramString =[paramString stringByAppendingFormat:@"&linkNameBased=true"];
+
+    }
     /*
     
 xx1:kk
@@ -115,7 +120,6 @@ zc_childlabelname_2:xxxx
         
     }
     
-    paramString =[paramString stringByAppendingFormat:@"&linkNameBased=true"];
 
 
     return paramString;
