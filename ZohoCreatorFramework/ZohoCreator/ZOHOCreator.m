@@ -8,6 +8,7 @@
 
 #import "ZOHOCreator.h"
 #import "LookUPChoiceParser.h"
+#import "ZCSharedAppsEventsParamsUtil.h"
 
 static ZOHOCreator *creatorObject = nil;
 
@@ -250,28 +251,26 @@ static ZOHOCreator *creatorObject = nil;
     
 //    NSLog(@"riyaz lookup %@",lookupfield);
     
-    NSMutableArray *childappNamesINORDER=[[NSMutableArray alloc]init];
-    NSMutableArray *childFormNameINORDER=[[NSMutableArray alloc]init];
-
-    NSMutableArray *baseFieldNameINORDER=[[NSMutableArray alloc]init];
-    for (int index=lookupfields.count;index>0;index--) {
-        
-      ZCField * field=  [lookupfields objectAtIndex:index-1];
-        ZCForm * form=[baseforms objectAtIndex:index -1];
-        ZCApplication * app=[baseApps objectAtIndex:index -1];
-//     NSLog(@"field linkname  addtopic %@  form %@ %@",field.relatedComponent.linkName,field.relatedComponent.zcApplication.appLinkName,field.fieldName);
-        
-
-        [childappNamesINORDER addObject:[app appLinkName]];
-        [childFormNameINORDER addObject:form.linkName];
-        [baseFieldNameINORDER addObject:field.fieldName];
-
-        
-    }
+//    NSMutableArray *childappNamesINORDER=[[NSMutableArray alloc]init];
+//    NSMutableArray *childFormNameINORDER=[[NSMutableArray alloc]init];
+//
+//    NSMutableArray *baseFieldNameINORDER=[[NSMutableArray alloc]init];
+//    for (int index=lookupfields.count;index>0;index--) {
+//        
+//      ZCField * field=  [lookupfields objectAtIndex:index-1];
+//        ZCForm * form=[baseforms objectAtIndex:index -1];
+//        ZCApplication * app=[baseApps objectAtIndex:index -1];
+////     NSLog(@"field linkname  addtopic %@  form %@ %@",field.relatedComponent.linkName,field.relatedComponent.zcApplication.appLinkName,field.fieldName);
+//        
+//
+//        [childappNamesINORDER addObject:[app appLinkName]];
+//        [childFormNameINORDER addObject:form.linkName];
+//        [baseFieldNameINORDER addObject:field.fieldName];
+//
+//        
+//    }
     
     
-    
-
     
     
     
@@ -513,8 +512,7 @@ static ZOHOCreator *creatorObject = nil;
     
     return [lookupparser lookUpChoicesParm];
     
-}
-//
+}//
 //-(NSString *)subFormAddRowWithAppLinkname:(NSString *)appLinkName formLinkName:(NSString *)formLinkName fieldLinkName:(NSString *)fieldLinkName numberofsubformEntries:(int)numberofsubformEntries appOwner:(NSString *)appOwner recordParm:(NSString *)params
 //{
 //

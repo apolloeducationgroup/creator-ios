@@ -87,7 +87,11 @@
     }
     NSString *newRecord = [URLConstructor newsubmitRecordURL];
     NSString *newRecordString = [URLConstructor postAuthTokenWithApplication:[_form application]];
-    newRecordString = [newRecordString stringByAppendingFormat:@"&%@&errorLog=true&zcRefValue=true",[ZCRecordString newRecordStringXMLWithViewLinkname:viewLinkname form:self->_form record:self]];
+    
+     newRecordString =[newRecordString stringByAppendingFormat:@"&formAccessType=2&errorLog=true"];
+
+    newRecordString = [newRecordString stringByAppendingFormat:@"&%@",[ZCRecordString newRecordStringXMLWithViewLinkname:viewLinkname form:self->_form record:self]];
+    
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
     
     NSString *response = [urlConnect apiResponse];

@@ -89,7 +89,6 @@
     [recordXML appendFormat:@"XMLString=<ZohoCreator><applicationlist><application name='%@'><viewlist><view name='%@'><add>",[[form application] appLinkName],viewLinkname];
     [recordXML appendString:[ZCRecordString recordValueXML:form :record]];
     [recordXML appendString:@"</add></view></viewlist></application></applicationlist></ZohoCreator>"];
-    
     return  recordXML;
 }
 

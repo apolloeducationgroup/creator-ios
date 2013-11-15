@@ -51,10 +51,10 @@
         paramString = [paramString stringByAppendingFormat:@"&zc_childformname_%i=%@",appInd+1,[childFormNameINORDER objectAtIndex:appInd]];
         paramString = [paramString stringByAppendingFormat:@"&zc_childlabelname_%i=%@",appInd+1,[baseFieldNameINORDER objectAtIndex:appInd]];
         
-        if (appInd==0) {
-            paramString = [paramString stringByAppendingFormat:@"&childAppLinkName%i=%@",appInd+1,[childappNamesINORDER objectAtIndex:appInd]];
-            paramString = [paramString stringByAppendingFormat:@"&childFormLinkName%i=%@",appInd+1,[childFormNameINORDER objectAtIndex:appInd]];
-            paramString = [paramString stringByAppendingFormat:@"&childFieldLabelName%i=%@",appInd+1,[baseFieldNameINORDER objectAtIndex:appInd]];
+        if (appInd==apps.count-1) {
+            paramString = [paramString stringByAppendingFormat:@"&childAppLinkName=%@",[childappNamesINORDER objectAtIndex:appInd]];
+            paramString = [paramString stringByAppendingFormat:@"&childFormLinkName=%@",[childFormNameINORDER objectAtIndex:appInd]];
+            paramString = [paramString stringByAppendingFormat:@"&childFieldLabelName=%@",[baseFieldNameINORDER objectAtIndex:appInd]];
 
         }
     }
@@ -66,6 +66,7 @@
 //           paramString =[paramString stringByAppendingFormat:@"&linkNameBased=true"];
 
     }
+    
     /*
     
 xx1:kk

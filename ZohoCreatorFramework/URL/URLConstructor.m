@@ -746,7 +746,7 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
                paramString =[paramString stringByAppendingFormat:@"&rowactiontype=onaddrow"];
 //    NSLog(@"param  string %@",paramString);
 
-               paramString =[paramString stringByAppendingFormat:@"&rowseqid=t::row_%i=",numberofsubformEntries];
+               paramString =[paramString stringByAppendingFormat:@"&rowseqid=t::row_%i",numberofsubformEntries];
 //    NSLog(@"param  string %@",paramString);
 
 //    NSLog(@"param  string %@",paramString);
@@ -785,7 +785,7 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
     paramString =[paramString stringByAppendingFormat:@"&rowactiontype=ondeleterow"];
 //    NSLog(@"param  string %@",paramString);
     
-      paramString =[paramString stringByAppendingFormat:@"&rowseqid=t::row_%i=",deleteRowNumber];
+      paramString =[paramString stringByAppendingFormat:@"&rowseqid=t::row_%i",deleteRowNumber];
 
     
     paramString =[paramString stringByAppendingFormat:@"&fieldName=%@",fieldLinkName];
