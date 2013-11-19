@@ -30,6 +30,7 @@
 @private BOOL _optionsElementTag;
 @private BOOL _statusElementTag;
 @private BOOL _updateElementTag;
+@private BOOL _deleteElementTag;
 @private BOOL _errorList;
 @private BOOL _error;
 @private BOOL _errorCode;

@@ -21,13 +21,14 @@
 @synthesize formName=_formName;
 @synthesize dateFormat=_dateFormat;
 @synthesize timezone=_timezone;
-- (RecordDuplicateParser*) initWithRecordDuplicateParser:(NSString *) xmlString  {
+- (RecordDuplicateParser*) initWithRecordDuplicateParser:(NSString *) xmlString  bulkDuplicate:(BOOL)bulkdup {
     
     self = [super init];
     if (self) {
         
         self->_xmlString = xmlString;
         fieldkeyvaluepair=[[NSMutableDictionary alloc]init];
+        _bulkDuplicate=bulkdup;
     }
     [self recordDuplicateParserXML];
     return self;
@@ -91,7 +92,7 @@
     
     //    NSLog(@"found char %@",string);
     
-    if([_elementname isEqualToString:@"criteria"]) {
+    if([_elementname isEqualToString:@"criteria"] && !_bulkDuplicate) {
         
         NSArray * array=[string componentsSeparatedByString:@"== "];
         [fieldkeyvaluepair setObject:[NSString stringWithFormat:@"%lld",[[array objectAtIndex:1]longLongValue] ]forKey:@"CriteriaID"];

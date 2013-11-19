@@ -16,6 +16,7 @@
     NSMutableDictionary * fieldkeyvaluepair;
     NSString * _fieldname;
     NSString * _elementname;
+    BOOL _bulkDuplicate;
     
     
 }
@@ -27,8 +28,7 @@
 @property (nonatomic,retain) NSString *  criteriaID;
 @property (nonatomic,retain) NSString * formName;
 
-- (RecordDuplicateParser*) initWithRecordDuplicateParser:(NSString *) xmlString;
-
+- (RecordDuplicateParser*) initWithRecordDuplicateParser:(NSString *) xmlString  bulkDuplicate:(BOOL)bulkdup;
 
 
 @end

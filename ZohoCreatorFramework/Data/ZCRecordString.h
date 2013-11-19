@@ -32,10 +32,13 @@
 + (NSString*) newDeleteRecordStringXML : (ZCView*) view : (ZCRecord*) record;
 + (NSString*) newUpdateRcordStringXML : (ZCView*) view : (ZCRecord*) record ;
 + (NSString*) recordXMLforSubformRecord : (ZCForm*) form : (ZCRecord*) record;
+
++ (NSString*) bulKUpdateRcordStringXMLWithZCForm:(ZCForm *)form viewLinkName : (NSString*) viewLinkName  records : (NSMutableArray*) records newRecord:(ZCRecord *)record;
+
 + (NSString*) bulkDeleteRecordStringXML: (NSString*) appLinkName withViewLinkName : (NSString*) viewLinkName : (NSMutableArray*) idValues;
 + (NSString*) deleteRecordStringXML: (NSString*) appLinkName withViewName: (NSString*) viewLinkName : (NSString*) idValue;
 + (NSString*) updateRcordStringXML : (NSString*) appLinkName  withViewName: (NSString*) viewLinkName : (NSDictionary*) dataDict;
-+ (NSString*) bulKUpdateRcordStringXML : (NSString*) appLinkName withViewName : (NSString*) viewLinkName : andDataDictList : (NSMutableArray*) dataDictList;
++ (NSString*) bulKUpdateRcordStringXML : (NSString*) appLinkName withViewName : (NSString*) viewLinkName  andDataDictList : (NSMutableArray*) dataDictList;
 + (NSString*) duplicateRecords : (NSString*) viewLinkName withApplication : (NSString*) appLinkName AndRecords : (NSMutableArray*) records;
 + (NSString*) newDuplicateRecords : (NSString*) viewLinkName withApplication : (NSString*) appLinkName AndRecords : (NSMutableArray*) records;
 

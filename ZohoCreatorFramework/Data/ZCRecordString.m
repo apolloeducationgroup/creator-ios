@@ -156,7 +156,72 @@
     return  recordXML;
 }
 
-+ (NSString*) bulKUpdateRcordStringXML : (NSString*) appLinkName withViewName : (NSString*) viewLinkName : andDataDictList : (NSMutableArray*) dataDictList {
+//+ (NSString*) bulKUpdateRcordStringXMLWithZCForm:(ZCForm *)form viewLinkName : (NSString*) viewLinkName  records : (NSMutableArray*) records {
+//    
+//    NSMutableString *recordXML = [[NSMutableString alloc] init];
+//    [recordXML appendFormat:@"XMLString=<ZohoCreator><applicationlist><application name='%@'><viewlist><view name='%@'>",[[form application] appLinkName],viewLinkName];
+//    for(NSInteger index=0;index<[records count];index++) {
+//        ZCRecord *record = [records objectAtIndex:index];
+//        
+//        //        ZCFieldData *fieldData =  [record getFieldData:@"ID"];
+//        [recordXML appendString:@"<update>"];
+//        //            [recordXML appendString:[ZCRecordString editRecordCriteria:[fieldData fieldValue]]];
+//        [recordXML appendString:[ZCRecordString editRecordCriteria:[record recordID]]];
+//        [recordXML appendString:@"<newvalues>"];
+//        [recordXML appendString:[ZCRecordString updateRecordValueXML:form :record]];
+//        [recordXML appendString:@"</newvalues></update>"];
+//    }
+//    [recordXML appendString:@"</view></viewlist></application></applicationlist></ZohoCreator>"];    return  recordXML;
+//}
++ (NSString*) bulKUpdateRcordStringXMLWithZCForm:(ZCForm *)form viewLinkName : (NSString*) viewLinkName  records : (NSMutableArray*) records newRecord:(ZCRecord *)record{
+
+    NSMutableString *recordXML = [[NSMutableString alloc] init];
+    [recordXML appendFormat:@"XMLString=<ZohoCreator><applicationlist><application name='%@'><viewlist><view name='%@'>",[[form application] appLinkName],viewLinkName];
+    
+    NSMutableArray *ids = [[NSMutableArray alloc] init];
+    NSMutableString * idsstring=[[NSMutableString alloc]init];
+    for(NSInteger index=0;index<[records count];index++) {
+        ZCRecord *record = [records objectAtIndex:index];
+        [ids addObject:[NSString stringWithFormat:@"ID == \" %@\" ",[record recordID]]];
+        
+    }
+    
+    for (int idInd=0;idInd<ids.count;idInd++) {
+        
+        [idsstring appendString:[ids objectAtIndex:idInd]];
+        
+        if (idInd< ids.count-1) {
+            [idsstring appendString:@"||"];
+        }
+        
+        
+    }
+    [recordXML appendFormat:@"<update><criteria><![CDATA[(%@)]]></criteria>",idsstring];
+
+//        for(NSInteger index=0;index<[records count];index++) {
+//            ZCRecord *record = [records objectAtIndex:index];
+//
+//        //        ZCFieldData *fieldData =  [record getFieldData:@"ID"];
+//        //            [recordXML appendString:[ZCRecordString editRecordCriteria:[fieldData fieldValue]]];
+////        [recordXML appendString:[ZCRecordString editRecordCriteria:[record recordID]]];
+//        [recordXML appendString:@"<newvalues>"];
+//        [recordXML appendString:[ZCRecordString updateRecordValueXML:form :record]];
+//        [recordXML appendString:@"</newvalues></update>"];
+//    }
+//    
+        [recordXML appendString:@"<newvalues>"];
+        [recordXML appendString:[ZCRecordString updateRecordValueXML:form :record]];
+        [recordXML appendString:@"</newvalues></update>"];
+        [recordXML appendString:@"</view></viewlist></application></applicationlist></ZohoCreator>"];    return  recordXML;
+    
+    
+    //
+
+//    &XMLString=<ZohoCreator><applicationlist><application name='iphone-testing'><viewlist><view name='Multiline_Report'><update><criteria><![CDATA[(ID == "830230000000339007" || ID == "830230000000339003")]]></criteria><newvalues><field name='Multi_Line'><value><![CDATA[123]]></value></field></newvalues></update></view></viewlist></application></applicationlist></ZohoCreator>
+
+}
+
++ (NSString*) bulKUpdateRcordStringXML : (NSString*) appLinkName withViewName : (NSString*) viewLinkName  andDataDictList : (NSMutableArray*) dataDictList {
     
     NSMutableString *recordXML = [[NSMutableString alloc] init];
     [recordXML appendFormat:@"XMLString=<ZohoCreator><applicationlist><application name='%@'><viewlist><view name='%@'><update>",appLinkName,viewLinkName];

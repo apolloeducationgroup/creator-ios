@@ -36,8 +36,8 @@
 
 - (ZCApplication*) getZCApplicationByName : (NSString*) appName {
     
-    for (int i=0; i<self->_applicationList.count; i++) {
-        ZCApplication *app = [self ->_applicationList objectAtIndex:i];
+    for (int appInd=0; appInd<self->_applicationList.count; appInd++) {
+        ZCApplication *app = [self ->_applicationList objectAtIndex:appInd];
         if ([app.appLinkName isEqualToString:appName]) {
             return app;
         }
@@ -48,8 +48,8 @@
 - (ZCApplicationList *) getZCApplications:(NSString *) ownerName
 {
     ZCApplicationList *appListforOwner = [[ZCApplicationList alloc] initZCApplicationList];
-    for (int i=0; i<self->_applicationList.count; i++) {
-        ZCApplication *app = [self ->_applicationList objectAtIndex:i];
+    for (int appInd=0; appInd<self->_applicationList.count; appInd++) {
+        ZCApplication *app = [self ->_applicationList objectAtIndex:appInd];
         if ([app.appOwner isEqualToString:ownerName]) {
             [appListforOwner addZCApplication:app];
         }
@@ -60,8 +60,8 @@
 
 - (ZCApplication *) getZCApplication:(NSString *) ownerName ApplicationName:(NSString *)appName
 {
-    for (int i=0; i<self->_applicationList.count; i++) {
-        ZCApplication *app = [self ->_applicationList objectAtIndex:i];
+    for (int appInd=0; appInd<self->_applicationList.count; appInd++) {
+        ZCApplication *app = [self ->_applicationList objectAtIndex:appInd];
         if ([app.appOwner isEqualToString:ownerName] && [app.appLinkName isEqualToString:appName]) {
             return app;
         }

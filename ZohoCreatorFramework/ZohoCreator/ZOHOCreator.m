@@ -9,7 +9,7 @@
 #import "ZOHOCreator.h"
 #import "LookUPChoiceParser.h"
 #import "ZCSharedAppsEventsParamsUtil.h"
-
+#import "RecordDuplicateParser.h"
 static ZOHOCreator *creatorObject = nil;
 
 @interface ZOHOCreator(hidden)
@@ -362,7 +362,7 @@ static ZOHOCreator *creatorObject = nil;
     return YES;
 }
 
-+ (NSMutableArray*) deleteRecordWithIDs : (NSMutableArray*) recordLinkIDs withViewName : (NSString*) viewName andAppName : (NSString*) appLinkName {
++ (ZCRecordStatus *) deleteRecordWithIDs : (NSMutableArray*) recordLinkIDs withViewName : (NSString*) viewName andAppName : (NSString*) appLinkName {
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSString *deleteRecord = [URLConstructor writeURL];
@@ -373,13 +373,14 @@ static ZOHOCreator *creatorObject = nil;
     //// //NSLog(@"delete criteria string %@",deleteCriteriaString);
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:deleteRecord :deleteCriteriaString :[URLConnector POSTMETHOD]];
     [urlConnect apiResponse];
-    //    NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:nil];
-    //    [parser recordStatus];
+        NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:[urlConnect apiResponse]:nil];
+        [parser recordStatus];
+    NSLog(@"delete record status %i %@ %@ ",[[parser recordStatus]success],[[[parser recordStatus]error ]errorMessage ],[[[parser recordStatus ]error]generalErrorList ]);
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    return nil;
+    return [parser recordStatus];
 }
 
-+ (NSMutableArray*) deleteRecordWithIDs : (NSMutableArray*) recordLinkIDs withFormName : (NSString*) formName andAppName : (NSString*) appLinkName {
++ (ZCRecordStatus *) deleteRecordWithIDs : (NSMutableArray*) recordLinkIDs withFormName : (NSString*) formName andAppName : (NSString*) appLinkName {
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSString *deleteRecord = [URLConstructor writeURL];
@@ -389,10 +390,11 @@ static ZOHOCreator *creatorObject = nil;
 
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:deleteRecord :deleteCriteriaString :[URLConnector POSTMETHOD]];
     [urlConnect apiResponse];
-    //NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:nil];
-    //    [parser recordStatus];
+    NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:[urlConnect apiResponse]:nil];
+    [parser recordStatus];
+    NSLog(@"delete record status %i %@ %@ ",[[parser recordStatus]success],[[[parser recordStatus]error ]errorMessage ],[[[parser recordStatus ]error]generalErrorList ]);
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    return nil;
+    return [parser recordStatus];
 }
 
 + (NSDictionary*) updateRecordForView : (NSString*) viewLinkName  WithApplication: (NSString*) appLinkName AmdDataDictionary : (NSMutableArray*) dataDict {
@@ -419,6 +421,26 @@ static ZOHOCreator *creatorObject = nil;
 }
 
 
++ (ZCRecordStatus*) updateRecordWithIDsfromView : (ZCForm*) form recordsTobeUpdated:(NSMutableArray*) records  newRecord:(ZCRecord *)record viewLinkname:(NSString *)viewLinkname
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    NSString *updateRecord = [URLConstructor submitRecordURL];
+    
+    NSString *updateRecordString = [URLConstructor postAuthTokenWithAppOwner:[[form application] appOwner]];
+    updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@&zcRefValue=true&formAccessType=4",[ZCRecordString bulKUpdateRcordStringXMLWithZCForm:form viewLinkName:viewLinkname records:records newRecord:record]];
+    
+    URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:updateRecord :updateRecordString :[URLConnector POSTMETHOD]];
+    NSString *response = [urlConnect apiResponse];
+//    if(form != nil) {
+        NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:form];
+        [parser recordStatus];
+//    }
+    
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    return [parser recordStatus];
+}
+
 + (NSMutableArray*) updateRecordWithIDs : (ZCForm*) form : (NSMutableArray*) records
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -441,7 +463,7 @@ static ZOHOCreator *creatorObject = nil;
     return nil;
 }
 
-+ (NSArray*) newDuplicateRecordForView : (NSString*) viewLinkName  WithApplication: (NSString*) appLinkName AndRecords : (NSMutableArray*) records AndAppOwner : (NSString*) appOwner {
++ (RecordDuplicateParser *) newDuplicateRecordForView : (NSString*) viewLinkName  WithApplication: (NSString*) appLinkName AndRecords : (NSMutableArray*) records AndAppOwner : (NSString*) appOwner {
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSString *newRecord = [URLConstructor submitRecordURL];
@@ -453,9 +475,20 @@ static ZOHOCreator *creatorObject = nil;
     
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    //NSLog(@"xml response for duplicate record %@",[urlConnect apiResponse]);
     
-    return [NSArray arrayWithObject:[urlConnect apiResponse]];
+//    NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:[urlConnect apiResponse]:nil];
+    BOOL BulkDup=NO;
+    if (records.count>1) {
+
+        BulkDup=YES;
+    }
+    
+    RecordDuplicateParser *parser=[[RecordDuplicateParser alloc]initWithRecordDuplicateParser:[urlConnect apiResponse] bulkDuplicate:BulkDup];
+    [parser status];
+
+    NSLog(@"duplicate record status %i",[parser status]);
+
+    return parser;
 }
 
 + (void) duplicateRecordsForView : (NSString*) viewLinkName  WithApplication: (NSString*) appLinkName AndRecords : (NSMutableArray*) records AndAppOwner : (NSString*) appOwner {

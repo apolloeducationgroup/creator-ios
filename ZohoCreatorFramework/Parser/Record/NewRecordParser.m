@@ -53,11 +53,10 @@
     
     
 }
-
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict   {
     
     NSLog(@"element name %@",elementName);
-    if(_addElementTag == YES || _updateElementTag==YES) {
+    if(_addElementTag == YES || _updateElementTag==YES || _deleteElementTag == YES ) {
         
         if(_valueElementTag == YES) {
             
@@ -122,6 +121,14 @@
         else if([elementName isEqualToString:@"update"]) {
             _record = [[ZCRecord alloc] initZCRecord];
             _updateElementTag = YES;
+        }
+        else if ([elementName isEqualToString:@"delete"])
+        {
+        
+            
+            _record = [[ZCRecord alloc] initZCRecord];
+            _deleteElementTag = YES;
+        
         }
         else if([elementName isEqualToString:@"errorlist"]) {
             _errorList = YES;
@@ -322,6 +329,13 @@
                 [_recordStatus setRecord:_record];
                 //// //NSLog(@"Record has setted in status object %@",_record);
                 _updateElementTag = NO;
+            }
+            
+            else if([elementName isEqualToString:@"delete"]) {
+                [_record setForm:_form];
+                [_recordStatus setRecord:_record];
+                //// //NSLog(@"Record has setted in status object %@",_record);
+                _deleteElementTag = NO;
             }
         }
     }

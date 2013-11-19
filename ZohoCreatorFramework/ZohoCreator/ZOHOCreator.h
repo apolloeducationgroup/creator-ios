@@ -18,8 +18,9 @@
 #import "ZCAllAppsCategory.h"
 #import "LookUPChoiceParser.h"
 #import "ZCLookUpChoices.h"
+#import "RecordDuplicateParser.h"
 
-@class ZOHOUser,ZCForm,ZCView,ZCApplication,ZCViewParam;
+@class ZOHOUser,ZCForm,ZCView,ZCApplication,ZCViewParam,ZCRecordStatus,ZCRecord;
 
 @interface ZOHOCreator : NSObject {
     
@@ -64,17 +65,18 @@
 + (NSDictionary*) submitRecordForForm : (NSString*) formLinkName  WithApplication: (NSString*) appLinkName AndDataDictionary : (NSDictionary*) dataDict;
 + (NSDictionary*) updateRecordForView : (NSString*) viewLinkName  WithApplication: (NSString*) appLinkName AmdDataDictionary : (NSMutableArray*) dataDict;
 + (BOOL) deleteRecordWithID : (NSString*) recordLinkID withViewName : (NSString*) viewName andApplication : (ZCApplication*) application;
-+ (NSMutableArray*) deleteRecordWithIDs : (NSMutableArray*) recordLinkIDs withFormName : (NSString*) formName andAppName : (NSString*) appLinkName;
++ (ZCRecordStatus *) deleteRecordWithIDs : (NSMutableArray*) recordLinkIDs withFormName : (NSString*) formName andAppName : (NSString*) appLinkName;
 + (void) submitRecordsForForm : (NSString*) formLinkName  WithApplication: (NSString*) appLinkName AndRecords : (NSMutableArray*) records;
-+ (NSMutableArray*) deleteRecordWithIDs : (NSMutableArray*) recordLinkIDs withViewName : (NSString*) viewName andAppName : (NSString*) appLinkName;
++ (ZCRecordStatus *) deleteRecordWithIDs : (NSMutableArray*) recordLinkIDs withViewName : (NSString*) viewName andAppName : (NSString*) appLinkName;
 + (BOOL) deleteRecordWithID : (NSString*) recordLinkID withViewName : (NSString*) viewName andAppName : (NSString*) appLinkName;
 + (void) logout;
 + (NSMutableArray*) updateRecordWithIDs : (ZCForm*) form : (NSMutableArray*) records;
 + (NSMutableArray*) updateRecordWithIDs:(NSMutableArray *)records withViewLinkName :(NSString*) viewLinkName andApplicationName : (NSString*) applicationName;
++ (ZCRecordStatus*) updateRecordWithIDsfromView : (ZCForm*) form recordsTobeUpdated:(NSMutableArray*) records  newRecord:(ZCRecord *)record viewLinkname:(NSString *)viewLinkname;
 + (ZCForm*) getIssueReportForm;
 + (void) duplicateRecordsForView : (NSString*) viewLinkName  WithApplication: (NSString*) appLinkName AndRecords : (NSMutableArray*) records AndAppOwner : (NSString*) appOwner;
 + (ZCForm*) getEditForm : (NSString*) appLinkName : (NSString*) formLinkName recordLinkID : (NSString*) recordLinkID appOwner : (NSString *) appOwner;
-+ (NSArray*) newDuplicateRecordForView : (NSString*) viewLinkName  WithApplication: (NSString*) appLinkName AndRecords : (NSMutableArray*) records AndAppOwner : (NSString*) appOwner;
++ (RecordDuplicateParser *) newDuplicateRecordForView : (NSString*) viewLinkName  WithApplication: (NSString*) appLinkName AndRecords : (NSMutableArray*) records AndAppOwner : (NSString*) appOwner;
 + (ZCForm*) getEditFormWithView : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName recordLinkID : (NSString*) recordLinkID appOwner : (NSString *) appOwner;
 
 
