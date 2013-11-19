@@ -19,8 +19,8 @@
 @property (nonatomic,retain,getter = getRecord) ZCRecord *record;
 @property (nonatomic,retain) ZCRecordError *error;
 @property (nonatomic,retain,setter = setCriteria:) ZCCriteria *criteria;
-
+@property (nonatomic,retain)NSMutableDictionary * lookUpAddedDataDict;
 - (void) setCriteria:(ZCCriteria *) localcriteria : (NSInteger) reloperator;
 + (BOOL) getStatusForBulkRecords : (NSArray*) recordsStatus;
-
+-(void)addvalueToSelectedLookUpValueDict:(NSString *)value key:(NSString *)key;
 @end

@@ -566,14 +566,15 @@
                 
                 _columnTagEnabled = NO;
                 ZCViewField *tempField = [_zcView getField:[_zcFieldData fieldName]];
-                if([tempField fieldType] == 20 )  //Image
+                if([tempField fieldType] == [ZCFieldList ZCImage] || [tempField fieldType] == [ZCFieldList ZCFileupload] )  //Image
                 {
                     
                     // //NSLog(@"Image Value %@",[_zcFieldData fieldValue]);
                     [_zcFieldData setFieldValue:[ParserUtil getImageLocation:[_zcFieldData fieldValue]]];
                 }
-                else if([tempField fieldType] == 21)  //URL
+                else if([tempField fieldType] == [ZCFieldList ZCURL])  //URL
                 {
+                    NSLog(@"field data for url riyaz:: %@",[_zcFieldData fieldValue]);
                     [_zcFieldData setFieldValue:[ParserUtil getURLString:[_zcFieldData fieldValue]]];
                 }
                 /*                else if([tempField fieldType] == [ZCFieldList ZCFileupload]) {

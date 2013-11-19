@@ -11,7 +11,7 @@
 
 @implementation ZCRecordStatus
 
-@synthesize criteria=_criteria,record=_record,success=_success;
+@synthesize criteria=_criteria,record=_record,success=_success,lookUpAddedDataDict=_lookUpAddedDataDict;
 
 - (void) setCriteria:(ZCCriteria *) localcriteria {
 
@@ -42,5 +42,14 @@
     
     return YES;
 }
-
+-(void)addvalueToSelectedLookUpValueDict:(NSString *)value key:(NSString *)key
+{
+    if (_lookUpAddedDataDict == nil) {
+        
+        _lookUpAddedDataDict=[[NSMutableDictionary alloc]init];
+    }
+    
+    [_lookUpAddedDataDict setObject:value forKey:key];
+    
+}
 @end
