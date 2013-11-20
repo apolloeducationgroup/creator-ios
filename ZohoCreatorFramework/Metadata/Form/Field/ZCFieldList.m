@@ -167,49 +167,49 @@
 + (NSInteger) getFieldInteger : (NSString*) fieldString {
     
     if([fieldString isEqualToString:@"TEXT"]) {
-        return 1;
+        return [ZCFieldList ZCSingleLine];
     }
     else if([fieldString isEqualToString:@"TEXT_AREA"]) {
-        return 2;
+        return [ZCFieldList ZCMultiLine];
     }
     else if([fieldString isEqualToString:@"EMAIL_ADDRESS"]) {
-        return 3;
+        return [ZCFieldList ZCEmail];
     }
     else if([fieldString isEqualToString:@"NUMBER"]) {
-        return 5;
+        return [ZCFieldList ZCNumber];
     }
     else if([fieldString isEqualToString:@"CURRENCY"]) {
-        return 8;
+        return [ZCFieldList ZCCurrency];
     }
     else if([fieldString isEqualToString:@"PERCENTAGE"]) {
-        return 7;
+        return [ZCFieldList ZCPercentage];
     }
     else if([fieldString isEqualToString:@"CHECK_BOX"]) {
-        return 15;
+        return [ZCFieldList ZCCheckbox];
     }
     else if([fieldString isEqualToString:@"DATE"]) {
-        return 10;
+        return [ZCFieldList ZCDate];
     }
     else if([fieldString isEqualToString:@"TIME"]) {
-        return 11;
+        return [ZCFieldList ZCDateTime];
     }
     else if([fieldString isEqualToString:@"SINGLE_SELECT"]||[fieldString isEqualToString:@"INLINE_SINGLE_SELECT"]) {
-        return 12;
+        return [ZCFieldList ZCDropdown];
     }
     else if([fieldString isEqualToString:@"MULTI_SELECT"]) {
-        return 14;
+        return [ZCFieldList ZCMultiSelect];
     }
     else if([fieldString isEqualToString:@"PLAIN_TEXT"]) {
-        return 2;
+        return [ZCFieldList ZCSingleLine];
     }
     else if([fieldString isEqualToString:@"EXTERNAL_FIELD"]) {
-        return 23;
+        return [ZCFieldList ZCExternal];
     }
     else if([fieldString isEqualToString:@"EXTERNAL_LINK_FIELD"]) {
-        return 23;
+        return [ZCFieldList ZCExternal];
     }
     else if([fieldString isEqualToString:@"RICH_TEXT_AREA"]) {
-        return 4;
+        return [ZCFieldList ZCRichText];
     }
     else if([fieldString isEqualToString:@"EXTERNAL_MODULE"]) {
         return -1;
@@ -218,48 +218,163 @@
         return -1;
     }
     else if([fieldString isEqualToString:@"FLOAT"]) {
-        return 1;
+        return [ZCFieldList ZCSingleLine];
     }
     else if([fieldString isEqualToString:@"SCRIPT"]) {
-        return 2;
+        return [ZCFieldList ZCMultiLine];
     }
     else if([fieldString isEqualToString:@"FILE_UPLOAD"]) {
-        return 19;
+        return [ZCFieldList ZCFileupload];
     }
     else if([fieldString isEqualToString:@"SYSTEM_LOOKUP"]) {
         return 30;
     }
     else if([fieldString isEqualToString:@"POPUP_SINGLE"]) {
-        return 23;
+        return [ZCFieldList ZCSubform];
     }
     else if([fieldString isEqualToString:@"PASSWORD"]) {
         return -1;
     }
     else if([fieldString isEqualToString:@"DECIMAL"]) {
-        return 6;
+        return [ZCFieldList ZCDecimal];
     }
     else if([fieldString isEqualToString:@"URL"]) {
-        return 17;
+        return [ZCFieldList ZCURL];
     }
     else if([fieldString isEqualToString:@"DATE_TIME"]) {
-        return 11;
+        return [ZCFieldList ZCDateTime];
     }
     else if([fieldString isEqualToString:@"PICK_LIST"]) {
-        return 12;
+        return [ZCFieldList ZCDropdown];
     }
     else if([fieldString isEqualToString:@"IMAGE"]) {
-        return 18;
+        return [ZCFieldList ZCImage];
     }
     else if([fieldString isEqualToString:@"NOTES"]) {
-        return 24;
+        return [ZCFieldList ZCNotes];
     }
     else if([fieldString isEqualToString:@"AUTO_NUMBER"]) {
-        return 9;
+        return [ZCFieldList ZCAutoNumber];
     }
     else {
         return -1;
     }
 }
+
+
+
+//
+//+ (NSInteger) getFieldInteger : (NSString*) fieldString {
+//    
+//    if([fieldString isEqualToString:@"TEXT"]) {
+//        return 1;
+//    }
+//    else if([fieldString isEqualToString:@"TEXT_AREA"]) {
+//        return 2;
+//    }
+//    else if([fieldString isEqualToString:@"EMAIL_ADDRESS"]) {
+//        return 3;
+//    }
+//    else if([fieldString isEqualToString:@"NUMBER"]) {
+//        return 5;
+//    }
+//    else if([fieldString isEqualToString:@"CURRENCY"]) {
+//        return 8;
+//    }
+//    else if([fieldString isEqualToString:@"PERCENTAGE"]) {
+//        return 7;
+//    }
+//    else if([fieldString isEqualToString:@"CHECK_BOX"]) {
+//        return 15;
+//    }
+//    else if([fieldString isEqualToString:@"DATE"]) {
+//        return 10;
+//    }
+//    else if([fieldString isEqualToString:@"TIME"]) {
+//        return 11;
+//    }
+//    else if([fieldString isEqualToString:@"SINGLE_SELECT"]||[fieldString isEqualToString:@"INLINE_SINGLE_SELECT"]) {
+//        return 12;
+//    }
+//    else if([fieldString isEqualToString:@"MULTI_SELECT"]) {
+//        return 14;
+//    }
+//    else if([fieldString isEqualToString:@"PLAIN_TEXT"]) {
+//        return 2;
+//    }
+//    else if([fieldString isEqualToString:@"EXTERNAL_FIELD"]) {
+//        return 23;
+//    }
+//    else if([fieldString isEqualToString:@"EXTERNAL_LINK_FIELD"]) {
+//        return 23;
+//    }
+//    else if([fieldString isEqualToString:@"RICH_TEXT_AREA"]) {
+//        return 4;
+//    }
+//    else if([fieldString isEqualToString:@"EXTERNAL_MODULE"]) {
+//        return -1;
+//    }
+//    else if([fieldString isEqualToString:@"FROMTO"]) {
+//        return -1;
+//    }
+//    else if([fieldString isEqualToString:@"FLOAT"]) {
+//        return 1;
+//    }
+//    else if([fieldString isEqualToString:@"SCRIPT"]) {
+//        return 2;
+//    }
+//    else if([fieldString isEqualToString:@"FILE_UPLOAD"]) {
+//        return 19;
+//    }
+//    else if([fieldString isEqualToString:@"SYSTEM_LOOKUP"]) {
+//        return 30;
+//    }
+//    else if([fieldString isEqualToString:@"POPUP_SINGLE"]) {
+//        return 23;
+//    }
+//    else if([fieldString isEqualToString:@"PASSWORD"]) {
+//        return -1;
+//    }
+//    else if([fieldString isEqualToString:@"DECIMAL"]) {
+//        return 6;
+//    }
+//    else if([fieldString isEqualToString:@"URL"]) {
+//        return 17;
+//    }
+//    else if([fieldString isEqualToString:@"DATE_TIME"]) {
+//        return 11;
+//    }
+//    else if([fieldString isEqualToString:@"PICK_LIST"]) {
+//        return 12;
+//    }
+//    else if([fieldString isEqualToString:@"IMAGE"]) {
+//        return 18;
+//    }
+//    else if([fieldString isEqualToString:@"NOTES"]) {
+//        return 24;
+//    }
+//    else if([fieldString isEqualToString:@"AUTO_NUMBER"]) {
+//        return 9;
+//    }
+//    else {
+//        return -1;
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //
 //+ (NSInteger) getFieldInteger : (NSString*) fieldString {
 //    
