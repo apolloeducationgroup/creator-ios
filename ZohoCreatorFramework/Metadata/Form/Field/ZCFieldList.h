@@ -126,6 +126,7 @@ enum FIELDLIST {
 + (int) ZCNewCheckbox;
 + (int) ZCNewMultiSelect;
 + (int) ZCPayment;
++ (int) ZCFormula;
 
 + (BOOL) isSkipField : (NSInteger) fieldType;
 + (NSInteger) getFieldInteger : (NSString*) fieldString;
