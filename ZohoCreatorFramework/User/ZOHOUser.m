@@ -21,7 +21,7 @@
 
 static ZOHOUser *userCredential = nil;
 
-@synthesize userName=_userName,authToken=_authToken,userDisplayName=_userDisplayName,userLocale=_userLocale,emailIds=_emailIds,zuid=_zuid;
+@synthesize userName=_userName,authToken=_authToken,userDisplayName=_userDisplayName,userLocale=_userLocale,emailIds=_emailIds,zuid=_zuid,gender=_gender;
 
 + (ZOHOUser*) userObject
 {
@@ -121,14 +121,28 @@ static ZOHOUser *userCredential = nil;
 {
     self->_userName=[aDecoder decodeObjectForKey:@"userName"];
     self->_authToken=[aDecoder decodeObjectForKey:@"authToken"];
-    return self;
+    self->_emailIds=[aDecoder decodeObjectForKey:@"emailIds"];
+    self->_zuid=[aDecoder decodeObjectForKey:@"zuid"];
+    self->_userDisplayName=[aDecoder decodeObjectForKey:@"userDisplayName"];
+    self->_userLocale=[aDecoder decodeObjectForKey:@"userLocale"];
+    self->_gender=[aDecoder decodeObjectForKey:@"gender"];
+
+        return self;
 }
 
 - (void) encodeWithCoder:(NSCoder *)aCoder {
     
     [aCoder encodeObject:_userName forKey:@"userName"];
     [aCoder encodeObject:_authToken forKey:@"authToken"];
+    [aCoder encodeObject:_emailIds forKey:@"emailIds"];
+    [aCoder encodeObject:_zuid forKey:@"zuid"];
+    [aCoder encodeObject:_userDisplayName forKey:@"userDisplayName"];
+    [aCoder encodeObject:_userLocale forKey:@"userLocale"];
+    [aCoder encodeObject:_gender forKey:@"gender"];
+    
 }
+
+
 
 - (void) removeZCuser {
     [self deleteAuthToekn];

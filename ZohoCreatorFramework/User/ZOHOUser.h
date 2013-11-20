@@ -27,6 +27,8 @@
 @property (nonatomic,retain) NSArray *emailIds;
 @property (nonatomic,retain) NSString *userLocale;
 
+@property (nonatomic,retain) NSString *gender;
+
 + (ZOHOUser*) userObject;
 - (id) init;
 - (ZOHOUser*) initZOHOUser : (NSString*) userName : (NSString*) password;

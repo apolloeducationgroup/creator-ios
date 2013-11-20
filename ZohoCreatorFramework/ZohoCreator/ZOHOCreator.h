@@ -84,4 +84,5 @@
 
 
 + (ZCForm*) getForAddToPickListappLinkName : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner baseApps:(NSArray *)baseApps baseForms:(NSArray *)baseforms LookUpField:(NSArray *)lookupfield  recordID:(NSString *)recordID viewLinkname:(NSString *)viewLinkname;
++(NSData *)getZOHOProfilePicture;
 @end

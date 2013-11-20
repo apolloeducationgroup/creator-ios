@@ -586,7 +586,16 @@ static ZOHOCreator *creatorObject = nil;
     return [fetcher zcForm];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
++(NSData *)getZOHOProfilePicture
+{
 
+    
+    NSString * profilePicUrr= [URLConstructor contactsServerPhotoDownloadURL];
+    
+    URLConnector * profilePIC=[[URLConnector alloc]initFetcher:profilePicUrr];
+
+    return [profilePIC apiRawData];
+}
 @end
 
 @implementation ZOHOCreator (hidden)

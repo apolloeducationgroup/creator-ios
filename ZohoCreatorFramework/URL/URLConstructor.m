@@ -659,13 +659,19 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
     return [NSString stringWithFormat:@"%@%@",protocol,CREATOR_URL];
 }
 
++ (NSString*)  contactsServerPhotoDownloadURL
+{
+    NSString *contactUrl =[NSString stringWithFormat:@"https://contacts.zoho.com/file/download?authtoken=%@&scope=creatorapi&fs=thumb&t=user&ID=%@",[[ZOHOCreator userObject]authToken ],[[ZOHOCreator userObject] zuid]];
+        return contactUrl;
+}
+
 +(NSString *)authenticationUrl
 {
     
     //    NSString * authenticationUrl=[NSString stringWithFormat:@"%@/login?scopes=creatorapi/Creator&appname=ZohoCreator&serviceurl=%@&hide_fp=false&hide_remember=true&getticket=true&hide_gsignup=false&hidegooglesignin=false",[URLConstructor accountsURL],[URLConstructor serverURL:YES]];
     //
     //
-    NSString * authenticationUrl=[NSString stringWithFormat:@"%@/login?scopes=ZohoCreator/creatorapi&serviceurl=%@&hide_fp=false&hide_remember=true&hide_signup=true&hide_gsignup=false&hidegooglesignin=false",[URLConstructor accountsURL],[URLConstructor serverURL:YES]];
+    NSString * authenticationUrl=[NSString stringWithFormat:@"%@/login?scopes=ZohoCreator/creatorapi,ZohoContacts/photoapi&serviceurl=%@&hide_fp=false&hide_remember=true&hide_signup=true&hide_gsignup=false&hidegooglesignin=false",[URLConstructor accountsURL],[URLConstructor serverURL:YES]];
     
     
     //    NSString * authenticationUrl=[NSString stringWithFormat:@"https://accounts.zoho.com/login?scopes=JProxy/jmobileapi,ZohoShow/DataAPI&serviceurl=https://creator.zoho.com&hide_fp=false&hide_remember=true&hide_gsignup=false&hidegooglesignin=false&getticket=true"];

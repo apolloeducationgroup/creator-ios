@@ -59,6 +59,15 @@
     else if([_currentElementName isEqualToString:@"EMAIL_ID"]) {
         [[ZOHOUser userObject] setEmailIds:[string componentsSeparatedByString:@","]];
     }
+    else if ([_currentElementName isEqualToString:@"GENDER"])
+    {
+        [[ZOHOUser userObject] setGender:string];
+    
+    }
+    
+    
+    
+    
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
