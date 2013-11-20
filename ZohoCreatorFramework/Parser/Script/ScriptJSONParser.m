@@ -44,7 +44,20 @@
     }
     return self;
 }
-
+//                                                          {
+//                                                              compType = 1;
+//                                                              fieldName = "Single_Line";
+//                                                              fieldValue = a;
+//                                                              formName = deluge;
+//                                                              task = 12;
+//                                                          }
+//
+//                                                          
+//                                                          json dict {
+//                                                              code = 2911;
+//                                                              message = "No Access.";
+//                                                          }
+//
 
 @end
 
@@ -55,14 +68,24 @@
     NSData *jsonData = [_jsonString dataUsingEncoding:[NSString defaultCStringEncoding]];
     id _jsonDictionary= [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
     NSLog(@"json dict %@",_jsonDictionary);
+    NSLog(@"json dic class %@",[_jsonDictionary class]);
+    
+    
     if(_jsonDictionary != nil) {
         
+        if ([_jsonDictionary isKindOfClass:[NSArray class ]]) {
         for(NSInteger index=0;index<[_jsonDictionary count];index++) {
             
             id delugeTask = [self taskFinder:[_jsonDictionary objectAtIndex:index]];
             NSLog(@"Task had added");
             [_delugeTasks addTaskList:delugeTask];
             NSLog(@"Task had added");
+        }
+        }
+        else if([_jsonDictionary isKindOfClass:[NSDictionary class]])
+        {
+            id delugeTask = [self taskFinder:_jsonDictionary ];
+            [_delugeTasks addTaskList:delugeTask];
         }
     }
 }

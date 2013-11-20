@@ -40,11 +40,11 @@
 @private ZCFieldData *_field;
 @private ZCForm *_form;
 @private ZCRecordError *_zcRecordError;
-    
+@private BOOL _combinedlookupvalueTag;
+@private NSMutableDictionary * lookupDataDict;
 }
 
 @property (nonatomic,retain) ZCRecordStatus *recordStatus;
-
 - (NewRecordParser*) initRecordParser : (NSString*) xmlString : (ZCForm*) form;
 - (NewRecordParser*) initRecordParser:(NSString *)xmlString;
 

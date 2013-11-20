@@ -22,9 +22,11 @@
 }
 
 - (void) addTaskList:(id) task {
-    NSLog(@"tasklist %@",_taskList);
+    if (task !=nil) {
     [_taskList addObject:task];
+    }
     NSLog(@"tasklist %@",_taskList);
+
 }
 
 @end

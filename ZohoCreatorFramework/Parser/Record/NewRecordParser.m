@@ -90,10 +90,19 @@
             if([elementName isEqualToString:@"values"]) {
                 _valueElementTag = YES;
             }
+            
             else if([elementName isEqualToString:@"status"]) {
                 _statusElementTag = YES;
             }
+            
+            else if([elementName isEqualToString:@"combinedlookupvalue"]) {
+                _combinedlookupvalueTag = YES;
+            }
+
         }
+        
+        
+        
     }
     else if(_errorList == YES) {
         
@@ -153,6 +162,13 @@
             }
         }
     }
+    else if (_combinedlookupvalueTag ==YES)
+    {
+        
+        [_recordStatus addvalueToSelectedLookUpValueDict:string key:[[[_record record]objectForKey:@"ID"]fieldValue ]  ];
+        
+    }
+
     else if(_statusElementTag == YES) {
         NSLog(@"Status Element Tag is coming");
         if([string isEqualToString:@"Success"]) {
@@ -337,6 +353,13 @@
                 //// //NSLog(@"Record has setted in status object %@",_record);
                 _deleteElementTag = NO;
             }
+            else if([elementName isEqualToString:@"combinedlookupvalue"]) {
+                [_record setForm:_form];
+                [_recordStatus setRecord:_record];
+                //// //NSLog(@"Record has setted in status object %@",_record);
+                _combinedlookupvalueTag = NO;
+            }
+
         }
     }
     else if(_errorList==YES) {
