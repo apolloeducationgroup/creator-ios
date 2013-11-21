@@ -58,22 +58,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZohoCreatorFramework/Parser/Form/JSON/FormJSONParser.m"
-            timestampString = "406724737.002174"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "-getFieldInfo::"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZohoCreatorFramework/Parser/Form/JSON/FormJSONParser.m"
             timestampString = "406729040.978274"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"

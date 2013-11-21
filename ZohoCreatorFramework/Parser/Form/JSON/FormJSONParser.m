@@ -126,24 +126,19 @@
         [_field setFieldDisplayName:[_fieldDict objectForKey:@"displayname"]];
         [_field setFieldName:[_fieldDict objectForKey:@"fieldname"]];
         [_field setDefaultRows:[[_fieldDict objectForKey:@"defaultrows"]integerValue]];
-        
-        
+        [_field setInitialValues:[_fieldDict objectForKey:@"initial"]];
         
         
         [_field setToolTip:[_fieldDict objectForKey:@"tooltip"]];
         NSString *_fieldTypeRawString = [_fieldDict objectForKey:@"type"];
         [_field setFieldType:[_fieldTypeRawString integerValue]];
-
-        if ([_field fieldType]==[ZCFieldList ZCURL]) {
-            [_field setInitialValues:[ParserUtil getURLString:[_fieldDict objectForKey:@"initial"]]];
-        }
-        else
-        {
         
-            [_field setInitialValues:[_fieldDict objectForKey:@"initial"]];
+        
+        if ([_field fieldType]== [ZCFieldList ZCURL]) {
+            
+            _field.initialValues=[[NSMutableDictionary alloc]init];
             
         }
-
         BOOL _isUnique = [[_fieldDict valueForKey:@"required"] boolValue];
         [_field setIsRequired:_isUnique];
         _isUnique = [[_fieldDict valueForKey:@"unique"] boolValue];
@@ -238,6 +233,18 @@
         if(tempValue != nil) {
             [_field setIsUrlTitle:[tempValue boolValue]];
         }
+        tempValue = [_fieldDict objectForKey:@"linkname"];
+        if(tempValue != nil) {
+            
+            [[_field initialValues]setObject:tempValue forKey:@"linkname"];
+        }
+        
+        tempValue = [_fieldDict objectForKey:@"title"];
+        if(tempValue != nil) {
+            
+            [[_field initialValues]setObject:tempValue forKey:@"title"];
+        }
+
         
         tempValue = [_fieldDict objectForKey:@"text"];
         if(tempValue != nil) {
@@ -294,7 +301,7 @@
         if(tempValue != nil) {
 //            [_field setInitialValues:tempValue];
             if ([_field fieldType]==[ZCFieldList ZCURL]) {
-                [_field setInitialValues:[ParserUtil getURLString:tempValue]];
+                [[_field initialValues]setObject:tempValue forKey:@"value"];
             }
             else
             {
