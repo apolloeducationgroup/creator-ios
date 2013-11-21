@@ -436,7 +436,7 @@
                 NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
 
                 [returnString appendFormat:@"<![CDATA[%@]]>",escapedString];
-                [returnString appendFormat:@"<value>"];
+                [returnString appendFormat:@"</value>"];
 
             }
             [returnString appendString:@"</field>"];

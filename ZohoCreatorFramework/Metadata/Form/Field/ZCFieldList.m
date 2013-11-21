@@ -185,7 +185,7 @@
         return [ZCFieldList ZCPercentage];
     }
     else if([fieldString isEqualToString:@"CHECK_BOX"]) {
-        return [ZCFieldList ZCCheckbox];
+        return [ZCFieldList ZCDecisionBox];
     }
     else if([fieldString isEqualToString:@"DATE"]) {
         return [ZCFieldList ZCDate];
