@@ -15,13 +15,14 @@
 @synthesize hasSubFormOnUserScript=_hasSubFormOnUserScript,hasSubFormAddEvent=_hasSubFormAddEvent,hasSubFormDeleteEvent=_hasSubFormDeleteEvent,optionkeys=_optionkeys;
 @synthesize hasInvolvedInFormula=_hasInvolvedInFormula,isHidden=_isHidden,isUnique=_isUnique,isAdminOnly=_isAdminOnly;
 @synthesize subformRecords=_subformRecords,toolTip=_toolTip,isLookupField=_isLookupField,hasAllowNewEntries=_hasAllowNewEntries,decimalLength=_decimalLength;
-@synthesize currencyDisplay=_currencyDisplay,currencyName=_currencyName,isUrlLinkName=_isUrlLinkName,isUrlTitle=_isUrlTitle,hasVisiblity=_hasVisiblity;
+@synthesize currencyDisplay=_currencyDisplay,currencyName=_currencyName,isUrlLinkName=_isUrlLinkName,isUrlTitle=_isUrlTitle,hasVisiblity=_hasVisiblity,defaultRows=_defaultRows;
 - (ZCField*) initZCField {
     
     self = [super init];
     if(self) {
         
         self->_maxCharacter = -1;
+        self->_defaultRows=0;
         self->_isRequired = YES;
         self->_initialValues = nil;
         self->_options = [[NSMutableArray alloc] init];

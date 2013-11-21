@@ -125,11 +125,25 @@
         NSDictionary *_fieldDict = [_fieldRawList objectAtIndex:index];
         [_field setFieldDisplayName:[_fieldDict objectForKey:@"displayname"]];
         [_field setFieldName:[_fieldDict objectForKey:@"fieldname"]];
-        [_field setInitialValues:[_fieldDict objectForKey:@"initial"]];
+        [_field setDefaultRows:[[_fieldDict objectForKey:@"defaultrows"]integerValue]];
+        
+        
+        
+        
         [_field setToolTip:[_fieldDict objectForKey:@"tooltip"]];
         NSString *_fieldTypeRawString = [_fieldDict objectForKey:@"type"];
         [_field setFieldType:[_fieldTypeRawString integerValue]];
+
+        if ([_field fieldType]==[ZCFieldList ZCURL]) {
+            [_field setInitialValues:[ParserUtil getURLString:[_fieldDict objectForKey:@"initial"]]];
+        }
+        else
+        {
         
+            [_field setInitialValues:[_fieldDict objectForKey:@"initial"]];
+            
+        }
+
         BOOL _isUnique = [[_fieldDict valueForKey:@"required"] boolValue];
         [_field setIsRequired:_isUnique];
         _isUnique = [[_fieldDict valueForKey:@"unique"] boolValue];
@@ -227,7 +241,18 @@
         
         tempValue = [_fieldDict objectForKey:@"text"];
         if(tempValue != nil) {
-            [_field setInitialValues:tempValue];
+            
+            if ([_field fieldType]==[ZCFieldList ZCURL]) {
+                [_field setInitialValues:[ParserUtil getURLString:tempValue]];
+            }
+            else
+            {
+                
+                [_field setInitialValues:tempValue];
+                
+            }
+
+//            [_field setInitialValues:tempValue];
         }
         
         tempValue = [_fieldDict objectForKey:@"visiblity"];
@@ -267,7 +292,17 @@
         
         tempValue = [_fieldDict objectForKey:@"value"];
         if(tempValue != nil) {
-            [_field setInitialValues:tempValue];
+//            [_field setInitialValues:tempValue];
+            if ([_field fieldType]==[ZCFieldList ZCURL]) {
+                [_field setInitialValues:[ParserUtil getURLString:tempValue]];
+            }
+            else
+            {
+                
+                [_field setInitialValues:tempValue];
+                
+            }
+
         }
         
         tempValue = [_fieldDict objectForKey:@"subformrecords"];
@@ -277,10 +312,14 @@
 
         
         }
-        
+        NSLog(@"field initial val %@  %@",_field.initialValues, _field.fieldName);
+
         
         [_localForm addZCField:_field];
     }
+    
+    
+    
     
     /*
      

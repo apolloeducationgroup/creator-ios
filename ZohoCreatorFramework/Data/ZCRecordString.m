@@ -390,6 +390,7 @@
             if(fieldType == [ZCFieldList ZCMultiSelect] || fieldType==[ZCFieldList ZCCheckbox])
             {
                 
+                [returnString appendFormat:@"<value>"];
                 NSArray *options = [fieldData fieldValue];
                 [returnString appendString:@"<options>"];
                 if(options != nil && [options isMemberOfClass:[NSArray class]] ) {
@@ -404,17 +405,39 @@
                     }
                 }
                 [returnString appendString:@"</options>"];
+                [returnString appendFormat:@"</value>"];
+
+                
             }
             else if(fieldType == [ZCFieldList ZCFileupload]) {
                 
             }
+            else if(fieldType == [ZCFieldList ZCURL]) {
+                
+                NSMutableDictionary *dic = [fieldData fieldValue];
+                NSString *url = [dic valueForKey:@"url"];
+                NSString *urltitle = [dic valueForKey:@"title"];
+                NSString *urlLinkname = [dic valueForKey:@"urllinkname"];
+                NSString *URLData = [NSString stringWithFormat:@"<a href=\"%@\" title=\"%@\">%@</a>",url,urltitle,urlLinkname];
+                
+                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) URLData,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+                
+                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
+                
+            }
+            
+
             else {
+                [returnString appendFormat:@"<value>"];
+
                 //                ////// //NSLog(@"Field Name %@ ==== %@",[fieldData fieldName],[fieldData fieldValue]);
                 NSString* cdata = [fieldData fieldValue];
                 
                 NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
 
                 [returnString appendFormat:@"<![CDATA[%@]]>",escapedString];
+                [returnString appendFormat:@"<value>"];
+
             }
             [returnString appendString:@"</field>"];
         }

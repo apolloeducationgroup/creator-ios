@@ -26,7 +26,6 @@
 @property (nonatomic,retain) NSString *zuid;
 @property (nonatomic,retain) NSArray *emailIds;
 @property (nonatomic,retain) NSString *userLocale;
-
 @property (nonatomic,retain) NSString *gender;
 
 + (ZOHOUser*) userObject;

@@ -29,8 +29,7 @@
 
 + (NSMutableDictionary*) getURLString : (NSString*) rawString {
     
-    NSLog(@"raw string : %@",rawString);
-    
+    NSLog(@"raw string urlstring: %@",rawString);
     NSMutableDictionary *returnList = [[NSMutableDictionary alloc] init];
     if(rawString != nil && ![rawString isEqualToString:@"(null)"]) {
         

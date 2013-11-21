@@ -21,7 +21,7 @@
 @property (nonatomic) BOOL isAdminOnly;
 @property (nonatomic) BOOL isLookupField;
 @property (nonatomic) BOOL hasAllowNewEntries;
-@property (nonatomic,retain) NSString *initialValues;
+@property (nonatomic,retain) id initialValues;
 @property (nonatomic) NSInteger maxCharacter;
 @property (nonatomic,retain) NSMutableArray *options;
 @property (nonatomic,retain) NSMutableArray *optionkeys;
@@ -44,6 +44,7 @@
 @property (nonatomic,retain) NSString *currencyDisplay;
 @property (nonatomic,retain) NSString *currencyName;
 @property(nonatomic,assign) NSInteger hasmaximumNumberOfRows;
+@property (nonatomic,assign) NSInteger defaultRows;
 -(ZCField*) initZCField;
 
 @end
