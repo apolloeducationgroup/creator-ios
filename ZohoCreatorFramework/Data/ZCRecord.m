@@ -255,7 +255,7 @@
         [copyRecord setRecord:[_record mutableCopy]];
         [copyRecord setRecordID:[_recordID mutableCopy]];
         [copyRecord setFieldDataList:[_fieldDataList mutableCopy]];
-        [copyRecord setZCGroup:[_zCGroup mutableCopy ]];
+        [copyRecord setZCGroup:[_zCGroup copy ]];
     }
     return copyRecord;
 }

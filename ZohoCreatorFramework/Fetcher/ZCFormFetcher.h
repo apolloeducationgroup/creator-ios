@@ -37,7 +37,8 @@
     
     NSString *    subformFieldLinkname_forSubform;
     
-    
+    BOOL _isBulkeditForm;
+
     
     
     
@@ -56,6 +57,7 @@
 - (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName :(NSString*) formLinkName : (ZCComponent*) component appOwner : (NSString *) appOwner;
 + (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner;
 + (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName appOwner : (NSString *) appOwner;
++ (ZCFormFetcher*) initFormFetcherForBulkedit : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName appOwner : (NSString *) appOwner;
 + (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName recordLinkID : (NSString*) _recLinkID appOwner : (NSString *) appOwner;
 - (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (ZCComponent*) component recordLinkID : (NSString*) recordLinkID appOwner : (NSString *) appOwner;
 + (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName recordLinkID : (NSString*) _recLinkID appOwner : (NSString *) appOwner;

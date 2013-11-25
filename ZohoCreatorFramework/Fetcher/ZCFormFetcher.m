@@ -73,7 +73,17 @@
 
 }
 
++ (ZCFormFetcher*) initFormFetcherForBulkedit : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName appOwner : (NSString *) appOwner
 
+{
+
+    ZCComponent *_comp = [[ZCComponent alloc] init];
+    [_comp setLinkName:formLinkName];
+    [_comp setDisplayName:formLinkName];
+    [_comp setType:1];
+    ZCFormFetcher *fetcher = [[ZCFormFetcher alloc] initFormFetcherforBulkedit:appLinkName :viewLinkName :_comp appOwner:appOwner];
+    return fetcher;
+}
 
 + (ZCFormFetcher*) initFormFetcherformAddtoPickListForm: (NSString*) appLinkName   formLinkname: (NSString*) formLinkName appOwner : (NSString *) appOwner childappsINORDER:(NSArray *)childappsINORDER childFormsINORDER:(NSArray *)childFormsINORDER baseFieldsINORDER:(NSArray *)baseFieldsINORDER recordID:(NSString *)recordID viewLinkName:(NSString *)viewLinkName
 {
@@ -250,6 +260,45 @@
     return self;
 }
 
+- (ZCFormFetcher *) initFormFetcherforBulkedit:(NSString *)appLinkName :(NSString *)viewLinkName :(ZCComponent *)component appOwner:(NSString *)appOwner
+{
+    self = [super init];
+    if(self) {
+        
+        self->_appLinkName = appLinkName;
+        self->_component = component;
+        self->_appOwner = appOwner;
+        self->_viewLinkName = viewLinkName;
+        _isBulkeditForm=YES;
+        if([ConnectionChecker isServerActive]) {
+            
+            ZOHOCreator *creator = [ZOHOCreator getObject];
+            //            ZCApplication *application = [creator getApplication:appLinkName];
+            ZCApplication *application = [creator getApplication:appLinkName appOwner:appOwner];
+            
+            if(application != nil) {
+                [self->_component setZcApplication:application];
+            }
+            else {
+                application = [[ZCApplication alloc] init];
+                [application setAppLinkName:appLinkName];
+                [application setAppOwner:appOwner];
+                
+                [self->_component setZcApplication:application];
+            }
+            self->_zcForm = [self fetchFromServer];
+            [self->_zcForm setApplication:application];
+            [self encodeZCForm];
+        }
+        else
+        {
+            [NSException raise:@"Network Unavailable" format:@"No network available to connnect to setver"];
+            // self->_zcForm = [self fetchFromLocal];
+        }
+    }
+    return self;
+}
+
 - (ZCFormFetcher *) initFormFetcher:(NSString *)appLinkName :(NSString *)viewLinkName :(ZCComponent *)component appOwner:(NSString *)appOwner
 {
     self = [super init];
@@ -368,6 +417,12 @@
         if (_isSubform) {
             
             formMetaURL=[URLConstructor subformMetaURL:_appLinkName formLinkname:[_component linkName] mainAppLinkname:mainAppLinkname_forSubform mainFormLinkname:mainFormLinkname_forSubform subformFieldLinkname:subformFieldLinkname_forSubform appOwner:_appOwner  ];
+        }
+        else if(_isBulkeditForm)
+        {
+        
+            formMetaURL = [URLConstructor  formURLforBulkedit:_appLinkName formName:[_component linkName] viewName:_viewLinkName withApplicationOwner:_appOwner];
+
         }
         else
         {
