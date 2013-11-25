@@ -65,6 +65,7 @@ enum ZCViewSory {
 - (void) clearCriteria;
 - (void) criteriaRelation : (NSInteger) relation;
 - (void) setCustomFilter : (NSString*) _filterID;
+- (NSString*) getCustomFilterID;
 - (NSDictionary*) filterDictionary;
 - (NSArray*) criteriaList;
 - (NSArray*) sortColumnList;

@@ -168,6 +168,10 @@
     _customFilterID = _filterID;
 }
 
+- (NSString*) getCustomFilterID {
+    return _customFilterID;
+}
+
 - (NSString*) getFilterString {
     
     if(_filterDict.count > 0) {
