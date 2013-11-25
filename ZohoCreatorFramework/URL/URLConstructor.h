@@ -17,6 +17,7 @@
 @interface URLConstructor : NSObject
 
 + (NSString*) formURL : (NSString*) appLinkName formName : (NSString*) formLinkName withApplicationOwner: (NSString *) appOwner;
++ (NSString*) formURLforBulkedit : (NSString*) appLinkName formName : (NSString*) formLinkName viewName:(NSString*) viewLinkName withApplicationOwner: (NSString *) appOwner;
 + (NSString*) formURL : (NSString*) appLinkName formName : (NSString*) formLinkName viewName:(NSString*) viewLinkName withApplicationOwner: (NSString *) appOwner;
 + (NSString*) appListURL;
 + (NSString*) sharedAppListURL;

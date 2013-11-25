@@ -45,7 +45,9 @@
                     
                     NSMutableDictionary *dic = [fieldData fieldValue];
                     if(dic != nil) {
+                        if ([dic objectForKey:@"url"]!=Nil) {
                         [returnString appendFormat:@",%@",[dic objectForKey:@"url"]];
+                    }
                     }
                     else {
                         [returnString appendString:@"," ];

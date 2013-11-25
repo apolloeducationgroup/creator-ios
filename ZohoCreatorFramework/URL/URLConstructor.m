@@ -45,6 +45,14 @@ int FORM_LOOKUP_ADD_FORM =5;
     return formURL;
 }
 
++ (NSString*) formURLforBulkedit:(NSString *)appLinkName formName:(NSString *)formLinkName viewName:(NSString *)viewLinkName withApplicationOwner:(NSString *)appOwner
+{
+    NSString *formURL = [self formURL:appLinkName formName:formLinkName withApplicationOwner:appOwner];
+    formURL = [formURL stringByAppendingString:[NSString stringWithFormat:@"&viewLinkName=%@&formAccessType=%d&zcRefValue=true",viewLinkName,4]];
+    return formURL;
+}
+
+
 +(NSString *)formURLforAddTOFickListAppname:(NSString *)  appLinkName formName : (NSString*) formLinkName withApplicationOwner: (NSString *) appOwner childappsINORDER:(NSArray *)childappINORDER childFormsINORDER:(NSArray *)childFormsINORDER baseFieldsINORDER:(NSArray *)baseFieldsINORDER recordID :(NSString *)recID viewLinkname:(NSString *)viewLinkname;
 {
 

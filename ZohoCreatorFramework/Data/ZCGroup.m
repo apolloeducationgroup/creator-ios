@@ -62,5 +62,4 @@
     [zcRecord setZCGroup:self];
     [_zcRecords addObject:zcRecord];
 }
-
 @end

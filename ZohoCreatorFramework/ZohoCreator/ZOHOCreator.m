@@ -302,6 +302,14 @@ static ZOHOCreator *creatorObject = nil;
     ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcher:appLinkName :formLinkName viewLinkName:viewLinkName appOwner:appOwner];
     return [fetcher zcForm];
 }
++ (ZCForm*) getFormforBulkedit : (NSString*) appLinkName : (NSString*) formLinkName :(NSString*) viewLinkName appOwner : (NSString *) appOwner
+{
+
+    
+    ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcherForBulkedit:appLinkName :formLinkName viewLinkName:viewLinkName appOwner:appOwner];
+    return [fetcher zcForm];
+
+}
 
 +(ZCForm*) getSubForm : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner   mainAppLinkname:(NSString *)mainAppLinkname mainFormLinkname:(NSString *)mainFormLinkname subformFieldLinkname:(NSString *)subformFieldLinkname
 {

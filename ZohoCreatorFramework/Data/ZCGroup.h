@@ -18,5 +18,5 @@
 -(ZCGroup *) initWithZCGroup;
 -(void) addZCGroupFields:(ZCFieldData *) fieldData;
 -(void) addZCRecordInGroup:(ZCRecord *) zcRecord;
-
+-(id)copyWithZone:(NSZone *)zone;
 @end
