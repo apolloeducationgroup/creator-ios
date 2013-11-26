@@ -303,6 +303,12 @@
             if ([_field fieldType]==[ZCFieldList ZCURL]) {
                 [[_field initialValues]setObject:tempValue forKey:@"value"];
             }
+            else if([_field fieldType]==[ZCFieldList ZCNotes])
+            {
+            
+                
+            
+            }
             else
             {
                 
