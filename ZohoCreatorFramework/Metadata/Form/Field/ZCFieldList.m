@@ -256,6 +256,12 @@
     else if([fieldString isEqualToString:@"AUTO_NUMBER"]) {
         return [ZCFieldList ZCAutoNumber];
     }
+    else if ([fieldString isEqualToString:@"SUB_FORM"])
+    {
+    
+            return [ZCFieldList ZCSubform];
+
+    }
     else {
         return -1;
     }
