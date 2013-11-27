@@ -568,9 +568,10 @@
                 ZCViewField *tempField = [_zcView getField:[_zcFieldData fieldName]];
                 if([tempField fieldType] == [ZCFieldList ZCImage] || [tempField fieldType] == [ZCFieldList ZCFileupload] )  //Image
                 {
-                    
                     // //NSLog(@"Image Value %@",[_zcFieldData fieldValue]);
-                    [_zcFieldData setFieldValue:[ParserUtil getImageLocation:[_zcFieldData fieldValue]]];
+                    NSLog(@"view link, app link & app owner : %@ %@ %@",_zcView.viewLinkName,_zcView.application.appLinkName,_zcView.application.appOwner);
+                    
+                    [_zcFieldData setFieldValue:[ParserUtil getImageLocationURLString:[_zcFieldData fieldValue] viewLinkName:_zcView.viewLinkName appLinkName:_zcView.application.appLinkName appOwner:_zcView.application.appOwner]];
                 }
                 else if([tempField fieldType] == [ZCFieldList ZCURL])  //URL
                 {
