@@ -18,7 +18,7 @@
 + (ZCForm*) convertToZCForm : (ZCComponent*) component;
 + (ZCView*) convertToZCView : (ZCComponent*) component;
 + (NSString*) getURL : (NSString*) rawString;
-+ (NSString*) getImageLocationURLString : (NSString*) rawString viewLinkName:(NSString*) viewlink appLinkName:(NSString*) applink appOwner:(NSString*) owner;
++ (NSString*) getImageLocationURLString : (NSString*) rawString;
 + (NSMutableDictionary*) getURLString : (NSString*) rawString;
 + (NSString*) extractEmailFromLink : (NSString*) rawString;
 

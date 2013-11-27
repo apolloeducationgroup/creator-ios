@@ -161,7 +161,7 @@
     }
 }
 
-+ (NSString*) getImageLocationURLString : (NSString*) rawString viewLinkName:(NSString*) viewlink appLinkName:(NSString*) applink appOwner:(NSString*) owner {
++ (NSString*) getImageLocationURLString : (NSString*) rawString {
     
     NSLog(@" Raw String %@",rawString);
     
@@ -187,9 +187,10 @@
             return rawString;//It means that image field has been updated using link option & file upload
         }
         
-        NSArray * stringarray=[rawString componentsSeparatedByString:@"/"];
+        NSArray * stringarray = [rawString componentsSeparatedByString:@"/"];
+        NSLog(@"url array : %@",stringarray);
         
-        NSString* finalURL = [URLConstructor downloadFile:[NSString stringWithFormat:@"/%@",[stringarray lastObject]] viewLinkName:viewlink :applink :owner];
+        NSString* finalURL = [URLConstructor downloadFile:[NSString stringWithFormat:@"/%@",[stringarray lastObject]] viewLinkName:[stringarray objectAtIndex:2] :[stringarray objectAtIndex:1] :[stringarray objectAtIndex:0]];
         
         //        //NSLog(@"stigs %@",stringarray);
         return finalURL;
