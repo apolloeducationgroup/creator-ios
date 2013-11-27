@@ -190,7 +190,7 @@
         NSArray * stringarray = [rawString componentsSeparatedByString:@"/"];
         NSLog(@"url array : %@",stringarray);
         
-        NSString* finalURL = [URLConstructor downloadFile:[NSString stringWithFormat:@"/%@",[stringarray lastObject]] viewLinkName:[stringarray objectAtIndex:2] :[stringarray objectAtIndex:1] :[stringarray objectAtIndex:0]];
+        NSString* finalURL = [URLConstructor downloadFile:[NSString stringWithFormat:@"/%@",[stringarray lastObject]] viewLinkName:[stringarray objectAtIndex:3] :[stringarray objectAtIndex:2] :[stringarray objectAtIndex:1]];
         
         //        //NSLog(@"stigs %@",stringarray);
         return finalURL;
