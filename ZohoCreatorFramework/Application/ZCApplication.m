@@ -155,7 +155,7 @@
 
 - (ZCComponent*) getComponent : (NSString*) componentLinkName {
     
-    NSLog(@"%@",[NSThread callStackSymbols]);
+    NSLog(@"stack zcapp%@",[NSThread callStackSymbols]);
     if(_sections == nil) {
         [self getSections:YES];
     }

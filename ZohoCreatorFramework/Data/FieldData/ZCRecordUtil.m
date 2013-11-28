@@ -34,6 +34,7 @@
                     NSMutableArray *options = [fieldData fieldValue];
                     NSMutableString *optionString = [NSMutableString string];
                     for(NSInteger index=0;index<[options count];index++) {
+                        if ([options objectAtIndex:index]!=Nil)
                         [optionString appendString:[options objectAtIndex:index]];
                         if(index != [options count]-1) {
                             [optionString appendString:@","];
@@ -47,7 +48,7 @@
                     if(dic != nil) {
                         if ([dic objectForKey:@"url"]!=Nil) {
                         [returnString appendFormat:@",%@",[dic objectForKey:@"url"]];
-                    }
+                                                }
                     }
                     else {
                         [returnString appendString:@"," ];
@@ -124,6 +125,7 @@
                         NSMutableArray *options = [fieldData fieldValue];
                         NSMutableString *optionString = [NSMutableString string];
                         for(NSInteger index=0;index<[options count];index++) {
+                            if ([options objectAtIndex:index]!=Nil)
                             [optionString appendString:[options objectAtIndex:index]];
                             if(index != [options count]-1) {
                                 [optionString appendString:@","];
@@ -135,6 +137,7 @@
                         
                         NSMutableDictionary *dic = [fieldData fieldValue];
                         if(dic != nil) {
+                            if ([dic objectForKey:@"url"]!=Nil)
                             [returnString appendFormat:@",%@",[dic objectForKey:@"url"]];
                         }
                         else {
@@ -143,6 +146,7 @@
                     }
                     
                     else {
+                        if ([[zcRecord getFieldDataByIndex:index] fieldValue]!=Nil)
                         [returnString appendFormat:@", %@",[[zcRecord getFieldDataByIndex:index] fieldValue]];
                     }
                     
@@ -158,6 +162,8 @@
                         NSMutableArray *options = [fieldData fieldValue];
                         NSMutableString *optionString = [NSMutableString string];
                         for(NSInteger index=0;index<[options count];index++) {
+                            if ([options objectAtIndex:index]!=Nil)
+
                             [optionString appendString:[options objectAtIndex:index]];
                             if(index != [options count]-1) {
                                 [optionString appendString:@","];
@@ -168,9 +174,11 @@
                     else if([[fieldData fieldValue] isKindOfClass:[NSMutableDictionary class]]) {
                         
                         NSMutableDictionary *dic = [fieldData fieldValue];
+                        if ([dic objectForKey:@"title"]!=Nil)
                         [returnString appendFormat:@"%@",[dic objectForKey:@"title"]];
                     }
                     else {
+                        if ([[zcRecord getFieldDataByIndex:index] fieldValue]!=Nil)
                         [returnString appendFormat:@"%@",[[zcRecord getFieldDataByIndex:index] fieldValue]];
                     }
                 }
