@@ -37,7 +37,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     NSString *formURL = [NSString stringWithFormat:@"/api/%@/json/%@/form/%@/fields/",appOwner,appLinkName,formLinkName];
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
-    formURL = [formURL stringByAppendingString:@"&metaData=complete"];
+    formURL = [formURL stringByAppendingString:@"&metaData=complete&zcRefValue=true"];
     
     
     NSLog(@"frm URL %@",appOwner);
