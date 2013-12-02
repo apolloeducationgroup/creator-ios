@@ -30,7 +30,7 @@
         if(indexCount != 0) {
             if([fieldData fieldValue]!=nil) {
                 
-                if([[fieldData fieldValue] isKindOfClass:[NSMutableArray class]]) {
+                if([[fieldData fieldValue] isKindOfClass:[NSArray class]]) {
                     NSMutableArray *options = [fieldData fieldValue];
                     NSMutableString *optionString = [NSMutableString string];
                     for(NSInteger index=0;index<[options count];index++) {
@@ -73,7 +73,7 @@
         else {
             if([fieldData fieldValue]!=nil) {
                 
-                if([[fieldData fieldValue] isKindOfClass:[NSMutableArray class]]) {
+                if([[fieldData fieldValue] isKindOfClass:[NSArray class]]) {
                     NSMutableArray *options = [fieldData fieldValue];
                     NSMutableString *optionString = [NSMutableString string];
                     for(NSInteger index=0;index<[options count];index++) {
@@ -121,7 +121,7 @@
                 if([[zcRecord getFieldDataByIndex:index] fieldValue] != nil)
                 {
                     
-                    if([[fieldData fieldValue] isKindOfClass:[NSMutableArray class]]) {
+                    if([[fieldData fieldValue] isKindOfClass:[NSArray class]]) {
                         NSMutableArray *options = [fieldData fieldValue];
                         NSMutableString *optionString = [NSMutableString string];
                         for(NSInteger index=0;index<[options count];index++) {
@@ -158,7 +158,7 @@
             else {
                 if([[zcRecord getFieldDataByIndex:index] fieldValue] != nil) {
                     
-                    if([[fieldData fieldValue] isKindOfClass:[NSMutableArray class]]) {
+                    if([[fieldData fieldValue] isKindOfClass:[NSArray class]]) {
                         NSMutableArray *options = [fieldData fieldValue];
                         NSMutableString *optionString = [NSMutableString string];
                         for(NSInteger index=0;index<[options count];index++) {

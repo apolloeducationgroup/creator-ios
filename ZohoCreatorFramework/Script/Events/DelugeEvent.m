@@ -187,7 +187,7 @@
                 
                 [paramString appendFormat:@"&%@=%@",keyName,keyValue];
             }
-            else if([keyValue isKindOfClass:[NSMutableArray class]]) {
+            else if([keyValue isKindOfClass:[NSArray class]]) {
                 
                 for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
                     NSLog(@"coming to index");
@@ -411,7 +411,7 @@
                 
 
             }
-            else if([keyValue isKindOfClass:[NSMutableArray class]]) {
+            else if([keyValue isKindOfClass:[NSArray class]]) {
                 
                 for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
                     
@@ -457,7 +457,7 @@
             if([keyValue isKindOfClass:[NSString class]]) {
                  [paramString appendFormat:@"%@=%@",keyName,keyValue];
             }
-            else if([keyValue isKindOfClass:[NSMutableArray class]]) {
+            else if([keyValue isKindOfClass:[NSArray class]]) {
                 
             }
         }
@@ -487,7 +487,7 @@
                     [paramString appendFormat:@"%@_delvar=%@",keyName,keyValue];
                 }
             }
-            else if([keyValue isKindOfClass:[NSMutableArray class]]) {
+            else if([keyValue isKindOfClass:[NSArray class]]) {
                 
             }
         }

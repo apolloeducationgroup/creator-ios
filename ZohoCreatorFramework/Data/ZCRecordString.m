@@ -529,7 +529,7 @@
             if(fieldValue != nil) {
                 [returnString appendFormat:@"<field name='%@'>",fieldName];
                 
-                if([fieldValue isMemberOfClass:[NSMutableArray class]] || [fieldValue isMemberOfClass:[NSArray class]]) {
+                if([fieldValue isMemberOfClass:[NSArray class]] || [fieldValue isMemberOfClass:[NSArray class]]) {
                     [returnString appendFormat:@"<field name='%@'>",fieldName];
                     [returnString appendString:@"<options>"];
                     for(NSInteger opt=0;opt<[fieldValue count];opt++) {
@@ -599,7 +599,7 @@
                 [returnString appendString:@"</field>"];
                 
             }
-            else if([fieldValue isKindOfClass:[NSMutableArray class]]) {
+            else if([fieldValue isKindOfClass:[NSArray class]]) {
                 
                 NSArray *options =fieldValue;
                 //// //NSLog(@"option value for update %@",options);
@@ -820,7 +820,7 @@
                 
                 [returnString appendFormat:@"<field name='%@' value='%@'>",fieldName,fieldValue];
             }
-            else if([fieldValue isKindOfClass:[NSMutableArray class]]) {
+            else if([fieldValue isKindOfClass:[NSArray class]]) {
                 
                 NSArray *options =fieldValue;
                 //// //NSLog(@"option value for update %@",options);
