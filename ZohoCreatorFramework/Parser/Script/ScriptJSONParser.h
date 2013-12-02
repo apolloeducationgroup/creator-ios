@@ -22,6 +22,7 @@
 #import "SelectValueTask.h"
 #import "DeSelectValueTask.h"
 #import "OpenUrlTask.h"
+#import "InfoTask.h"
 
 @interface ScriptJSONParser : NSObject {
     

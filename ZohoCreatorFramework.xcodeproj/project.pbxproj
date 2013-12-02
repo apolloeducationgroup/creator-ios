@@ -123,6 +123,7 @@
 		717E3108182A4D1900993049 /* DelugeSubformEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 717E3107182A4D1900993049 /* DelugeSubformEvent.m */; };
 		717E310D182A4E4400993049 /* LookUPChoiceParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 717E310A182A4E4400993049 /* LookUPChoiceParser.m */; };
 		717E310E182A4E4400993049 /* ZCLookUpChoices.m in Sources */ = {isa = PBXBuildFile; fileRef = 717E310C182A4E4400993049 /* ZCLookUpChoices.m */; };
+		71BC268D184C819F009E4C00 /* InfoTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BC268C184C819F009E4C00 /* InfoTask.m */; };
 		71CE1E5318335940000DEFDF /* ZCSharedAppsEventsParamsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CE1E521833593F000DEFDF /* ZCSharedAppsEventsParamsUtil.m */; };
 		863D04251819FBB900D10587 /* FormJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 863D04241819FBB900D10587 /* FormJSONParser.m */; };
 /* End PBXBuildFile section */
@@ -372,6 +373,8 @@
 		717E310A182A4E4400993049 /* LookUPChoiceParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookUPChoiceParser.m; sourceTree = "<group>"; };
 		717E310B182A4E4400993049 /* ZCLookUpChoices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCLookUpChoices.h; sourceTree = "<group>"; };
 		717E310C182A4E4400993049 /* ZCLookUpChoices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCLookUpChoices.m; sourceTree = "<group>"; };
+		71BC268B184C819F009E4C00 /* InfoTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoTask.h; sourceTree = "<group>"; };
+		71BC268C184C819F009E4C00 /* InfoTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoTask.m; sourceTree = "<group>"; };
 		71CE1E511833593F000DEFDF /* ZCSharedAppsEventsParamsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCSharedAppsEventsParamsUtil.h; sourceTree = "<group>"; };
 		71CE1E521833593F000DEFDF /* ZCSharedAppsEventsParamsUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCSharedAppsEventsParamsUtil.m; sourceTree = "<group>"; };
 		863D04231819FBB900D10587 /* FormJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FormJSONParser.h; path = JSON/FormJSONParser.h; sourceTree = "<group>"; };
@@ -916,6 +919,8 @@
 				26F82AFA17F468810048E85B /* SetVariableTask.m */,
 				26F82AFB17F468810048E85B /* ShowTask.h */,
 				26F82AFC17F468810048E85B /* ShowTask.m */,
+				71BC268B184C819F009E4C00 /* InfoTask.h */,
+				71BC268C184C819F009E4C00 /* InfoTask.m */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -1102,6 +1107,7 @@
 				26F82B4817F468810048E85B /* ZCViewCustomFilter.m in Sources */,
 				26F82B4917F468810048E85B /* ZCViewFilter.m in Sources */,
 				26F82B4A17F468810048E85B /* ZCHTMLView.m in Sources */,
+				71BC268D184C819F009E4C00 /* InfoTask.m in Sources */,
 				26F82B4B17F468810048E85B /* ZCView.m in Sources */,
 				26F82B4C17F468810048E85B /* ZCViewParam.m in Sources */,
 				26F82B4D17F468810048E85B /* ZCApplicationParser.m in Sources */,

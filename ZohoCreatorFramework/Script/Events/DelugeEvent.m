@@ -67,6 +67,7 @@
                 AlertTask *alertTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate showAlert: [alertTask message]];
             }
+            
             else if([taskType isEqualToString:@"show"]) {
                 
                 ShowTask *showTask = [taskList objectAtIndex:taskIndex];

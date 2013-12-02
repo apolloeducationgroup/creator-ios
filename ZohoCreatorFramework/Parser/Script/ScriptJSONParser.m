@@ -26,6 +26,7 @@
 - (SelectValueTask*) selectValueTask : (NSDictionary*) selectValueDict;
 - (DeSelectValueTask*) deSelectValueTask : (NSDictionary*) deSelectValueDict;
 - (OpenUrlTask*) openUrlTask : (NSDictionary*) openUrlDict;
+-(InfoTask*) infoTask : (NSDictionary*) infoValueDict;
 
 @end
 
@@ -126,10 +127,21 @@
         case 280:
             NSLog(@"Coming to open Url task parser");
             return [self openUrlTask:taskDict];
+        case 71:
+            return [self infoTask:taskDict];
+
     }
     return nil;
 }
 
+-(InfoTask *)infoTask:(NSDictionary *)infoValueDict
+{
+    
+    InfoTask *info = [[InfoTask alloc] init];
+    [info setTaskType:@"alert"];
+    [info setMessage:[infoValueDict objectForKey:@"infoValue"]];
+    return info;
+}
 - (AlertTask*) alertTask : (NSDictionary*) alertDic {
     
     AlertTask *alert = [[AlertTask alloc] init];
