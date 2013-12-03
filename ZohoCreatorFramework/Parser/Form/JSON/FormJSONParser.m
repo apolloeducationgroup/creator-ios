@@ -68,8 +68,10 @@
     NSLog(@"type of on laod %@",[temp class]);
     
     BOOL _hasOnLoad = [[formGeneralDict valueForKey:@"hasaddonload"] boolValue];
+    BOOL _haseditOnload = [[formGeneralDict valueForKey:@"haseditonload"] boolValue];
+
     [_zcForm setHasOnLoad:_hasOnLoad];
-    
+    [_zcForm setHasEditOnLoad:_haseditOnload];
     /*
      NSLog(@"Cominf IOnnnnnnn");
      
@@ -106,6 +108,10 @@
         NSString *_buttonActType = [_buttonDic objectForKey:@"actiontype"];
         NSString *_buttonType =          [_buttonDic objectForKey:@"type"];
         NSString *_sequenceNum =          [_buttonDic objectForKey:@"sequencenumber"];
+        NSString  *_onClickExists=[_buttonDic objectForKey:@"onclickexists"];
+        if ([_onClickExists isEqualToString:@"true"]) {
+            [_button setOnclickexists:YES];
+        }
         [_button setButtonActionType:[_buttonActType integerValue]];
         NSInteger buttonInt = [_buttonType integerValue];
         [_button setButtonType:buttonInt];
@@ -129,6 +135,7 @@
         [_field setInitialValues:[_fieldDict objectForKey:@"initial"]];
         
         
+        
         [_field setToolTip:[_fieldDict objectForKey:@"tooltip"]];
         NSString *_fieldTypeRawString = [_fieldDict objectForKey:@"type"];
         [_field setFieldType:[_fieldTypeRawString integerValue]];
@@ -139,10 +146,10 @@
             _field.initialValues=[[NSMutableDictionary alloc]init];
             
         }
-        BOOL _isUnique = [[_fieldDict valueForKey:@"required"] boolValue];
-        [_field setIsRequired:_isUnique];
-        _isUnique = [[_fieldDict valueForKey:@"unique"] boolValue];
-        [_field setIsUnique:_isUnique];
+        BOOL _isrequired = [[_fieldDict valueForKey:@"required"] boolValue];
+        [_field setIsRequired:_isrequired];
+        _isrequired = [[_fieldDict valueForKey:@"unique"] boolValue];
+        [_field setIsUnique:_isrequired];
         
         
         
@@ -161,6 +168,10 @@
             [_field setHasOnUserScript:[tempValue boolValue]];
         }
         
+        tempValue = [_fieldDict objectForKey:@"formulaexists"];
+        if(tempValue != nil) {
+            [_field setHasInvolvedInFormula:[tempValue boolValue]];
+        }
         
         tempValue = [_fieldDict objectForKey:@"onaddrowexists"];
         if(tempValue != nil) {
@@ -311,10 +322,34 @@
             }
             else
             {
-                
-                [_field setInitialValues:tempValue];
+                if([tempValue isKindOfClass:[NSArray class]])
+                {
+                    NSArray* initialValuesArray = tempValue;
+                    NSMutableDictionary* dictionary = [NSMutableDictionary dictionary];
+                    for(NSInteger i=0; i<initialValuesArray.count;i++)
+                    {
+                        NSMutableDictionary* dic = [initialValuesArray objectAtIndex:i];
+                        NSMutableDictionary* oneEntryInSelectedOptionsDic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[dic objectForKey:@"value"],[dic objectForKey:@"key"], nil];
+                        [dictionary addEntriesFromDictionary:oneEntryInSelectedOptionsDic];
+                        
+                    }
+                    
+                    [_field setInitialValues:dictionary];
+                    
+                }
+                else if([tempValue isKindOfClass:[NSDictionary class]])
+                {
+                    NSMutableDictionary* oneEntryInSelectedOptionsDic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[tempValue objectForKey:@"value"],[tempValue objectForKey:@"key"], nil];
+                    [_field setInitialValues:oneEntryInSelectedOptionsDic];
+                    
+                }
+                else
+                {
+                    [_field setInitialValues:tempValue];
+                }
                 
             }
+            
 
         }
         

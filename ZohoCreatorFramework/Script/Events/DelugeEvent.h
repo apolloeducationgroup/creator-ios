@@ -14,10 +14,19 @@
 #import "ZCRecord.h"
 #import "CustomActionResponse.h"
 #import "ScriptJSONParser.h"
-
+enum ZCRecType { //for onload and onedit "recType"
+    
+    FORM_ALONE =1,
+    VIEW_ADD_FORM =2,
+    VIEW_EDIT_FORM =3,
+    FORM_LOOKUP_ADD_FORM =5
+    
+};
 @class ZCApplication,ZCForm;
 
 @protocol DelugeDelegate <NSObject>
+
+
 
 @required -(void) showAlert : (NSString*) message;
 @required -(void) enableField : (NSString*) formName : (NSString*) fieldName subformName:(NSString *)subformname;

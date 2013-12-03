@@ -48,7 +48,7 @@ int FORM_LOOKUP_ADD_FORM =5;
 + (NSString*) formURLforBulkedit:(NSString *)appLinkName formName:(NSString *)formLinkName viewName:(NSString *)viewLinkName withApplicationOwner:(NSString *)appOwner
 {
     NSString *formURL = [self formURL:appLinkName formName:formLinkName withApplicationOwner:appOwner];
-    formURL = [formURL stringByAppendingString:[NSString stringWithFormat:@"&viewLinkName=%@&formAccessType=%d&zcRefValue=true",viewLinkName,4]];
+    formURL = [formURL stringByAppendingString:[NSString stringWithFormat:@"&viewLinkName=%@&formAccessType=%d",viewLinkName,4]];
     return formURL;
 }
 

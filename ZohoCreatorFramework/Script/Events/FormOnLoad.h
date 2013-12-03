@@ -13,7 +13,6 @@
 #import "URLConstructor.h"
 
 @class ZCForm;
-
 @interface FormOnLoad : DelugeEvent  {
     
 }
@@ -23,5 +22,8 @@
 
 - (FormOnLoad*) initFormOnLoad:(ZCApplication *)applicationLocal :(ZCForm *)formLocal : (id) delegate;
 - (DelugeTasks*) execute;
+
+- (FormOnLoad*) initFormOnLoad: (ZCApplication*) _appLocal fieldForm: (ZCForm*) _formLocal zcRecors:(ZCRecord*) zcrecord delegate:(id)delegate recordIDIncaseOFEDITFORM:(NSString *)recID viewLinkname:(NSString *)viewLinkname childAppsIncaseOFAddTOPickListForm:(NSArray *)apps childforms:(NSArray *)forms basefields:(NSArray *)fields appOwner:(NSString *)appowner;
+
 
 @end

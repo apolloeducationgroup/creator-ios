@@ -10,6 +10,6 @@
 
 @implementation ZCButton
 
-@synthesize buttonName=_buttonName,buttonType=_buttonType,sequence=_sequence,buttonDisplayName=_buttonDisplayName,buttonActionType=_buttonActionType;
+@synthesize buttonName=_buttonName,buttonType=_buttonType,sequence=_sequence,buttonDisplayName=_buttonDisplayName,buttonActionType=_buttonActionType,onclickexists=_onclickexists;
 
 @end
