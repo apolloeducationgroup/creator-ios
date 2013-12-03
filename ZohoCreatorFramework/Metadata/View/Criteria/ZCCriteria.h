@@ -23,6 +23,8 @@ enum ZCCriteriaOperator {
     ZCCriteriaLessThanEqualOperator=22,
     ZCCriteriaGreaterThanEqualOperator=23,
     
+    ZCCriteriaTrueOperator = 49,
+    ZCCriteriaFalseOperator = 50,
     
     //date
     ZCCriteriaBeforeOperator=20,

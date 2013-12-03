@@ -1239,7 +1239,9 @@
 				GCC_PREFIX_HEADER = "ZohoCreatorFramework/ZohoCreatorFramework-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos6.1;
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "armv7 arm64 armv7s";
 			};
 			name = Debug;
 		};
@@ -1251,7 +1253,9 @@
 				GCC_PREFIX_HEADER = "ZohoCreatorFramework/ZohoCreatorFramework-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos6.1;
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "armv7 arm64 armv7s";
 			};
 			name = Release;
 		};

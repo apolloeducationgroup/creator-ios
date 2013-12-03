@@ -94,7 +94,7 @@
             [_customResponse setDelugeTasks:nil];
         }
         
-        NSLog(@"element name : %@ & value : %@",_currentElementName,string);
+        NSLog(@"g element name : %@ & value : %@",_currentElementName,string);
     }
 }
 
