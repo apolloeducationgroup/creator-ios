@@ -93,6 +93,8 @@
         else if([_currentElementName isEqualToString:@"GenerateJS"]) {
             [_customResponse setDelugeTasks:nil];
         }
+        
+        NSLog(@"element name : %@ & value : %@",_currentElementName,string);
     }
 }
 
