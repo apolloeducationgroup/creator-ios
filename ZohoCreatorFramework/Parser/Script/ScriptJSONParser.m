@@ -98,7 +98,8 @@
     NSInteger taskNumber = [task integerValue];
     NSLog(@"coming to task Finder %d",taskNumber);
     switch (taskNumber) {
-        case 1302:
+            
+                        case 1302:
             return [self alertTask:taskDict];
         case 12:
             return [self setVariableTask:taskDict];
@@ -129,6 +130,9 @@
             return [self openUrlTask:taskDict];
         case 71:
             return [self infoTask:taskDict];
+            case 1007:
+            return [self alertTask:[NSDictionary dictionaryWithObject:[taskDict objectForKey:@"errors"] forKey:@"alertValue"]];
+            
 
     }
     return nil;

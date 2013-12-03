@@ -25,5 +25,6 @@ enum ZCButtonType {
 @property ZCButtonType buttonType;
 @property NSInteger sequence;
 @property NSInteger buttonActionType;
+@property BOOL onclickexists;
 
 @end
