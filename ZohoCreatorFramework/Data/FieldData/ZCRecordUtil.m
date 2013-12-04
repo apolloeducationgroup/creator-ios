@@ -15,7 +15,7 @@
     return [NSString stringWithFormat:@"%@, %@, %@",[[zcRecord getFieldDataByIndex:0] fieldValue],[[zcRecord getFieldDataByIndex:1] fieldValue],[[zcRecord getFieldDataByIndex:2] fieldValue]];
 }
 
-+ (NSString*) getPrimaryValueByCount : (ZCRecord*) zcRecord : (NSInteger) count {
++ (NSString*) getPrimaryValueByCount : (ZCRecord*) zcRecord : (NSInteger) count  {
     
     NSMutableString *returnString = [NSMutableString stringWithCapacity:200];
     
@@ -99,8 +99,29 @@
         }
         indexCount ++;
     }
+    
+   returnString=[NSMutableString stringWithString:[ZCRecordUtil stringByStrippingHTML:returnString]];
+    
     return returnString;
 }
++(NSString *) stringByStrippingHTML:(NSString *)string
+{
+    if (string ==NULL || [string isEqualToString:@""] || [string isEqualToString:@"(null)"]) {
+        return @"";
+    }
+    NSRange r;
+    while ((r = [string rangeOfString:@"(null)" options:NSRegularExpressionSearch]).location != NSNotFound)
+        string = [string stringByReplacingCharactersInRange:r withString:@""];
+    while ((r = [string rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+        string = [string stringByReplacingCharactersInRange:r withString:@""];
+    
+    while ((r = [string rangeOfString:@"&nbsp;" options:NSRegularExpressionSearch]).location != NSNotFound)
+        string = [string stringByReplacingCharactersInRange:r withString:@" "];
+    
+    return string;
+}
+
+
 
 + (NSString*) getSubtitleValueByCount : (ZCRecord*) zcRecord : (NSInteger) startIndex : (NSInteger) count {
     
@@ -189,6 +210,8 @@
             indexCount++;
         }
     }
+    returnString=[NSMutableString stringWithString:[ZCRecordUtil stringByStrippingHTML:returnString]];
+
     return returnString;
 }
 
@@ -200,6 +223,17 @@
             [skipFields addObject:fieldData.fieldName];
         }
     }
+    
+    
+    for (ZCField *field in zcRecord.form.fields) {
+
+        if (field.fieldType ==[ZCFieldList ZCImage] || field.fieldType==[ZCFieldList ZCFileupload] || field.fieldType==[ZCFieldList ZCURL] || field.fieldType == [ZCFieldList ZCRichText]) {
+            [skipFields addObject:field.fieldName];            
+        }
+    
+    }
+
+    
     return skipFields;
 }
 
