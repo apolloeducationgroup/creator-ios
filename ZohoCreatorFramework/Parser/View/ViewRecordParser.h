@@ -48,6 +48,7 @@
     NSMutableArray *filterList;
     NSMutableArray *customFilterList;
     NSMutableArray *_filterValueList;
+    NSMutableArray *_filterDisplayValueList;
     ZCViewAction *_viewAction;
     NSMutableArray *_rowActions;
     NSMutableArray *_headerActions;
@@ -57,6 +58,9 @@
     ZCFieldData *_groupByNameFields;
     NSString *_currentElementName;
     ZCCalendarEvent *_zcCalendarEvent;
+    
+    
+    NSString * filterNAMEKey;
 }
 
 @property (nonatomic,retain) ZCView *zcView;

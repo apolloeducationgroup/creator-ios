@@ -693,6 +693,8 @@
                 }
                 [returnString appendString:@"</options>"];
                 
+                [returnString appendString:@"</field>"];
+
                 
             }
             else if(fieldType == [ZCFieldList ZCURL]) {
@@ -707,6 +709,8 @@
                 NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) URLData,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
 
                 [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
+                [returnString appendString:@"</field>"];
+
                 
             }
             else if(fieldType == [ZCFieldList ZCSubform] || fieldType ==[ZCFieldList ZCNewSubform])
@@ -789,19 +793,22 @@
                 
                 [returnString appendString:subformRECORDSXML];
                 
-                
+                [returnString appendString:@"</field>"];
+
                 
                 //                NSLog(@"subformrecord xml riyaz:: %@",subformRECORDSXML);
                 
             }
-            
+            else if (fieldType ==[ZCFieldList ZCFileupload] || fieldType ==[ZCFieldList ZCImage])
+            {
+            }
             else
                 
             {
                 [returnString appendFormat:@"<field name='%@' value='%@'>",fieldName,[fieldData fieldValue]];
-                
+                [returnString appendString:@"</field>"];
+
             }
-            [returnString appendString:@"</field>"];
         }
     }
     return returnString;

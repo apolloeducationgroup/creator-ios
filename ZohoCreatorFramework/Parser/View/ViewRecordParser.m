@@ -76,10 +76,20 @@
             
             if([elementName isEqualToString:@"filter"]) {
                 filter = [[ZCViewFilter alloc] initZCViewFilter];
+//                [filter setFilterDisplayName:[attributeDict objectForKey:@"display"]];
                 [filter setFilterName:[attributeDict valueForKey:@"name"]];
                 //                [filter setFilterDisplayName:[attributeDict valueForKey:@"displayname"]];
                 _filterValueList = [[NSMutableArray alloc] init];
+            
+            
             }
+            if([elementName isEqualToString:@"value"]) {
+                
+                filterNAMEKey=[attributeDict valueForKey:@"display"];
+
+            }
+            
+            
         }
         else if(_metaDataCustomFiltersEnabled==YES) {
             if([elementName isEqualToString:@"customFilter"]) {
@@ -430,8 +440,13 @@
             [filter setFilterDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding]];
         }
         else {
+            NSLog(@"filter string %@",string);
             NSRange startIndex = [string rangeOfString:@":"];
-            [_filterValueList addObject:[string substringFromIndex:startIndex.location+1]];
+            
+            NSDictionary * dic=[NSDictionary dictionaryWithObject:[string substringFromIndex:startIndex.location+1] forKey:filterNAMEKey];
+            
+//            [_filterValueList addObject:[string substringFromIndex:startIndex.location+1]];
+            [_filterValueList addObject:dic];
         }
     }
     else if(_metaDataCustomFiltersEnabled==YES) {
@@ -487,6 +502,7 @@
         else if(_metaDataFiltersEnabled==YES) {
             
             if([elementName isEqualToString:@"filter"]) {
+                
                 [filter setFilterValues:_filterValueList];
                 [filterList addObject:filter];
             }

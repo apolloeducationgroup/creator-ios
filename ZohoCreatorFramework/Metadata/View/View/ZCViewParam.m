@@ -191,15 +191,15 @@
             }
             NSMutableArray *keyValues = [self->_filterDict valueForKey:keyName];
             for(NSInteger index=0;index<[keyValues count];index++) {
-                NSString *keyValue = [keyValues objectAtIndex:index];
+                NSDictionary *keyValue = [keyValues objectAtIndex:index];
                 
                 
                 
                 if(index == [keyValues count]-1) {
-                    [returnString appendFormat:@"%@",keyValue];
+                    [returnString appendFormat:@"%@",[[keyValue allValues]objectAtIndex:0]];
                 }
                 else {
-                    [returnString appendFormat:@"%@@zohocomma@",keyValue];
+                    [returnString appendFormat:@"%@@zohocomma@",[[keyValue allValues]objectAtIndex:0]];
                 }
             }
         }
@@ -208,6 +208,7 @@
             
             [returnString appendFormat:@";CustomFilter:%@",_customFilterID];
         }
+        NSLog(@"reti  filter string %@",returnString);
         return [returnString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
     else {
