@@ -105,10 +105,15 @@
         
         if ([elementName isEqualToString:@"Failure"]) {
             [_failureList addObject:_customActionResult];
-            _failureElement=NO;
+                        NSLog(@"failure custom action %@",_failureList);
+
+            
+//            _failureElement=NO;
         }
         else if([elementName isEqualToString:@"FailureRecords"]) {
             _failureElement =NO;
+//            NSLog(@"failure custom action %@",_customActionResult);
+            NSLog(@"failure custom action %@",_failureList);
             [_customResponse setFailureRecordList:_failureList];
         }
     }
