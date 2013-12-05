@@ -409,7 +409,7 @@
 
                 
             }
-            else if(fieldType == [ZCFieldList ZCFileupload]) {
+            else if(fieldType == [ZCFieldList ZCFileupload] || fieldType ==[ZCFieldList ZCImage]) {
                 
             }
             else if(fieldType == [ZCFieldList ZCURL]) {
