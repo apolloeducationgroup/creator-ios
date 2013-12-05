@@ -509,7 +509,7 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
 + (NSString*) postAuthTokenWithAppOwner : (NSString*) appOwner {
     
     ZOHOUser *user = [ZOHOUser userObject];
-    NSString *urlString = [NSString stringWithFormat:@"authtoken=%@&scope=creatorapi&zc_ownername=%@",[user authToken],appOwner];
+    NSString *urlString = [NSString stringWithFormat:@"zcRefValue=true&authtoken=%@&scope=creatorapi&zc_ownername=%@",[user authToken],appOwner];
     return urlString;
 }
 
