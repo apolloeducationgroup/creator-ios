@@ -87,7 +87,7 @@
                 else if([[fieldData fieldValue] isKindOfClass:[NSMutableDictionary class]]) {
                     
                     NSMutableDictionary *dic = [fieldData fieldValue];
-                    [returnString appendFormat:@"%@",[dic objectForKey:@"title"]];
+                    [returnString appendFormat:@"%@",[dic objectForKey:@"urllinkname"]];
                 }
                 else {
                     [returnString appendFormat:@"%@",[fieldData fieldValue]];

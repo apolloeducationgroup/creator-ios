@@ -72,7 +72,7 @@
 //            rectype =5;
 //        }
 //        re
-        paramString =[paramString stringByAppendingFormat:@"&recType=3&pkValue=%@",recID];
+        paramString =[paramString stringByAppendingFormat:@"&recType=3&pkValue=%lli",[recID longLongValue ]-2];
         self->_application = _appLocal;
         self->_form = _formLocal;
         [super setCallerDelegate:delegate];
