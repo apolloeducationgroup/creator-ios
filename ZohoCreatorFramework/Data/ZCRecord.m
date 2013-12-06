@@ -160,7 +160,7 @@
     [idFieldData setFieldName:@"ID"];
     [idFieldData setFieldValue:self.recordID];
     [self addZCFieldData:idFieldData];
-    updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@&zcRefValue=true",[ZCRecordString newUpdateRcordStringXML:self->_form :self :viewLinkName]];
+    updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@",[ZCRecordString newUpdateRcordStringXML:self->_form :self :viewLinkName]];
     NSLog(@"Update record string %@",updateRecordString);
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:updateRecord :updateRecordString :[URLConnector POSTMETHOD]];
     NSString *response = [urlConnect apiResponse];

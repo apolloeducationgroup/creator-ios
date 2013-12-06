@@ -502,14 +502,14 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
 + (NSString*) postAuthTokenWithAppOwner {
     
     ZOHOUser *user = [ZOHOUser userObject];
-    NSString *urlString = [NSString stringWithFormat:@"authtoken=%@&scope=creatorapi&sharedBy=%@",[user authToken],[user userName]];
+    NSString *urlString = [NSString stringWithFormat:@"zcRefValue=true&authtoken=%@&scope=creatorapi&sharedBy=%@",[user authToken],[user userName]];
     return urlString;
 }
 
 + (NSString*) postAuthTokenWithAppOwner : (NSString*) appOwner {
     
     ZOHOUser *user = [ZOHOUser userObject];
-    NSString *urlString = [NSString stringWithFormat:@"authtoken=%@&scope=creatorapi&zc_ownername=%@",[user authToken],appOwner];
+    NSString *urlString = [NSString stringWithFormat:@"zcRefValue=true&authtoken=%@&scope=creatorapi&zc_ownername=%@",[user authToken],appOwner];
     return urlString;
 }
 
