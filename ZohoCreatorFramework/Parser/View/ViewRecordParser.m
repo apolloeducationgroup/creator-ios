@@ -302,7 +302,7 @@
                 [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"id"]]];
                 [_zcCalendarEvent setStart:startDate];
                 [_zcCalendarEvent setEnd:endDate];
-                //                [_zcCalendarEvent setTitle:[attributeDict valueForKey:@"title"]];
+                [_zcCalendarEvent setTitle:[attributeDict valueForKey:@"title"]];
                 [_zcCalendarEvent setEventType:[ZCCalendarEvent EVENT_SHORT]];
                 if ([[attributeDict valueForKey:@"allDay"] boolValue]) {
                     [_zcCalendarEvent setEventType:[ZCCalendarEvent EVENT_ALLDAY]];
@@ -388,7 +388,7 @@
                         [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"id"]]];
                         [_zcCalendarEvent setStart:modStartDate];
                         [_zcCalendarEvent setEnd:modEndDate];
-                        //    [_zcCalendarEvent setTitle:[attributeDict valueForKey:@"title"]];
+                        [_zcCalendarEvent setTitle:[attributeDict valueForKey:@"title"]];
                         [_zcCalendarEvent setSubTitle:subTitle];
                         [_zcCalendarEvent setEventType:eventType];
                         [_zcCalendarEvents addZCCalendarEvent:_zcCalendarEvent];
