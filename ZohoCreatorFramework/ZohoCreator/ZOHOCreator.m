@@ -529,14 +529,17 @@ static ZOHOCreator *creatorObject = nil;
     //    NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:nil];
     //    [parser recordStatus];
 }
-+(ZCLookUpChoices *)getLookupChoicesWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit viewLinkname:(NSString *)ViewLinkname recordID:(NSString *)recordID
++(ZCLookUpChoices *)getLookupChoicesWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit viewLinkname:(NSString *)ViewLinkname recordID:(NSString *)recordID ifFormInAddToPickListChildappNamesINORDER:(NSArray *)childappNamesINORDER childFormNameINORDER:(NSArray *)childFormNameINORDER baseFieldNameINORDER:(NSArray *)baseFieldNameINORDER
 {
     
     
     
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    NSString *url = [URLConstructor construckLookupChoicesURLWithAppLinkname:appLinkName formLinkname:formLinkName lookUpFieldLinkName:lookupFieldName appOwner:appOwner subformComponent:subformComponent searchString:searchString startindex:startIndex limit:limit viewLinkname:ViewLinkname recordID:recordID];
+    NSString *url = [URLConstructor construckLookupChoicesURLWithAppLinkname:appLinkName formLinkname:formLinkName lookUpFieldLinkName:lookupFieldName appOwner:appOwner subformComponent:subformComponent searchString:searchString startindex:startIndex limit:limit viewLinkname:ViewLinkname recordID:recordID ifFormInAddToPickListChildappNamesINORDER:childappNamesINORDER childFormNameINORDER:childFormNameINORDER baseFieldNameINORDER:baseFieldNameINORDER];
+    
+
+    
     URLConnector *urlConnect = [[URLConnector alloc] initFetcher:url];
     
     [urlConnect apiResponse];

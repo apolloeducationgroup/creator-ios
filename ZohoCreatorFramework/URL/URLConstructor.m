@@ -703,7 +703,8 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
     
     return authenticationUrl;
 }
-+(NSString *)construckLookupChoicesURLWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit viewLinkname:(NSString *)viewLinkname recordID:(NSString *)recordID
++(NSString *)construckLookupChoicesURLWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit viewLinkname:(NSString *)viewLinkname recordID:(NSString *)recordID ifFormInAddToPickListChildappNamesINORDER:(NSArray *)childappNamesINORDER childFormNameINORDER:(NSArray *)childFormNameINORDER baseFieldNameINORDER:(NSArray *)baseFieldNameINORDER
+
 {
     NSString * lookUpchoiceURL=[NSString stringWithFormat:@"/api/%@/xml/%@/form/%@/lookup/%@/options//",appOwner,appLinkName,formLinkName,lookupFieldName];
     lookUpchoiceURL = [URLConstructor appendAuthToken:lookUpchoiceURL];
@@ -721,11 +722,18 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
         
         formAccestype=3;
     }
+    
+    if (childappNamesINORDER.count) {
+        formAccestype=5;
+
+        
+    }
 
     lookUpchoiceURL =[lookUpchoiceURL stringByAppendingFormat:@"&formAccessType=%i",formAccestype];
 
     
-    
+    lookUpchoiceURL =[lookUpchoiceURL stringByAppendingString:[ZCSharedAppsEventsParamsUtil getAddtoPickListParamsWithAPPS:childappNamesINORDER Forms:childFormNameINORDER fields:baseFieldNameINORDER viewLinkname:nil recordID:nil]];
+
     lookUpchoiceURL = [[URLConstructor serverURL:false] stringByAppendingString:lookUpchoiceURL];
     
     
