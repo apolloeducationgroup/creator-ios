@@ -39,6 +39,8 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict   {
     
+    NSLog(@"did start element name : %@",elementName);
+    
     if(_failureElement==YES) {
         
         if([elementName isEqualToString:@"Failure"]) {
@@ -100,6 +102,7 @@
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     
+    NSLog(@"did end element name : %@",elementName);
     
     if(_failureElement==YES) {
         
