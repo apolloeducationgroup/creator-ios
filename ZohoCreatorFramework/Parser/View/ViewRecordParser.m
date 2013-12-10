@@ -302,6 +302,8 @@
                 [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"id"]]];
                 [_zcCalendarEvent setStart:startDate];
                 [_zcCalendarEvent setEnd:endDate];
+                NSLog(@"attribute title : %@",[attributeDict valueForKey:@"title"]);
+
                 [_zcCalendarEvent setTitle:[attributeDict valueForKey:@"title"]];
                 [_zcCalendarEvent setEventType:[ZCCalendarEvent EVENT_SHORT]];
                 if ([[attributeDict valueForKey:@"allDay"] boolValue]) {
@@ -388,6 +390,7 @@
                         [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"id"]]];
                         [_zcCalendarEvent setStart:modStartDate];
                         [_zcCalendarEvent setEnd:modEndDate];
+                        NSLog(@"attribute title : %@",[attributeDict valueForKey:@"title"]);
                         [_zcCalendarEvent setTitle:[attributeDict valueForKey:@"title"]];
                         [_zcCalendarEvent setSubTitle:subTitle];
                         [_zcCalendarEvent setEventType:eventType];
@@ -403,6 +406,8 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     
+    NSLog(@"event-found %@ : %@ & %@ %d",string,_zcCalendarEvent.start,_zcCalendarEvent.end,_zcCalendarEvent.eventType);
+
     if(_valueTagEnabled == YES) {
         //////// //NSLog(@"Coming to add field value  %@",string);
         
@@ -466,6 +471,8 @@
     else if(_calendarTagEnabled==YES) {
         if(_eventTagEnabled==YES) {
             if([_currentElementName isEqualToString:@"title"])  {
+                
+                NSLog(@"event-all : %@ & %@ %d",_zcCalendarEvent.start,_zcCalendarEvent.end,_zcCalendarEvent.eventType);
                 [_zcCalendarEvent setTitle:[NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding]];
             }
         }
