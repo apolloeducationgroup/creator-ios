@@ -47,6 +47,8 @@
 }
 
 - (void) addZCViewField : (ZCViewField*) viewField {
+    
+    if ([viewField fieldType] !=[ZCFieldList ZCAutoNumber ])
     [_viewFieldDict setObject:viewField forKey:[viewField fieldLinkName]];
     
 }
