@@ -265,6 +265,12 @@
         if([elementName isEqualToString:@"event"]) {
             
             _eventTagEnabled = YES;
+            
+            if (_currentEventItems==nil) {
+                _currentEventItems = [[NSMutableArray alloc] init];
+            }
+            [_currentEventItems removeAllObjects];
+            
             NSString *startTime = @"all-day";
             NSString *endTime = @"all-day";
             
@@ -302,9 +308,8 @@
                 [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"id"]]];
                 [_zcCalendarEvent setStart:startDate];
                 [_zcCalendarEvent setEnd:endDate];
-                NSLog(@"attribute title : %@",[attributeDict valueForKey:@"title"]);
 
-                [_zcCalendarEvent setTitle:[attributeDict valueForKey:@"title"]];
+                [_zcCalendarEvent setTitle:_currentEventTitle];
                 [_zcCalendarEvent setEventType:[ZCCalendarEvent EVENT_SHORT]];
                 if ([[attributeDict valueForKey:@"allDay"] boolValue]) {
                     [_zcCalendarEvent setEventType:[ZCCalendarEvent EVENT_ALLDAY]];
@@ -315,13 +320,16 @@
                     [_zcCalendarEvent setEventType:[ZCCalendarEvent EVENT_SHORT]];
                     [_zcCalendarEvent setSubTitle:startTime];
                 }
-                [_zcCalendarEvents addZCCalendarEvent:_zcCalendarEvent];
+                
+                [_currentEventItems addObject:_zcCalendarEvent];
+//                [_zcCalendarEvents addZCCalendarEvent:_zcCalendarEvent];
             }
             else
             {
                 NSDate *checkDate = [startDate copy];
                 NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
                 [offsetComponents setDay:1];
+                
                 while (YES) {
                     NSComparisonResult result = [checkDate compare:endDate];
                     if (result == NSOrderedDescending)
@@ -351,7 +359,6 @@
                     {
                         if ([checkdatecomp year] == [startcomp year] && [checkdatecomp month] == [startcomp month] && [checkdatecomp day] == [startcomp day])
                         {
-                            
                             if ([startTime isEqualToString:@"00:00 AM"]) {
                                 eventType = [ZCCalendarEvent EVENT_ALLDAY];
                             }
@@ -365,7 +372,6 @@
                         }
                         else if ([checkdatecomp year] == [endcomp year] && [checkdatecomp month] == [endcomp month] && [checkdatecomp day] == [endcomp day])
                         {
-                            
                             if ([endTime isEqualToString:@"11:59 AM"]) {
                                 eventType = [ZCCalendarEvent EVENT_ALLDAY];
                             }
@@ -382,6 +388,8 @@
                         }
                         else
                         {
+                            modStartDate = [_userDateTimeFormat dateFromString:[NSString stringWithFormat:@"%@ 00:00:00", modStartStr]];
+                            modEndDate = [_userDateTimeFormat dateFromString:[NSString stringWithFormat:@"%@ 23:59:59", modEndStr]];
                             subTitle = @"all-day";
                         }
                     }
@@ -390,11 +398,13 @@
                         [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"id"]]];
                         [_zcCalendarEvent setStart:modStartDate];
                         [_zcCalendarEvent setEnd:modEndDate];
-                        NSLog(@"attribute title : %@",[attributeDict valueForKey:@"title"]);
-                        [_zcCalendarEvent setTitle:[attributeDict valueForKey:@"title"]];
+                        [_zcCalendarEvent setTitle:_currentEventTitle];
                         [_zcCalendarEvent setSubTitle:subTitle];
                         [_zcCalendarEvent setEventType:eventType];
-                        [_zcCalendarEvents addZCCalendarEvent:_zcCalendarEvent];
+                        
+                        [_currentEventItems addObject:_zcCalendarEvent];
+                        
+//                        [_zcCalendarEvents addZCCalendarEvent:_zcCalendarEvent];
                     }
                     
                     checkDate = [cal dateByAddingComponents:offsetComponents toDate:checkDate options:0];
@@ -406,8 +416,6 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     
-    NSLog(@"event-found %@ : %@ & %@ %d",string,_zcCalendarEvent.start,_zcCalendarEvent.end,_zcCalendarEvent.eventType);
-
     if(_valueTagEnabled == YES) {
         //////// //NSLog(@"Coming to add field value  %@",string);
         
@@ -472,8 +480,9 @@
         if(_eventTagEnabled==YES) {
             if([_currentElementName isEqualToString:@"title"])  {
                 
-                NSLog(@"event-all : %@ & %@ %d",_zcCalendarEvent.start,_zcCalendarEvent.end,_zcCalendarEvent.eventType);
-                [_zcCalendarEvent setTitle:[NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding]];
+                _currentEventTitle = [NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding];
+                
+//                [_zcCalendarEvent setTitle:[NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding]];
             }
         }
     }
@@ -686,6 +695,14 @@
             
             _groupNameEnabled = NO;
             [_zcGroup addZCGroupFields:_groupByNameFields];
+        }
+        
+        if ([elementName isEqualToString:@"event"]) {
+            
+            [_currentEventItems enumerateObjectsUsingBlock:^(ZCCalendarEvent* zce,NSUInteger i, BOOL *stop) {
+                zce.title = _currentEventTitle;
+                [_zcCalendarEvents addZCCalendarEvent:zce];
+            }];
         }
     }
 }

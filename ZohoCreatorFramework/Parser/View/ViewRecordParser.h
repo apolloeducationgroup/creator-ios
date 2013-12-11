@@ -58,7 +58,8 @@
     ZCFieldData *_groupByNameFields;
     NSString *_currentElementName;
     ZCCalendarEvent *_zcCalendarEvent;
-    
+    NSString* _currentEventTitle;
+    NSMutableArray* _currentEventItems;
     
     NSString * filterNAMEKey;
 }
