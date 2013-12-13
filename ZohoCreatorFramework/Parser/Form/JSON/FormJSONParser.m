@@ -323,8 +323,29 @@
         tempValue = [_fieldDict objectForKey:@"value"];
         if(tempValue != nil) {
 //            [_field setInitialValues:tempValue];
+
             if ([_field fieldType]==[ZCFieldList ZCURL]) {
+                
                 [[_field initialValues]setObject:tempValue forKey:@"value"];
+            }
+            else if([_field fieldType]==[ZCFieldList ZCImage]) {
+                
+                NSString* imageSrc = [NSString stringWithFormat:@"%@",tempValue];
+                
+                NSURL *validURL = [NSURL URLWithString:imageSrc];
+                if (validURL && validURL.scheme && validURL.host) {
+                    
+                    [_field setInitialValues:imageSrc];
+                }
+                else {
+                    
+                    NSArray * stringarray = [imageSrc componentsSeparatedByString:@"/"];
+                    
+                    NSString* imageName = [NSString stringWithFormat:@"/%@",[stringarray lastObject]];
+                    
+                    [_field setInitialValues:imageName];
+                    
+                }
             }
             else if([_field fieldType]==[ZCFieldList ZCNotes])
             {
