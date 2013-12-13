@@ -57,13 +57,25 @@
         
     }
 }
-
 - (void) getFormGeneralInfo  : (NSDictionary*) formGeneralDict {
     
     [_zcForm setSuccessMessage:[formGeneralDict objectForKey:@"successmessage"]];
     [_zcForm setLinkName:[formGeneralDict objectForKey:@"labelname"]];
     [_zcForm setDisplayName:[formGeneralDict objectForKey:@"displayname"]];
     [_zcForm setDateFormat:[formGeneralDict objectForKey:@"dateformat"]];
+    
+    
+    if ([formGeneralDict objectForKey:@"nexturl"]!=nil) {
+        
+        
+        NSMutableDictionary *urldict=[NSMutableDictionary dictionaryWithDictionary:[formGeneralDict objectForKey:@"nexturl"] ];
+        
+        [_zcForm setNextUrl:urldict];
+        
+    }
+    
+    
+    
     id temp = [formGeneralDict valueForKey:@"hasaddonload"];
     NSLog(@"type of on laod %@",[temp class]);
     

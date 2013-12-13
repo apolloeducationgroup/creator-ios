@@ -417,7 +417,7 @@
     // formData(template::row_1).singleValuedParam(Mobile_number)*Enter a valid number for  Mobile number. Email_1*Enter a valid email address for  Email 1
     
     
-    ////// //NSLog(@"\n\n  eeror mrgsubform    \n\n  %@  \n\n   %@\n\n  \n",OriginalErrorString,errorFieldName);
+NSLog(@"\n\n  eeror mrgsubform    \n\n  %@  \n\n   %@\n\n  \n",OriginalErrorString,errorFieldName);
     
     
     NSRange fieldrange = [OriginalErrorString rangeOfString:errorFieldName];
