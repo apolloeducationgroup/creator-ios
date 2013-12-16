@@ -417,7 +417,7 @@
         tempValue = [_fieldDict objectForKey:@"subformrecords"];
         if(tempValue != nil) {
 
-            [_field setSubformRecords:[self getSubformRecords:tempValue]];
+            [_field setSubformRecords:[self getSubformRecords:tempValue field:_field] ];
 
         
         }
@@ -463,7 +463,7 @@
      */
     
 }
--(NSMutableArray *)getSubformRecords:(NSArray *)recordsRawArray
+-(NSMutableArray *)getSubformRecords:(NSArray *)recordsRawArray field:(ZCField *)field
 {
     NSMutableArray * records=[[NSMutableArray alloc]init];
     
@@ -474,8 +474,8 @@
     for (NSString * key_fieldname in [recDict allKeys])
      
      {
-     
-         ZCFieldData * data=[[ZCFieldData alloc]init];
+         
+        ZCFieldData * data=[[ZCFieldData alloc]init];
          [data setFieldValue:[recDict objectForKey:key_fieldname]];
          [data setFieldName:key_fieldname ];
          [subrec addZCFieldData:data];

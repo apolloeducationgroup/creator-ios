@@ -381,7 +381,7 @@
         NSInteger fieldType = [field fieldType];
         
         ZCFieldData *fieldData = [[record record] objectForKey:fieldName];
-        //////// //NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
+NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
         
         if([fieldData fieldValue] != nil) {
             
@@ -393,15 +393,35 @@
                 [returnString appendFormat:@"<value>"];
                 NSArray *options = [fieldData fieldValue];
                 [returnString appendString:@"<options>"];
-                if(options != nil && [options isMemberOfClass:[NSArray class]] ) {
-                    for(NSInteger opt=0;opt<[options count];opt++)
-                    {
-                        NSString *optionValue =  [options objectAtIndex:opt];
-                        optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
-                        
-                        NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
 
-                        [returnString appendFormat:@"<option><![CDATA[%@]]></option>",escapedString];
+                if(options != nil && [options isKindOfClass:[NSArray class]] ) {
+
+//                    for(NSInteger opt=0;opt<[options count];opt++)
+//                    {
+//                        NSLog(@"escape string %@",returnString);
+//
+//                        NSString *optionValue =  [options objectAtIndex:opt];
+////                        optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
+//                        NSLog(@"escape string %@",returnString);
+//
+//                        NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+//                        NSLog(@"escape string %@",escapedString);
+//                        [returnString appendFormat:@"<option><![CDATA[%@]]></option>",escapedString];
+//                        NSLog(@"escape string %@",escapedString);
+//                        
+//                    }
+                    
+                    
+                    if(options != nil && [options count] > 0 )//&& [options isMemberOfClass:[NSArray class]] )
+                    {
+                        for(NSInteger opt=0;opt<[options count];opt++)
+                        {
+                            NSString *optionValue =  [options objectAtIndex:opt];
+                            optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
+                            if(optionValue != nil) {
+                                [returnString appendFormat:@"<option>[CDATA[%@]]</option>",optionValue];
+                            }
+                        }
                     }
                 }
                 [returnString appendString:@"</options>"];
@@ -442,6 +462,8 @@
             [returnString appendString:@"</field>"];
         }
     }
+    
+    NSLog(@"retu %@",returnString);
     return returnString;
 }
 
@@ -600,7 +622,8 @@
                 
             }
             else if([fieldValue isKindOfClass:[NSArray class]]) {
-                
+                [returnString appendFormat:@"<field name='%@'>",fieldName];
+
                 NSArray *options =fieldValue;
                 //// //NSLog(@"option value for update %@",options);
                 [returnString appendString:@"<options>"];
@@ -771,9 +794,10 @@
                     NSMutableString *SubFormrecordXML = [[NSMutableString alloc] init];
                     [SubFormrecordXML appendFormat:@"<add>"];
                     NSString * SubFormRecordString=[NSString stringWithFormat:@"%@", [ZCRecordString recordXMLforSubformRecord:zcSubform :SubFOrmRecord]];
+                    NSLog(@"subform data %@",[[[SubFOrmRecord record] objectForKey:@"Multi_Select"] fieldValue]);
                     [SubFormrecordXML appendString:SubFormRecordString];
                     [SubFormrecordXML appendString:@"</add>"];
-                    ////// //NSLog(@"\n\n subform string %@\n\n",SubFormrecordXML);
+            NSLog(@"\n\n subform string %@\n\n",SubFormrecordXML);
                     [subformRECORDSXML appendString:SubFormrecordXML];
                     addrecCount++;
                 }

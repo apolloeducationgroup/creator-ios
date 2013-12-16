@@ -110,10 +110,12 @@
         return @"";
     }
     NSRange r;
+    while ((r = [string rangeOfString:@"<br>" options:NSRegularExpressionSearch]).location != NSNotFound)
+        string = [string stringByReplacingCharactersInRange:r withString:@"\n"];
     while ((r = [string rangeOfString:@"(null)" options:NSRegularExpressionSearch]).location != NSNotFound)
         string = [string stringByReplacingCharactersInRange:r withString:@""];
-    while ((r = [string rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
-        string = [string stringByReplacingCharactersInRange:r withString:@""];
+//    while ((r = [string rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+//        string = [string stringByReplacingCharactersInRange:r withString:@""];
     
     while ((r = [string rangeOfString:@"&nbsp;" options:NSRegularExpressionSearch]).location != NSNotFound)
         string = [string stringByReplacingCharactersInRange:r withString:@" "];
