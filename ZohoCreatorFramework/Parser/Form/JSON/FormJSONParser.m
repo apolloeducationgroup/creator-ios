@@ -134,13 +134,29 @@
         NSLog(@"Button has added %@",[_button buttonDisplayName]);
     }
 }
--(BOOL)subformHASUnsupportedFields:(int)type
+-(BOOL)subformHASUnsupportedFields:(ZCField *)field
 {
 
-    if (type == [ZCFieldList ZCLookupCheckbox] || type == [ZCFieldList ZCLookupDropDown] || type == [ZCFieldList ZCLookupMultiSelect] || type == [ZCFieldList ZCLookupRadio] || type == [ZCFieldList ZCCrm] || type == [ZCFieldList ZCImage] || type == [ZCFieldList ZCFileupload] ) {
+    
+    if ([field fieldType] == [ZCFieldList ZCLookupCheckbox] || [field fieldType] == [ZCFieldList ZCLookupDropDown] || [field fieldType] == [ZCFieldList ZCLookupMultiSelect] || [field fieldType] == [ZCFieldList ZCLookupRadio] || [field fieldType] == [ZCFieldList ZCMultiSelect] || [field fieldType] == [ZCFieldList ZCDropdown] || [field fieldType] == [ZCFieldList ZCRadio] || [field fieldType] == [ZCFieldList ZCCheckbox])
+        
+    {
+        
+        if([field isLookupField])
+        {
+            
+            return YES;
+        }
+    }
+    
+    
+    if ([field fieldType] == [ZCFieldList ZCCrm] || [field fieldType] == [ZCFieldList ZCImage] || [field fieldType] == [ZCFieldList ZCFileupload] )
+        
+    {
         return YES;
-}
-
+    }
+    
+    
     return NO;
     
 }
@@ -161,21 +177,6 @@
         
         NSString *_fieldTypeRawString = [_fieldDict objectForKey:@"type"];
         [_field setFieldType:[_fieldTypeRawString integerValue]];
-        
-        if (SUBFORMTAG)
-        {
-        
-          if ( [self subformHASUnsupportedFields:[_fieldTypeRawString integerValue]])
-          {
-          
-        [_zcForm setIsNotSupported:YES];
-              
-//    [NSException raise:@"Form not Supported" format:@" FORM NOT SUPPORTED DUE TO UNSUPPORTED SUBFORM FIELDS"];
-
-          }
-            
-        }
-        
         
         
         
@@ -422,8 +423,29 @@
         }
         NSLog(@"field initial val %@  %@",_field.initialValues, _field.fieldName);
 
-        
+        if (SUBFORMTAG)
+        {
+            
+            
+            if ( [self subformHASUnsupportedFields:_field])
+            {
+                
+                [_zcForm setIsNotSupported:YES];
+                
+                //    [NSException raise:@"Form not Supported" format:@" FORM NOT SUPPORTED DUE TO UNSUPPORTED SUBFORM FIELDS"];
+                
+            }
+            
+        }
+
         [_localForm addZCField:_field];
+        
+        
+        
+        
+        
+        
+
     }
     
     
