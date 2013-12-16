@@ -134,7 +134,16 @@
         NSLog(@"Button has added %@",[_button buttonDisplayName]);
     }
 }
+-(BOOL)subformHASUnsupportedFields:(int)type
+{
 
+    if (type == [ZCFieldList ZCLookupCheckbox] || type == [ZCFieldList ZCLookupDropDown] || type == [ZCFieldList ZCLookupMultiSelect] || type == [ZCFieldList ZCLookupRadio] || type == [ZCFieldList ZCCrm] || type == [ZCFieldList ZCImage] || type == [ZCFieldList ZCFileupload] ) {
+        return YES;
+}
+
+    return NO;
+    
+}
 - (void) getFieldInfo : (NSArray*) _fieldRawList : (ZCForm*) _localForm {
     
     for(NSInteger index=0;index<[_fieldRawList count];index++) {
@@ -149,8 +158,25 @@
         
         
         [_field setToolTip:[_fieldDict objectForKey:@"tooltip"]];
+        
         NSString *_fieldTypeRawString = [_fieldDict objectForKey:@"type"];
         [_field setFieldType:[_fieldTypeRawString integerValue]];
+        
+        if (SUBFORMTAG)
+        {
+        
+          if ( [self subformHASUnsupportedFields:[_fieldTypeRawString integerValue]])
+          {
+          
+        [_zcForm setIsNotSupported:YES];
+              
+    [NSException raise:@"Form not Supported" format:@" FORM NOT SUPPORTED DUE TO UNSUPPORTED SUBFORM FIELDS"];
+
+          }
+            
+        }
+        
+        
         
         
         if ([_field fieldType]== [ZCFieldList ZCURL]) {
@@ -315,7 +341,9 @@
         if(tempValue != nil) {
             
             ZCForm *_subFormData = [[ZCForm alloc] initZCForm];
+            SUBFORMTAG =YES;
             [self getFieldInfo:tempValue :_subFormData];
+            SUBFORMTAG =NO;
             [_field setSubForm:_subFormData];
             NSLog(@"SubForm Data has added");
         }
@@ -344,7 +372,6 @@
                     NSString* imageName = [NSString stringWithFormat:@"/%@",[stringarray lastObject]];
                     
                     [_field setInitialValues:imageName];
-                    
                 }
             }
             else if([_field fieldType]==[ZCFieldList ZCNotes])

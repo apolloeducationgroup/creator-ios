@@ -22,6 +22,7 @@
     @private NSString *_jsonString;
     @private NSDictionary *_jsonDictionary;
     @private ZCApplication *_application;
+    @private BOOL SUBFORMTAG;
 }
 
 @property (nonatomic,retain) ZCForm *zcForm;
