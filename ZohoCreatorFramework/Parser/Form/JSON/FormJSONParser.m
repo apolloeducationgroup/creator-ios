@@ -7,7 +7,6 @@
 //
 
 #import "FormJSONParser.h"
-
 @interface FormJSONParser(private)
 
 - (void) convertJSONToZCForm;
@@ -473,23 +472,84 @@
 {
     NSMutableArray * records=[[NSMutableArray alloc]init];
     
+    NSArray * subformFields=[NSArray arrayWithArray:[[field subForm]fields]];
+    
  for(NSDictionary * recDict in recordsRawArray)
  {
 
      ZCRecord * subrec=[[ZCRecord alloc]initZCRecord];
     for (NSString * key_fieldname in [recDict allKeys])
      {
+         int fieldtype=0;
          
-        ZCFieldData * data=[[ZCFieldData alloc]init];
-         [data setFieldValue:[recDict objectForKey:key_fieldname]];
-         [data setFieldName:key_fieldname ];
-         [subrec addZCFieldData:data];
-     
+         for (int fieldindex=0; fieldindex < subformFields.count;fieldindex++)
+         {
+             
+             ZCField * subformField=[subformFields objectAtIndex:fieldindex];
+             
+             if ([key_fieldname isEqualToString:[subformField fieldName]]) {
+                 
+                 
+                 fieldtype=[subformField fieldType];
+                 
+                 break;
+                 
+             }
+         }
+         
+         [subrec addZCFieldData:[self getZCFieldDataForFieldName:key_fieldname fieldType:fieldtype fieldvalue:[recDict objectForKey:key_fieldname]]];
+         
+    
      }
      [records addObject:subrec];
  }
     return records;
 
 }
+-(ZCFieldData *)getZCFieldDataForFieldName:(NSString *)fieldname fieldType:(int)type fieldvalue:(NSString *)fieldValue
+{
 
+
+    
+    
+    ZCFieldData * data=[[ZCFieldData alloc]init];
+    [data setFieldName:fieldname ];
+
+    if (type==[ZCFieldList ZCMultiSelect] || type ==[ZCFieldList ZCCheckbox] || type ==[ZCFieldList ZCLookupCheckbox] || type==[ZCFieldList ZCLookupMultiSelect]) {
+        
+        
+        NSLog(@"dta ");
+
+        NSData *jsonData = [fieldValue dataUsingEncoding:[NSString defaultCStringEncoding]];
+        NSArray *jsonArray= [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+        
+        NSLog(@"dta %@",jsonArray);
+        NSMutableDictionary * choicesDict=[[NSMutableDictionary alloc]init];
+        for (NSDictionary * choiceDic in jsonArray ) {
+            
+            [choicesDict setValue:[choiceDic objectForKey:@"displayValue"] forKey:[choiceDic objectForKey:@"referFieldValue"]];
+            
+            
+            
+        }
+        
+        [data setFieldValue:choicesDict];
+        
+    }
+   else if (type==[ZCFieldList ZCURL]) {
+
+     [data setFieldValue:[ParserUtil getURLString: fieldValue]];
+    }
+    
+    else
+    {
+        [data setFieldValue:fieldValue];
+
+    }
+
+    
+    return data;
+
+
+}
 @end

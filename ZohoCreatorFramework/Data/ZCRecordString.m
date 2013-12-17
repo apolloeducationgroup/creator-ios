@@ -804,7 +804,6 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                     NSMutableString *SubFormrecordXML = [[NSMutableString alloc] init];
                     [SubFormrecordXML appendFormat:@"<add>"];
                     NSString * SubFormRecordString=[NSString stringWithFormat:@"%@", [ZCRecordString recordXMLforSubformRecord:zcSubform :SubFOrmRecord]];
-                    NSLog(@"subform data %@",[[[SubFOrmRecord record] objectForKey:@"Multi_Select"] fieldValue]);
                     [SubFormrecordXML appendString:SubFormRecordString];
                     [SubFormrecordXML appendString:@"</add>"];
             NSLog(@"\n\n subform string %@\n\n",SubFormrecordXML);

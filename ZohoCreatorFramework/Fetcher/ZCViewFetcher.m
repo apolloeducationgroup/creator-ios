@@ -136,13 +136,33 @@
     if ([formMetaXML isEqualToString:@""]) {
         [NSException raise:@"We are unable to fetch this data, sorry!" format:@"Report this problem to support@zohocreator.com"];
     }
-    
+    formMetaXML=[self stringByStrippingHTML:formMetaXML];
     ViewRecordParser *view = [[ViewRecordParser alloc] initViewRecordParser:formMetaXML :_component ];
     [[view zcView] setViewParam:_zcViewParam];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
     return [view zcView];
 }
+-(NSString *) stringByStrippingHTML:(NSString *)string
+{
+    if (string ==NULL || [string isEqualToString:@""] || [string isEqualToString:@"(null)"]) {
+        return @"";
+    }
+    NSRange r;
+    while ((r = [string rangeOfString:@"<br>" options:NSRegularExpressionSearch]).location != NSNotFound)
+        string = [string stringByReplacingCharactersInRange:r withString:@"\n"];
+    while ((r = [string rangeOfString:@"(null)" options:NSRegularExpressionSearch]).location != NSNotFound)
+        string = [string stringByReplacingCharactersInRange:r withString:@""];
+    //    while ((r = [string rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+    //        string = [string stringByReplacingCharactersInRange:r withString:@""];
+    
+    while ((r = [string rangeOfString:@"&nbsp;" options:NSRegularExpressionSearch]).location != NSNotFound)
+        string = [string stringByReplacingCharactersInRange:r withString:@" "];
+    
+    return string;
+}
+
+
 
 @end
 
