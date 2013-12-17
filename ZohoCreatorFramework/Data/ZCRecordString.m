@@ -621,7 +621,10 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                 
                 fieldValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) fieldValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
 
-                [returnString appendFormat:@"<field name='%@' value='![CDATA[%@]]'>",fieldName,fieldValue];
+//                [returnString appendFormat:@"<field name='%@' value=![CDATA[%@]]>",fieldName,fieldValue];
+                [returnString appendFormat:@"<field name='%@'>",fieldName];
+
+                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",fieldValue];
 
                 [returnString appendString:@"</field>"];
                 
@@ -641,7 +644,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                         if(optionValue != nil) {
                             optionValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
 
-                            [returnString appendFormat:@"<option>![CDATA[%@]]</option>",optionValue];
+                            [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
                         }
                     }
                 }
