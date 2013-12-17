@@ -335,6 +335,12 @@
                     
                 }
             }
+            else if([_field fieldType]==[ZCFieldList ZCFileupload]) {
+                
+                NSString* fileName = [NSString stringWithFormat:@"/%@",tempValue];
+
+                [_field setInitialValues:fileName];
+            }
             else if([_field fieldType]==[ZCFieldList ZCNotes])
             {
             
