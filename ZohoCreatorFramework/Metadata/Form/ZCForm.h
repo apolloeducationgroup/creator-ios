@@ -38,6 +38,10 @@ enum UPCOMING_FIELDS {
 @property (nonatomic,retain) NSMutableArray *errorList;
 @property BOOL hasError;
 
+@property BOOL isNotSupported;
+
+@property (nonatomic,retain)NSDictionary *nextUrl;
+
 - (ZCForm*) initZCForm;
 - (void) addZCField : (ZCField*) field;
 - (ZCField*) getFieldByName:(NSString *)fieldLinkName;

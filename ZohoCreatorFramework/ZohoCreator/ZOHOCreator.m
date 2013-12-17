@@ -13,7 +13,8 @@
 static ZOHOCreator *creatorObject = nil;
 
 @interface ZOHOCreator(hidden)
-
++(BOOL)formIsEditSuppoted:(ZCForm *)form;
++(BOOL)formIsSupported:(ZCForm *)form;
 @end
 
 @implementation ZOHOCreator
@@ -240,6 +241,10 @@ static ZOHOCreator *creatorObject = nil;
 + (ZCForm*) getEditFormWithView : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName recordLinkID : (NSString*) recordLinkID appOwner : (NSString *) appOwner {
     
     ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcher:appLinkName :formLinkName viewLinkName:viewLinkName recordLinkID:recordLinkID appOwner:appOwner];
+    if (![ZOHOCreator formIsEditSuppoted:[fetcher zcForm]])
+    {
+        [[fetcher zcForm]setIsNotSupported:YES];
+    }
     return [fetcher zcForm];
 }
 
@@ -288,9 +293,12 @@ static ZOHOCreator *creatorObject = nil;
 + (ZCForm*) getEditForm : (NSString*) appLinkName : (NSString*) formLinkName recordLinkID : (NSString*) recordLinkID appOwner : (NSString *) appOwner {
     
     ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcher:appLinkName :formLinkName  recordLinkID:recordLinkID appOwner:appOwner];
+    if (![ZOHOCreator formIsEditSuppoted:[fetcher zcForm]])
+    {
+        [[fetcher zcForm]setIsNotSupported:YES];
+    }
     return [fetcher zcForm];
 }
-
 + (ZCForm*) getForm : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner {
     
     ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcher:appLinkName :formLinkName appOwner:appOwner];
@@ -300,6 +308,7 @@ static ZOHOCreator *creatorObject = nil;
 + (ZCForm*) getForm : (NSString*) appLinkName : (NSString*) formLinkName :(NSString *)viewLinkName appOwner:(NSString *)appOwner {
 
     ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcher:appLinkName :formLinkName viewLinkName:viewLinkName appOwner:appOwner];
+
     return [fetcher zcForm];
 }
 + (ZCForm*) getFormforBulkedit : (NSString*) appLinkName : (NSString*) formLinkName :(NSString*) viewLinkName appOwner : (NSString *) appOwner
@@ -610,6 +619,25 @@ static ZOHOCreator *creatorObject = nil;
 @end
 
 @implementation ZOHOCreator (hidden)
++(BOOL)formIsEditSuppoted:(ZCForm *)form
+{
 
+    for (int fieldindex=0; fieldindex<[form fields].count; fieldindex++) {
+  if( [[[form fields]objectAtIndex:fieldindex]fieldType]==[ZCFieldList ZCURL])
+
+  {
+
+      return NO;
+  }
+    
+    }
+
+    return YES;
+}
++(BOOL)formIsSupported:(ZCForm *)form
+{
+    return YES;
+
+}
 
 @end

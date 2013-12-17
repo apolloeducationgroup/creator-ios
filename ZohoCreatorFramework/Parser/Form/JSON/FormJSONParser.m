@@ -57,13 +57,25 @@
         
     }
 }
-
 - (void) getFormGeneralInfo  : (NSDictionary*) formGeneralDict {
     
     [_zcForm setSuccessMessage:[formGeneralDict objectForKey:@"successmessage"]];
     [_zcForm setLinkName:[formGeneralDict objectForKey:@"labelname"]];
     [_zcForm setDisplayName:[formGeneralDict objectForKey:@"displayname"]];
     [_zcForm setDateFormat:[formGeneralDict objectForKey:@"dateformat"]];
+    
+    
+    if ([formGeneralDict objectForKey:@"nexturl"]!=nil) {
+        
+        
+        NSMutableDictionary *urldict=[NSMutableDictionary dictionaryWithDictionary:[formGeneralDict objectForKey:@"nexturl"] ];
+        
+        [_zcForm setNextUrl:urldict];
+        
+    }
+    
+    
+    
     id temp = [formGeneralDict valueForKey:@"hasaddonload"];
     NSLog(@"type of on laod %@",[temp class]);
     
@@ -122,7 +134,32 @@
         NSLog(@"Button has added %@",[_button buttonDisplayName]);
     }
 }
+-(BOOL)subformHASUnsupportedFields:(ZCField *)field
+{
 
+    
+    if ([field fieldType] == [ZCFieldList ZCLookupCheckbox] || [field fieldType] == [ZCFieldList ZCLookupDropDown] || [field fieldType] == [ZCFieldList ZCLookupMultiSelect] || [field fieldType] == [ZCFieldList ZCLookupRadio] || [field fieldType] == [ZCFieldList ZCMultiSelect] || [field fieldType] == [ZCFieldList ZCDropdown] || [field fieldType] == [ZCFieldList ZCRadio] || [field fieldType] == [ZCFieldList ZCCheckbox])
+        
+    {
+        
+        if([field isLookupField])
+        {
+            
+            return YES;
+        }
+    }
+    
+    
+    if ([field fieldType] == [ZCFieldList ZCDecisionBox] ||  [field fieldType] == [ZCFieldList ZCCrm] || [field fieldType] == [ZCFieldList ZCImage] || [field fieldType] == [ZCFieldList ZCFileupload] )
+        
+    {
+        return YES;
+    }
+    
+    
+    return NO;
+    
+}
 - (void) getFieldInfo : (NSArray*) _fieldRawList : (ZCForm*) _localForm {
     
     for(NSInteger index=0;index<[_fieldRawList count];index++) {
@@ -137,8 +174,10 @@
         
         
         [_field setToolTip:[_fieldDict objectForKey:@"tooltip"]];
+        
         NSString *_fieldTypeRawString = [_fieldDict objectForKey:@"type"];
         [_field setFieldType:[_fieldTypeRawString integerValue]];
+        
         
         
         if ([_field fieldType]== [ZCFieldList ZCURL]) {
@@ -303,7 +342,9 @@
         if(tempValue != nil) {
             
             ZCForm *_subFormData = [[ZCForm alloc] initZCForm];
+            SUBFORMTAG =YES;
             [self getFieldInfo:tempValue :_subFormData];
+            SUBFORMTAG =NO;
             [_field setSubForm:_subFormData];
             NSLog(@"SubForm Data has added");
         }
@@ -332,7 +373,6 @@
                     NSString* imageName = [NSString stringWithFormat:@"/%@",[stringarray lastObject]];
                     
                     [_field setInitialValues:imageName];
-                    
                 }
             }
             else if([_field fieldType]==[ZCFieldList ZCFileupload]) {
@@ -383,14 +423,35 @@
         tempValue = [_fieldDict objectForKey:@"subformrecords"];
         if(tempValue != nil) {
 
-            [_field setSubformRecords:[self getSubformRecords:tempValue]];
+            [_field setSubformRecords:[self getSubformRecords:tempValue field:_field] ];
 
         
         }
         NSLog(@"field initial val %@  %@",_field.initialValues, _field.fieldName);
 
-        
+        if (SUBFORMTAG)
+        {
+            
+            
+            if ( [self subformHASUnsupportedFields:_field])
+            {
+                
+                [_zcForm setIsNotSupported:YES];
+                
+                //    [NSException raise:@"Form not Supported" format:@" FORM NOT SUPPORTED DUE TO UNSUPPORTED SUBFORM FIELDS"];
+                
+            }
+            
+        }
+
         [_localForm addZCField:_field];
+        
+        
+        
+        
+        
+        
+
     }
     
     
@@ -408,7 +469,7 @@
      */
     
 }
--(NSMutableArray *)getSubformRecords:(NSArray *)recordsRawArray
+-(NSMutableArray *)getSubformRecords:(NSArray *)recordsRawArray field:(ZCField *)field
 {
     NSMutableArray * records=[[NSMutableArray alloc]init];
     
@@ -419,8 +480,8 @@
     for (NSString * key_fieldname in [recDict allKeys])
      
      {
-     
-         ZCFieldData * data=[[ZCFieldData alloc]init];
+         
+        ZCFieldData * data=[[ZCFieldData alloc]init];
          [data setFieldValue:[recDict objectForKey:key_fieldname]];
          [data setFieldName:key_fieldname ];
          [subrec addZCFieldData:data];
