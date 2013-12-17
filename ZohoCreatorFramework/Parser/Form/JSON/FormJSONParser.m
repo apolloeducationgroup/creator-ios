@@ -478,7 +478,6 @@
 
      ZCRecord * subrec=[[ZCRecord alloc]initZCRecord];
     for (NSString * key_fieldname in [recDict allKeys])
-     
      {
          
         ZCFieldData * data=[[ZCFieldData alloc]init];

@@ -390,7 +390,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
             if(fieldType == [ZCFieldList ZCMultiSelect] || fieldType==[ZCFieldList ZCCheckbox])
             {
                 
-                [returnString appendFormat:@"<value>"];
+//                [returnString appendFormat:@"<value>"];
                 NSArray *options = [fieldData fieldValue];
                 [returnString appendString:@"<options>"];
 
@@ -418,14 +418,16 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                         {
                             NSString *optionValue =  [options objectAtIndex:opt];
                             optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
+                            
+//                            optionValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
                             if(optionValue != nil) {
-                                [returnString appendFormat:@"<option>[CDATA[%@]]</option>",optionValue];
+                                [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
                             }
                         }
                     }
                 }
                 [returnString appendString:@"</options>"];
-                [returnString appendFormat:@"</value>"];
+//                [returnString appendFormat:@"</value>"];
 
                 
             }
@@ -617,7 +619,10 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
             
             if([fieldValue isKindOfClass:[NSString class]] ) {
                 
-                [returnString appendFormat:@"<field name='%@' value='%@'>",fieldName,fieldValue];
+                fieldValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) fieldValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+
+                [returnString appendFormat:@"<field name='%@' value='![CDATA[%@]]'>",fieldName,fieldValue];
+
                 [returnString appendString:@"</field>"];
                 
             }
@@ -634,7 +639,9 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                         NSString *optionValue =  [options objectAtIndex:opt];
                         optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
                         if(optionValue != nil) {
-                            [returnString appendFormat:@"<option>%@</option>",optionValue];
+                            optionValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+
+                            [returnString appendFormat:@"<option>![CDATA[%@]]</option>",optionValue];
                         }
                     }
                 }
