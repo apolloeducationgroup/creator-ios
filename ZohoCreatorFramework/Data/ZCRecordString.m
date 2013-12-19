@@ -615,7 +615,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
             
         {
             id fieldValue = [[[record record] objectForKey:fieldName]fieldValue ];
-            //        NSLog(@"fieldvalue %@",fieldValue);
+            NSLog(@"fieldvalue %@",[fieldValue class]);
             
             if([fieldValue isKindOfClass:[NSString class]] ) {
                 
@@ -633,7 +633,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                 [returnString appendFormat:@"<field name='%@'>",fieldName];
 
                 NSArray *options =fieldValue;
-                //// //NSLog(@"option value for update %@",options);
+                NSLog(@"option value for update %@",options);
                 [returnString appendString:@"<options>"];
                 if(options != nil && [options count] > 0 )//&& [options isMemberOfClass:[NSArray class]] )
                 {
@@ -652,8 +652,28 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                 [returnString appendString:@"</field>"];
                 
             }
-            else if([fieldValue isKindOfClass:[NSMutableDictionary class]]) {
+            else if([fieldValue isKindOfClass:[NSDictionary class]]) {
+                [returnString appendFormat:@"<field name='%@'>",fieldName];
                 
+                NSArray *options =[fieldValue allValues];
+                NSLog(@"option value for update %@",options);
+                [returnString appendString:@"<options>"];
+                if(options != nil && [options count] > 0 )//&& [options isMemberOfClass:[NSArray class]] )
+                {
+                    for(NSInteger opt=0;opt<[options count];opt++)
+                    {
+                        NSString *optionValue =  [options objectAtIndex:opt];
+                        optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
+                        if(optionValue != nil) {
+                            optionValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+                            
+                            [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
+                        }
+                    }
+                }
+                [returnString appendString:@"</options>"];
+                [returnString appendString:@"</field>"];
+
             }
             
         }
