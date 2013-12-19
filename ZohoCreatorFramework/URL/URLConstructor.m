@@ -47,7 +47,12 @@ int FORM_LOOKUP_ADD_FORM =5;
 
 + (NSString*) formURLforBulkedit:(NSString *)appLinkName formName:(NSString *)formLinkName viewName:(NSString *)viewLinkName withApplicationOwner:(NSString *)appOwner
 {
-    NSString *formURL = [self formURL:appLinkName formName:formLinkName withApplicationOwner:appOwner];
+    
+    
+    NSString *formURL = [NSString stringWithFormat:@"/api/%@/json/%@/form/%@/bulkeditfields/",appOwner,appLinkName,formLinkName];
+    formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
+    formURL = [URLConstructor appendAuthToken:formURL];
+    formURL = [formURL stringByAppendingString:@"&metaData=complete&zcRefValue=true"];
     formURL = [formURL stringByAppendingString:[NSString stringWithFormat:@"&viewLinkName=%@&formAccessType=%d",viewLinkName,4]];
     return formURL;
 }
@@ -706,7 +711,16 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
 +(NSString *)construckLookupChoicesURLWithAppLinkname:(NSString *)appLinkName formLinkname:(NSString *)formLinkName lookUpFieldLinkName:(NSString *)lookupFieldName appOwner:(NSString *)appOwner subformComponent:(NSString *)subformComponent searchString: (NSString *)searchString startindex:(int)startIndex limit:(int)limit viewLinkname:(NSString *)viewLinkname recordID:(NSString *)recordID ifFormInAddToPickListChildappNamesINORDER:(NSArray *)childappNamesINORDER childFormNameINORDER:(NSArray *)childFormNameINORDER baseFieldNameINORDER:(NSArray *)baseFieldNameINORDER
 
 {
-    NSString * lookUpchoiceURL=[NSString stringWithFormat:@"/api/%@/xml/%@/form/%@/lookup/%@/options//",appOwner,appLinkName,formLinkName,lookupFieldName];
+    NSString * lookUpchoiceURL=@"";
+    if (subformComponent.length) {
+        NSString * lookUpchoiceURLForSubform=[NSString stringWithFormat:@"/api/%@/xml/%@/form/%@/lookup/%@/options//&subformcomponent=%@",appOwner,appLinkName,formLinkName,subformComponent,lookupFieldName];
+        lookUpchoiceURL=lookUpchoiceURLForSubform;
+    }
+    else
+    {
+        lookUpchoiceURL=[NSString stringWithFormat:@"/api/%@/xml/%@/form/%@/lookup/%@/options//",appOwner,appLinkName,formLinkName,lookupFieldName];
+    }
+    
     lookUpchoiceURL = [URLConstructor appendAuthToken:lookUpchoiceURL];
     
     lookUpchoiceURL =[lookUpchoiceURL stringByAppendingFormat:@"&limit=%i&appendRows=true&startindex=%i&zcRefValue=true&searchValue=%@",limit,startIndex,searchString];
