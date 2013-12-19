@@ -242,54 +242,78 @@
                             NSRange rang;
                             rang.location=0;
                             rang.length=3;
-                        if ([[errorFieldName substringWithRange:rang]isEqualToString:@"SF(" ]) {
-                        
-                                                [self setSubformFieldErrors:errorFieldName errorMsg:fieldErrorMessage];
-
-//                                [self generateSubformError:OriginalErrorString :errorFieldName] ;
-                        }
-                        }
-        
-//
-////                        NSRegularExpression *regexp_View = [NSRegularExpression regularExpressionWithPattern: @"<div elName='zc-component' viewLinkName='(.*)\\' params='(.*)\\</div>"options:NSRegularExpressionCaseInsensitive error:NULL];
-//                        
-//                        NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'FD(t::row_(.*)\\).SV((.*)\\)'"];
-////                        NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'formData(.*)\\.singleValuedParam(.*)'"];
-//                        BOOL result2=[predicate2 evaluateWithObject:errorFieldName];
-//                        NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'SV((.*)\\)'"];
-////                        NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'singleValuedParam(.*)'"];
-//                        BOOL result3=[predicate3 evaluateWithObject:errorFieldName];
-//
-//                        
-////                        NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'subFormDetails(.*)\\.formData(.*)\\.singleValuedParam(.*)'"];
-////                        BOOL result1 = [predicate1 evaluateWithObject:errorFieldName];
-////                        
-////                        NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'formData(.*)\\.singleValuedParam(.*)'"];
-////                        BOOL result2=[predicate2 evaluateWithObject:errorFieldName];
-////                        
-////                        NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'singleValuedParam(.*)'"];
-////                        BOOL result3=[predicate3 evaluateWithObject:errorFieldName];
-                        
-                            ////// //NSLog(@"checked msg \n\n %@  \n\n %@ \n\n %@",errorMessage,errorFieldName,fieldErrorMessage);
-                            
-                            if ([errorFieldName isEqualToString:@"null"]) {
-                                //----------------------->> supposed to be subform error API mistake  [generalErrorlist addObject:fieldErrorMessage];
+                            if ([[errorFieldName substringWithRange:rang]isEqualToString:@"SF(" ]) {
+                                
+                                [self setSubformFieldErrors:errorFieldName errorMsg:fieldErrorMessage];
+                                
+                                //                                [self generateSubformError:OriginalErrorString :errorFieldName] ;
                             }
+                        }
+                        
+                        //
+                        ////                        NSRegularExpression *regexp_View = [NSRegularExpression regularExpressionWithPattern: @"<div elName='zc-component' viewLinkName='(.*)\\' params='(.*)\\</div>"options:NSRegularExpressionCaseInsensitive error:NULL];
+                        //
+                        //                        NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'FD(t::row_(.*)\\).SV((.*)\\)'"];
+                        ////                        NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'formData(.*)\\.singleValuedParam(.*)'"];
+                        //                        BOOL result2=[predicate2 evaluateWithObject:errorFieldName];
+                        //                        NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'SV((.*)\\)'"];
+                        ////                        NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'singleValuedParam(.*)'"];
+                        //                        BOOL result3=[predicate3 evaluateWithObject:errorFieldName];
+                        //
+                        //
+                        ////                        NSPredicate *predicate1 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'subFormDetails(.*)\\.formData(.*)\\.singleValuedParam(.*)'"];
+                        ////                        BOOL result1 = [predicate1 evaluateWithObject:errorFieldName];
+                        ////
+                        ////                        NSPredicate *predicate2 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'formData(.*)\\.singleValuedParam(.*)'"];
+                        ////                        BOOL result2=[predicate2 evaluateWithObject:errorFieldName];
+                        ////
+                        ////                        NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'singleValuedParam(.*)'"];
+                        ////                        BOOL result3=[predicate3 evaluateWithObject:errorFieldName];
+                        
+                        ////// //NSLog(@"checked msg \n\n %@  \n\n %@ \n\n %@",errorMessage,errorFieldName,fieldErrorMessage);
+                        
+                        if ([errorFieldName isEqualToString:@"null"] ) {
+                            //----------------------->> supposed to be subform error API mistake  [generalErrorlist addObject:fieldErrorMessage];
+                        }
+                        else
+                        {
+                            
+                            
+                            if (errorFieldName.length>4) {
+                                NSRange rang;
+                                rang.location=0;
+                                rang.length=3;
+                                if (![[errorFieldName substringWithRange:rang]isEqualToString:@"SF(" ])
+                                {
+                                    ZCFieldError *fieldError = [[ZCFieldError alloc] init];
+                                    [fieldError setFieldName:errorFieldName];
+                                    [fieldError setErrorMessage:fieldErrorMessage];
+                                    [_zcRecordError addFieldError:fieldError];
+                                    
+                                    //                                [self getsubform:errorFieldName];
+//                                    NSLog(@"errrr %@ %@  %@",errorFieldName,fieldErrorMessage,fieldError);
+                                }
+                                
+                            }
+                            
                             else
+                                
                             {
                                 ZCFieldError *fieldError = [[ZCFieldError alloc] init];
                                 [fieldError setFieldName:errorFieldName];
                                 [fieldError setErrorMessage:fieldErrorMessage];
                                 [_zcRecordError addFieldError:fieldError];
                                 
-//                                [self getsubform:errorFieldName];
-                                NSLog(@"errrr %@ %@  %@",errorFieldName,fieldErrorMessage,fieldError);
+                                //                                [self getsubform:errorFieldName];
+//                                NSLog(@"errrr %@ %@  %@",errorFieldName,fieldErrorMessage,fieldError);
+
+                            
                             }
                             
                         }
-                        
-                                            ////// //NSLog(@" next Range %d",nextrange.length);
-            
+                    }
+                    ////// //NSLog(@" next Range %d",nextrange.length);
+                    
                     
                     
                     
@@ -456,12 +480,12 @@
     NSLog(@"arr osdfsa %@ %@ %@",fieldName,subformfieldName,rowNum);
         
     ZCSubFormFieldError * subformFieldError=[[ZCSubFormFieldError alloc ]init];
-    [subformFieldError setSubFormLinkname:errorname];
+    [subformFieldError setSubFormLinkname:fieldName];
     [subformFieldError setRecordRowinSubform:[rowNum integerValue]];
     [subformFieldError setFieldName:subformfieldName];
     [subformFieldError setErrorMessage:errorMsg];
     
-    ////// //NSLog(@"subformFielderror   \n\n %@  \n\n %i \n\n %@  \n\n  %@",subFormDetails,formRecordRow,singleValuedParam,ErrorMessageForSubform);
+    NSLog(@"subformFielderror   \n\n %@  \n\n %@  \n\n  %@ %@",fieldName,rowNum,subformfieldName,errorMsg);
     
     [_zcRecordError addSubFormFieldFieldError:subformFieldError];
 }
