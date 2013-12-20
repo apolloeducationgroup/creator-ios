@@ -51,7 +51,6 @@
         htmlViewURL =[htmlViewURL stringByAppendingFormat:@"searchKey=%@",_searchString];
         
     }
-    nslo
     URLConnector *connection = [[URLConnector alloc] initFetcher:htmlViewURL];
     NSString *rawHTML = [connection apiResponse];
     ZCHTMLView *htmlView = [[ZCHTMLView alloc] init];
