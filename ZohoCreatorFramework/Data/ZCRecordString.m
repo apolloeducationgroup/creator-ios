@@ -858,7 +858,10 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
             else
                 
             {
-                [returnString appendFormat:@"<field name='%@' value='%@'>",fieldName,[fieldData fieldValue]];
+                [returnString appendFormat:@"<field name='%@'>",fieldName];
+                
+                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",[fieldData fieldValue]];
+
                 [returnString appendString:@"</field>"];
 
             }
@@ -878,7 +881,9 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
             id fieldValue = [dataDict objectForKey:fieldName];
             if([fieldValue isKindOfClass:[NSString class]] ) {
                 
-                [returnString appendFormat:@"<field name='%@' value='%@'>",fieldName,fieldValue];
+                [returnString appendFormat:@"<field name='%@'>",fieldName];
+                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",fieldValue];
+
             }
             else if([fieldValue isKindOfClass:[NSArray class]]) {
                 
