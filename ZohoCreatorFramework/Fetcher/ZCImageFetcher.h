@@ -18,6 +18,5 @@
     NSString *_appLinkName;
     NSString *_appOwner;
 }
-+  (NSData*) fetchImageWITHFilePath: (NSString*) FilePath withViewLinkName : (NSString*) viewLinkName appLinkName:(NSString *)appLinkname appOwner : (NSString *) appOwner;
-
++  (NSData*) fetchImageWITHFilePath: (NSString*) FilePath withViewLinkName : (NSString*) viewLinkName appLinkName:(NSString *)appLinkname appOwner : (NSString *) appOwner  getOnlyImageURL:(BOOL)getIMageURL;
 @end

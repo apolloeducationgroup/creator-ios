@@ -19,7 +19,7 @@
 
 @synthesize zcHtmlView=_zcHtmlView;
 
-- (ZCHTMLViewFetcher*) initHTMLViewFetcher : (NSString*) appLinkName htmlViewLinkName : (NSString*) viewLinkName appOwner:(NSString *) appOwner {
+- (ZCHTMLViewFetcher*) initHTMLViewFetcher : (NSString*) appLinkName htmlViewLinkName : (NSString*) viewLinkName appOwner:(NSString *) appOwner searchString:(NSString *)searchString{
     
     self = [super init];
     if(self) {
@@ -28,6 +28,7 @@
         self->_appOwner = appOwner;
         self->_componentName = viewLinkName;
         self->_zcHtmlView = [self fetchFromServer];
+        self->_searchString=searchString;
     }
     return self;
 }
@@ -45,6 +46,12 @@
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSString *htmlViewURL = [URLConstructor htmlView:self->_appLinkName htmlViewLinkName:self->_componentName applicationOwner:self->_appOwner];
+    if (_searchString.length) {
+        
+        htmlViewURL =[htmlViewURL stringByAppendingFormat:@"searchKey=%@",_searchString];
+        
+    }
+    nslo
     URLConnector *connection = [[URLConnector alloc] initFetcher:htmlViewURL];
     NSString *rawHTML = [connection apiResponse];
     ZCHTMLView *htmlView = [[ZCHTMLView alloc] init];

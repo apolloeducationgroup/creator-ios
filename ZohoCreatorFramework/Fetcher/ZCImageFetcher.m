@@ -10,7 +10,7 @@
 
 @implementation ZCImageFetcher
 
-+  (NSData*) fetchImageWITHFilePath: (NSString*) FilePath withViewLinkName : (NSString*) viewLinkName appLinkName:(NSString *)appLinkname appOwner : (NSString *) appOwner {
++  (NSData*) fetchImageWITHFilePath: (NSString*) FilePath withViewLinkName : (NSString*) viewLinkName appLinkName:(NSString *)appLinkname appOwner : (NSString *) appOwner  getOnlyImageURL:(BOOL)getIMageURL{
     
     
     
@@ -32,7 +32,10 @@ urlString = [URLConstructor downloadFile:FilePath viewLinkName:viewLinkName :app
         
     }
     
-
+    if (getIMageURL)
+    {
+        return[urlString dataUsingEncoding:[NSString defaultCStringEncoding]];
+    }
     
     
     

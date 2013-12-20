@@ -23,10 +23,10 @@
     NSString *_appLinkName;
     NSString *_componentName;
     NSString *_appOwner;
+    NSString *_searchString;
 }
 
 @property (nonatomic,retain) ZCHTMLView *zcHtmlView;
 
-- (ZCHTMLViewFetcher*) initHTMLViewFetcher : (NSString*) appLinkName htmlViewLinkName : (NSString*) viewLinkName appOwner:(NSString *) appOwner;
-
+- (ZCHTMLViewFetcher*) initHTMLViewFetcher : (NSString*) appLinkName htmlViewLinkName : (NSString*) viewLinkName appOwner:(NSString *) appOwner searchString:(NSString *)searchString;
 @end
