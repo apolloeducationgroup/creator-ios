@@ -139,9 +139,32 @@
     formMetaXML=[self stringByStrippingHTML:formMetaXML];
     ViewRecordParser *view = [[ViewRecordParser alloc] initViewRecordParser:formMetaXML :_component ];
     [[view zcView] setViewParam:_zcViewParam];
+   view.zcView=[self checkViewForCalenderParam:[view zcView ]];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
     return [view zcView];
+}
+-(ZCView *)checkViewForCalenderParam:(ZCView *)view
+{
+
+    if ([_zcViewParam getCalendarCriteria])
+    {
+    
+        NSMutableArray *gps=[view.zcGroups.zcGroups copy ];
+        
+        [view.zcGroups.zcGroups removeAllObjects];
+        
+        
+        for (int grpind=gps.count-1;grpind>0; grpind--) {
+            
+            
+            [view.zcGroups addZCGroup:[gps objectAtIndex:grpind]];
+        }
+
+        
+        
+    }
+    return view;
 }
 -(NSString *) stringByStrippingHTML:(NSString *)string
 {

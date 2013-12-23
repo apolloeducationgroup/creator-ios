@@ -7,10 +7,10 @@
 //
 
 #import "ZCRecordError.h"
-
+#import "ZCSubFormFieldError.h"
 @implementation ZCRecordError
 
-@synthesize errorCode=_errorCode,errorMessage=_errorMessage,fieldErrorList=_fieldErrorList,subFormFieldErrorList=_subFormFieldErrorList,generalErrorList=_generalErrorList;
+@synthesize errorCode=_errorCode,errorMessage=_errorMessage,fieldErrorList=_fieldErrorList,subFormFieldErrorList=_subFormFieldErrorList,subFormFieldErrorsDictionary=_subFormFieldErrorsDictionary,generalErrorList=_generalErrorList;
 
 - (ZCRecordError*) init {
 
@@ -21,6 +21,7 @@
         self->_fieldErrorList = [[NSMutableArray alloc] init];
         self->_subFormFieldErrorList=[[NSMutableArray alloc]init];
         self->_generalErrorList=[[NSMutableArray alloc]init];
+        self->_subFormFieldErrorsDictionary=[[NSMutableDictionary alloc]init];
 
     }
     return self;
@@ -35,6 +36,8 @@
         self->_fieldErrorList = [[NSMutableArray alloc] init];
         self->_subFormFieldErrorList=[[NSMutableArray alloc]init];
         self->_generalErrorList=[[NSMutableArray alloc]init];
+        self->_subFormFieldErrorsDictionary=[[NSMutableDictionary alloc]init];
+
     }
     return self;
 }
@@ -48,6 +51,20 @@
 {
 
     [_subFormFieldErrorList addObject:subformFieldError];
+    
+    NSString * rowNum=[NSString stringWithFormat:@"%i",[subformFieldError recordRowinSubform]];
+    
+    if([_subFormFieldErrorsDictionary objectForKey:rowNum])
+    {
+    
+       [ [_subFormFieldErrorsDictionary objectForKey:rowNum]addObject:subformFieldError];
+    
+    }
+    else
+    {
+    
+        [_subFormFieldErrorsDictionary setObject:[NSMutableArray arrayWithObject:subformFieldError] forKey:rowNum];
+    }
     ////// //NSLog(@"subform errorlist  %@",_subFormFieldErrorList);
     
 }

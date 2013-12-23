@@ -48,12 +48,12 @@ int FORM_LOOKUP_ADD_FORM =5;
 + (NSString*) formURLforBulkedit:(NSString *)appLinkName formName:(NSString *)formLinkName viewName:(NSString *)viewLinkName withApplicationOwner:(NSString *)appOwner
 {
     
-    
-    NSString *formURL = [NSString stringWithFormat:@"/api/%@/json/%@/form/%@/bulkeditfields/",appOwner,appLinkName,formLinkName];
+    NSString *formURL = [NSString stringWithFormat:@"/api/%@/json/%@/view/%@/bulkeditfields/",appOwner,appLinkName,viewLinkName];
+
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     formURL = [formURL stringByAppendingString:@"&metaData=complete&zcRefValue=true"];
-    formURL = [formURL stringByAppendingString:[NSString stringWithFormat:@"&viewLinkName=%@&formAccessType=%d",viewLinkName,4]];
+    formURL = [formURL stringByAppendingString:[NSString stringWithFormat:@"&zc_ownername=%@&formAccessType=%d",appOwner,4]];
     return formURL;
 }
 
@@ -686,7 +686,7 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
     //
     NSString * authenticationUrl=[NSString stringWithFormat:@"%@/login?scopes=ZohoCreator/creatorapi,ZohoContacts/photoapi&serviceurl=%@&hide_fp=false&hide_remember=true&hide_signup=true&hide_gsignup=false&hidegooglesignin=false",[URLConstructor accountsURL],[URLConstructor serverURL:YES]];
     
-    
+    NSLog(@"auth riyaz url :: %@",authenticationUrl);
     //    NSString * authenticationUrl=[NSString stringWithFormat:@"https://accounts.zoho.com/login?scopes=JProxy/jmobileapi,ZohoShow/DataAPI&serviceurl=https://creator.zoho.com&hide_fp=false&hide_remember=true&hide_gsignup=false&hidegooglesignin=false&getticket=true"];
     
     //        hide_remember (true / false) - Used to hide Keep me Signed in option.

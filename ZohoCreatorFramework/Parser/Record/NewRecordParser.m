@@ -445,7 +445,7 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     
     
-    NSLog(@"record error %@ %@",[_zcRecordError fieldErrorList],[_zcRecordError subFormFieldErrorList]);
+    NSLog(@"record error %@ %@",[_zcRecordError fieldErrorList],[_zcRecordError subFormFieldErrorsDictionary]);
     
 }
 

@@ -16,6 +16,8 @@
 @property (nonatomic,retain) NSString *errorMessage;
 @property (nonatomic,retain) NSMutableArray *fieldErrorList;
 @property (nonatomic,retain) NSMutableArray * subFormFieldErrorList;
+@property (nonatomic,retain) NSMutableDictionary * subFormFieldErrorsDictionary;
+
 @property (nonatomic,retain) NSMutableArray * generalErrorList;
 - (ZCRecordError*) initZCRecordError : (NSString*) errorCode : (NSString*) errorMessage;
 - (ZCRecordError*) init;

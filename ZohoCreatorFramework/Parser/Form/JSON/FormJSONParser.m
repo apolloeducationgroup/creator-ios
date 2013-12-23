@@ -149,8 +149,9 @@
     }
     
     
-    if ([field fieldType] == [ZCFieldList ZCDecisionBox] ||  [field fieldType] == [ZCFieldList ZCCrm] || [field fieldType] == [ZCFieldList ZCImage] || [field fieldType] == [ZCFieldList ZCFileupload] )
-        
+//    if ([field fieldType] == [ZCFieldList ZCDecisionBox] ||  [field fieldType] == [ZCFieldList ZCCrm] || [field fieldType] == [ZCFieldList ZCImage] || [field fieldType] == [ZCFieldList ZCFileupload] )
+    if ( [field fieldType] == [ZCFieldList ZCCrm] || [field fieldType] == [ZCFieldList ZCImage] || [field fieldType] == [ZCFieldList ZCFileupload] )
+
     {
         return YES;
     }
