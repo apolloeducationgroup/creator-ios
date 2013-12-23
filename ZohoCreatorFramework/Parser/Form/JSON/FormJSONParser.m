@@ -220,8 +220,10 @@
         if(tempValue != nil) {
             [_field setHasSubFormDeleteEvent:[tempValue boolValue]];
         }
-
-        
+        tempValue = [_fieldDict objectForKey:@"inputtype"];
+        if(tempValue != nil) {
+            [_field setImageInputType:[tempValue integerValue]];
+        }
         tempValue = [_fieldDict objectForKey:@"maximumrows"];
         if(tempValue != nil) {
             [_field setHasmaximumNumberOfRows:[tempValue integerValue]];

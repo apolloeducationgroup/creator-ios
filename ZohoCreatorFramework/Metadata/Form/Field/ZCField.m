@@ -16,6 +16,7 @@
 @synthesize hasInvolvedInFormula=_hasInvolvedInFormula,isHidden=_isHidden,isUnique=_isUnique,isAdminOnly=_isAdminOnly;
 @synthesize subformRecords=_subformRecords,toolTip=_toolTip,isLookupField=_isLookupField,hasAllowNewEntries=_hasAllowNewEntries,decimalLength=_decimalLength;
 @synthesize currencyDisplay=_currencyDisplay,currencyName=_currencyName,isUrlLinkName=_isUrlLinkName,isUrlTitle=_isUrlTitle,hasVisiblity=_hasVisiblity,defaultRows=_defaultRows;
+@synthesize imageInputType=_imageInputType;
 - (ZCField*) initZCField {
     
     self = [super init];

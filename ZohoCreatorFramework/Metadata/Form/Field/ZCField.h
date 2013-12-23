@@ -45,6 +45,7 @@
 @property (nonatomic,retain) NSString *currencyName;
 @property(nonatomic,assign) NSInteger hasmaximumNumberOfRows;
 @property (nonatomic,assign) NSInteger defaultRows;
+@property (nonatomic,assign) NSInteger imageInputType;
 -(ZCField*) initZCField;
 
 @end
