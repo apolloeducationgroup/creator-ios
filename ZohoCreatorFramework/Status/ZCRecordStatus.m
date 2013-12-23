@@ -11,7 +11,7 @@
 
 @implementation ZCRecordStatus
 
-@synthesize criteria=_criteria,record=_record,success=_success,lookUpAddedDataDict=_lookUpAddedDataDict;
+@synthesize criteria=_criteria,record=_record,success=_success,lookUpAddedDataDict=_lookUpAddedDataDict,openUrltask=_openUrltask;
 
 - (void) setCriteria:(ZCCriteria *) localcriteria {
 
@@ -52,4 +52,5 @@
     [_lookUpAddedDataDict setObject:value forKey:key];
     
 }
+
 @end

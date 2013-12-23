@@ -10,7 +10,7 @@
 #import "ZCRecord.h"
 #import "ZCRecordError.h"
 #import "ZCCriteriaUtil.h"
-
+#import "OpenUrlTask.h"
 @class ZCCriteria,ZCRecord;
 
 @interface ZCRecordStatus : NSObject
@@ -20,6 +20,7 @@
 @property (nonatomic,retain) ZCRecordError *error;
 @property (nonatomic,retain,setter = setCriteria:) ZCCriteria *criteria;
 @property (nonatomic,retain)NSMutableDictionary * lookUpAddedDataDict;
+@property (nonatomic,retain)OpenUrlTask *openUrltask;
 - (void) setCriteria:(ZCCriteria *) localcriteria : (NSInteger) reloperator;
 + (BOOL) getStatusForBulkRecords : (NSArray*) recordsStatus;
 -(void)addvalueToSelectedLookUpValueDict:(NSString *)value key:(NSString *)key;

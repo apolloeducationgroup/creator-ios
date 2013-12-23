@@ -41,6 +41,10 @@
 @private ZCForm *_form;
 @private ZCRecordError *_zcRecordError;
 @private BOOL _combinedlookupvalueTag;
+@private BOOL _openURLTag;
+
+@private BOOL _openURLURLTag;
+@private BOOL _openURLTypeTag;
 @private NSMutableDictionary * lookupDataDict;
 }
 

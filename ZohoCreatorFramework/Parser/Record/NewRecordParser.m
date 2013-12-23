@@ -85,6 +85,20 @@
                 }
             }
         }
+        else if(_openURLTag==YES)
+        {
+            if([elementName isEqualToString:@"url"]) {
+                _openURLURLTag=YES;
+                
+            }
+            
+            if ([elementName isEqualToString:@"type"]) {
+                
+                _openURLTypeTag=YES;
+            }
+            
+        }
+        
         else {
             NSLog(@"Coming to value tag in values  %@",elementName);
             if([elementName isEqualToString:@"values"]) {
@@ -98,10 +112,18 @@
             else if([elementName isEqualToString:@"combinedlookupvalue"]) {
                 _combinedlookupvalueTag = YES;
             }
+            else if([elementName isEqualToString:@"openurl"]) {
+                _openURLTag = YES;
+                 _recordStatus.openUrltask= [[OpenUrlTask alloc] init];
+                [_recordStatus.openUrltask setTaskType:@"openurl"];
+                
+
+            }
+
 
         }
         
-        
+
         
     }
     else if(_errorList == YES) {
@@ -148,6 +170,8 @@
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     
+    
+    
     if(_errorList == YES) {
         
         if(_error==YES) {
@@ -168,7 +192,19 @@
         [_recordStatus addvalueToSelectedLookUpValueDict:string key:[[[_record record]objectForKey:@"ID"]fieldValue ]  ];
         
     }
-
+    else if ( _openURLTypeTag==YES)
+    {
+        NSLog(@"openurl tag %@",string);
+        [_recordStatus.openUrltask setWindowType:string];
+        _openURLTypeTag=NO;
+    }
+    else if (_openURLURLTag ==YES)
+        
+    {
+    
+        [_recordStatus.openUrltask setUrlString:string];
+        _openURLURLTag=NO;
+    }
     else if(_statusElementTag == YES) {
         NSLog(@"Status Element Tag is coming");
         if([string isEqualToString:@"Success"]) {
