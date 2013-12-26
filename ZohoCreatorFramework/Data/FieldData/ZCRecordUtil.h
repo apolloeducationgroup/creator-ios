@@ -15,5 +15,4 @@
 + (NSString*) getPrimaryValueByCount : (ZCRecord*) zcRecord : (NSInteger) count;
 + (NSString*) getSubtitleValueByCount : (ZCRecord*) zcRecord : (NSInteger) startIndex : (NSInteger) count;
 + (NSString*) getPrimaryTextField : (ZCView*) zcview : (NSInteger) rowIndex : (NSInteger) columnIndex;
-
 @end

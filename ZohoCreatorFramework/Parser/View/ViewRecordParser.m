@@ -94,7 +94,14 @@
         else if(_metaDataCustomFiltersEnabled==YES) {
             if([elementName isEqualToString:@"customFilter"]) {
                 customFilter = [[ZCViewCustomFilter alloc ] init];
-                [customFilter setFilterID:[attributeDict valueForKey:@"Id"]];
+                if ([attributeDict valueForKey:@"id"]!=nil) {
+                    [customFilter setFilterID:[attributeDict valueForKey:@"id"]];
+                }
+                else {
+                [customFilter setFilterID:[attributeDict valueForKey:@"ID"]];
+                    }
+            
+                    
                 
                 
                 
@@ -107,7 +114,16 @@
             if([elementName isEqualToString:@"Action"]) {
                 _viewAction = [[ZCViewAction alloc] init];
                 //                [_viewAction setActionName:[attributeDict valueForKey:@"name"]];
-                [_viewAction setFunctionName:[attributeDict valueForKey:@"id"]];
+                
+                if ([attributeDict valueForKey:@"id"]!=nil) {
+                    [_viewAction setFunctionName:[attributeDict valueForKey:@"id"]];
+                }
+                else {
+                    [_viewAction setFunctionName:[attributeDict valueForKey:@"ID"]];
+                }
+                
+
+                
                 
                 NSString *actionTyepStr = [attributeDict valueForKey:@"type"];
                 if([actionTyepStr isEqualToString:@"row"]) {
@@ -222,7 +238,19 @@
             //////// //NSLog(@"Record Tag Coming :::%@", [attributeDict objectForKey:@"id"]);
             _recordTagEnabled = YES;
             _zcRecord = [[ZCRecord alloc] initZCRecord];
-            [_zcRecord setRecordID:[attributeDict objectForKey:@"id"]];
+//            [_zcRecord setRecordID:[attributeDict objectForKey:@"id"]];
+            
+            
+            
+            if ([attributeDict valueForKey:@"id"]!=nil) {
+                [_zcRecord setRecordID:[attributeDict objectForKey:@"id"]];
+            }
+            else {
+                [_zcRecord setRecordID:[attributeDict objectForKey:@"ID"]];
+            }
+            
+
+            
             
             BOOL isGroupStart = NO;
             for (NSString *column in attributeDict) {
@@ -305,7 +333,15 @@
             if ([startcomp year] == [endcomp year] && [startcomp month] == [endcomp month] && [startcomp day] == [endcomp day])
             {
                 _zcCalendarEvent = [[ZCCalendarEvent alloc] init];
-                [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"id"]]];
+//                [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"id"]]];
+                
+                if ([attributeDict valueForKey:@"id"]!=nil) {
+                    [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"id"]]];
+                }
+                else {
+                    [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"ID"]]];
+                }
+
                 [_zcCalendarEvent setStart:startDate];
                 [_zcCalendarEvent setEnd:endDate];
 
@@ -395,7 +431,14 @@
                     }
                     
                     if (isEvent) {
-                        [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"id"]]];
+//                        [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"id"]]];
+                        if ([attributeDict valueForKey:@"id"]!=nil) {
+                            [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"id"]]];
+                        }
+                        else {
+                            [_zcCalendarEvent setZcRecord:[_zcView.records getZCRecord:[attributeDict valueForKey:@"ID"]]];
+                        }
+
                         [_zcCalendarEvent setStart:modStartDate];
                         [_zcCalendarEvent setEnd:modEndDate];
                         [_zcCalendarEvent setTitle:_currentEventTitle];
@@ -443,6 +486,10 @@
                 NSString *correctString = [NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding];
                 if([viewField fieldType] == [ZCFieldList ZCEmail]) {
                     correctString = [ParserUtil extractEmailFromLink:correctString];
+                }
+                if ([viewField fieldType]==[ZCFieldList ZCSubform] || [viewField fieldType]==[ZCFieldList ZCNewSubform]) {
+                    correctString =[ParserUtil extactSringFormSubformData:correctString];;
+                    
                 }
                 [_zcFieldData setFieldValue:correctString];
             }
@@ -609,11 +656,18 @@
                         [_zcFieldData setFieldValue:[NSString stringWithFormat:@"/%@",[_zcFieldData fieldValue]]];
                     }
                 }
+                
                 else if([tempField fieldType] == [ZCFieldList ZCURL])  //URL
                 {
                     NSLog(@"field data for url riyaz:: %@",[_zcFieldData fieldValue]);
                     [_zcFieldData setFieldValue:[ParserUtil getURLString:[_zcFieldData fieldValue]]];
                 }
+              else  if ([tempField fieldType]==[ZCFieldList ZCSubform] || [tempField fieldType]==[ZCFieldList ZCNewSubform]) {
+                  [_zcFieldData setFieldValue:[ParserUtil extactSringFormSubformData:[_zcFieldData fieldValue]]];
+
+                }
+
+                
                 /*                else if([tempField fieldType] == [ZCFieldList ZCFileupload]) {
                  
                  // //NSLog(@"Fileupload Data %@",[_zcFieldData fieldValue]);

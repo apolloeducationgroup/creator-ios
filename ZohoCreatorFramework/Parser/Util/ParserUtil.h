@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ZCView.h"
 #import "ZCForm.h"
+#import "ZCRecordUtil.h"
 #import "ZCComponent.h"
 
 @class ZCForm,ZCView,ZCComponent;
@@ -22,4 +23,7 @@
 + (NSMutableDictionary*) getURLString : (NSString*) rawString;
 + (NSString*) extractEmailFromLink : (NSString*) rawString;
 
+
++ (NSString*) extactSringFormSubformData : (NSString*) rawString;
++(NSString *) stringByStrippingHTML:(NSString *)string;
 @end

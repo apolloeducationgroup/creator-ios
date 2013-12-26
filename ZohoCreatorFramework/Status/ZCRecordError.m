@@ -53,18 +53,66 @@
     [_subFormFieldErrorList addObject:subformFieldError];
     
     NSString * rowNum=[NSString stringWithFormat:@"%i",[subformFieldError recordRowinSubform]];
+    NSString * fieldSubFormname=[subformFieldError subFormLinkname];
     
-    if([_subFormFieldErrorsDictionary objectForKey:rowNum])
+    
+    NSMutableDictionary * errorDictInField=[_subFormFieldErrorsDictionary objectForKey:fieldSubFormname];
+
+    if(errorDictInField != nil)
     {
-    
-       [ [_subFormFieldErrorsDictionary objectForKey:rowNum]addObject:subformFieldError];
-    
+        if([errorDictInField objectForKey:rowNum])
+
+        {
+        
+            [ [errorDictInField objectForKey:rowNum]addObject:subformFieldError];
+        
+        }
+        
+        
+        else
+        {
+            [errorDictInField setObject:[NSMutableArray arrayWithObject:subformFieldError] forKey:rowNum];
+
+            
+        }
+
+        [_subFormFieldErrorsDictionary setObject:errorDictInField forKey:fieldSubFormname];
+
     }
     else
     {
+        
+        errorDictInField =[[NSMutableDictionary alloc]init];
+//        if([errorDictInField objectForKey:rowNum])
+//        {
+//            
+//            [ [errorDictInField objectForKey:rowNum]addObject:subformFieldError];
+//            
+//        }
+//        else
+//        {
+//            
+            [errorDictInField setObject:[NSMutableArray arrayWithObject:subformFieldError] forKey:rowNum];
+//        }
+        
+        [_subFormFieldErrorsDictionary setObject:errorDictInField forKey:fieldSubFormname];
+
     
-        [_subFormFieldErrorsDictionary setObject:[NSMutableArray arrayWithObject:subformFieldError] forKey:rowNum];
     }
+
+    
+    
+//    if([_subFormFieldErrorsDictionary objectForKey:rowNum])
+//    {
+//    
+//       [ [_subFormFieldErrorsDictionary objectForKey:rowNum]addObject:subformFieldError];
+//    
+//    }
+//    else
+//    {
+//    
+//        [_subFormFieldErrorsDictionary setObject:[NSMutableArray arrayWithObject:subformFieldError] forKey:rowNum];
+//    }
     ////// //NSLog(@"subform errorlist  %@",_subFormFieldErrorList);
     
 }

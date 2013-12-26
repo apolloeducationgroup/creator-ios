@@ -100,30 +100,10 @@
         indexCount ++;
     }
     
-   returnString=[NSMutableString stringWithString:[ZCRecordUtil stringByStrippingHTML:returnString]];
+   returnString=[NSMutableString stringWithString:[ParserUtil stringByStrippingHTML:returnString]];
     
     return returnString;
 }
-+(NSString *) stringByStrippingHTML:(NSString *)string
-{
-    if (string ==NULL || [string isEqualToString:@""] || [string isEqualToString:@"(null)"]) {
-        return @"";
-    }
-    NSRange r;
-    while ((r = [string rangeOfString:@"<br>" options:NSRegularExpressionSearch]).location != NSNotFound)
-        string = [string stringByReplacingCharactersInRange:r withString:@"\n"];
-    while ((r = [string rangeOfString:@"(null)" options:NSRegularExpressionSearch]).location != NSNotFound)
-        string = [string stringByReplacingCharactersInRange:r withString:@""];
-//    while ((r = [string rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
-//        string = [string stringByReplacingCharactersInRange:r withString:@""];
-    
-    while ((r = [string rangeOfString:@"&nbsp;" options:NSRegularExpressionSearch]).location != NSNotFound)
-        string = [string stringByReplacingCharactersInRange:r withString:@" "];
-    
-    return string;
-}
-
-
 
 + (NSString*) getSubtitleValueByCount : (ZCRecord*) zcRecord : (NSInteger) startIndex : (NSInteger) count {
     
@@ -212,7 +192,7 @@
             indexCount++;
         }
     }
-    returnString=[NSMutableString stringWithString:[ZCRecordUtil stringByStrippingHTML:returnString]];
+    returnString=[NSMutableString stringWithString:[ParserUtil stringByStrippingHTML:returnString]];
 
     return returnString;
 }

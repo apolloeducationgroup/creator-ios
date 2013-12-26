@@ -135,6 +135,7 @@
 }
 -(BOOL)subformHASUnsupportedFields:(ZCField *)field
 {
+    return NO;
 
     
     if ([field fieldType] == [ZCFieldList ZCLookupCheckbox] || [field fieldType] == [ZCFieldList ZCLookupDropDown] || [field fieldType] == [ZCFieldList ZCLookupMultiSelect] || [field fieldType] == [ZCFieldList ZCLookupRadio] || [field fieldType] == [ZCFieldList ZCMultiSelect] || [field fieldType] == [ZCFieldList ZCDropdown] || [field fieldType] == [ZCFieldList ZCRadio] || [field fieldType] == [ZCFieldList ZCCheckbox])
@@ -324,6 +325,7 @@
             [_field setHasVisiblity:[tempValue boolValue]];
         }
 
+        if ([_field fieldType]!=[ZCFieldList ZCSubform] && [_field fieldType]!=[ZCFieldList ZCNewSubform]) {
         tempValue = [_fieldDict objectForKey:@"refapplication"];
         NSLog(@"ref application %@",tempValue);
         if(tempValue != nil) {
@@ -332,12 +334,14 @@
             [_refApp setAppLinkName:tempValue];
             NSLog(@"Application Owner %@",[_application appOwner]);
             [_refApp setAppOwner:[_application appOwner]];
+            
             tempValue = [_fieldDict objectForKey:@"refform"];
             ZCComponent *_relatedComp = [[ZCComponent alloc] init];
             [_relatedComp setZcApplication:_refApp];
             [_relatedComp setLinkName:tempValue];
             [_relatedComp setDisplayName:tempValue];
             [_field setRelatedComponent:_relatedComp];
+        }
         }
         
         tempValue = [_fieldDict objectForKey:@"subformfields"];
@@ -347,6 +351,19 @@
             SUBFORMTAG =YES;
             [self getFieldInfo:tempValue :_subFormData];
             SUBFORMTAG =NO;
+            NSMutableIndexSet * notesindexSet=[[NSMutableIndexSet alloc]init];
+            for (int fieldIndex =0;fieldIndex<[_subFormData fields].count; fieldIndex++) {
+                
+
+                if ([[[_subFormData fields]objectAtIndex:fieldIndex] fieldType]==[ZCFieldList ZCNotes]) {
+                    [notesindexSet addIndex:fieldIndex];
+                    
+                }
+                
+                
+            }
+            
+            [_subFormData.fields removeObjectsAtIndexes:notesindexSet];
             [_field setSubForm:_subFormData];
             NSLog(@"SubForm Data has added");
         }

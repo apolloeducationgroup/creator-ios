@@ -10,7 +10,7 @@
 
 @implementation ExecuteFormula
 
-- (ExecuteFormula*) initExecuteFormula : (NSString*) _appLocal : (NSString*) _formLocal : (NSString*) _fieldLocal : (NSString*) paramString : (id) delegate {
+- (ExecuteFormula*) initExecuteFormula : (NSString*) _appLocal : (NSString*) _formLocal : (NSString*) _fieldLocal : (NSString*) paramString : (id) delegate{
     self = [super init];
     if(self) {
         [super setCallerDelegate:delegate];

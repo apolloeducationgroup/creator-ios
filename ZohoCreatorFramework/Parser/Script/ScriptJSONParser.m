@@ -27,7 +27,7 @@
 - (DeSelectValueTask*) deSelectValueTask : (NSDictionary*) deSelectValueDict;
 - (OpenUrlTask*) openUrlTask : (NSDictionary*) openUrlDict;
 -(InfoTask*) infoTask : (NSDictionary*) infoValueDict;
--(AlertTask *)htmlAlertOccurred;
+-(AlertTask *)htmlErrorOccurred;
 @end
 
 @implementation ScriptJSONParser
@@ -79,14 +79,33 @@
             
             id delugeTask = [self taskFinder:[_jsonDictionary objectAtIndex:index]];
             NSLog(@"Task had added");
+            if (delugeTask) {
             [_delugeTasks addTaskList:delugeTask];
+            }
+            
+            else
+                
+            {
+                [_delugeTasks addTaskList:[self htmlErrorOccurred ]];
+                
+            }
+
             NSLog(@"Task had added");
         }
         }
         else if([_jsonDictionary isKindOfClass:[NSDictionary class]])
         {
             id delugeTask = [self taskFinder:_jsonDictionary ];
-            [_delugeTasks addTaskList:delugeTask];
+            if (delugeTask) {
+                [_delugeTasks addTaskList:delugeTask];
+            }
+            else
+                
+            {
+                [_delugeTasks addTaskList:[self htmlErrorOccurred ]];
+
+            }
+            
         }
     }
     else
@@ -94,7 +113,7 @@
     
         
         
-        [_delugeTasks addTaskList:[self htmlAlertOccurred ]];
+        [_delugeTasks addTaskList:[self htmlErrorOccurred ]];
     
     }
 }
@@ -144,7 +163,7 @@
     }
     return nil;
 }
--(AlertTask *)htmlAlertOccurred
+-(AlertTask *)htmlErrorOccurred
 {
     
     

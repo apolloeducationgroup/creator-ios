@@ -7,7 +7,6 @@
 //
 
 #import "ParserUtil.h"
-
 @implementation ParserUtil
 
 + (ZCForm*) convertToZCForm : (ZCComponent*) component {
@@ -225,5 +224,146 @@
     
 }
 
++ (NSString*) extactSringFormSubformData : (NSString*) rawString {
+    
+    
+//    NSRegularExpression *regexp_Form = [NSRegularExpression regularExpressionWithPattern: @"<div elName='zc-component' formLinkName='(.*)\\' params='(.*)\\</div>"options:NSRegularExpressionCaseInsensitive error:NULL];
+    NSLog(@"QWFKLBKLXBKLSBFGKLSDBGKLSBDGKABSKBGASKGLA\n\n\n\n\n\n\n\n\n\n\n%@",rawString);
+    rawString= [ParserUtil stringByStrippingHTML:rawString];
+    NSLog(@"\n\n\n\n\n\n\n\n\n\n\n QWFKLBKLXBKLSBFGKLSDBGKLSBDGKABSKBGASKGLA%@\n\n\n\n\n\n\n\n\n\n\n",rawString);
+
+    @try {
+
+        rawString=[ParserUtil extact_URL_FormSubformData:rawString];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"exceptop in subform1 %@",exception);
+    }
+    @finally {
+        
+    }
+    @try {
+        
+        rawString=[ParserUtil extact_Image_FormSubformData:rawString];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"exceptop in subform2%@",exception);
+    }
+    @finally {
+        
+    }
+
+
+    
+    return rawString;
+}
++(NSString *) stringByStrippingHTML:(NSString *)string
+{
+    if (string ==NULL || [string isEqualToString:@""] || [string isEqualToString:@"(null)"]) {
+        return @"";
+    }
+    NSRange r;
+    while ((r = [string rangeOfString:@"<br>" options:NSRegularExpressionSearch]).location != NSNotFound)
+        string = [string stringByReplacingCharactersInRange:r withString:@"\n"];
+    while ((r = [string rangeOfString:@"(null)" options:NSRegularExpressionSearch]).location != NSNotFound)
+        string = [string stringByReplacingCharactersInRange:r withString:@""];
+    //    while ((r = [string rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+    //        string = [string stringByReplacingCharactersInRange:r withString:@""];
+    
+    while ((r = [string rangeOfString:@"&nbsp;" options:NSRegularExpressionSearch]).location != NSNotFound)
+        string = [string stringByReplacingCharactersInRange:r withString:@" "];
+    while ((r = [string rangeOfString:@"&nbsp" options:NSRegularExpressionSearch]).location != NSNotFound)
+        string = [string stringByReplacingCharactersInRange:r withString:@" "];
+
+    return string;
+}
+
+
+
++(NSString *) extact_URL_FormSubformData:(NSString *)rawString
+{
+    
+//    return rawString;
+    NSRegularExpression *regexpURL = [NSRegularExpression regularExpressionWithPattern: @"(.*)<a href=(.*)\\</a>(.*)"options:NSRegularExpressionCaseInsensitive error:NULL];
+    
+    NSTextCheckingResult *matchURL = [regexpURL firstMatchInString:rawString options:0 range:NSMakeRange(0, rawString.length)];
+    
+    NSString * linkSource;
+    NSString * linkTag;
+    if (matchURL) {
+        for (int i=0;i<[matchURL numberOfRanges];i++ ) {
+            
+            
+            NSRange  hashRange = [matchURL rangeAtIndex:i];
+            NSString *hashCode = [rawString  substringWithRange:hashRange];
+            if (i==2) {
+                
+                linkTag=[NSString stringWithFormat:@"<a href=%@</a>",hashCode];
+            }
+            
+            NSArray * array=[hashCode componentsSeparatedByString:@"\""];
+            
+            NSLog(@"arrar %@",array);
+            if (array.count>1) {
+                
+                linkSource=[array objectAtIndex:1];
+                
+            }
+
+            NSLog(@" FormHash Code is %@", hashCode);
+            NSLog(@"range at index %i  %i",[matchURL rangeAtIndex:i].location,[matchURL rangeAtIndex:i].length);
+        }
+    }
+    
+    if (linkSource) {
+        rawString=    [rawString stringByReplacingOccurrencesOfString:linkTag withString:[NSString stringWithFormat:@"<br>%@",[[ParserUtil getURLString:linkTag]objectForKey:@"url"]]];
+    }
+    NSLog(@"rawstirng view %@",rawString);
+
+
+    return rawString;
+}
++(NSString *) extact_Image_FormSubformData:(NSString *)rawString
+{
+    
+    NSRegularExpression *regexpImage = [NSRegularExpression regularExpressionWithPattern: @"(.*)<img src =(.*)\\</img>(.*)"options:NSRegularExpressionCaseInsensitive error:NULL];
+    
+    NSTextCheckingResult *matchImage = [regexpImage firstMatchInString:rawString options:0 range:NSMakeRange(0, rawString.length)];
+    
+    NSString * imageTag;
+    NSString * imageSource;
+    
+    if (matchImage) {
+        for (int i=0;i<[matchImage numberOfRanges];i++ ) {
+            
+            
+            NSRange  hashRange = [matchImage rangeAtIndex:i];
+            NSString *hashCode = [rawString  substringWithRange:hashRange];
+            if (i==2) {
+                
+                imageTag=[NSString stringWithFormat:@"<img src =%@</img>",hashCode];
+                
+                NSArray * array=[hashCode componentsSeparatedByString:@"\""];
+                
+                NSLog(@"arrar %@",array);
+                if (array.count>1) {
+                    
+                    imageSource=[array objectAtIndex:1];
+                    
+                }
+                
+            }
+            
+//            NSLog(@" FormHash Code is %@", hashCode);
+//            NSLog(@"range at index %i  %i",[matchImage rangeAtIndex:i].location,[matchImage rangeAtIndex:i].length);
+        }
+    }
+    
+//    rawString=    [rawString stringByReplacingOccurrencesOfString:imageSource withString:@"<br><  image  >"];
+    if (imageTag) {
+    rawString=    [rawString stringByReplacingOccurrencesOfString:imageTag withString:[NSString stringWithFormat:@"<br>%@",[ParserUtil getImageLocationURLString:imageSource]]];
+    }
+    return rawString;
+}
 
 @end

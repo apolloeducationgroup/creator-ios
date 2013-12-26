@@ -136,7 +136,7 @@
     if ([formMetaXML isEqualToString:@""]) {
         [NSException raise:@"We are unable to fetch this data, sorry!" format:@"Report this problem to support@zohocreator.com"];
     }
-    formMetaXML=[self stringByStrippingHTML:formMetaXML];
+  formMetaXML=[self stringByStrippingHTML:formMetaXML];
     ViewRecordParser *view = [[ViewRecordParser alloc] initViewRecordParser:formMetaXML :_component ];
     [[view zcView] setViewParam:_zcViewParam];
    view.zcView=[self checkViewForCalenderParam:[view zcView ]];

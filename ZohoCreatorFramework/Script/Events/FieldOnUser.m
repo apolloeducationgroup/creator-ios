@@ -15,6 +15,8 @@
     self = [super init];
     if(self) {
         [super setCallerDelegate:delegate];
+        
+
         [super setDelugeParams:[URLConstructor fieldOnUserWithJSON:_appLocal :_formLocal :_fieldLocal :paramString :appOwner]];
         [super setDelugeURL:[URLConstructor delugeURL]];
     }
