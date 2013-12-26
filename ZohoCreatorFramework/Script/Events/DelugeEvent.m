@@ -116,7 +116,7 @@
             else if([taskType isEqualToString:@"openurl"]) {
                 ////// //NSLog(@"Coming to openurl task");
                 OpenUrlTask *openUrlTask = [taskList objectAtIndex:taskIndex];
-                [_callerDelegate openUrl : [openUrlTask urlString] withWindowType : [openUrlTask windowType] andParameter : [openUrlTask windowParameters]];
+                [_callerDelegate openUrl : [openUrlTask urlString] withWindowType : [openUrlTask windowType] windowParameters:[openUrlTask windowParameters] application:[openUrlTask application] componentType:[openUrlTask componentType] urlParameters:[openUrlTask urlParameters]];
             }
             else if([taskType isEqualToString:@"reloadform"]) {
                 ReloadFormTask *reloadTask = [taskList objectAtIndex:taskIndex];

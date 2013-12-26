@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "DelugeTask.h"
-
+@class ZCApplication;
 @interface OpenUrlTask : DelugeTask
 
 @property (nonatomic,retain) NSString *urlString;
 @property (nonatomic,retain) NSString *windowType;
 @property (nonatomic,retain) NSString *windowParameters;
-
+@property (nonatomic,retain) NSString *componentType;
+@property (nonatomic,retain) NSString *urlParameters;
+@property (nonatomic,retain) ZCApplication *application;
 @end

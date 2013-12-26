@@ -10,6 +10,6 @@
 
 @implementation OpenUrlTask
 
-@synthesize urlString=_urlString,windowParameters=_windowParameters,windowType=_windowType;
+@synthesize urlString=_urlString,windowParameters=_windowParameters,windowType=_windowType,componentType=_componentType,application=_application;
 
 @end

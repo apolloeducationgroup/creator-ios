@@ -37,7 +37,8 @@ enum ZCRecType { //for onload and onedit "recType"
 @required -(void) clearValue : (NSString*) formName : (NSString*) fieldName rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
 @required -(void) noScript : (NSString*) message;
 @required -(void) setFieldValue : (NSString*) formName  : (NSString*) fieldName : (id) fieldValue rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
-@required -(void) openUrl : (NSString*) urlString withWindowType : (NSString*) windowsType andParameter : (NSString*) parameter;
+//@required -(void) openUrl : (NSString*) urlString withWindowType : (NSString*) windowsType andParameter : (NSString*) parameter;
+@required -(void) openUrl : (NSString*) urlString withWindowType : (NSString*) windowsType windowParameters : (NSString*) windowParameters application:(ZCApplication *)application componentType:(NSString *)componentType urlParameters:(NSString *)urlParameters;
 @required -(void) reloadForm : (NSString*) formName;
 @required -(void) selectValue : (NSString*) formName withFieldName : (NSString*) fieldName andValues : (NSMutableArray*) selectValues rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
 @required -(void) selectAllValues : (NSString*) formName withFieldName : (NSString*) fieldName rowNumberForSubform:(int)rownumber subformName:(NSString *)subformname;
