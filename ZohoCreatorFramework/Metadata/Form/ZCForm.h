@@ -10,7 +10,7 @@
 #import "ZCComponent.h"
 #import "ZCField.h"
 #import "ZCFieldList.h"
-
+#import "OpenUrlTask.h"
 @class ZCApplication,ZCButton;
 
 
@@ -40,8 +40,8 @@ enum UPCOMING_FIELDS {
 
 @property BOOL isNotSupported;
 
-@property (nonatomic,retain)NSDictionary *nextUrl;
-
+//@property (nonatomic,retain)NSDictionary *nextUrl;
+@property (nonatomic,retain) OpenUrlTask *nextUrl;
 - (ZCForm*) initZCForm;
 - (void) addZCField : (ZCField*) field;
 - (ZCField*) getFieldByName:(NSString *)fieldLinkName;

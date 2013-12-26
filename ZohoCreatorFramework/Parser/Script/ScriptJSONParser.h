@@ -31,5 +31,5 @@
 @property (nonatomic,retain) DelugeTasks *delugeTasks;
 
 - (ScriptJSONParser*) initScriptJSONParser : (NSString*) _localString;
-
++(OpenUrlTask *)setopenURLTaskparameters:(OpenUrlTask *)openurltask urlString:(NSString *)urlString;
 @end

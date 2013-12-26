@@ -7,6 +7,7 @@
 //
 
 #import "NewRecordParser.h"
+#import "ScriptJSONParser.h"
 
 /**** start of private interface for the current class ****/
 
@@ -202,7 +203,11 @@
         
     {
     
-        [_recordStatus.openUrltask setUrlString:string];
+//        [_recordStatus.openUrltask setUrlString:string];
+        
+        _recordStatus.openUrltask =[ScriptJSONParser setopenURLTaskparameters:_recordStatus.openUrltask urlString:string];
+        
+        
         _openURLURLTag=NO;
     }
     else if(_statusElementTag == YES) {

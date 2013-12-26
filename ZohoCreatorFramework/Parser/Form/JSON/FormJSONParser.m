@@ -7,6 +7,7 @@
 //
 
 #import "FormJSONParser.h"
+#import "ScriptJSONParser.h"
 @interface FormJSONParser(private)
 
 - (void) convertJSONToZCForm;
@@ -68,8 +69,16 @@
         
         
         NSMutableDictionary *urldict=[NSMutableDictionary dictionaryWithDictionary:[formGeneralDict objectForKey:@"nexturl"] ];
+    
         
-        [_zcForm setNextUrl:urldict];
+        [urldict objectForKey:@"value"];
+        
+         OpenUrlTask * openUrltask=[[OpenUrlTask alloc]init];
+         [openUrltask setWindowType:[_zcForm.nextUrl valueForKey:@"openin"]];
+        [openUrltask setWindowParameters:[_zcForm.nextUrl valueForKey:@"type"]];
+        openUrltask =[ScriptJSONParser setopenURLTaskparameters:openUrltask urlString:[urldict objectForKey:@"value"]];
+        
+        [_zcForm setNextUrl:openUrltask];
         
     }
     

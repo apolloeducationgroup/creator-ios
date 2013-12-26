@@ -60,6 +60,128 @@
 //                                                          }
 //
 
++(OpenUrlTask *)setopenURLTaskparameters:(OpenUrlTask *)openurltask urlString:(NSString *)urlString
+{
+    
+    
+    
+    
+    
+    if (urlString.length) {
+        
+        NSString * startChar=[NSString stringWithFormat:@"%c",[urlString characterAtIndex:0]];
+        
+        if ([startChar isEqualToString:@"#"])
+        {
+            
+            NSArray * arrayOfStrings=[urlString componentsSeparatedByString:@":"];
+            
+            if ([[arrayOfStrings objectAtIndex:0] isEqualToString:@"#Form"])
+            {
+                
+                NSString *formName=[arrayOfStrings objectAtIndex:1];
+                
+                [openurltask setComponentType:@"Form"];
+                NSArray * arrayOfURLComponents=[formName componentsSeparatedByString:@"?"];
+                
+                [openurltask setUrlString:[arrayOfURLComponents objectAtIndex:0]];
+                if (arrayOfURLComponents.count>1) {
+                    
+                    [openurltask setUrlParameters: [arrayOfURLComponents objectAtIndex:1]];
+                    
+                }
+                
+                
+            }
+            else if([[arrayOfStrings objectAtIndex:0] isEqualToString:@"#View"]) {
+                
+                NSString *viewname=[arrayOfStrings objectAtIndex:1];
+                [openurltask setComponentType:@"View"];
+                
+                NSArray * arrayOfURLComponents=[viewname componentsSeparatedByString:@"?"];
+                
+                [openurltask setUrlString:[arrayOfURLComponents objectAtIndex:0]];
+                if (arrayOfURLComponents.count>1) {
+                    
+                    [openurltask setUrlParameters: [arrayOfURLComponents objectAtIndex:1]];
+                    
+                }
+                
+            }
+            else if([[arrayOfStrings objectAtIndex:0] isEqualToString:@"#Page"]) {
+                
+                NSString *pagename=[arrayOfStrings objectAtIndex:1];
+                [openurltask setComponentType:@"Page"];
+                
+                NSArray * arrayOfURLComponents=[pagename componentsSeparatedByString:@"?"];
+                
+                [openurltask setUrlString:[arrayOfURLComponents objectAtIndex:0]];
+                if (arrayOfURLComponents.count>1) {
+                    
+                    [openurltask setUrlParameters: [arrayOfURLComponents objectAtIndex:1]];
+                    
+                }
+                
+            }
+            //        while ((r = [string rangeOfString:@"<br>" options:NSRegularExpressionSearch]).location != NSNotFound)
+            
+            //    https://creator.zoho.com/balakumar/deluge-actions/#Form:Aggregate_Records
+            
+        }
+        
+        else
+        {
+            if (urlString.length>25) {
+                NSRange r;
+                while ((r = [urlString rangeOfString:[URLConstructor serverURL:YES] options:NSRegularExpressionSearch]).location != NSNotFound)
+                {
+                    
+                    
+                    NSArray * arrayOfURLComponents=[urlString componentsSeparatedByString:@"/"];
+                    
+                    
+                    
+                    NSString * componentDetail=[arrayOfURLComponents objectAtIndex:arrayOfURLComponents.count-1];
+                    
+                    urlString = [urlString stringByReplacingCharactersInRange:r withString:@""];
+                    
+                    
+                    
+                    
+                    NSArray * URLComponents=[componentDetail componentsSeparatedByString:@"#"];
+                    
+                    ZCApplication *application=[[ZCApplication alloc]init];
+                    if ([[URLComponents objectAtIndex:0] length]) {
+                    [application setAppLinkName:[URLComponents objectAtIndex:0]];
+                    [application setAppOwner:[arrayOfURLComponents objectAtIndex:arrayOfURLComponents.count-2]];
+                    }
+                    else
+                    {
+
+                        [application setAppLinkName:[arrayOfURLComponents objectAtIndex:arrayOfURLComponents.count-2]];
+                        [application setAppOwner:[arrayOfURLComponents objectAtIndex:arrayOfURLComponents.count-3]];
+                        
+                    }
+                    [openurltask setApplication:application];
+                    
+                    openurltask=[ScriptJSONParser setopenURLTaskparameters:openurltask urlString:[NSString stringWithFormat:@"#%@",[URLComponents objectAtIndex:1]]];
+                    
+                    
+                }
+            }
+        }
+    }
+    
+    NSLog(@"open URLTASK %@",[openurltask urlString]);
+    NSLog(@"open URLTASK %@",[openurltask urlParameters]);
+    NSLog(@"open URLTASK %@",[openurltask application]);
+    
+    
+    
+    return openurltask;
+    
+}
+
 @end
 
 @implementation ScriptJSONParser(private)
@@ -519,7 +641,7 @@
     [_openUrl setWindowType:[openUrlDict objectForKey:@"windowType"]];
     [_openUrl setUrlString:[openUrlDict objectForKey:@"urlString"]];
     
-    _openUrl =[self setopenURLTaskparameters:_openUrl urlString:[openUrlDict objectForKey:@"urlString"]];
+    _openUrl =[ScriptJSONParser setopenURLTaskparameters:_openUrl urlString:[openUrlDict objectForKey:@"urlString"]];
     [_openUrl setWindowParameters:[openUrlDict objectForKey:@"windowSpecificArgument"]];
     
     
@@ -541,119 +663,6 @@
     
     
     return _openUrl;
-}
--(OpenUrlTask *)setopenURLTaskparameters:(OpenUrlTask *)openurltask urlString:(NSString *)urlString
-{
-    
-    
-   
-
-    
-if (urlString.length) {
-    
-    NSString * startChar=[NSString stringWithFormat:@"%c",[urlString characterAtIndex:0]];
-        
-    if ([startChar isEqualToString:@"#"])
-    {
-        
-        NSArray * arrayOfStrings=[urlString componentsSeparatedByString:@":"];
-        
-        if ([[arrayOfStrings objectAtIndex:0] isEqualToString:@"#Form"])
-        {
-            
-            NSString *formName=[arrayOfStrings objectAtIndex:1];
-            
-            [openurltask setComponentType:@"Form"];
-            NSArray * arrayOfURLComponents=[formName componentsSeparatedByString:@"?"];
-            
-            [openurltask setUrlString:[arrayOfURLComponents objectAtIndex:0]];
-            if (arrayOfURLComponents.count>1) {
-
-            [openurltask setUrlParameters: [arrayOfURLComponents objectAtIndex:1]];
-                
-            }
-
-            
-        }
-        else if([[arrayOfStrings objectAtIndex:0] isEqualToString:@"#View"]) {
-            
-            NSString *viewname=[arrayOfStrings objectAtIndex:1];
-            [openurltask setComponentType:@"View"];
-
-            NSArray * arrayOfURLComponents=[viewname componentsSeparatedByString:@"?"];
-            
-            [openurltask setUrlString:[arrayOfURLComponents objectAtIndex:0]];
-            if (arrayOfURLComponents.count>1) {
-                
-                [openurltask setUrlParameters: [arrayOfURLComponents objectAtIndex:1]];
-                
-            }
-            
-        }
-        else if([[arrayOfStrings objectAtIndex:0] isEqualToString:@"#Page"]) {
-            
-            NSString *pagename=[arrayOfStrings objectAtIndex:1];
-            [openurltask setComponentType:@"Page"];
-
-            NSArray * arrayOfURLComponents=[pagename componentsSeparatedByString:@"?"];
-            
-            [openurltask setUrlString:[arrayOfURLComponents objectAtIndex:0]];
-            if (arrayOfURLComponents.count>1) {
-                
-                [openurltask setUrlParameters: [arrayOfURLComponents objectAtIndex:1]];
-                
-            }
-            
-        }
-//        while ((r = [string rangeOfString:@"<br>" options:NSRegularExpressionSearch]).location != NSNotFound)
-
-//    https://creator.zoho.com/balakumar/deluge-actions/#Form:Aggregate_Records
-
-    }
-    
-    else
-    {
-        if (urlString.length>25) {
-            NSRange r;
-            while ((r = [urlString rangeOfString:[URLConstructor serverURL:YES] options:NSRegularExpressionSearch]).location != NSNotFound)
-            {
-
-                
-                NSArray * arrayOfURLComponents=[urlString componentsSeparatedByString:@"/"];
-                
-                
-             NSLog(@"arrayfasfasfsafsafafsaff %@",[arrayOfURLComponents objectAtIndex:arrayOfURLComponents.count-1]);
-                
-                NSString * componentDetail=[arrayOfURLComponents objectAtIndex:arrayOfURLComponents.count-1];
-                
-                urlString = [urlString stringByReplacingCharactersInRange:r withString:@""];
-                
-            
-                
-                
-                NSArray * URLComponents=[componentDetail componentsSeparatedByString:@"#"];
-
-                ZCApplication *application=[[ZCApplication alloc]init];
-                [application setAppLinkName:[URLComponents objectAtIndex:0]];
-                [application setAppOwner:[arrayOfURLComponents objectAtIndex:arrayOfURLComponents.count-2]];
-                [openurltask setApplication:application];
-                
-                openurltask=[self setopenURLTaskparameters:openurltask urlString:[NSString stringWithFormat:@"#%@",[URLComponents objectAtIndex:1]]];
-                
-                
-            }
-        }
-}
-}
-    
-    NSLog(@"open URLTASK %@",[openurltask urlString]);
-    NSLog(@"open URLTASK %@",[openurltask urlParameters]);
-    NSLog(@"open URLTASK %@",[openurltask application]);
-
-
-    
-    return openurltask;
-
 }
 
 @end
