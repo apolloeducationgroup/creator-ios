@@ -77,6 +77,8 @@
 {
     
     
+    
+    
 self = [super init];
     
     if(self) {
@@ -88,6 +90,7 @@ self = [super init];
             
             paramString=[paramString stringByAppendingString:@"&isFormula=true"];
         }
+        
 
         if (rownum) {
             
