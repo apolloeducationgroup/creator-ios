@@ -390,11 +390,12 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
     }
     
     
-    
+    NSLog(@"came here subform onuser %@  riyaz::",formURL);
     formURL=[formURL stringByAppendingFormat:@"&subformFieldName=%@",subformFieldname];
     
     formURL=[formURL stringByAppendingFormat:@"&rowseqid=t::row_%i",rownum];
     
+    NSLog(@"came here subform onuser %@  riyaz::",formURL);
 
     return formURL;
 }

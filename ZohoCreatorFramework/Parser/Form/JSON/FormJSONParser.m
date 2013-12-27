@@ -38,6 +38,7 @@
     @try {
         NSLog(@"Coming to JSON Parser");
         NSData *jsonData = [_jsonString dataUsingEncoding:[NSString defaultCStringEncoding]];
+        NSLog(@"jsondata %@",jsonData);
         _jsonDictionary= [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
         if(_jsonDictionary != nil) {
             NSLog(@"Coming inside");
