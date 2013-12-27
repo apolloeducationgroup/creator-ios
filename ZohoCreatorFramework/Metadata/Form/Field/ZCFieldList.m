@@ -154,7 +154,7 @@
 
 + (BOOL) isSkipField : (NSInteger) fieldType {
     
-    if(fieldType == [ZCFieldList ZCAutoNumber] || fieldType == [ZCFieldList ZCFormula] || fieldType==[ZCFieldList ZCCrm] || fieldType == [ZCFieldList ZCExternal]) {
+    if(fieldType == [ZCFieldList ZCAutoNumber] || fieldType==[ZCFieldList ZCCrm] || fieldType == [ZCFieldList ZCExternal]) {
         //        if(fieldType == [ZCFieldList ZCAutoNumber] || fieldType==[ZCFieldList ZCCrm] || fieldType == [ZCFieldList ZCExternal]) {
         
         return YES;
