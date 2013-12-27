@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "75"
             endingLineNumber = "75"
-            landmarkName = "-initFieldOnUserEventWithFieldAppname:fieldFormName:fieldName:parmString:delegate:rowNumberincaseOFsubofrmField:subformFieldName:recordIDIncaseOFEDITFORM:viewLinkname:childAppsIncaseOFAddTOPickListForm:childforms:basefields:appOwner:"
+            landmarkName = "-initFieldOnUserEventWithFieldAppname:fieldFormName:fieldName:parmString:delegate:rowNumberincaseOFsubofrmField:subformFieldName:recordIDIncaseOFEDITFORM:viewLinkname:childAppsIncaseOFAddTOPickListForm:childforms:basefields:appOwner:isformula:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

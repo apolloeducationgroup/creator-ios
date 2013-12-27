@@ -9,7 +9,7 @@
 #import "FieldOnuserEvent.h"
 #import "ZCSharedAppsEventsParamsUtil.h"
 @implementation FieldOnuserEvent
-- (FieldOnuserEvent*) initFieldOnUserEventWithFieldAppname: (NSString*) _appLocal fieldFormName: (NSString*) _formLocal fieldName:(NSString*) _fieldLocal parmString:(NSString*) paramString delegate:(id) delegate  fieldBElongToSubForm:(BOOL)subform mainAppLinkname:(NSString *)mainAppLinkname mainFormLinkname:(NSString *)mainFormLinkname subformFieldLinkname:(NSString *)subformFieldLinkname appOwner:(NSString *)appowner   {
+- (FieldOnuserEvent*) initFieldOnUserEventWithFieldAppname: (NSString*) _appLocal fieldFormName: (NSString*) _formLocal fieldName:(NSString*) _fieldLocal parmString:(NSString*) paramString delegate:(id) delegate  fieldBElongToSubForm:(BOOL)subform mainAppLinkname:(NSString *)mainAppLinkname mainFormLinkname:(NSString *)mainFormLinkname subformFieldLinkname:(NSString *)subformFieldLinkname appOwner:(NSString *)appowner  {
     
     self = [super init];
     
@@ -29,7 +29,7 @@
     return self;
 }
 
-- (FieldOnuserEvent*) initFieldOnUserEventWithFieldAppname: (NSString*) _appLocal fieldFormName: (NSString*) _formLocal fieldName:(NSString*) _fieldLocal parmString:(NSString*) paramString delegate:(id) delegate rowNumberincaseOFsubofrmField:(int)rownum subformFieldName:(NSString *)subformFieldname appOwner:(NSString *)appowner
+- (FieldOnuserEvent*) initFieldOnUserEventWithFieldAppname: (NSString*) _appLocal fieldFormName: (NSString*) _formLocal fieldName:(NSString*) _fieldLocal parmString:(NSString*) paramString delegate:(id) delegate rowNumberincaseOFsubofrmField:(int)rownum subformFieldName:(NSString *)subformFieldname appOwner:(NSString *)appowner 
 
 
 {
@@ -72,9 +72,10 @@
 //    }
 //    return self;
 //}
-- (FieldOnuserEvent*) initFieldOnUserEventWithFieldAppname: (NSString*) _appLocal fieldFormName: (NSString*) _formLocal fieldName:(NSString*) _fieldLocal parmString:(NSString*) paramString delegate:(id)delegate rowNumberincaseOFsubofrmField:(int)rownum subformFieldName:(NSString *)subformFieldname recordIDIncaseOFEDITFORM:(NSString *)recID viewLinkname:(NSString *)viewLinkname childAppsIncaseOFAddTOPickListForm:(NSArray *)apps childforms:(NSArray *)forms basefields:(NSArray *)fields appOwner:(NSString *)appowner
+- (FieldOnuserEvent*) initFieldOnUserEventWithFieldAppname: (NSString*) _appLocal fieldFormName: (NSString*) _formLocal fieldName:(NSString*) _fieldLocal parmString:(NSString*) paramString delegate:(id)delegate rowNumberincaseOFsubofrmField:(int)rownum subformFieldName:(NSString *)subformFieldname recordIDIncaseOFEDITFORM:(NSString *)recID viewLinkname:(NSString *)viewLinkname childAppsIncaseOFAddTOPickListForm:(NSArray *)apps childforms:(NSArray *)forms basefields:(NSArray *)fields appOwner:(NSString *)appowner isformula:(BOOL)isFormula
 
 {
+    
     
 self = [super init];
     
@@ -82,6 +83,11 @@ self = [super init];
         
           paramString=[paramString stringByAppendingString:[ZCSharedAppsEventsParamsUtil getAddtoPickListParamsWithAPPS:apps Forms:forms fields:fields viewLinkname:viewLinkname recordID:recID deluge:YES]];
         
+        
+        if (isFormula) {
+            
+            paramString=[paramString stringByAppendingString:@"&isFormula=true"];
+        }
 
         if (rownum) {
             
