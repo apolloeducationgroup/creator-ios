@@ -362,7 +362,12 @@
 
 + (NSString*) editRecordCriteria:(NSString *)idValue {
     
-    return [NSString stringWithFormat:@"<criteria><field name='ID' compOperator='Equals' value='%@'></field><reloperator>OR</reloperator><field name='ID' compOperator='Equals' value='%@'></field></criteria>",idValue,idValue];
+//    return [NSString stringWithFormat:@"<criteria><field name='ID' compOperator='Equals' value='%@'></field><reloperator>OR</reloperator><field name='ID' compOperator='Equals' value='%@'></field></criteria>",idValue,idValue];
+    
+    return [NSString stringWithFormat:@"<criteria><![CDATA[(ID == \"%@\")]]></criteria>",idValue];
+
+    
+    
 }
 
 + (NSString*) deleteRecordCriteria:(NSString *)idValue {
