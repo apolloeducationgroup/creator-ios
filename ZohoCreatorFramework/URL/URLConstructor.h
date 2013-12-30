@@ -33,7 +33,7 @@
 
 +(NSString *) subformMetaURL:(NSString *)appLinkName formLinkname:(NSString *)formLinkName mainAppLinkname:(NSString *)mainAppLinkname  mainFormLinkname:(NSString *)mainFormLinkname subformFieldLinkname:(NSString *)subformFieldLinkname appOwner:(NSString *)appOwner;
 
-+ (NSString*) uploadURL : (NSString*) applicationName : (NSString*) formName : (NSString*) fieldName : (NSString*) recordID : (NSString*) fileName : (NSString*) appOwner;
++ (NSString*) uploadURL : (NSString*) applicationName : (NSString*) formName : (NSString*) fieldName : (NSString*) recordID : (NSString*) fileName : (NSString*) appOwner viewLinkname:(NSString *)viewLinkname;
 + (NSString*) formOnLoad:(NSString*) appLinkName : (NSString*) formLinkName : (NSString*) paramString : (NSString*) appOwner;
 + (NSString*) formEditOnLoad:(NSString*) appLinkName : (NSString*) formLinkName  : (NSString*) paramString : (NSString*) appOwner;
 + (NSString*) sunFormOnUser:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) subFormName : (NSString*) fieldLinkName;

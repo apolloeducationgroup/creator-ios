@@ -189,8 +189,7 @@
     return [parser recordStatus];
 }
 
-- (BOOL) uploadImages : (NSString*)  recordID {
-    
+- (BOOL) uploadImages : (NSString*)  recordID viewLinkname:(NSString *)viewLinkname {
     
     NSArray *imageFields = [self.form getImageFields];
     if(imageFields != nil && imageFields.count > 0) {
@@ -201,7 +200,7 @@
             UIImageView *newImage = [[self.record valueForKey:fieldName] fieldValue];
             if(newImage != nil) {
                 
-                NSString *uploadURL = [URLConstructor uploadURL:[self.form.application appLinkName] :[self.form linkName] :fieldName :recordID :@"file" :[self.form.application appOwner]];
+                NSString *uploadURL = [URLConstructor uploadURL:[self.form.application appLinkName] :[self.form linkName] :fieldName :recordID :@"file" :[self.form.application appOwner]viewLinkname:viewLinkname];
                 
                 NSLog(@"file name %@",fieldName);
                 NSLog(@"URL for Image Upload   %@",uploadURL);
@@ -210,12 +209,29 @@
                 URLConnector *url = [[URLConnector alloc] initFetcherPostImage:uploadURL :newImage :[URLConnector MULTIPARTPOST]];
                 NSLog(@" Image Response %@",[url apiResponse]);
             }
+            
+            else {
+                
+                NSString *uploadURL = [URLConstructor uploadURL:[self.form.application appLinkName] :[self.form linkName] :fieldName :recordID :@"file" :[self.form.application appOwner]viewLinkname:viewLinkname];
+                
+                NSLog(@"file name %@",fieldName);
+                NSLog(@"URL for Image Upload   %@",uploadURL);
+                
+                uploadURL=[uploadURL stringByAppendingString:@"&operation=delete"];
+                URLConnector *url = [[URLConnector alloc] initFetcherPostImage:uploadURL :Nil :[URLConnector MULTIPARTPOST]];
+                NSLog(@" Image Response %@",[url apiResponse]);
+            }
+
         }
     }
+    
+    
+    
+    
     return YES;
 }
 
-- (BOOL)  uploadFiles : (NSString*) recordID {
+- (BOOL)  uploadFiles : (NSString*) recordID viewLinkname:(NSString *)viewLinkname {
     
     NSLog(@"Coming to upload files11111");
     
@@ -228,7 +244,7 @@
             UIImageView *newImage = [[self.record valueForKey:fieldName] fieldValue];
             if(newImage != nil) {
                 
-                NSString *uploadURL = [URLConstructor uploadURL:[self.form.application appLinkName] :[self.form linkName] :fieldName :recordID :@"file" :[self.form.application appOwner]];
+                NSString *uploadURL = [URLConstructor uploadURL:[self.form.application appLinkName] :[self.form linkName] :fieldName :recordID :@"file" :[self.form.application appOwner] viewLinkname:viewLinkname];
                 
                 //NSLog(@"image upload url riyaz :: %@",uploadURL);
                 

@@ -38,8 +38,8 @@
 - (ZCRecordStatus*) updateRecordFromView:(NSString*) viewLinkName;
 - (ZCRecordStatus*) deleteRecord;
 - (ZCRecordStatus*) duplicateRecord;
-- (BOOL) uploadImages : (NSString*)  recordID;
-- (BOOL) uploadFiles : (NSString*)  recordID;
+- (BOOL) uploadImages : (NSString*)  recordID viewLinkname:(NSString *)viewLinkname;
+- (BOOL)  uploadFiles : (NSString*) recordID viewLinkname:(NSString *)viewLinkname;
 -(id)copyWithZone:(NSZone *)zone;
 
 @end

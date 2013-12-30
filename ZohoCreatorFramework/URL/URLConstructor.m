@@ -173,12 +173,28 @@ int FORM_LOOKUP_ADD_FORM =5;
     return sectionMeta;
 }
 
-+ (NSString*) uploadURL : (NSString*) applicationName : (NSString*) formName : (NSString*) fieldName : (NSString*) recordID : (NSString*) fileName : (NSString*) appOwner {
++ (NSString*) uploadURL : (NSString*) applicationName : (NSString*) formName : (NSString*) fieldName : (NSString*) recordID : (NSString*) fileName : (NSString*) appOwner viewLinkname:(NSString *)viewLinkname  {
+    int formAccessType=1;
+
+    if (viewLinkname.length) {
+        formAccessType =2;
+    }
+    
+    if (recordID.length && viewLinkname.length) {
+        formAccessType =3;
+    }
+    
     
     NSString *sectionMeta = @"/api/xml/fileupload/";
     sectionMeta = [[URLConstructor serverURL:false] stringByAppendingString:sectionMeta];
     sectionMeta = [URLConstructor appendAuthToken:sectionMeta];
-    sectionMeta = [sectionMeta stringByAppendingFormat:@"&applinkname=%@&formname=%@&fieldname=%@&recordId=%@&filename=%@&sharedBy=%@",applicationName,formName,fieldName,recordID,fileName,appOwner];
+    sectionMeta = [sectionMeta stringByAppendingFormat:@"&applinkname=%@&formname=%@&fieldname=%@&recordId=%@&formAccessType=%d&filename=%@&sharedBy=%@",applicationName,formName,fieldName,recordID,formAccessType,fileName,appOwner];
+    
+    if (viewLinkname.length) {
+        
+        [sectionMeta stringByAppendingFormat:@"&viewLinkName%@",viewLinkname];
+    }
+    
     return sectionMeta;
 }
 
