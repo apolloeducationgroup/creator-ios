@@ -686,7 +686,7 @@
             
             [dict setObject:[fieldvalue objectAtIndex:index] forKey:[keys objectAtIndex:index]];
         }
-        
+        return dict;
         
     }
 
