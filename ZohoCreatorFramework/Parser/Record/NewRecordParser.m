@@ -458,6 +458,13 @@
                 //// //NSLog(@"Record has setted in status object %@",_record);
                 _combinedlookupvalueTag = NO;
             }
+            else if([elementName isEqualToString:@"openurl"]) {
+                _openURLTag = NO;
+                
+            }
+            
+
+            
 
         }
     }
