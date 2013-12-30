@@ -967,6 +967,23 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
             else if(fieldType == [ZCFieldList ZCFileupload] || fieldType == [ZCFieldList ZCImage]) {
                 
                 
+                if ( [[fieldData fieldValue]isKindOfClass:[NSString class]])
+                    {
+                        [returnString appendFormat:@"<field name='%@'>",fieldName];
+                        
+                        NSLog(@"Field Name %@ ==== %@",[fieldData fieldName],[fieldData fieldValue]);
+                        
+                        NSString* cdata = [fieldData fieldValue];
+                        
+                        NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+                        
+                        [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
+                        [returnString appendString:@"</field>"];
+
+                        
+                    }
+                
+                
                 
             }
             else if(fieldType == [ZCFieldList ZCSubform] || fieldType ==[ZCFieldList ZCNewSubform])
