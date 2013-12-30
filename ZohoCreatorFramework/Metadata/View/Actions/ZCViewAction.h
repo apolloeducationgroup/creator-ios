@@ -14,6 +14,7 @@ enum
 {
     ZCViewActionTypeRecord=1,
     ZCViewActionTypeHeader=2,
+    ZCViewActionTypeMenu=3,
 };
 
 @interface ZCViewAction : NSObject

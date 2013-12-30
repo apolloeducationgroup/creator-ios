@@ -22,7 +22,7 @@
 @synthesize viewLinkName=_viewLinkName,records=_records,viewFieldDict=_viewFieldDict,application=_application,events=_events,filterList=_filterList, zcGroups=_zcGroups;
 @synthesize hasAddPermission=_hasAddPermission,hasBulkEditPermission=_hasBulkEditPermission,hasDeletePermission=_hasDeletePermission;
 @synthesize hasDupplicatePermission=_hasDupplicatePermission,hasEditPermission=_hasEditPermission;
-@synthesize headerAction=_headerAction,rowAction=_rowAction,viewParam=_viewParam,customFilterList=_customFilterList;
+@synthesize headerAction=_headerAction,rowAction=_rowAction,menuAction=_menuAction,viewParam=_viewParam,customFilterList=_customFilterList;
 @synthesize baseField=_baseField;
 
 - (ZCView*) initZCView  {
@@ -45,7 +45,10 @@
 - (NSMutableArray*) headerAction {
     return _headerAction;
 }
-
+-(NSMutableArray *) menuAction
+{
+    return  _menuAction;
+}
 - (void) addZCViewField : (ZCViewField*) viewField {
     
 //    if ([viewField fieldType] !=[ZCFieldList ZCAutoNumber ])

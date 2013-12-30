@@ -113,6 +113,8 @@
             
             if([elementName isEqualToString:@"Action"]) {
                 _viewAction = [[ZCViewAction alloc] init];
+
+                _metaDataActionEnabled=YES;
                 //                [_viewAction setActionName:[attributeDict valueForKey:@"name"]];
                 
                 if ([attributeDict valueForKey:@"id"]!=nil) {
@@ -122,20 +124,43 @@
                     [_viewAction setFunctionName:[attributeDict valueForKey:@"ID"]];
                 }
                 
+                
+                
+//                NSString *actionTyepStr = [attributeDict valueForKey:@"type"];
+//                if([actionTyepStr isEqualToString:@"row"]) {
+//                    [_viewAction setActionType:ZCViewActionTypeRecord];
+//                    [_rowActions addObject:_viewAction];
+//                    //// //NSLog(@"Added as row action");
+//                }
+//                else if([actionTyepStr isEqualToString:@"view"]) {
+//                    [_viewAction setActionType:ZCViewActionTypeHeader];
+//                    [_headerActions addObject:_viewAction];
+//                }
+            
+                
 
-                
-                
-                NSString *actionTyepStr = [attributeDict valueForKey:@"type"];
-                if([actionTyepStr isEqualToString:@"row"]) {
-                    [_viewAction setActionType:ZCViewActionTypeRecord];
-                    [_rowActions addObject:_viewAction];
-                    //// //NSLog(@"Added as row action");
-                }
-                else if([actionTyepStr isEqualToString:@"view"]) {
-                    [_viewAction setActionType:ZCViewActionTypeHeader];
-                    [_headerActions addObject:_viewAction];
-                }
             }
+            else if ([elementName isEqualToString:@"isRowAction"])
+            {
+            
+                _metaDataRowActionEnabled=YES;
+                
+            
+            }
+            else if ([elementName isEqualToString:@"isHeaderAction"])
+            {
+                
+                
+                _metaDataViewActionEnabled=YES;
+                
+            }
+            else if ([elementName isEqualToString:@"isMenuAction"])
+            {
+                
+                _metaDataMenuActionEnabled=YES;
+                
+            }
+
         }
         else
         {
@@ -205,6 +230,7 @@
                 _metaDataActionsEnabled=YES;
                 _rowActions = [[NSMutableArray alloc] init];
                 _headerActions = [[NSMutableArray alloc] init];
+                _menuAction=[[NSMutableArray alloc]init];
             }
         }
     }
@@ -517,6 +543,44 @@
     }
     else if(_metaDataActionsEnabled==YES) {
         [_viewAction setActionName:[NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding]];
+        
+        
+         if (_metaDataRowActionEnabled==YES)
+        {
+            
+            if ([string isEqualToString:@"true"]) {
+                [_viewAction setActionType:ZCViewActionTypeRecord];
+                [_rowActions addObject:_viewAction];
+
+                
+            }
+            
+        }
+        else if (_metaDataViewActionEnabled ==YES)
+        {
+            
+            if ([string isEqualToString:@"true"]) {
+                [_viewAction setActionType:ZCViewActionTypeHeader];
+            [_headerActions addObject:_viewAction];
+
+            }
+
+            
+        }
+        else if (_metaDataMenuActionEnabled ==YES)
+        {
+            
+            if ([string isEqualToString:@"true"]) {
+                [_viewAction setActionType:ZCViewActionTypeMenu];
+                [_menuAction addObject:_viewAction];
+            }
+
+            
+        }
+
+        
+        
+        
     }
     else if(_fieldTagEnabled==YES) {
         if([_currentElementName isEqualToString:@"DisplayName"]) {
@@ -617,11 +681,33 @@
                 
                 [_zcView setRowAction:_rowActions];
                 [_zcView setHeaderAction:_headerActions];
+                [_zcView setMenuAction:_menuAction];
                 
             }
             else if([elementName isEqualToString:@"Action"]) {
                 
             }
+            else if ([elementName isEqualToString:@"isRowAction"])
+            {
+                
+                _metaDataRowActionEnabled=NO;
+                
+                
+            }
+            else if ([elementName isEqualToString:@"isHeaderAction"])
+            {
+                
+                
+                _metaDataViewActionEnabled=NO;
+                
+            }
+            else if ([elementName isEqualToString:@"isMenuAction"])
+            {
+                
+                _metaDataMenuActionEnabled=NO;
+                
+            }
+
             else if(_viewTagEnabled==YES) {
                 if([elementName isEqualToString:@"View"]) {
                     _viewTagEnabled = NO;

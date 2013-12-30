@@ -37,6 +37,8 @@
 @property (nonatomic,retain) NSMutableArray *filterList;
 @property (nonatomic,retain,getter = headerAction) NSMutableArray *headerAction;
 @property (nonatomic,retain,getter = rowAction) NSMutableArray *rowAction;
+@property (nonatomic,retain,getter = menuAction) NSMutableArray *menuAction;
+
 @property (nonatomic,retain) ZCViewParam *viewParam;
 @property (nonatomic, retain) NSString* baseField;
 @property BOOL hasAddPermission;

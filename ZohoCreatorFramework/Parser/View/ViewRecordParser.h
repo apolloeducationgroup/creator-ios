@@ -36,6 +36,12 @@
     BOOL _metaDataFiltersEnabled;
     BOOL _metaDataCustomFiltersEnabled;
     BOOL _metaDataActionsEnabled;
+    BOOL _metaDataActionEnabled;
+    BOOL _metaDataRowActionEnabled;
+    BOOL _metaDataViewActionEnabled;
+    BOOL _metaDataMenuActionEnabled;
+
+    
     BOOL _groupNameEnabled;
     BOOL _viewTagEnabled;
     BOOL _fieldTagEnabled;
@@ -52,6 +58,7 @@
     ZCViewAction *_viewAction;
     NSMutableArray *_rowActions;
     NSMutableArray *_headerActions;
+    NSMutableArray *_menuAction;
     ZCGroup *_zcGroup;
     ZCGroups *_zcGroups;
     BOOL isGrouped;
