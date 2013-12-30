@@ -169,6 +169,10 @@
                     
                 }
             }
+            else
+            {
+                [openurltask setUrlString:urlString];
+            }
         }
     }
     
