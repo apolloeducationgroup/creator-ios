@@ -156,6 +156,8 @@
     NSString *updateRecord = [URLConstructor submitRecordURL];
     NSString *updateRecordString = [URLConstructor postAuthTokenWithAppOwner:[[self->_form application] appOwner]];
     
+    updateRecordString=[updateRecordString stringByAppendingString:@"&formAccessType=3&errorLog=true"];
+    
     ZCFieldData *idFieldData = [[ZCFieldData alloc] init];
     [idFieldData setFieldName:@"ID"];
     [idFieldData setFieldValue:self.recordID];
