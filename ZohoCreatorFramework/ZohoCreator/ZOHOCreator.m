@@ -623,7 +623,7 @@ static ZOHOCreator *creatorObject = nil;
 {
 
     for (int fieldindex=0; fieldindex<[form fields].count; fieldindex++) {
-        if( [[[form fields]objectAtIndex:fieldindex]fieldType]==[ZCFieldList ZCURL] ||  [[[form fields]objectAtIndex:fieldindex]fieldType]==[ZCFieldList ZCRichText] ||  [[[form fields]objectAtIndex:fieldindex]fieldType]==[ZCFieldList ZCSubform])
+        if([[[form fields]objectAtIndex:fieldindex]fieldType]==[ZCFieldList ZCRichText] ||  [[[form fields]objectAtIndex:fieldindex]fieldType]==[ZCFieldList ZCSubform])
   {
       if( [[[form fields]objectAtIndex:fieldindex]fieldType]==[ZCFieldList ZCSubform])
       {

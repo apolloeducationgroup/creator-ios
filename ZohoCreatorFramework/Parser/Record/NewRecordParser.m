@@ -90,6 +90,7 @@
         {
             if([elementName isEqualToString:@"url"]) {
                 _openURLURLTag=YES;
+                NSLog(@"openURl url");
                 
             }
             
@@ -117,7 +118,7 @@
                 _openURLTag = YES;
                  _recordStatus.openUrltask= [[OpenUrlTask alloc] init];
                 [_recordStatus.openUrltask setTaskType:@"openurl"];
-                
+                NSLog(@"openurltask_ %@",_recordStatus.openUrltask);
 
             }
 
