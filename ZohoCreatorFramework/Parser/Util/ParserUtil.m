@@ -134,6 +134,8 @@
     {
        return (NSMutableDictionary*)rawString;
 }
+    return Nil;
+    
 }
 
 + (NSString*) getURL : (NSString*) rawString {

@@ -630,7 +630,7 @@ static ZOHOCreator *creatorObject = nil;
 
 ZCForm * subform=[[[form fields]objectAtIndex:fieldindex] subForm];
           
-          if (![ZOHOCreator formIsEditSuppoted:subform])
+          if (![ZOHOCreator isSuportededitSubformField:subform ])
           {
           
               return NO;
@@ -652,6 +652,22 @@ ZCForm * subform=[[[form fields]objectAtIndex:fieldindex] subForm];
     }
 
     return YES;
+}
++(BOOL)isSuportededitSubformField:(ZCForm *)subform
+{
+    for (int fieldindex=0; fieldindex<[subform fields].count; fieldindex++) {
+        int type =[[[subform fields]objectAtIndex:fieldindex]fieldType];
+
+    if (type == [ZCFieldList ZCURL] || type == [ZCFieldList ZCURL]  || type == [ZCFieldList ZCSubform]  || type == [ZCFieldList ZCImage] || type == [ZCFieldList ZCFileupload] )
+    {
+        
+        return NO;
+        
+    }
+    
+}
+    return YES;
+
 }
 +(BOOL)formIsSupported:(ZCForm *)form
 {
