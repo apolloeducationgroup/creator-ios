@@ -192,7 +192,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     
     if (viewLinkname.length) {
         
-        [sectionMeta stringByAppendingFormat:@"&viewLinkName%@",viewLinkname];
+    sectionMeta=[sectionMeta stringByAppendingFormat:@"&viewLinkName%@",viewLinkname];
     }
     
     return sectionMeta;
