@@ -206,6 +206,7 @@
     
 //        [_recordStatus.openUrltask setUrlString:string];
         
+        NSLog(@"open URL task url %@",string);
         _recordStatus.openUrltask =[ScriptJSONParser setopenURLTaskparameters:_recordStatus.openUrltask urlString:string];
         
         
