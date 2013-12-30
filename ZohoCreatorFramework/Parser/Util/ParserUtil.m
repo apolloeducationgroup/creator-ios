@@ -28,6 +28,7 @@
 
 + (NSMutableDictionary*) getURLString : (NSString*) rawString {
     
+    if ([rawString isKindOfClass:[NSString class]]) {
     NSLog(@"raw string urlstring: %@",rawString);
     NSMutableDictionary *returnList = [[NSMutableDictionary alloc] init];
     if(rawString != nil && ![rawString isEqualToString:@"(null)"]) {
@@ -123,10 +124,16 @@
         
         
         return returnList;
+        
     }
     else {
         return nil;
     }
+    }
+    else if([rawString isKindOfClass:[NSDictionary class]])
+    {
+       return (NSMutableDictionary*)rawString;
+}
 }
 
 + (NSString*) getURL : (NSString*) rawString {
