@@ -560,6 +560,7 @@
         
             jsonArray=[NSArray arrayWithArray:(NSArray *)fieldValue];
         }
+        NSLog(@"json array riyaz %@",jsonArray);
         NSMutableDictionary * choicesDict=[[NSMutableDictionary alloc]init];
         for (NSDictionary * choiceDic in jsonArray ) {
             
