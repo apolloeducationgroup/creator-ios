@@ -563,9 +563,9 @@
         NSMutableDictionary * choicesDict=[[NSMutableDictionary alloc]init];
         for (NSDictionary * choiceDic in jsonArray ) {
             
-            [choicesDict setValue:[choiceDic objectForKey:@"displayValue"] forKey:[choiceDic objectForKey:@"referFieldValue"]];
+            [choicesDict setValue:[choiceDic objectForKey:@"value"] forKey:[choiceDic objectForKey:@"key"]];
             
-            
+
             
         }
         
