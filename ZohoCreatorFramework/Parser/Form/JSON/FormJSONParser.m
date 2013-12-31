@@ -462,12 +462,14 @@
         if (SUBFORMTAG)
         {
             
+            NSLog(@"subform tag");
             
             if ( [self subformHASUnsupportedFields:_field])
             {
                 
                 [_zcForm setIsNotSupported:YES];
                 
+                NSLog(@"form is not supported");
                 //    [NSException raise:@"Form not Supported" format:@" FORM NOT SUPPORTED DUE TO UNSUPPORTED SUBFORM FIELDS"];
                 
             }
