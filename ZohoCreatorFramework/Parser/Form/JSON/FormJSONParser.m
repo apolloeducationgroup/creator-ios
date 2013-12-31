@@ -146,9 +146,6 @@
 }
 -(BOOL)subformHASUnsupportedFields:(ZCField *)field
 {
-    return NO;
-
-    
     if ([field fieldType] == [ZCFieldList ZCLookupCheckbox] || [field fieldType] == [ZCFieldList ZCLookupDropDown] || [field fieldType] == [ZCFieldList ZCLookupMultiSelect] || [field fieldType] == [ZCFieldList ZCLookupRadio] || [field fieldType] == [ZCFieldList ZCMultiSelect] || [field fieldType] == [ZCFieldList ZCDropdown] || [field fieldType] == [ZCFieldList ZCRadio] || [field fieldType] == [ZCFieldList ZCCheckbox])
         
     {
