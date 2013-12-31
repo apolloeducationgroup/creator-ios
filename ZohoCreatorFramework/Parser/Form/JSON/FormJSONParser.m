@@ -37,7 +37,7 @@
 {
     @try {
         NSLog(@"Coming to JSON Parser");
-        NSData* jsonData = [_jsonString dataUsingEncoding:NSUTF8StringEncoding];
+        NSData* jsonData = [_jsonString dataUsingEncoding:NSUnicodeStringEncoding];
 //        NSData *jsonData = [_jsonString dataUsingEncoding:[NSString defaultCStringEncoding]];
         NSLog(@"jsondata %@",jsonData);
         _jsonDictionary= [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
