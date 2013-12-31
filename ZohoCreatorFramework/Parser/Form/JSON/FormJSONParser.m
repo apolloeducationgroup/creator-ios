@@ -550,11 +550,16 @@
         
         
         NSLog(@"dta ");
-
-        NSData *jsonData = [fieldValue dataUsingEncoding:[NSString defaultCStringEncoding]];
-        NSArray *jsonArray= [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+        NSArray *jsonArray;
+        if ([fieldValue isKindOfClass:[NSString class]]) {
+        NSData *jsonData = [fieldValue dataUsingEncoding:NSUnicodeStringEncoding];
+         jsonArray=[NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+        }
+        else if ([fieldValue isKindOfClass:[NSArray class]])
+        {
         
-        NSLog(@"dta %@",jsonArray);
+            jsonArray=[NSArray arrayWithArray:(NSArray *)fieldValue];
+        }
         NSMutableDictionary * choicesDict=[[NSMutableDictionary alloc]init];
         for (NSDictionary * choiceDic in jsonArray ) {
             
