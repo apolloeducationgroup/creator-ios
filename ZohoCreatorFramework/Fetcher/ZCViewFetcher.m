@@ -155,7 +155,7 @@
         [view.zcGroups.zcGroups removeAllObjects];
         
         
-        for (int grpind=gps.count-1;grpind>0; grpind--) {
+        for (int grpind=gps.count-1;grpind>=0; grpind--) {
             
             
             [view.zcGroups addZCGroup:[gps objectAtIndex:grpind]];

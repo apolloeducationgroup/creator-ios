@@ -549,7 +549,7 @@
         
         
         NSLog(@"dta ");
-        NSArray *jsonArray;
+        id jsonArray;
         if ([fieldValue isKindOfClass:[NSString class]]) {
         NSData *jsonData = [fieldValue dataUsingEncoding:NSUnicodeStringEncoding];
          jsonArray=[NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
@@ -560,16 +560,47 @@
             jsonArray=[NSArray arrayWithArray:(NSArray *)fieldValue];
         }
         NSLog(@"json array riyaz %@",jsonArray);
-        NSMutableDictionary * choicesDict=[[NSMutableDictionary alloc]init];
-        for (NSDictionary * choiceDic in jsonArray ) {
-            
-            [choicesDict setValue:[choiceDic objectForKey:@"value"] forKey:[choiceDic objectForKey:@"key"]];
-            
-
-            
-        }
+//        NSMutableDictionary * choicesDict=[[NSMutableDictionary alloc]init];
+//        for (NSDictionary * choiceDic in jsonArray ) {
+//            [choicesDict setValue:[choiceDic objectForKey:@"value"] forKey:[choiceDic objectForKey:@"key"]];            
+//        }
         
-        [data setFieldValue:choicesDict];
+//        [data setFieldValue:choicesDict];
+        
+        
+        
+        if([jsonArray isKindOfClass:[NSArray class]])
+        {
+            NSArray* initialValuesArray = jsonArray;
+            NSMutableDictionary* dictionary = [NSMutableDictionary dictionary];
+            for(NSInteger i=0; i<initialValuesArray.count;i++)
+            {
+                NSMutableDictionary* dic = [initialValuesArray objectAtIndex:i];
+                NSMutableDictionary* oneEntryInSelectedOptionsDic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[dic objectForKey:@"value"],[dic objectForKey:@"key"], nil];
+                [dictionary addEntriesFromDictionary:oneEntryInSelectedOptionsDic];
+                
+            }
+            
+//            [_field setInitialValues:dictionary];
+            [data setFieldValue:dictionary];
+
+        }
+        else if([jsonArray isKindOfClass:[NSDictionary class]])
+        {
+            NSMutableDictionary* oneEntryInSelectedOptionsDic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[jsonArray objectForKey:@"value"],[jsonArray objectForKey:@"key"], nil];
+//            [_field setInitialValues:oneEntryInSelectedOptionsDic];
+            [data setFieldValue:oneEntryInSelectedOptionsDic];
+
+        }
+        else
+        {
+//            [_field setInitialValues:tempValue];
+            [data setFieldValue:jsonArray];
+
+        }
+
+        
+        
         
     }
    else if (type==[ZCFieldList ZCURL]) {
