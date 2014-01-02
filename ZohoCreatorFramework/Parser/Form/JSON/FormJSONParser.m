@@ -380,7 +380,10 @@
             NSLog(@"SubForm Data has added");
         }
         
+        
+        
         tempValue = [_fieldDict objectForKey:@"value"];
+        NSLog(@"test log riyaz value tag starts %@",tempValue);
         if(tempValue != nil) {
 //            [_field setInitialValues:tempValue];
 
@@ -389,7 +392,7 @@
                 [[_field initialValues]setObject:tempValue forKey:@"value"];
             }
             else if([_field fieldType]==[ZCFieldList ZCImage]) {
-                
+                if ([tempValue isKindOfClass:[NSDictionary class]]) {
                 NSURL *validURL = [NSURL URLWithString:[tempValue objectForKey:@"src"]];
                 if (validURL && validURL.scheme && validURL.host) {
                     
@@ -403,6 +406,7 @@
                     NSString* imageName = [NSString stringWithFormat:@"/%@",[stringarray lastObject]];
                     
                     [_field setInitialValues:imageName];
+                }
                 }
             }
             else if([_field fieldType]==[ZCFieldList ZCFileupload]) {
@@ -450,6 +454,8 @@
 
         }
         
+        NSLog(@"test log riyaz value tag ends %@",tempValue);
+
         tempValue = [_fieldDict objectForKey:@"subformrecords"];
         if(tempValue != nil) {
 
