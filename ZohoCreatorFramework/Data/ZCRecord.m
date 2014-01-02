@@ -11,7 +11,7 @@
 
 @implementation ZCRecord
 
-@synthesize record=_record,form=_form,fieldDataList=_fieldDataList,recordID=_recordID, zCGroup=_zCGroup;
+@synthesize record=_record,form=_form,fieldDataList=_fieldDataList,recordID=_recordID, zCGroup=_zCGroup,errorDictionary=_errorDictionary;
 
 - (ZCRecord*) initZCRecord {
     
@@ -19,6 +19,7 @@
     if(self) {
         self->_record = [[NSMutableDictionary alloc] init];
         self->_fieldDataList = [[NSMutableArray alloc] init];
+        self->_errorDictionary=[[NSMutableDictionary alloc]init];
     }
     return self;
 }
@@ -31,6 +32,8 @@
         self->_record = [[NSMutableDictionary alloc] init];
         self->_fieldDataList = [[NSMutableArray alloc] init];
         self->_form=_localform;
+        self->_errorDictionary=[[NSMutableDictionary alloc]init];
+
     }
     return self;
 }

@@ -27,6 +27,7 @@
 @property (nonatomic,retain) ZCGroup *zCGroup;
 @property (nonatomic,retain) ZCForm *form;
 
+@property (nonatomic,retain) NSMutableDictionary * errorDictionary; //forsubform
 - (ZCRecord*) initZCRecord;
 - (ZCRecord*) initZCRecord : (ZCForm*) _localform;
 - (void) addZCFieldData : (ZCFieldData*) fieldData;
