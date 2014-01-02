@@ -386,16 +386,14 @@
             }
             else if([_field fieldType]==[ZCFieldList ZCImage]) {
                 
-                NSString* imageSrc = [NSString stringWithFormat:@"%@",tempValue];
-                
-                NSURL *validURL = [NSURL URLWithString:imageSrc];
+                NSURL *validURL = [NSURL URLWithString:[tempValue objectForKey:@"src"]];
                 if (validURL && validURL.scheme && validURL.host) {
                     
-                    [_field setInitialValues:imageSrc];
+                    [_field setInitialValues:[tempValue objectForKey:@"src"]];
                 }
                 else {
                     
-                    NSArray * stringarray = [imageSrc componentsSeparatedByString:@"/"];
+                    NSArray * stringarray = [[tempValue objectForKey:@"src"] componentsSeparatedByString:@"/"];
                     
                     NSString* imageName = [NSString stringWithFormat:@"/%@",[stringarray lastObject]];
                     
