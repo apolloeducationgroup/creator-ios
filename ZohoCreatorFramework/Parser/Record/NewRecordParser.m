@@ -526,7 +526,15 @@
     [subformfieldName deleteCharactersInRange:rangL];
     rangL.location=rowNum.length-1;
     [rowNum deleteCharactersInRange:rangL];
-
+    
+    
+    NSArray * rownumberIDcheckarrray=[rowNum componentsSeparatedByString:@"_"];
+    if (rownumberIDcheckarrray.count>1) {
+        
+        rowNum=[rownumberIDcheckarrray objectAtIndex:1];
+    }
+    
+    
     NSLog(@"arr osdfsa %@ %@ %@",fieldName,subformfieldName,rowNum);
         
     ZCSubFormFieldError * subformFieldError=[[ZCSubFormFieldError alloc ]init];
