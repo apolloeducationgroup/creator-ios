@@ -11,6 +11,7 @@
 #import "ZCField.h"
 #import "ZCFieldList.h"
 #import "OpenUrlTask.h"
+#import "ZCExpection.h"
 @class ZCApplication,ZCButton;
 
 
@@ -39,7 +40,7 @@ enum UPCOMING_FIELDS {
 @property BOOL hasError;
 
 @property BOOL isNotSupported;
-
+@property (nonatomic,retain) ZCExpection * exceptionOccuredInFetching;
 //@property (nonatomic,retain)NSDictionary *nextUrl;
 @property (nonatomic,retain) OpenUrlTask *nextUrl;
 - (ZCForm*) initZCForm;

@@ -10,7 +10,7 @@
 
 @implementation ZCForm
 
-@synthesize fields=_fields,application=_application,hasEditOnLoad=_hasEditOnLoad,hasOnLoad=_hasOnLoad,isStateful=_isStateful,buttons=_buttons,successMessage=_successMessage,dateFormat=_dateFormat,nextUrl=_nextUrl,isNotSupported=_isNotSupported;
+@synthesize fields=_fields,application=_application,hasEditOnLoad=_hasEditOnLoad,hasOnLoad=_hasOnLoad,isStateful=_isStateful,buttons=_buttons,successMessage=_successMessage,dateFormat=_dateFormat,nextUrl=_nextUrl,isNotSupported=_isNotSupported,exceptionOccuredInFetching=_exceptionOccuredInFetching;
 
 - (ZCForm*) initZCForm  {
     

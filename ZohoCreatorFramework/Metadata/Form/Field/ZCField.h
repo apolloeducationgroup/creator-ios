@@ -32,6 +32,7 @@
 @property  BOOL hasSubFormDeleteEvent;
 @property BOOL hasSubFormOnUserScript;
 @property BOOL hasInvolvedInFormula;
+//@property BOOL hasDynamicpicklistexists;
 @property BOOL isHidden;
 @property BOOL isUrlLinkName;
 @property BOOL isUrlTitle;

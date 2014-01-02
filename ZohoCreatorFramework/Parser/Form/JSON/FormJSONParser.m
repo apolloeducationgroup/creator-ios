@@ -51,12 +51,13 @@
             NSArray *_fieldRawList = [_responseDict objectForKey:@"fields"];
             NSLog(@"Coming to fetch getFieldInfo");
             [self getFieldInfo:_fieldRawList :_zcForm];
+
         }
     }
     @catch (NSException *exception) {
         
         NSLog(@"Exception occ IN FORM PARSING %@",exception);
-        
+        _zcForm.exceptionOccuredInFetching =[[ZCExpection alloc]initWithException:exception inClass:[self description]];
     }
 }
 - (void) getFormGeneralInfo  : (NSDictionary*) formGeneralDict {
@@ -221,6 +222,10 @@
             [_field setHasInvolvedInFormula:[tempValue boolValue]];
         }
         
+        tempValue = [_fieldDict objectForKey:@"dynamicpicklistexists"];
+        if(tempValue != nil) {
+            [_field setHasInvolvedInFormula:[tempValue boolValue]];
+        }
         tempValue = [_fieldDict objectForKey:@"onaddrowexists"];
         if(tempValue != nil) {
             [_field setHasSubFormAddEvent:[tempValue boolValue]];
