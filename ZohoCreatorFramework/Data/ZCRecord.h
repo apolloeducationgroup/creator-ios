@@ -43,4 +43,5 @@
 - (BOOL)  uploadFiles : (NSString*) recordID viewLinkname:(NSString *)viewLinkname;
 -(id)copyWithZone:(NSZone *)zone;
 
+-(void)addErrorFieldName:(NSString *)fieldname error:(ZCFieldError *)error;
 @end

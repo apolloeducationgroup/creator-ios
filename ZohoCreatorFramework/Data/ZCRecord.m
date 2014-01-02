@@ -37,6 +37,15 @@
     }
     return self;
 }
+-(void)addErrorFieldName:(NSString *)fieldname error:(ZCFieldError *)error
+{
+
+    if (_errorDictionary==Nil) {
+        _errorDictionary =[[NSMutableDictionary alloc]init];
+    }
+    [_errorDictionary setObject:error forKey:fieldname];
+    
+}
 
 - (void) addZCFieldData : (ZCFieldData*) fieldData {
     
@@ -277,6 +286,7 @@
         [copyRecord setRecordID:[_recordID mutableCopy]];
         [copyRecord setFieldDataList:[_fieldDataList mutableCopy]];
         [copyRecord setZCGroup:[_zCGroup copy ]];
+        [copyRecord setErrorDictionary:[_errorDictionary copy]];
     }
     return copyRecord;
 }
