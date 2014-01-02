@@ -546,7 +546,7 @@
     if (type==[ZCFieldList ZCMultiSelect] || type ==[ZCFieldList ZCCheckbox] || type ==[ZCFieldList ZCLookupCheckbox] || type==[ZCFieldList ZCLookupMultiSelect]  || type==[ZCFieldList ZCRadio] || type==[ZCFieldList ZCDropdown] ) {
         
         
-        NSLog(@"dta %@",[fieldValue class]);
+        NSLog(@"dta %@ %@",[fieldValue class],fieldValue);
         id jsonArray;
         if ([fieldValue isKindOfClass:[NSString class]]) {
         NSData *jsonData = [fieldValue dataUsingEncoding:NSUnicodeStringEncoding];
@@ -556,6 +556,10 @@
         {
         
             jsonArray=[NSArray arrayWithArray:(NSArray *)fieldValue];
+        }
+        else if ([fieldValue isKindOfClass:[NSDictionary class]])
+        {
+            jsonArray=[NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)fieldValue];
         }
         NSLog(@"json array riyaz %@ %@",fieldname,jsonArray);
 //        NSMutableDictionary * choicesDict=[[NSMutableDictionary alloc]init];
