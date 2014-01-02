@@ -490,8 +490,8 @@
     [_addValue setTaskType:@"addvalue"];
     [_addValue setFormName:[addValueDict objectForKey:@"formName"]];
     [_addValue setFieldName:[addValueDict objectForKey:@"fieldName"]];
-    NSMutableArray *_fieldValueList = [addValueDict objectForKey:@"fieldValue"];
-    NSMutableArray *_fieldKeyList = [addValueDict objectForKey:@"combinedValue"];
+    NSMutableArray *_fieldKeyList = [addValueDict objectForKey:@"fieldValue"];
+    NSMutableArray *_fieldValueList = [addValueDict objectForKey:@"combinedValue"];
     NSString * subformName= [addValueDict objectForKey:@"subFormName"];
     
     if (subformName !=Nil) {
@@ -580,10 +580,10 @@
     [_selectValue setTaskType:@"select"];
     [_selectValue setFormName:[selectValueDict objectForKey:@"formName"]];
     [_selectValue setFieldName:[selectValueDict objectForKey:@"fieldName"]];
-    NSMutableArray *_fieldValueList = [selectValueDict objectForKey:@"fieldValue"];
+    NSMutableArray *_fieldKeyList = [selectValueDict objectForKey:@"fieldValue"];
     
     
-    NSMutableArray *_fieldKeyList = [selectValueDict objectForKey:@"combinedValue"];
+    NSMutableArray *_fieldValueList = [selectValueDict objectForKey:@"combinedValue"];
     
     
     NSString * subformName= [selectValueDict objectForKey:@"subFormName"];
@@ -617,8 +617,8 @@
     [_deSelectValue setTaskType:@"deselect"];
     [_deSelectValue setFormName:[deSelectValueDict objectForKey:@"formName"]];
     [_deSelectValue setFieldName:[deSelectValueDict objectForKey:@"fieldName"]];
-    NSMutableArray *_fieldValue = [deSelectValueDict objectForKey:@"fieldValue"];
-    NSMutableArray *_fieldKeyList = [deSelectValueDict objectForKey:@"combinedValue"];
+    NSMutableArray *_fieldKeyList= [deSelectValueDict objectForKey:@"fieldValue"];
+    NSMutableArray *_fieldValue = [deSelectValueDict objectForKey:@"combinedValue"];
 
     if(_fieldValue != nil) {
         [_deSelectValue setDeSelectValues:[self  getDictionaryForChoicesValues:_fieldValue choiceKey:_fieldKeyList]];
