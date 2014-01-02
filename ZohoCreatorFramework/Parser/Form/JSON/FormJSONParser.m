@@ -231,6 +231,10 @@
         }
         tempValue = [_fieldDict objectForKey:@"inputtype"];
         if(tempValue != nil) {
+            if ([tempValue integerValue]==1) {
+                _zcForm.isNotSupported = TRUE;
+            }
+
             [_field setImageInputType:[tempValue integerValue]];
         }
         tempValue = [_fieldDict objectForKey:@"maximumrows"];
@@ -389,6 +393,7 @@
                 NSURL *validURL = [NSURL URLWithString:[tempValue objectForKey:@"src"]];
                 if (validURL && validURL.scheme && validURL.host) {
                     
+                    _zcForm.isNotSupported = TRUE;
                     [_field setInitialValues:[tempValue objectForKey:@"src"]];
                 }
                 else {
