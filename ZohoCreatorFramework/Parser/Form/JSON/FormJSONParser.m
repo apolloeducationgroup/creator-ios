@@ -543,7 +543,7 @@
     ZCFieldData * data=[[ZCFieldData alloc]init];
     [data setFieldName:fieldname ];
 
-    if (type==[ZCFieldList ZCMultiSelect] || type ==[ZCFieldList ZCCheckbox] || type ==[ZCFieldList ZCLookupCheckbox] || type==[ZCFieldList ZCLookupMultiSelect]) {
+    if (type==[ZCFieldList ZCMultiSelect] || type ==[ZCFieldList ZCCheckbox] || type ==[ZCFieldList ZCLookupCheckbox] || type==[ZCFieldList ZCLookupMultiSelect]  || type==[ZCFieldList ZCRadio] || type==[ZCFieldList ZCDropdown] ) {
         
         
         NSLog(@"dta ");
