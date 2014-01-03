@@ -692,7 +692,7 @@
 
     else     {
     
-        return fieldvalue;
+        return keys;
         
     }
     
