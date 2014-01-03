@@ -97,6 +97,9 @@
                 if ([attributeDict valueForKey:@"id"]!=nil) {
                     [customFilter setFilterID:[attributeDict valueForKey:@"id"]];
                 }
+               else if ([attributeDict valueForKey:@"Id"]!=nil) {
+                    [customFilter setFilterID:[attributeDict valueForKey:@"Id"]];
+                }
                 else {
                 [customFilter setFilterID:[attributeDict valueForKey:@"ID"]];
                     }
