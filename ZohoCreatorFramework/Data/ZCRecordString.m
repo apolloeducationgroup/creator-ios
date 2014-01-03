@@ -461,7 +461,24 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                 [returnString appendFormat:@"<value>"];
 
                 //                ////// //NSLog(@"Field Name %@ ==== %@",[fieldData fieldName],[fieldData fieldValue]);
-                NSString* cdata = [fieldData fieldValue];
+                
+                NSString* cdata=@"";
+                if([[fieldData fieldValue]isKindOfClass:[NSString class]])
+
+                {
+                    cdata= [fieldData fieldValue];
+                }
+                if([[fieldData fieldValue]isKindOfClass:[NSDictionary class]])
+                {
+                
+                    if ([[fieldData fieldValue]allKeys].count==1) {
+                        
+                        cdata=[[[fieldData fieldValue]allKeys]objectAtIndex:0];
+                    
+                }
+                }
+                
+            
                 
                 NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
 
@@ -619,6 +636,7 @@ form
     
     returnString =[returnString stringByAppendingString:[ self recordXMLforSubformRecord:form :record ]];
     return returnString;
+    
     while(fieldName=[fieldNames nextObject])
     {
         
