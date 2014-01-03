@@ -390,7 +390,10 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
         
         if([fieldData fieldValue] != nil) {
             
-            
+            if(![fieldName isEqualToString:@"ID"])
+                
+            {
+
             [returnString appendFormat:@"<field name='%@'>",fieldName];
             if(fieldType == [ZCFieldList ZCMultiSelect] || fieldType==[ZCFieldList ZCCheckbox])
             {
@@ -469,7 +472,8 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
             [returnString appendString:@"</field>"];
         }
     }
-    
+}
+
     NSLog(@"retu %@",returnString);
     return returnString;
 }
@@ -598,7 +602,8 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
     
     
 }
-+(NSString *)updateRecordValueXMLFormSubformRecord:(ZCRecord *)record
++(NSString *)updateRecordValueXMLFormSubformRecord:(ZCRecord *)record form:(ZCForm *)
+form
 {
     //
     //    <update ID="3000000150243">
@@ -611,6 +616,9 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
     
     [returnString appendFormat:@"<update ID=\"%@\">",[[record.record objectForKey:@"ID" ]fieldValue] ];
     
+    
+    returnString =[returnString stringByAppendingString:[ self recordXMLforSubformRecord:form :record ]];
+    return returnString;
     while(fieldName=[fieldNames nextObject])
     {
         
@@ -815,7 +823,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                     //
                     //
                     
-                    NSString * SubFormRecordString=[NSString stringWithFormat:@"%@", [ZCRecordString updateRecordValueXMLFormSubformRecord:SubFOrmRecord]];
+                    NSString * SubFormRecordString=[NSString stringWithFormat:@"%@", [ZCRecordString updateRecordValueXMLFormSubformRecord:SubFOrmRecord form:zcSubform ] ];
                     
                     
                     [SubFormrecordXML appendString:SubFormRecordString];
