@@ -433,6 +433,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                             NSString *optionValue =  [options objectAtIndex:opt];
                             optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
                                                         if(optionValue != nil) {
+                                                            
                                 [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
                             }
                         }
@@ -507,7 +508,9 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
 }
 
     NSLog(@"retu %@",returnString);
-    return returnString;
+    NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) returnString,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+
+    return escapedString;
 }
 
 + (NSString*) newDuplicateRecords : (NSString*) viewLinkName withApplication : (NSString*) appLinkName AndRecords : (NSMutableArray*) records {

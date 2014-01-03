@@ -385,7 +385,8 @@ int FORM_LOOKUP_ADD_FORM =5;
 https://creator.zoho.com/generateJSAPI.do?
     
     if(paramString != nil) {
-formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+//formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL =[formURL stringByAppendingString:paramString];
     }
     
 //    return @"Single_Line=&Single_Line1=&SF(SubForm).FD(t::row_1).SV(record::status)=added&SF(SubForm).FD(t::row_1).SV(Multi_Line)=&SF(SubForm).FD(t::row_1).SV(Single_Line)=riyazheehdh&authtoken=a6068ae81f07813b3c264276863792d4&scope=creatorapi&sharedBy=vignesh.rajamani&appLinkName=riyazsubformapp&formLinkName=Untitled_Form&linkNameBased=true&fieldName=SubForm&subformFieldName=Single_Line&subfcname=SF(SubForm).FD(t::row_1).SV(Single_Line)&rowseqid=t::row_1";
