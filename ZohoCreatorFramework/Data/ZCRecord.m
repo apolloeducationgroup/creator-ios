@@ -8,7 +8,7 @@
 
 #import "ZCRecord.h"
 #import "ZCSharedAppsEventsParamsUtil.h"
-
+#import "ZCSubFormRecords.h"
 @implementation ZCRecord
 
 @synthesize record=_record,form=_form,fieldDataList=_fieldDataList,recordID=_recordID, zCGroup=_zCGroup,errorDictionary=_errorDictionary;
@@ -85,7 +85,58 @@
     NSString *response = [urlConnect apiResponse];
     NSLog(@"addrecord response \n \n %@ \n\n",response);
     NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:_form];
+    [self setErrorinSubformRecord:[parser recordStatus]];
     return [parser recordStatus];
+}
+-(void)setErrorinSubformRecord:(ZCRecordStatus *)status
+{
+
+    
+    NSArray * fieldErrors=[status.error.subFormFieldErrorsDictionary allKeys];
+    for (int sErrInd=0;sErrInd < [fieldErrors count]; sErrInd++) {
+        
+        
+        
+;
+        
+
+        
+        
+        //                [fieldObj setSubformErrorlist:[[[status error]subFormFieldErrorsDictionary]objectForKey:[fieldErrors objectAtIndex:sErrInd]]];
+        
+        
+        NSMutableArray * recordsAddedInSubform=[(ZCSubFormRecords *)[[self getFieldData:[fieldErrors objectAtIndex:sErrInd]] fieldValue] allRecordsInOrder];
+        NSMutableDictionary *subErrors=[[[status error]subFormFieldErrorsDictionary]objectForKey:[fieldErrors objectAtIndex:sErrInd]];
+        
+        
+        NSArray * errorRows= [[status.error.subFormFieldErrorsDictionary objectForKey:[fieldErrors objectAtIndex:sErrInd]]allKeys];
+        for (int errind=0; errind<errorRows.count;errind++) {
+            
+            
+            int errorrow= [[errorRows objectAtIndex:errind]integerValue];
+            
+            
+            ZCRecord  *subRec = [recordsAddedInSubform objectAtIndex:errorrow-1];
+            NSArray * errorsinRow=[subErrors objectForKey:[NSString stringWithFormat:@"%i",errorrow]];
+            
+            
+            
+            for (int errinRownum=0;errinRownum<errorsinRow.count;errinRownum++ ) {
+                
+                [subRec addErrorFieldName:[[errorsinRow objectAtIndex:errinRownum]fieldName]
+                                    error:[errorsinRow objectAtIndex:errinRownum]];
+            }
+            
+            
+            
+            
+        }
+        
+        
+    }
+
+
+
 }
 -(ZCRecordStatus*) addRecordWithViewLinkName:(NSString *)viewLinkname
 
@@ -109,6 +160,7 @@
     NSString *response = [urlConnect apiResponse];
     NSLog(@"addrecord response \n \n %@ \n\n",response);
     NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:_form];
+    [self setErrorinSubformRecord:[parser recordStatus]];
     return [parser recordStatus];
 }
 - (ZCRecordStatus*) addRecordForFormInAddToPickListChildappNamesINORDER:(NSArray *)childappNamesINORDER childFormNameINORDER:(NSArray *)childFormNameINORDER baseFieldNameINORDER:(NSArray *)baseFieldNameINORDER recordID :(NSString *)recID viewLinkname:(NSString *)viewLinkname
@@ -156,6 +208,7 @@
     NSString *response = [urlConnect apiResponse];
     NSLog(@"addrecord response \n \n %@ \n\n",response);
     NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:_form];
+     [self setErrorinSubformRecord:[parser recordStatus]];
     return [parser recordStatus];
 }
 
@@ -180,6 +233,7 @@
     NSString *response = [urlConnect apiResponse];
     NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:_form];
     NSLog(@"%@",[parser recordStatus]);
+    [self setErrorinSubformRecord:[parser recordStatus]];
     return [parser recordStatus];
 }
 

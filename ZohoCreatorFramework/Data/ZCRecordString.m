@@ -609,7 +609,6 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
     NSEnumerator *fieldNames =  [[record record] keyEnumerator];
     NSString *fieldName;
     
-    
     [returnString appendFormat:@"<update ID=\"%@\">",[[record.record objectForKey:@"ID" ]fieldValue] ];
     
     while(fieldName=[fieldNames nextObject])
