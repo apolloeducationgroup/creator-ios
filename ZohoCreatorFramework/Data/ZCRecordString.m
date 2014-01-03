@@ -399,36 +399,40 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
             {
                 
 //                [returnString appendFormat:@"<value>"];
-                NSArray *options = [fieldData fieldValue];
+                
+                NSArray *options;
+                
+
+                if ([[fieldData fieldValue ]isKindOfClass:[NSDictionary class]]) {
+                    
+                    options=[[fieldData fieldValue] allKeys];
+                    
+                }
+              else if ([[fieldData fieldValue ]isKindOfClass:[NSArray class]]) {
+                    
+                 options = [fieldData fieldValue];
+
+                  
+                }
+                
+                else if([[fieldData fieldValue]isKindOfClass:[NSString class]])
+                {
+                
+                    options=[NSMutableArray arrayWithObject:[fieldData fieldValue]];
+
+                }
+                
+                
                 [returnString appendString:@"<options>"];
 
                 if(options != nil && [options isKindOfClass:[NSArray class]] ) {
-
-//                    for(NSInteger opt=0;opt<[options count];opt++)
-//                    {
-//                        NSLog(@"escape string %@",returnString);
-//
-//                        NSString *optionValue =  [options objectAtIndex:opt];
-////                        optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
-//                        NSLog(@"escape string %@",returnString);
-//
-//                        NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
-//                        NSLog(@"escape string %@",escapedString);
-//                        [returnString appendFormat:@"<option><![CDATA[%@]]></option>",escapedString];
-//                        NSLog(@"escape string %@",escapedString);
-//                        
-//                    }
-                    
-                    
                     if(options != nil && [options count] > 0 )//&& [options isMemberOfClass:[NSArray class]] )
                     {
                         for(NSInteger opt=0;opt<[options count];opt++)
                         {
                             NSString *optionValue =  [options objectAtIndex:opt];
                             optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
-                            
-//                            optionValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
-                            if(optionValue != nil) {
+                                                        if(optionValue != nil) {
                                 [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
                             }
                         }
@@ -636,81 +640,81 @@ form
     
     returnString =[returnString stringByAppendingString:[ self recordXMLforSubformRecord:form :record ]];
     return returnString;
-    
-    while(fieldName=[fieldNames nextObject])
-    {
-        
-        //        NSLog(@"fieldname %@",fieldName);
-        if(![fieldName isEqualToString:@"ID"])
-            
-        {
-            id fieldValue = [[[record record] objectForKey:fieldName]fieldValue ];
-            NSLog(@"fieldvalue %@",[fieldValue class]);
-            
-            if([fieldValue isKindOfClass:[NSString class]] ) {
-                
-                fieldValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) fieldValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
-
-//                [returnString appendFormat:@"<field name='%@' value=![CDATA[%@]]>",fieldName,fieldValue];
-                [returnString appendFormat:@"<field name='%@'>",fieldName];
-
-                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",fieldValue];
-
-                [returnString appendString:@"</field>"];
-                
-            }
-            else if([fieldValue isKindOfClass:[NSArray class]]) {
-                [returnString appendFormat:@"<field name='%@'>",fieldName];
-
-                NSArray *options =fieldValue;
-                NSLog(@"option value for update %@",options);
-                [returnString appendString:@"<options>"];
-                if(options != nil && [options count] > 0 )//&& [options isMemberOfClass:[NSArray class]] )
-                {
-                    for(NSInteger opt=0;opt<[options count];opt++)
-                    {
-                        NSString *optionValue =  [options objectAtIndex:opt];
-                        optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
-                        if(optionValue != nil) {
-                            optionValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
-
-                            [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
-                        }
-                    }
-                }
-                [returnString appendString:@"</options>"];
-                [returnString appendString:@"</field>"];
-                
-            }
-            else if([fieldValue isKindOfClass:[NSDictionary class]]) {
-                [returnString appendFormat:@"<field name='%@'>",fieldName];
-                
-                NSArray *options =[fieldValue allValues];
-                NSLog(@"option value for update %@",options);
-                [returnString appendString:@"<options>"];
-                if(options != nil && [options count] > 0 )//&& [options isMemberOfClass:[NSArray class]] )
-                {
-                    for(NSInteger opt=0;opt<[options count];opt++)
-                    {
-                        NSString *optionValue =  [options objectAtIndex:opt];
-                        optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
-                        if(optionValue != nil) {
-                            optionValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
-                            
-                            [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
-                        }
-                    }
-                }
-                [returnString appendString:@"</options>"];
-                [returnString appendString:@"</field>"];
-
-            }
-            
-        }
-        
-    }
-    
-    return  returnString ;
+//    
+//    while(fieldName=[fieldNames nextObject])
+//    {
+//        
+//        //        NSLog(@"fieldname %@",fieldName);
+//        if(![fieldName isEqualToString:@"ID"])
+//            
+//        {
+//            id fieldValue = [[[record record] objectForKey:fieldName]fieldValue ];
+//            NSLog(@"fieldvalue %@",[fieldValue class]);
+//            
+//            if([fieldValue isKindOfClass:[NSString class]] ) {
+//                
+//                fieldValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) fieldValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+//
+////                [returnString appendFormat:@"<field name='%@' value=![CDATA[%@]]>",fieldName,fieldValue];
+//                [returnString appendFormat:@"<field name='%@'>",fieldName];
+//
+//                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",fieldValue];
+//
+//                [returnString appendString:@"</field>"];
+//                
+//            }
+//            else if([fieldValue isKindOfClass:[NSArray class]]) {
+//                [returnString appendFormat:@"<field name='%@'>",fieldName];
+//
+//                NSArray *options =fieldValue;
+//                NSLog(@"option value for update %@",options);
+//                [returnString appendString:@"<options>"];
+//                if(options != nil && [options count] > 0 )//&& [options isMemberOfClass:[NSArray class]] )
+//                {
+//                    for(NSInteger opt=0;opt<[options count];opt++)
+//                    {
+//                        NSString *optionValue =  [options objectAtIndex:opt];
+//                        optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
+//                        if(optionValue != nil) {
+//                            optionValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+//
+//                            [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
+//                        }
+//                    }
+//                }
+//                [returnString appendString:@"</options>"];
+//                [returnString appendString:@"</field>"];
+//                
+//            }
+//            else if([fieldValue isKindOfClass:[NSDictionary class]]) {
+//                [returnString appendFormat:@"<field name='%@'>",fieldName];
+//                
+//                NSArray *options =[fieldValue allValues];
+//                NSLog(@"option value for update %@",options);
+//                [returnString appendString:@"<options>"];
+//                if(options != nil && [options count] > 0 )//&& [options isMemberOfClass:[NSArray class]] )
+//                {
+//                    for(NSInteger opt=0;opt<[options count];opt++)
+//                    {
+//                        NSString *optionValue =  [options objectAtIndex:opt];
+//                        optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
+//                        if(optionValue != nil) {
+//                            optionValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+//                            
+//                            [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
+//                        }
+//                    }
+//                }
+//                [returnString appendString:@"</options>"];
+//                [returnString appendString:@"</field>"];
+//
+//            }
+//            
+//        }
+//        
+//    }
+//    
+//    return  returnString ;
     
     
     
