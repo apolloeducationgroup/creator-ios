@@ -690,8 +690,7 @@
         
     }
 
-    else if (!keys.count)
-    {
+    else     {
     
         return fieldvalue;
         

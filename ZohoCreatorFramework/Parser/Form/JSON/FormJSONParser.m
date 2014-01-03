@@ -220,11 +220,17 @@
         tempValue = [_fieldDict objectForKey:@"formulaexists"];
         if(tempValue != nil) {
             [_field setHasInvolvedInFormula:[tempValue boolValue]];
+            if (SUBFORMTAG) {
+                _zcForm.isNotSupported=YES;
+            }
         }
         
         tempValue = [_fieldDict objectForKey:@"dynamicpicklistexists"];
         if(tempValue != nil) {
             [_field setHasInvolvedInFormula:[tempValue boolValue]];
+            if (SUBFORMTAG) {
+                _zcForm.isNotSupported=YES;
+            }
         }
         tempValue = [_fieldDict objectForKey:@"onaddrowexists"];
         if(tempValue != nil) {
