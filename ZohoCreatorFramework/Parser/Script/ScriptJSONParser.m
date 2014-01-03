@@ -691,9 +691,13 @@
     }
 
     else     {
-    
-        return keys;
         
+        for (int index =0; index<keys.count; index++) {
+            
+            [dict setObject:[keys objectAtIndex:index] forKey:[keys objectAtIndex:index]];
+        }
+        return dict;
+
     }
     
     return Nil;
