@@ -221,7 +221,7 @@
     NSString *updateRecord = [URLConstructor submitRecordURL];
     NSString *updateRecordString = [URLConstructor postAuthTokenWithAppOwner:[[self->_form application] appOwner]];
     
-    updateRecordString=[updateRecordString stringByAppendingString:@"&formAccessType=3&errorLog=true"];
+    updateRecordString=[updateRecordString stringByAppendingFormat:@"&formAccessType=3&errorLog=true&viewLinkName=%@",viewLinkName];
     
     ZCFieldData *idFieldData = [[ZCFieldData alloc] init];
     [idFieldData setFieldName:@"ID"];

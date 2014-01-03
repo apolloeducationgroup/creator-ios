@@ -217,6 +217,11 @@
             [_field setHasOnUserScript:[tempValue boolValue]];
         }
         
+        tempValue = [_fieldDict objectForKey:@"filter"];
+        if(tempValue != nil) {
+            [_field setHasfilter:[tempValue boolValue]];
+        }
+        
         tempValue = [_fieldDict objectForKey:@"formulaexists"];
         if(tempValue != nil) {
             [_field setHasInvolvedInFormula:[tempValue boolValue]];

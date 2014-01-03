@@ -452,6 +452,17 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                 NSString *url = [dic valueForKey:@"url"];
                 NSString *urltitle = [dic valueForKey:@"title"];
                 NSString *urlLinkname = [dic valueForKey:@"urllinkname"];
+                
+                if (url==Nil) {
+                    url=@"";
+                }
+                if (urlLinkname==Nil) {
+                    urlLinkname=@"";
+                }
+                if (urltitle==Nil) {
+                    urltitle=@"";
+                }
+                
                 NSString *URLData = [NSString stringWithFormat:@"<a href=\"%@\" title=\"%@\">%@</a>",url,urltitle,urlLinkname];
                 
                 NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) URLData,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
