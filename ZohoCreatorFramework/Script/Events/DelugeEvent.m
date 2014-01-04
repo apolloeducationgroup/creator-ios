@@ -192,9 +192,10 @@
                                                                                 NULL,
                                                                                 (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
                                                                                 kCFStringEncodingUTF8 );
-
                 
-                [paramString appendFormat:@"&%@=%@",keyName,(__bridge NSString *)urlString];
+                keyValue = [keyValue stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+                
+                [paramString appendFormat:@"&%@=%@",keyName,keyValue];
             }
             else if([keyValue isKindOfClass:[NSArray class]]) {
                 
