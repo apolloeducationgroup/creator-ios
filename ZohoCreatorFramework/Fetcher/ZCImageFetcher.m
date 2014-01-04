@@ -40,7 +40,7 @@ urlString = [URLConstructor downloadFile:FilePath viewLinkName:viewLinkName :app
     
     NSData * imagedata=[ZCImageFetcher fetchImageFromURLString:urlString];
     
-    
+    NSLog(@"imagedata present %@",imagedata);
     if (!imagedata)
     {
 
@@ -48,6 +48,9 @@ urlString = [URLConstructor downloadFile:FilePath viewLinkName:viewLinkName :app
     URLConnector *connector = [[URLConnector alloc] initFetcher:urlString];
         imagedata=[connector apiRawData];
         [ZCImageFetcher storeimage:imagedata urlstring:urlString];
+        NSLog(@"imagedata not present %@",imagedata);
+
+        
     }
     
     
