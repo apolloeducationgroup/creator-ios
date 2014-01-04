@@ -186,15 +186,6 @@
         if(keyValue != nil) {
             if([keyValue isKindOfClass:[NSString class]]) {
                 
-                CFStringRef urlString = CFURLCreateStringByAddingPercentEscapes(
-                                                                                NULL,
-                                                                                (CFStringRef)keyValue,
-                                                                                NULL,
-                                                                                (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
-                                                                                kCFStringEncodingUTF8 );
-                
-                keyValue = [keyValue stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-                
                 [paramString appendFormat:@"&%@=%@",keyName,keyValue];
             }
             else if([keyValue isKindOfClass:[NSArray class]]) {
@@ -202,7 +193,6 @@
                 for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
                     NSLog(@"coming to index");
                     [paramString appendFormat:@"&%@=%@",keyName,[keyValue objectAtIndex:optIndex]];
-                    
                 }
             }
             else if ([keyValue isKindOfClass:[ZCSubFormRecords class]])
