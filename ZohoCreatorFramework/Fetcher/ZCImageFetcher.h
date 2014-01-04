@@ -19,4 +19,5 @@
     NSString *_appOwner;
 }
 +  (NSData*) fetchImageWITHFilePath: (NSString*) FilePath withViewLinkName : (NSString*) viewLinkName appLinkName:(NSString *)appLinkname appOwner : (NSString *) appOwner  getOnlyImageURL:(BOOL)getIMageURL;
++(void)deteteimagedata;
 @end

@@ -38,16 +38,49 @@ urlString = [URLConstructor downloadFile:FilePath viewLinkName:viewLinkName :app
     }
     
     
+    NSData * imagedata=[ZCImageFetcher fetchImageFromURLString:urlString];
     
     
+    if (!imagedata)
+    {
+
+    
+    URLConnector *connector = [[URLConnector alloc] initFetcher:urlString];
+        imagedata=[connector apiRawData];
+        [ZCImageFetcher storeimage:imagedata urlstring:urlString];
+    }
     
     
 //    NSString * urlString=[URLConstructor
 //                          downloadFile :[NSString stringWithCString:[FilePath cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding]viewLinkName:viewLinkName :appLinkname :appOwner ];
     
     
-    URLConnector *connector = [[URLConnector alloc] initFetcher:urlString];
     //NSLog(@"raw data %@",[connector apiRawData]);
-    return [connector apiRawData];
+    return imagedata;
+}
++(void)storeimage:(NSData *) imagedata urlstring:(NSString *)url
+{
+    
+    
+    NSString *filePath = [ArchiveUtil archiveFilePath:@"imageStroage"];
+    [EncodeObject encode:filePath :url :imagedata];
+
+}
++(NSData *)fetchImageFromURLString:(NSString *)url
+{
+    
+    
+    NSString *appPath = [ArchiveUtil applicationPath:@"imageStroage"];
+    NSData *imagedata =  [DecodeObject decode:appPath :url ];
+
+    return imagedata;
+    
+
+}
++(void)deteteimagedata
+{
+    
+    [ArchiveUtil deleteEncodeFile:@"imageStroage"];
+
 }
 @end
