@@ -185,8 +185,10 @@
         id keyValue = [fieldDate fieldValue];
         if(keyValue != nil) {
             if([keyValue isKindOfClass:[NSString class]]) {
-                
+                NSLog(@"\n\n\n\n strig encoded riyaz \n\n\n\n");
+                 [keyValue stringByAddingPercentEscapesUsingEncoding:NSUTF32StringEncoding];
                 [paramString appendFormat:@"&%@=%@",keyName,keyValue];
+                
             }
             else if([keyValue isKindOfClass:[NSArray class]]) {
                 
