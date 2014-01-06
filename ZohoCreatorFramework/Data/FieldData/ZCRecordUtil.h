@@ -11,8 +11,8 @@
 
 @interface ZCRecordUtil : NSObject
 
-+ (NSString*) getPrimaryValue : (ZCRecord*) zcRecord viewFields:(NSMutableArray *)viewFields;
-+ (NSString*) getPrimaryValueByCount : (ZCRecord*) zcRecord : (NSInteger) count viewFields:(NSMutableArray *)viewFields;
-+ (NSString*) getSubtitleValueByCount : (ZCRecord*) zcRecord : (NSInteger) startIndex : (NSInteger) count viewFields:(NSMutableArray *)viewFields;
-+ (NSString*) getPrimaryTextField : (ZCView*) zcview : (NSInteger) rowIndex : (NSInteger) columnIndex viewFields:(NSMutableArray *)viewFields;
++ (NSString*) getPrimaryValue : (ZCRecord*) zcRecord viewFields:(NSMutableDictionary *)viewFields;
++ (NSString*) getPrimaryValueByCount : (ZCRecord*) zcRecord : (NSInteger) count viewFields:(NSMutableDictionary *)viewFields;
++ (NSString*) getSubtitleValueByCount : (ZCRecord*) zcRecord : (NSInteger) startIndex : (NSInteger) count viewFields:(NSMutableDictionary *)viewFields;
++ (NSString*) getPrimaryTextField : (ZCView*) zcview : (NSInteger) rowIndex : (NSInteger) columnIndex viewFields:(NSMutableDictionary *)viewFields;
 @end

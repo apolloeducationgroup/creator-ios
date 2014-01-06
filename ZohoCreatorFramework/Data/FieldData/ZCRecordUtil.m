@@ -15,12 +15,14 @@
     return [NSString stringWithFormat:@"%@, %@, %@",[[zcRecord getFieldDataByIndex:0] fieldValue],[[zcRecord getFieldDataByIndex:1] fieldValue],[[zcRecord getFieldDataByIndex:2] fieldValue]];
 }
 
-+ (NSString*) getPrimaryValueByCount : (ZCRecord*) zcRecord : (NSInteger) count viewFields:(NSMutableArray *)viewFields {
++ (NSString*) getPrimaryValueByCount : (ZCRecord*) zcRecord : (NSInteger) count viewFields:(NSMutableDictionary *)viewFields {
     
     NSMutableString *returnString = [NSMutableString stringWithCapacity:200];
     
+    NSArray * Fields=[viewFields allValues];
+    
     NSInteger indexCount = 0;
-    NSArray *skipFields = [ZCRecordUtil getSkipFieldNames:zcRecord viewfields:viewFields];
+    NSArray *skipFields = [ZCRecordUtil getSkipFieldNames:zcRecord viewfields:Fields];
     for(NSInteger index=0;indexCount<count;index++)
     {
         ZCFieldData *fieldData = [zcRecord getFieldDataByIndex:index];
@@ -105,11 +107,12 @@
     return returnString;
 }
 
-+ (NSString*) getSubtitleValueByCount : (ZCRecord*) zcRecord : (NSInteger) startIndex : (NSInteger) count viewFields:(NSMutableArray *)viewFields {
++ (NSString*) getSubtitleValueByCount : (ZCRecord*) zcRecord : (NSInteger) startIndex : (NSInteger) count viewFields:(NSMutableDictionary *)viewFields {
     
     NSMutableString *returnString = [NSMutableString stringWithCapacity:200];
     NSInteger indexCount = 0;
-    NSArray *skipFields = [ZCRecordUtil getSkipFieldNames:zcRecord viewfields:viewFields];
+    NSArray * fields=[viewFields allValues];
+    NSArray *skipFields = [ZCRecordUtil getSkipFieldNames:zcRecord viewfields:fields];
     
     for(NSInteger index=startIndex;(indexCount<count && index  <=  [[zcRecord record] count]);index++) {
         
@@ -226,8 +229,9 @@
     return skipFields;
 }
 
-+ (NSString*) getPrimaryTextField : (ZCView*) zcview : (NSInteger) rowIndex : (NSInteger) columnIndex viewFields:(NSMutableArray *)viewFields{
++ (NSString*) getPrimaryTextField : (ZCView*) zcview : (NSInteger) rowIndex : (NSInteger) columnIndex viewFields:(NSMutableDictionary *)viewFields{
     
+
     return [[[[[zcview records] records] objectAtIndex:rowIndex] getFieldDataByIndex:columnIndex] fieldValue];
     
 }
