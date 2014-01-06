@@ -22,6 +22,8 @@
         self->_subFormFieldErrorList=[[NSMutableArray alloc]init];
         self->_generalErrorList=[[NSMutableArray alloc]init];
         self->_subFormFieldErrorsDictionary=[[NSMutableDictionary alloc]init];
+        self->_subformFieldErrorDictStatus=[[NSMutableDictionary alloc]init];
+
 
     }
     return self;
@@ -37,6 +39,7 @@
         self->_subFormFieldErrorList=[[NSMutableArray alloc]init];
         self->_generalErrorList=[[NSMutableArray alloc]init];
         self->_subFormFieldErrorsDictionary=[[NSMutableDictionary alloc]init];
+        self->_subformFieldErrorDictStatus=[[NSMutableDictionary alloc]init];
 
     }
     return self;
