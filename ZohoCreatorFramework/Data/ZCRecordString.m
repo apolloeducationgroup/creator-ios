@@ -755,8 +755,10 @@ form
         
         
         
-        if([fieldData fieldValue] != nil) {
-            
+//        if([fieldData fieldValue] != nil)
+//        
+//        {
+        
             if(fieldType == [ZCFieldList ZCCheckbox] || fieldType == [ZCFieldList ZCMultiSelect] ) {
                 
                 [returnString appendFormat:@"<field name='%@'>",fieldName];
@@ -918,12 +920,16 @@ form
             {
                 [returnString appendFormat:@"<field name='%@'>",fieldName];
                 
-                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",[fieldData fieldValue]];
+                NSString * fieldvalue=[fieldData fieldValue];
+                if (fieldvalue==Nil) {
+                    fieldvalue=@"";
+                }
+                [returnString appendFormat:@"<value><![CDATA[%@]]></value>",fieldvalue];
 
                 [returnString appendString:@"</field>"];
 
             }
-        }
+        
     }
     return returnString;
 }
