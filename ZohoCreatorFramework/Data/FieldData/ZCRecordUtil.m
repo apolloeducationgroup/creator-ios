@@ -10,17 +10,17 @@
 
 @implementation ZCRecordUtil
 
-+ (NSString*) getPrimaryValue : (ZCRecord*) zcRecord {
++ (NSString*) getPrimaryValue : (ZCRecord*) zcRecord viewFields:(NSMutableArray *)viewFields{
     
     return [NSString stringWithFormat:@"%@, %@, %@",[[zcRecord getFieldDataByIndex:0] fieldValue],[[zcRecord getFieldDataByIndex:1] fieldValue],[[zcRecord getFieldDataByIndex:2] fieldValue]];
 }
 
-+ (NSString*) getPrimaryValueByCount : (ZCRecord*) zcRecord : (NSInteger) count  {
++ (NSString*) getPrimaryValueByCount : (ZCRecord*) zcRecord : (NSInteger) count viewFields:(NSMutableArray *)viewFields {
     
     NSMutableString *returnString = [NSMutableString stringWithCapacity:200];
     
     NSInteger indexCount = 0;
-    NSArray *skipFields = [ZCRecordUtil getSkipFieldNames:zcRecord];
+    NSArray *skipFields = [ZCRecordUtil getSkipFieldNames:zcRecord viewfields:viewFields];
     for(NSInteger index=0;indexCount<count;index++)
     {
         ZCFieldData *fieldData = [zcRecord getFieldDataByIndex:index];
@@ -105,11 +105,11 @@
     return returnString;
 }
 
-+ (NSString*) getSubtitleValueByCount : (ZCRecord*) zcRecord : (NSInteger) startIndex : (NSInteger) count {
++ (NSString*) getSubtitleValueByCount : (ZCRecord*) zcRecord : (NSInteger) startIndex : (NSInteger) count viewFields:(NSMutableArray *)viewFields {
     
     NSMutableString *returnString = [NSMutableString stringWithCapacity:200];
     NSInteger indexCount = 0;
-    NSArray *skipFields = [ZCRecordUtil getSkipFieldNames:zcRecord];
+    NSArray *skipFields = [ZCRecordUtil getSkipFieldNames:zcRecord viewfields:viewFields];
     
     for(NSInteger index=startIndex;(indexCount<count && index  <=  [[zcRecord record] count]);index++) {
         
@@ -197,7 +197,7 @@
     return returnString;
 }
 
-+ (NSArray *) getSkipFieldNames : (ZCRecord *) zcRecord
++ (NSArray *) getSkipFieldNames : (ZCRecord *) zcRecord viewfields:(NSArray *)viewFields
 {
     NSMutableArray *skipFields = [[NSMutableArray alloc] init];
     if (zcRecord.zCGroup != nil) {
@@ -206,20 +206,27 @@
         }
     }
     
-    
-    for (ZCField *field in zcRecord.form.fields) {
+    for (ZCViewField * viewField in viewFields) {
+        
+        if (viewField.fieldType ==[ZCFieldList ZCImage] || viewField.fieldType==[ZCFieldList ZCFileupload] || viewField.fieldType==[ZCFieldList ZCURL] || viewField.fieldType == [ZCFieldList ZCRichText]  || viewField.fieldType == [ZCFieldList ZCAutoNumber] || viewField.fieldType == [ZCFieldList ZCSubform]) {
+            [skipFields addObject:viewField.fieldLinkName];
 
-        if (field.fieldType ==[ZCFieldList ZCImage] || field.fieldType==[ZCFieldList ZCFileupload] || field.fieldType==[ZCFieldList ZCURL] || field.fieldType == [ZCFieldList ZCRichText]) {
-            [skipFields addObject:field.fieldName];            
-        }
-    
     }
-
+    }
     
+//    for (ZCField *field in zcRecord.form.fields) {
+//
+//        if (field.fieldType ==[ZCFieldList ZCImage] || field.fieldType==[ZCFieldList ZCFileupload] || field.fieldType==[ZCFieldList ZCURL] || field.fieldType == [ZCFieldList ZCRichText]) {
+//            [skipFields addObject:field.fieldName];            
+//        }
+//    
+//    }
+//
+//    
     return skipFields;
 }
 
-+ (NSString*) getPrimaryTextField : (ZCView*) zcview : (NSInteger) rowIndex : (NSInteger) columnIndex {
++ (NSString*) getPrimaryTextField : (ZCView*) zcview : (NSInteger) rowIndex : (NSInteger) columnIndex viewFields:(NSMutableArray *)viewFields{
     
     return [[[[[zcview records] records] objectAtIndex:rowIndex] getFieldDataByIndex:columnIndex] fieldValue];
     
