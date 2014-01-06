@@ -185,13 +185,16 @@
         id keyValue = [fieldDate fieldValue];
         if(keyValue != nil) {
             if([keyValue isKindOfClass:[NSString class]]) {
-                [paramString appendFormat:@"&%@=%@",keyName,keyValue];
+                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) keyValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+
+                [paramString appendFormat:@"&%@=%@",keyName,escapedString];
                 
             }
             else if([keyValue isKindOfClass:[NSArray class]]) {
                 
                 for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
                     NSLog(@"coming to index");
+                    
                     [paramString appendFormat:@"&%@=%@",keyName,[keyValue objectAtIndex:optIndex]];
                 }
             }
