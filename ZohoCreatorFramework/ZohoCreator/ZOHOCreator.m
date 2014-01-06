@@ -658,7 +658,7 @@ ZCForm * subform=[[[form fields]objectAtIndex:fieldindex] subForm];
     for (int fieldindex=0; fieldindex<[subform fields].count; fieldindex++) {
         int type =[[[subform fields]objectAtIndex:fieldindex]fieldType];
 
-    if (type == [ZCFieldList ZCURL] || type == [ZCFieldList ZCURL]  || type == [ZCFieldList ZCSubform]  || type == [ZCFieldList ZCImage] || type == [ZCFieldList ZCFileupload] )
+    if (type == [ZCFieldList ZCSubform]  || type == [ZCFieldList ZCImage] || type == [ZCFieldList ZCFileupload] || type == [ZCFieldList ZCRichText] )
     {
         
         return NO;
