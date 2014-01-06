@@ -10,7 +10,7 @@
 #import "ZCSubFormFieldError.h"
 @implementation ZCRecordError
 
-@synthesize errorCode=_errorCode,errorMessage=_errorMessage,fieldErrorList=_fieldErrorList,subFormFieldErrorList=_subFormFieldErrorList,subFormFieldErrorsDictionary=_subFormFieldErrorsDictionary,generalErrorList=_generalErrorList;
+@synthesize errorCode=_errorCode,errorMessage=_errorMessage,fieldErrorList=_fieldErrorList,subFormFieldErrorList=_subFormFieldErrorList,subFormFieldErrorsDictionary=_subFormFieldErrorsDictionary,generalErrorList=_generalErrorList,subformFieldErrorDictStatus=_subformFieldErrorDictStatus;
 
 - (ZCRecordError*) init {
 
@@ -77,6 +77,10 @@
         }
 
         [_subFormFieldErrorsDictionary setObject:errorDictInField forKey:fieldSubFormname];
+        if ([[errorDictInField allKeys]count]) {
+            [_subformFieldErrorDictStatus setObject:[NSNumber numberWithBool:YES] forKey:fieldSubFormname];
+            
+        }
 
     }
     else
@@ -96,8 +100,12 @@
 //        }
         
         [_subFormFieldErrorsDictionary setObject:errorDictInField forKey:fieldSubFormname];
+        
+        if ([[errorDictInField allKeys]count]) {
+            [_subformFieldErrorDictStatus setObject:[NSNumber numberWithBool:YES] forKey:fieldSubFormname];
+            
+        }
 
-    
     }
 
     

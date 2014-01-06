@@ -283,9 +283,9 @@
                 NSString *uploadURL = [URLConstructor uploadURL:[self.form.application appLinkName] :[self.form linkName] :fieldName :recordID :@"file" :[self.form.application appOwner]viewLinkname:viewLinkname];
                 
                 NSLog(@"file name %@",fieldName);
-                NSLog(@"URL for Image Upload  delete  %@",uploadURL);
                 
                 uploadURL=[uploadURL stringByAppendingString:@"&operation=delete"];
+                NSLog(@"URL for Image Upload  delete  %@",uploadURL);
                 URLConnector *url = [[URLConnector alloc] initFetcherPostImage:uploadURL :Nil :[URLConnector MULTIPARTPOST]];
                 NSLog(@" Image Response %@",[url apiResponse]);
             }
