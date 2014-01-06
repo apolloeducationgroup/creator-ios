@@ -604,7 +604,7 @@
     }
     
 
-    if(_fieldValueList != nil) {
+    if(_fieldKeyList != nil) {
         [_selectValue setSelectValues:[self  getDictionaryForChoicesValues:_fieldValueList choiceKey:_fieldKeyList]];
 
     }
@@ -620,9 +620,8 @@
     NSMutableArray *_fieldKeyList= [deSelectValueDict objectForKey:@"fieldValue"];
     NSMutableArray *_fieldValue = [deSelectValueDict objectForKey:@"combinedValue"];
 
-    if(_fieldValue != nil) {
+    if(_fieldKeyList != nil) {
         [_deSelectValue setDeSelectValues:[self  getDictionaryForChoicesValues:_fieldValue choiceKey:_fieldKeyList]];
-        
     }
     NSString * subformName= [deSelectValueDict objectForKey:@"subFormName"];
     
