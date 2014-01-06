@@ -496,7 +496,9 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                 
             
                 
+//                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
                 NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+
 
                 [returnString appendFormat:@"<![CDATA[%@]]>",escapedString];
                 [returnString appendFormat:@"</value>"];
@@ -507,10 +509,10 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
     }
 }
 
-    NSLog(@"retu %@",returnString);
-    NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) returnString,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+//    NSLog(@"retu %@",returnString);
+//    NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) returnString,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
 
-    return escapedString;
+    return returnString;
 }
 
 + (NSString*) newDuplicateRecords : (NSString*) viewLinkName withApplication : (NSString*) appLinkName AndRecords : (NSMutableArray*) records {
