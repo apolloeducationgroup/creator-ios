@@ -444,7 +444,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
 
                 
             }
-            else if(fieldType == [ZCFieldList ZCFileupload] || fieldType ==[ZCFieldList ZCImage]) {
+            else if(fieldType == [ZCFieldList ZCFileupload] || fieldType ==[ZCFieldList ZCImage]|| fieldType ==[ZCFieldList ZCFormula]) {
                 
             }
             else if(fieldType == [ZCFieldList ZCURL]) {
@@ -471,6 +471,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                 [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
                 
             }
+                
             
 
             else {
@@ -914,8 +915,10 @@ form
                 //                NSLog(@"subformrecord xml riyaz:: %@",subformRECORDSXML);
                 
             }
-            else if (fieldType ==[ZCFieldList ZCFileupload] || fieldType ==[ZCFieldList ZCImage])
+            else if (fieldType ==[ZCFieldList ZCFileupload] || fieldType ==[ZCFieldList ZCImage]|| fieldType ==[ZCFieldList ZCFormula])
             {
+                
+                
             }
             else
                 
