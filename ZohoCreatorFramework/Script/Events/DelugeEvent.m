@@ -152,17 +152,10 @@
     NSLog(@"deluge param %@",_delugeParams);
     URLConnector *connector = [[URLConnector alloc] initFetcherPostParam:_delugeURL :_delugeParams :[URLConnector POSTMETHOD]];
     NSString *formMetaXML = [connector apiResponse];
-    
-    NSLog(@"deluge form JSON %@ ",formMetaXML);
-
-    formMetaXML = [formMetaXML  stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding ];//]:[formMetaXML cStringUsingEncoding:[NSString defaultCStringEncoding]]];
-    
-    NSLog(@"deluge form JSON after decoding %@ ",formMetaXML);
-    
-    
+    //// //NSLog(@"deluge form Meta XML %@ ",formMetaXML);
     
     ScriptJSONParser *parser = [[ScriptJSONParser alloc] initScriptJSONParser:formMetaXML];
-//    ScriptParser *parser = [[ScriptParser alloc] initScriptParser:formMetaXML];
+    //    ScriptParser *parser = [[ScriptParser alloc] initScriptParser:formMetaXML];
     
     _delugeTasks = [parser delugeTasks];
     NSLog(@"deluge tasks %@",_delugeTasks.taskList);
@@ -177,28 +170,31 @@
 }
 
 + (NSString*) getParamXMLString : (ZCRecord*) _record  : (NSString*) sharedBy {
-
+    
     NSDictionary *_dictionary = [_record record];
     NSMutableString *paramString = [NSMutableString string];
     NSEnumerator *keyEnum = [_dictionary keyEnumerator];
     NSString *keyName;
     
-//    [paramString appendString:@"&SF(SubForm).FD(t::row_0).SV(record::status):added&SF(SubForm).FD(t::row_0).SV(Multi_Line):&SF(SubForm).FD(t::row_0).SV(Single_Line):riyaz"];
+    //    [paramString appendString:@"&SF(SubForm).FD(t::row_0).SV(record::status):added&SF(SubForm).FD(t::row_0).SV(Multi_Line):&SF(SubForm).FD(t::row_0).SV(Single_Line):riyaz"];
     
-
+    
     
     while((keyName = [keyEnum nextObject]) != nil) {
         ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
         id keyValue = [fieldDate fieldValue];
         if(keyValue != nil) {
             if([keyValue isKindOfClass:[NSString class]]) {
+                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) keyValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
                 
-                [paramString appendFormat:@"&%@=%@",keyName,keyValue];
+                [paramString appendFormat:@"&%@=%@",keyName,escapedString];
+                
             }
             else if([keyValue isKindOfClass:[NSArray class]]) {
                 
                 for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
                     NSLog(@"coming to index");
+                    
                     [paramString appendFormat:@"&%@=%@",keyName,[keyValue objectAtIndex:optIndex]];
                 }
             }
@@ -207,247 +203,248 @@
                 
                 NSLog(@"subform records riyaz");
                 NSMutableArray * recordstoAdd=[[NSMutableArray alloc]init];
-//               [recordstoAdd addObjectsFromArray:[keyValue recordsToAdd]];
-//                [recordstoAdd addObjectsFromArray:[keyValue recordsToUpdate]];
-//                [recordstoAdd addObjectsFromArray:[keyValue temporaryRecords]];
+                //               [recordstoAdd addObjectsFromArray:[keyValue recordsToAdd]];
+                //                [recordstoAdd addObjectsFromArray:[keyValue recordsToUpdate]];
+                //                [recordstoAdd addObjectsFromArray:[keyValue temporaryRecords]];
                 
                 
                 [recordstoAdd addObjectsFromArray:[keyValue allRecordsInOrder]];
                 [recordstoAdd addObjectsFromArray:[keyValue temporaryRecords]];
-
+                
                 if (recordstoAdd.count)
                 {
-                
-             [paramString appendString:[DelugeEvent getsubformRecordParam:recordstoAdd fieldlinkname:[fieldDate fieldName]]];
-//                [paramString appendFormat:@"&fieldName=%@",keyName];
+                    
+                    [paramString appendString:[DelugeEvent getsubformRecordParam:recordstoAdd fieldlinkname:[fieldDate fieldName]]];
+                    //                [paramString appendFormat:@"&fieldName=%@",keyName];
                 }
             }
         }
     }
     /*
-    NSMutableString *paramString = [NSMutableString string];
-    NSMutableDictionary *_dictionary = [_record record];
+     NSMutableString *paramString = [NSMutableString string];
+     NSMutableDictionary *_dictionary = [_record record];
+     
+     //// //NSLog(@"record dict : %@",_dictionary);
+     
+     NSEnumerator *keyEnum = [_dictionary keyEnumerator];
+     NSString *keyName;
+     [paramString appendString:@"<fields>"];
+     while((keyName = [keyEnum nextObject]) != nil) {
+     ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
+     id keyValue = [fieldDate fieldValue];
+     //        //// //NSLog(@"Key Value for key Name %@ %@",keyName,keyValue);
+     //// //NSLog(@"field name %@  %@",[fieldDate fieldName],[fieldDate fieldValue]);
+     if(keyValue != nil) {
+     if([keyValue isKindOfClass:[NSString class]]) {
+     [paramString appendFormat:@"<field name=\'%@\'><value><![CDATA[%@]]></value></field>",keyName,keyValue];
+     }
+     else if([keyValue isKindOfClass:[NSMutableArray class]]) {
+     //// //NSLog(@"Array   %@",keyValue);
+     if([keyValue count] > 0) {
+     [paramString appendFormat:@"<field name=\'%@\'><value><![CDATA[%@]]></value></field>",keyName,[keyValue objectAtIndex:0]];
+     }
+     }
+     }
+     }
+     [paramString appendString:@"</fields>"];
+     [paramString appendFormat:@"&sharedBy=%@",sharedBy]; */
     
-    //// //NSLog(@"record dict : %@",_dictionary);
-    
-    NSEnumerator *keyEnum = [_dictionary keyEnumerator];
-    NSString *keyName;
-    [paramString appendString:@"<fields>"];
-    while((keyName = [keyEnum nextObject]) != nil) {
-        ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
-        id keyValue = [fieldDate fieldValue];
-        //        //// //NSLog(@"Key Value for key Name %@ %@",keyName,keyValue);
-        //// //NSLog(@"field name %@  %@",[fieldDate fieldName],[fieldDate fieldValue]);
-        if(keyValue != nil) {
-            if([keyValue isKindOfClass:[NSString class]]) {
-                [paramString appendFormat:@"<field name=\'%@\'><value><![CDATA[%@]]></value></field>",keyName,keyValue];
-            }
-            else if([keyValue isKindOfClass:[NSMutableArray class]]) {
-                //// //NSLog(@"Array   %@",keyValue);
-                if([keyValue count] > 0) {
-                    [paramString appendFormat:@"<field name=\'%@\'><value><![CDATA[%@]]></value></field>",keyName,[keyValue objectAtIndex:0]];
-                }
-            }
-        }
-    }
-    [paramString appendString:@"</fields>"];
-    [paramString appendFormat:@"&sharedBy=%@",sharedBy]; */
-    return  paramString;
-//    return [paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];}
+    return   [paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    //    return [paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
 }
 +(NSString *)getsubformRecordParam:(NSMutableArray *)records fieldlinkname:(NSString *)fieldlinkname
 {
-
+    
     
     
     NSMutableString * param=[[NSMutableString alloc]init];
     
     
     
-//    [param appendString:@"&SF(SubForm).FD(t::row_0).SV(record::status)=added&SF(SubForm).FD(t::row_0).SV(Multi_Line):&SF(SubForm).FD(t::row_0).SV(Single_Line):"];
-
-    
-//    [param appendFormat:@"&SF(%@).FD(t::row_0).SV(record::status)=added",fieldlinkname];
-/*
-    
-    if (records.count) {
-        
-
-    
-    NSDictionary *_dictionary = [[records objectAtIndex:0 ]record];
-    NSEnumerator *keyEnum = [_dictionary keyEnumerator];
-    NSString *keyName;
-        [param appendFormat:@"&SF(%@).FD(t::row_0).SV(record::status)=added",fieldlinkname];
-
-    while((keyName = [keyEnum nextObject]) != nil) {
-
-        ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
-        id keyValue = [fieldDate fieldValue];
-        if(keyValue != nil) {
-            if([keyValue isKindOfClass:[NSString class]]) {
-                //                [paramString appendFormat:@"&%@=%@",keyName,keyValue];
-                
-                
-                
-                //   SF(SubForm_1).FD(t::row_1).SV(Single_Line_1):1111
-
-                
-                
-                [param appendFormat:@"&SF(%@).FD(t::row_0).SV(%@):%@",fieldlinkname,[fieldDate fieldName ],[fieldDate fieldValue]];
-                
-                
-    
-                
-            }
-            
-        }}
-    */
+    //    [param appendString:@"&SF(SubForm).FD(t::row_0).SV(record::status)=added&SF(SubForm).FD(t::row_0).SV(Multi_Line):&SF(SubForm).FD(t::row_0).SV(Single_Line):"];
     
     
-        
-//        zccpn=b5822429-c393-4d06-9246-856e20473a4b
-//        &name=sadsadasdsadsadasd
-//        &=%23Form%3Amain_form
-//        &SF(SubForm_1).FD(t::row_0).SV(record::status)=added
-//        &SF(SubForm_1).FD(t::row_0).SV(Single_Line_1)=
-//        &SF(SubForm_1).FD(t::row_0).SV(Single_Line)=
-//        &SF(SubForm_1).FD(t::row_1).SV(record::status)=added
-//        &SF(SubForm_1).FD(t::row_1).SV(Single_Line_1)=1111
-//        &SF(SubForm_1).FD(t::row_1).SV(Single_Line)=asd
-//        &SF(SubForm_1).FD(t::row_1).MV(Checkbox)=Choice%202
-//        &SF(SubForm_1).FD(t::row_2).SV(record::status)=added
-//        &SF(SubForm_1).FD(t::row_2).SV(Single_Line_1)=
-//        &SF(SubForm_1).FD(t::row_2).SV(Single_Line)=
-//        &SF(SubForm_1).FD(t::row_2).MV(Checkbox)=Choice%201
-//        &SF(SubForm_1).FD(t::row_2).MV(Checkbox)=Choice%202
-//        &SF(SubForm_1).FD(t::row_2).MV(Checkbox)=Choice%203
-//        &SF(SubForm_1).FD(t::row_3).SV(record::status)=added
-//        &SF(SubForm_1).FD(t::row_3).SV(Single_Line_1)=
-//        &SF(SubForm_1).FD(t::row_3).SV(Single_Line)=
-//        &SF(SubForm_1).FD(t::row_4).SV(record::status)=added
-//        &SF(SubForm_1).FD(t::row_4).SV(Single_Line_1)=
-//        &SF(SubForm_1).FD(t::row_4).SV(Single_Line)=
-//        &zc-mobile=
-//        &formid=1411560000000310009
-//        &formLinkId=178
-//        &formLinkName=main_form
-//        &tableName=t_1411560000000310009
-//        &lookupFieldName=
-//        &childFormAccessType=
-//        &childFieldLabelName=
-//        &childFormLinkName=
-//        &childAppLinkName=
-//        &childFormPrivateLink=
-//        &isFromSubForm=
-//        &rowNo=
-//        &subFormAppName=
-//        &subFormLinkName=
-//        &recType=1
-//        &viewLinkName=
-//        &pkValue=
-//        &dateFormat=dd-MMM-yyyy
-//        &timeZone=America%2FLos_Angeles
-//        
-//        &uiDateFormat=%25d-%25b-%25Y
-//        &fromIDX=
-//        &privatelink=
-//        &viewPrivateLink=
-//        &appLinkName=subform-app
-//        &sharedBy=riyazmd
-//        &isNewTypeSubform=
-//        &childSubformField=
-//        &zc_lookupCount=
-//        &fcid=1411560000000310127
-//        &fcname=SubForm_1
-//        &rowseqid=t::row_4
-//        &rowactiontype=onaddrow
-//        Response Headersview source
-//
+    //    [param appendFormat:@"&SF(%@).FD(t::row_0).SV(record::status)=added",fieldlinkname];
+    /*
+     
+     if (records.count) {
+     
+     
+     
+     NSDictionary *_dictionary = [[records objectAtIndex:0 ]record];
+     NSEnumerator *keyEnum = [_dictionary keyEnumerator];
+     NSString *keyName;
+     [param appendFormat:@"&SF(%@).FD(t::row_0).SV(record::status)=added",fieldlinkname];
+     
+     while((keyName = [keyEnum nextObject]) != nil) {
+     
+     ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
+     id keyValue = [fieldDate fieldValue];
+     if(keyValue != nil) {
+     if([keyValue isKindOfClass:[NSString class]]) {
+     //                [paramString appendFormat:@"&%@=%@",keyName,keyValue];
+     
+     
+     
+     //   SF(SubForm_1).FD(t::row_1).SV(Single_Line_1):1111
+     
+     
+     
+     [param appendFormat:@"&SF(%@).FD(t::row_0).SV(%@):%@",fieldlinkname,[fieldDate fieldName ],[fieldDate fieldValue]];
+     
+     
+     
+     
+     }
+     
+     }}
+     */
     
     
-//    
-//    SF(SubForm_1).FD(t::row_0).SV(record::status):added
-//    SF(SubForm_1).FD(t::row_0).SV(Single_Line_1):
-//    SF(SubForm_1).FD(t::row_0).SV(Single_Line):
-//    
-//    
-//    SF(SubForm_1).FD(t::row_1).SV(record::status):added
-//    SF(SubForm_1).FD(t::row_1).SV(Single_Line_1):1111
-//    SF(SubForm_1).FD(t::row_1).SV(Single_Line):asd
-//    SF(SubForm_1).FD(t::row_1).MV(Checkbox):Choice 2
-//    
-//    
-//    SF(SubForm_1).FD(t::row_2).SV(record::status):added
-//    SF(SubForm_1).FD(t::row_2).SV(Single_Line_1):
-//    SF(SubForm_1).FD(t::row_2).SV(Single_Line):
-//    SF(SubForm_1).FD(t::row_2).MV(Checkbox):Choice 1
-//    SF(SubForm_1).FD(t::row_2).MV(Checkbox):Choice 2
-//    SF(SubForm_1).FD(t::row_2).MV(Checkbox):Choice 3
-//    
-//    
-//    SF(SubForm_1).FD(t::row_3).SV(record::status):added
-//    SF(SubForm_1).FD(t::row_3).SV(Single_Line_1):
-//    SF(SubForm_1).FD(t::row_3).SV(Single_Line):
-
+    
+    //        zccpn=b5822429-c393-4d06-9246-856e20473a4b
+    //        &name=sadsadasdsadsadasd
+    //        &=%23Form%3Amain_form
+    //        &SF(SubForm_1).FD(t::row_0).SV(record::status)=added
+    //        &SF(SubForm_1).FD(t::row_0).SV(Single_Line_1)=
+    //        &SF(SubForm_1).FD(t::row_0).SV(Single_Line)=
+    //        &SF(SubForm_1).FD(t::row_1).SV(record::status)=added
+    //        &SF(SubForm_1).FD(t::row_1).SV(Single_Line_1)=1111
+    //        &SF(SubForm_1).FD(t::row_1).SV(Single_Line)=asd
+    //        &SF(SubForm_1).FD(t::row_1).MV(Checkbox)=Choice%202
+    //        &SF(SubForm_1).FD(t::row_2).SV(record::status)=added
+    //        &SF(SubForm_1).FD(t::row_2).SV(Single_Line_1)=
+    //        &SF(SubForm_1).FD(t::row_2).SV(Single_Line)=
+    //        &SF(SubForm_1).FD(t::row_2).MV(Checkbox)=Choice%201
+    //        &SF(SubForm_1).FD(t::row_2).MV(Checkbox)=Choice%202
+    //        &SF(SubForm_1).FD(t::row_2).MV(Checkbox)=Choice%203
+    //        &SF(SubForm_1).FD(t::row_3).SV(record::status)=added
+    //        &SF(SubForm_1).FD(t::row_3).SV(Single_Line_1)=
+    //        &SF(SubForm_1).FD(t::row_3).SV(Single_Line)=
+    //        &SF(SubForm_1).FD(t::row_4).SV(record::status)=added
+    //        &SF(SubForm_1).FD(t::row_4).SV(Single_Line_1)=
+    //        &SF(SubForm_1).FD(t::row_4).SV(Single_Line)=
+    //        &zc-mobile=
+    //        &formid=1411560000000310009
+    //        &formLinkId=178
+    //        &formLinkName=main_form
+    //        &tableName=t_1411560000000310009
+    //        &lookupFieldName=
+    //        &childFormAccessType=
+    //        &childFieldLabelName=
+    //        &childFormLinkName=
+    //        &childAppLinkName=
+    //        &childFormPrivateLink=
+    //        &isFromSubForm=
+    //        &rowNo=
+    //        &subFormAppName=
+    //        &subFormLinkName=
+    //        &recType=1
+    //        &viewLinkName=
+    //        &pkValue=
+    //        &dateFormat=dd-MMM-yyyy
+    //        &timeZone=America%2FLos_Angeles
+    //
+    //        &uiDateFormat=%25d-%25b-%25Y
+    //        &fromIDX=
+    //        &privatelink=
+    //        &viewPrivateLink=
+    //        &appLinkName=subform-app
+    //        &sharedBy=riyazmd
+    //        &isNewTypeSubform=
+    //        &childSubformField=
+    //        &zc_lookupCount=
+    //        &fcid=1411560000000310127
+    //        &fcname=SubForm_1
+    //        &rowseqid=t::row_4
+    //        &rowactiontype=onaddrow
+    //        Response Headersview source
+    //
+    
+    
+    //
+    //    SF(SubForm_1).FD(t::row_0).SV(record::status):added
+    //    SF(SubForm_1).FD(t::row_0).SV(Single_Line_1):
+    //    SF(SubForm_1).FD(t::row_0).SV(Single_Line):
+    //
+    //
+    //    SF(SubForm_1).FD(t::row_1).SV(record::status):added
+    //    SF(SubForm_1).FD(t::row_1).SV(Single_Line_1):1111
+    //    SF(SubForm_1).FD(t::row_1).SV(Single_Line):asd
+    //    SF(SubForm_1).FD(t::row_1).MV(Checkbox):Choice 2
+    //
+    //
+    //    SF(SubForm_1).FD(t::row_2).SV(record::status):added
+    //    SF(SubForm_1).FD(t::row_2).SV(Single_Line_1):
+    //    SF(SubForm_1).FD(t::row_2).SV(Single_Line):
+    //    SF(SubForm_1).FD(t::row_2).MV(Checkbox):Choice 1
+    //    SF(SubForm_1).FD(t::row_2).MV(Checkbox):Choice 2
+    //    SF(SubForm_1).FD(t::row_2).MV(Checkbox):Choice 3
+    //
+    //
+    //    SF(SubForm_1).FD(t::row_3).SV(record::status):added
+    //    SF(SubForm_1).FD(t::row_3).SV(Single_Line_1):
+    //    SF(SubForm_1).FD(t::row_3).SV(Single_Line):
+    
     
     for (int recindex=0;recindex<[records count];recindex++) {
         
         
         ZCRecord * record =  [records objectAtIndex:recindex];
-
-    NSDictionary *_dictionary = [record record];
-    NSEnumerator *keyEnum = [_dictionary keyEnumerator];
-    NSString *keyName;
+        
+        NSDictionary *_dictionary = [record record];
+        NSEnumerator *keyEnum = [_dictionary keyEnumerator];
+        NSString *keyName;
         [param appendFormat:@"&SF(%@).FD(t::row_%i).SV(record::status)=added",fieldlinkname,recindex+1];
-    while((keyName = [keyEnum nextObject]) != nil) {
-        ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
-        id keyValue = [fieldDate fieldValue];
-        if(keyValue != nil) {
-            if([keyValue isKindOfClass:[NSString class]]) {
-//                [paramString appendFormat:@"&%@=%@",keyName,keyValue];
-                
-                
-                
-           //   SF(SubForm_1).FD(t::row_1).SV(Single_Line_1):1111
-                
-                
-                
-                [param appendFormat:@"&SF(%@).FD(t::row_%i).SV(%@)=%@",fieldlinkname,recindex+1,[fieldDate fieldName ],[fieldDate fieldValue]];
-                
-                
-                
-
-            }
-            else if([keyValue isKindOfClass:[NSArray class]]) {
-                
-                for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
+        while((keyName = [keyEnum nextObject]) != nil) {
+            ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
+            id keyValue = [fieldDate fieldValue];
+            if(keyValue != nil) {
+                if([keyValue isKindOfClass:[NSString class]]) {
+                    //                [paramString appendFormat:@"&%@=%@",keyName,keyValue];
                     
                     
                     
-                    [param appendFormat:@"&SF(%@).FD(t::row_%i).MV(%@)=%@",fieldlinkname,recindex+1,[fieldDate fieldName ],[keyValue objectAtIndex:optIndex]];
-
-//                    [paramString appendFormat:@"&%@=%@",keyName,[keyValue objectAtIndex:optIndex]];
+                    //   SF(SubForm_1).FD(t::row_1).SV(Single_Line_1):1111
+                    
+                    
+                    
+                    [param appendFormat:@"&SF(%@).FD(t::row_%i).SV(%@)=%@",fieldlinkname,recindex+1,[fieldDate fieldName ],[fieldDate fieldValue]];
+                    
+                    
+                    
+                    
+                }
+                else if([keyValue isKindOfClass:[NSArray class]]) {
+                    
+                    for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
+                        
+                        
+                        
+                        [param appendFormat:@"&SF(%@).FD(t::row_%i).MV(%@)=%@",fieldlinkname,recindex+1,[fieldDate fieldName ],[keyValue objectAtIndex:optIndex]];
+                        
+                        //                    [paramString appendFormat:@"&%@=%@",keyName,[keyValue objectAtIndex:optIndex]];
+                    }
                 }
             }
         }
-    }
-
-
         
         
         
-
-
-
-    
-    
+        
+        
+        
+        
+        
+        
+        
     }
     //param= [param stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
-
+    
+    
     NSLog(@"subformREcordPArm riyaz %@",param);
     return param;
-
+    
     
 }
 
@@ -462,7 +459,7 @@
         id keyValue = [fieldDate fieldValue];
         if(keyValue != nil) {
             if([keyValue isKindOfClass:[NSString class]]) {
-                 [paramString appendFormat:@"%@=%@",keyName,keyValue];
+                [paramString appendFormat:@"%@=%@",keyName,keyValue];
             }
             else if([keyValue isKindOfClass:[NSArray class]]) {
                 

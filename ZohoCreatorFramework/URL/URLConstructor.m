@@ -22,14 +22,14 @@ static NSString *ACCOUNTS_URL;
 static NSString *SERVICE_NAME;
 
 /*
-formAccessType
-int FORM_ALONE =1;
-int VIEW_ADD_FORM =2;
-int VIEW_EDIT_FORM =3;
-int VIEW_BULK_EDIT_FORM =4;
-int FORM_LOOKUP_ADD_FORM =5;
-*/
- 
+ formAccessType
+ int FORM_ALONE =1;
+ int VIEW_ADD_FORM =2;
+ int VIEW_EDIT_FORM =3;
+ int VIEW_BULK_EDIT_FORM =4;
+ int FORM_LOOKUP_ADD_FORM =5;
+ */
+
 @implementation URLConstructor
 
 + (NSString*) formURL : (NSString*) appLinkName formName : (NSString*) formLinkName withApplicationOwner: (NSString *) appOwner {
@@ -41,7 +41,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     
     
     NSLog(@"frm URL %@",appOwner);
-//    formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
+    //    formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
     return formURL;
 }
 
@@ -49,7 +49,7 @@ int FORM_LOOKUP_ADD_FORM =5;
 {
     
     NSString *formURL = [NSString stringWithFormat:@"/api/%@/json/%@/view/%@/bulkeditfields/",appOwner,appLinkName,viewLinkName];
-
+    
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     formURL = [formURL stringByAppendingString:@"&metaData=complete&zcRefValue=true"];
@@ -60,43 +60,43 @@ int FORM_LOOKUP_ADD_FORM =5;
 
 +(NSString *)formURLforAddTOFickListAppname:(NSString *)  appLinkName formName : (NSString*) formLinkName withApplicationOwner: (NSString *) appOwner childappsINORDER:(NSArray *)childappINORDER childFormsINORDER:(NSArray *)childFormsINORDER baseFieldsINORDER:(NSArray *)baseFieldsINORDER recordID :(NSString *)recID viewLinkname:(NSString *)viewLinkname;
 {
-
+    
     NSString * formURL=[URLConstructor formURL:appLinkName formName:formLinkName withApplicationOwner:appOwner];
-//    for(int appInd=0;appInd<childappNamesINORDER.count;appInd++)
-//    {
-//    
-//        formURL = [formURL stringByAppendingFormat:@"&zc_childappname_%i=%@",appInd+1,[childappNamesINORDER objectAtIndex:appInd]];
-//        formURL = [formURL stringByAppendingFormat:@"&zc_childformname_%i=%@",appInd+1,[childFormNameINORDER objectAtIndex:appInd]];
-//        formURL = [formURL stringByAppendingFormat:@"&zc_childlabelname_%i=%@",appInd+1,[baseFieldNameINORDER objectAtIndex:appInd]];
-//    }
-//    
-//    formURL = [formURL stringByAppendingFormat:@"&zc_lookupCount=%i",childFormNameINORDER.count];
-//    formURL = [formURL stringByAppendingFormat:@"&formAccessType=5"];
-//    
-//    NSLog(@"recLinkID %@ %@",recID,viewLinkname);
-//    if (recID.length) {
-//        formURL = [formURL stringByAppendingFormat:@"&recLinkID=%@",recID];
-//    }
-//    if (viewLinkname.length) {
-//        
-//        formURL = [formURL stringByAppendingFormat:@"&viewLinkName=%@",viewLinkname];
-//
-//    }
+    //    for(int appInd=0;appInd<childappNamesINORDER.count;appInd++)
+    //    {
+    //
+    //        formURL = [formURL stringByAppendingFormat:@"&zc_childappname_%i=%@",appInd+1,[childappNamesINORDER objectAtIndex:appInd]];
+    //        formURL = [formURL stringByAppendingFormat:@"&zc_childformname_%i=%@",appInd+1,[childFormNameINORDER objectAtIndex:appInd]];
+    //        formURL = [formURL stringByAppendingFormat:@"&zc_childlabelname_%i=%@",appInd+1,[baseFieldNameINORDER objectAtIndex:appInd]];
+    //    }
+    //
+    //    formURL = [formURL stringByAppendingFormat:@"&zc_lookupCount=%i",childFormNameINORDER.count];
+    //    formURL = [formURL stringByAppendingFormat:@"&formAccessType=5"];
+    //
+    //    NSLog(@"recLinkID %@ %@",recID,viewLinkname);
+    //    if (recID.length) {
+    //        formURL = [formURL stringByAppendingFormat:@"&recLinkID=%@",recID];
+    //    }
+    //    if (viewLinkname.length) {
+    //
+    //        formURL = [formURL stringByAppendingFormat:@"&viewLinkName=%@",viewLinkname];
+    //
+    //    }
     
     formURL =[formURL stringByAppendingString:[ZCSharedAppsEventsParamsUtil getAddtoPickListParamsWithAPPS:childappINORDER Forms:childFormsINORDER fields:baseFieldsINORDER viewLinkname:viewLinkname recordID:recID]];
     formURL = [formURL stringByAppendingFormat:@"&formAccessType=5"];
     
     return formURL;
     
-//https://creator.zoho.com/api/riyazmd/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&formAccessType=5&zc_lookupCount=1&zc_childappname_1=all-fields&zc_childformname_1=Lookup&zc_childlabelname_1=Lookup_plus_add
+    //https://creator.zoho.com/api/riyazmd/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&formAccessType=5&zc_lookupCount=1&zc_childappname_1=all-fields&zc_childformname_1=Lookup&zc_childlabelname_1=Lookup_plus_add
     
     
-//https://creator.zoho.com/api/all-fields/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&zc_childappname_1=all-fields&zc_childformname_1=all-fields&zc_childlabelname_1=Lookup_plus_add&zc_lookupCount=1&formAccessType=5
+    //https://creator.zoho.com/api/all-fields/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&zc_childappname_1=all-fields&zc_childformname_1=all-fields&zc_childlabelname_1=Lookup_plus_add&zc_lookupCount=1&formAccessType=5
     
-//https://creator.zoho.com/api/all-fields/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&zc_childappname_1=Single_Line&zc_childformname_1=Single_Line&zc_childlabelname_1=Lookup_plus_add&zc_lookupCount=1&formAccessType=5
-//https://creator.zoho.com/api/all-fields/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&zc_childappname_1=Single_Line&zc_childformname_1=Single_Line&zc_childlabelname_1=Lookup_plus_add&zc_lookupCount=1&formAccessType=5
-
-
+    //https://creator.zoho.com/api/all-fields/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&zc_childappname_1=Single_Line&zc_childformname_1=Single_Line&zc_childlabelname_1=Lookup_plus_add&zc_lookupCount=1&formAccessType=5
+    //https://creator.zoho.com/api/all-fields/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&zc_childappname_1=Single_Line&zc_childformname_1=Single_Line&zc_childlabelname_1=Lookup_plus_add&zc_lookupCount=1&formAccessType=5
+    
+    
 }
 
 + (NSString*) formURL : (NSString*) appLinkName formName : (NSString*) formLinkName viewName:(NSString*) viewLinkName withApplicationOwner: (NSString *) appOwner
@@ -113,7 +113,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     appList = [URLConstructor appendAuthToken:appList];
     appList = [appList stringByAppendingString:@"&action=license"];
     NSLog(@"gee appListURL %@",appList);
-
+    
     return appList;
 }
 
@@ -125,7 +125,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     appList = [URLConstructor appendAuthToken:appList];
     appList = [appList stringByAppendingString:@"&action=license"];
     NSLog(@"gee sharedAppListURL %@",appList);
-
+    
     return appList;
 }
 
@@ -136,7 +136,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     appList = [URLConstructor appendAuthToken:appList];
     appList = [appList stringByAppendingFormat:@"&groupid=%@",groupid];
     NSLog(@"gee sharedAppListURL %@",appList);
-
+    
     return appList;
 }
 
@@ -148,7 +148,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     appList = [appList stringByAppendingString:@"&action=license"];
     appList = [appList stringByAppendingFormat:@"&workSpaceOwner=%@",workspaceowner];
     NSLog(@"gee workSpaceAppListURL %@",appList);
-
+    
     return appList;
 }
 
@@ -158,7 +158,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     appList = [[URLConstructor serverURL:false] stringByAppendingString:appList];
     appList = [URLConstructor appendAuthToken:appList];
     NSLog(@"gee allAppsCategoryListURL %@",appList);
-
+    
     return appList;
 }
 
@@ -168,14 +168,14 @@ int FORM_LOOKUP_ADD_FORM =5;
     sectionMeta = [[URLConstructor serverURL:false] stringByAppendingString:sectionMeta];
     sectionMeta = [URLConstructor appendAuthToken:sectionMeta];
     sectionMeta = [sectionMeta stringByAppendingFormat:@"&sharedBy=%@",appOwner];
-
+    
     //// //NSLog(@"Section Meta URL %@",sectionMeta);
     return sectionMeta;
 }
 
 + (NSString*) uploadURL : (NSString*) applicationName : (NSString*) formName : (NSString*) fieldName : (NSString*) recordID : (NSString*) fileName : (NSString*) appOwner viewLinkname:(NSString *)viewLinkname  {
     int formAccessType=1;
-
+    
     if (viewLinkname.length) {
         formAccessType =2;
     }
@@ -192,7 +192,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     
     if (viewLinkname.length) {
         
-    sectionMeta=[sectionMeta stringByAppendingFormat:@"&viewLinkName=%@",viewLinkname];
+        sectionMeta=[sectionMeta stringByAppendingFormat:@"&viewLinkName=%@",viewLinkname];
     }
     
     return sectionMeta;
@@ -203,7 +203,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     NSString *sectionMeta = [NSString stringWithFormat:@"/api/mobile/xml/%@/sections/",appLinkName];
     sectionMeta = [[URLConstructor serverURL:false] stringByAppendingString:sectionMeta];
     sectionMeta = [URLConstructor appendAuthToken:sectionMeta];
-
+    
     // sectionMeta = [sectionMeta stringByAppendingFormat:@"&appowner=%@",appOwner];
     return sectionMeta;
 }
@@ -272,7 +272,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     return formURL;
     
     
-    }
+}
 
 
 + (NSString*) editFormMetaJSON : (NSString*) _appLinkName : (NSString*) _viewLinkName : (NSString*) _recordLinkID : (NSString*) appOwner {
@@ -320,7 +320,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     NSString *formURL = [NSString stringWithFormat:@"sharedBy=%@&linkNameBased=true&appLinkName=%@&formLinkName=%@&",appOwner,appLinkName,formLinkName];
     formURL = [URLConstructor appendAuthToken:formURL];
     NSLog(@"new json url %@",formURL);
-//    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    //    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     return formURL;
 }
 
@@ -329,7 +329,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/OnLoad/",appLinkName,formLinkName];
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
-    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
     //// //NSLog(@"On load URL %@",formURL);
     
@@ -341,7 +341,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/OnEditLoad/",appLinkName,formLinkName];
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
-    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
     //// //NSLog(@"On Edit URL %@",formURL);
     return formURL;
@@ -352,7 +352,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/SubOnUser/%@/",appLinkName,formLinkName,fieldName];
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
-    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     formURL = [formURL stringByAppendingFormat:@"&refAppLinkName=%@&refFormLinkName=%@&refFieldName=%@",refAppName,refFormName,refFieldName];
     formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
     return formURL;
@@ -373,8 +373,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        //formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@", paramString];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     }
     return formURL;
 }
@@ -386,10 +385,10 @@ int FORM_LOOKUP_ADD_FORM =5;
 https://creator.zoho.com/generateJSAPI.do?
     
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"%@",paramString];
+        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     }
     
-//    return @"Single_Line=&Single_Line1=&SF(SubForm).FD(t::row_1).SV(record::status)=added&SF(SubForm).FD(t::row_1).SV(Multi_Line)=&SF(SubForm).FD(t::row_1).SV(Single_Line)=riyazheehdh&authtoken=a6068ae81f07813b3c264276863792d4&scope=creatorapi&sharedBy=vignesh.rajamani&appLinkName=riyazsubformapp&formLinkName=Untitled_Form&linkNameBased=true&fieldName=SubForm&subformFieldName=Single_Line&subfcname=SF(SubForm).FD(t::row_1).SV(Single_Line)&rowseqid=t::row_1";
+    //    return @"Single_Line=&Single_Line1=&SF(SubForm).FD(t::row_1).SV(record::status)=added&SF(SubForm).FD(t::row_1).SV(Multi_Line)=&SF(SubForm).FD(t::row_1).SV(Single_Line)=riyazheehdh&authtoken=a6068ae81f07813b3c264276863792d4&scope=creatorapi&sharedBy=vignesh.rajamani&appLinkName=riyazsubformapp&formLinkName=Untitled_Form&linkNameBased=true&fieldName=SubForm&subformFieldName=Single_Line&subfcname=SF(SubForm).FD(t::row_1).SV(Single_Line)&rowseqid=t::row_1";
     return formURL;
 }
 
@@ -397,13 +396,13 @@ https://creator.zoho.com/generateJSAPI.do?
 + (NSString*) subFormOnuserWithJSON : (NSString*) appLinkName formLinkname: (NSString*) formLinkName fieldlinkname: (NSString*) fieldName subformFieldName:(NSString *)subformFieldname rowNumberincaseOFsubofrmField:(int)rownum param: (NSString*) paramString appowner: (NSString*) appOwner
 
 {
-//    NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/SubOnUser/%@/",appLinkName,formLinkName,fieldName];
+    //    NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/SubOnUser/%@/",appLinkName,formLinkName,fieldName];
     
     NSString *formURL = [NSString stringWithFormat:@"sharedBy=%@&linkNameBased=true&appLinkName=%@&formLinkName=%@&fieldName=%@&",appOwner,appLinkName,formLinkName,fieldName];
-
+    
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     }
     
     
@@ -413,7 +412,7 @@ https://creator.zoho.com/generateJSAPI.do?
     formURL=[formURL stringByAppendingFormat:@"&rowseqid=t::row_%i",rownum];
     
     NSLog(@"came here subform onuser %@  riyaz::",formURL);
-
+    
     return formURL;
 }
 
@@ -424,7 +423,7 @@ https://creator.zoho.com/generateJSAPI.do?
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     }
     return formURL;
 }
@@ -621,17 +620,17 @@ https://creator.zoho.com/generateJSAPI.do?
 {
     
     NSString *formURL = [NSString stringWithFormat:@"sharedBy=%@&linkNameBased=true&appLinkName=%@&formLinkName=%@&buttonName=%@&",appOwner,appLinkName,formLinkName,buttonName];
-        formURL = [URLConstructor appendAuthToken:formURL];
+    formURL = [URLConstructor appendAuthToken:formURL];
     NSLog(@"forURL %@",formURL);
     if(paramString != nil) {
         
-        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
         
     }
     
     NSLog(@"forURL %@",formURL);
     return formURL;
-
+    
     
 }
 
@@ -641,7 +640,7 @@ https://creator.zoho.com/generateJSAPI.do?
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     }
     return formURL;
 }
@@ -652,7 +651,7 @@ https://creator.zoho.com/generateJSAPI.do?
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     }
     return formURL;
 }
@@ -663,7 +662,7 @@ https://creator.zoho.com/generateJSAPI.do?
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     }
     return formURL;
 }
@@ -693,7 +692,7 @@ https://creator.zoho.com/generateJSAPI.do?
 + (NSString*)  contactsServerPhotoDownloadURL
 {
     NSString *contactUrl =[NSString stringWithFormat:@"https://contacts.zoho.com/file/download?authtoken=%@&scope=creatorapi&fs=thumb&t=user&ID=%@",[[ZOHOCreator userObject]authToken ],[[ZOHOCreator userObject] zuid]];
-        return contactUrl;
+    return contactUrl;
 }
 
 +(NSString *)authenticationUrl
@@ -749,7 +748,7 @@ https://creator.zoho.com/generateJSAPI.do?
         lookUpchoiceURL =[lookUpchoiceURL stringByAppendingFormat:@"&viewLinkName=%@",viewLinkname];
         formAccestype=2;
     }
-
+    
     if (recordID.length) {
         
         formAccestype=3;
@@ -757,15 +756,15 @@ https://creator.zoho.com/generateJSAPI.do?
     
     if (childappNamesINORDER.count) {
         formAccestype=5;
-
+        
         
     }
-
+    
     lookUpchoiceURL =[lookUpchoiceURL stringByAppendingFormat:@"&formAccessType=%i",formAccestype];
-
+    
     
     lookUpchoiceURL =[lookUpchoiceURL stringByAppendingString:[ZCSharedAppsEventsParamsUtil getAddtoPickListParamsWithAPPS:childappNamesINORDER Forms:childFormNameINORDER fields:baseFieldNameINORDER viewLinkname:nil recordID:nil]];
-
+    
     lookUpchoiceURL = [[URLConstructor serverURL:false] stringByAppendingString:lookUpchoiceURL];
     
     
@@ -776,42 +775,42 @@ https://creator.zoho.com/generateJSAPI.do?
     
 }
 
-+(NSString *)subFormAddRowWithAppLinkname:(NSString *)appLinkName formLinkName:(NSString *)formLinkName fieldLinkName:(NSString *)fieldLinkName numberofsubformEntries:(int)numberofsubformEntries appOwner:(NSString *)appOwner recordParm:(NSString *)params  
++(NSString *)subFormAddRowWithAppLinkname:(NSString *)appLinkName formLinkName:(NSString *)formLinkName fieldLinkName:(NSString *)fieldLinkName numberofsubformEntries:(int)numberofsubformEntries appOwner:(NSString *)appOwner recordParm:(NSString *)params
 {
     NSString * paramString=[[NSString alloc]init];
     paramString=[paramString stringByAppendingString:[URLConstructor postAuthToken]];
     NSLog(@"param  string %@",paramString);
-
+    
     paramString =[paramString stringByAppendingString:params];
-
-               paramString =[paramString stringByAppendingFormat:@"&sharedBy=%@",appOwner];
-//    NSLog(@"param  string %@",paramString);
-
     
-               paramString =[paramString stringByAppendingFormat:@"&appLinkName=%@",appLinkName];
-//    NSLog(@"param  string %@",paramString);
-
-               paramString =[paramString stringByAppendingFormat:@"&formLinkName=%@",formLinkName];
-//    NSLog(@"param  string %@",paramString);
-
-               paramString =[paramString stringByAppendingFormat:@"&linkNameBased=true"];
-//    NSLog(@"param  string %@",paramString);
-
-               paramString =[paramString stringByAppendingFormat:@"&rowactiontype=onaddrow"];
-//    NSLog(@"param  string %@",paramString);
-
-               paramString =[paramString stringByAppendingFormat:@"&rowseqid=t::row_%i",numberofsubformEntries];
-//    NSLog(@"param  string %@",paramString);
-
-//    NSLog(@"param  string %@",paramString);
+    paramString =[paramString stringByAppendingFormat:@"&sharedBy=%@",appOwner];
+    //    NSLog(@"param  string %@",paramString);
     
     
-//        [param appendFormat:@"&rowseqid=t::row_%i",records.count];
+    paramString =[paramString stringByAppendingFormat:@"&appLinkName=%@",appLinkName];
+    //    NSLog(@"param  string %@",paramString);
     
-
+    paramString =[paramString stringByAppendingFormat:@"&formLinkName=%@",formLinkName];
+    //    NSLog(@"param  string %@",paramString);
+    
+    paramString =[paramString stringByAppendingFormat:@"&linkNameBased=true"];
+    //    NSLog(@"param  string %@",paramString);
+    
+    paramString =[paramString stringByAppendingFormat:@"&rowactiontype=onaddrow"];
+    //    NSLog(@"param  string %@",paramString);
+    
+    paramString =[paramString stringByAppendingFormat:@"&rowseqid=t::row_%i",numberofsubformEntries];
+    //    NSLog(@"param  string %@",paramString);
+    
+    //    NSLog(@"param  string %@",paramString);
+    
+    
+    //        [param appendFormat:@"&rowseqid=t::row_%i",records.count];
+    
+    
     
     paramString =[paramString stringByAppendingFormat:@"&fieldName=%@",fieldLinkName];
-
+    
     
     return paramString;
 }
@@ -819,31 +818,31 @@ https://creator.zoho.com/generateJSAPI.do?
 +(NSString *)subFormONDELETERowWithAppLinkname:(NSString *)appLinkName formLinkName:(NSString *)formLinkName fieldLinkName:(NSString *)fieldLinkName deleteRowNumber:(int)deleteRowNumber appOwner:(NSString *)appOwner recordParm:(NSString *)params {
     NSString * paramString=[[NSString alloc]init];
     paramString=[paramString stringByAppendingString:[URLConstructor postAuthToken]];
-//    NSLog(@"param  string %@",paramString);
+    //    NSLog(@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingString:params];
     
     paramString =[paramString stringByAppendingFormat:@"&sharedBy=%@",appOwner];
-//    NSLog(@"param  string %@",paramString);
+    //    NSLog(@"param  string %@",paramString);
     
     
     paramString =[paramString stringByAppendingFormat:@"&appLinkName=%@",appLinkName];
-//    NSLog(@"param  string %@",paramString);
+    //    NSLog(@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingFormat:@"&formLinkName=%@",formLinkName];
-//    NSLog(@"param  string %@",paramString);
+    //    NSLog(@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingFormat:@"&linkNameBased=true"];
-//    NSLog(@"param  string %@",paramString);
+    //    NSLog(@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingFormat:@"&rowactiontype=ondeleterow"];
-//    NSLog(@"param  string %@",paramString);
+    //    NSLog(@"param  string %@",paramString);
     
-      paramString =[paramString stringByAppendingFormat:@"&rowseqid=t::row_%i",deleteRowNumber];
-
+    paramString =[paramString stringByAppendingFormat:@"&rowseqid=t::row_%i",deleteRowNumber];
+    
     
     paramString =[paramString stringByAppendingFormat:@"&fieldName=%@",fieldLinkName];
-
+    
     
     
     
