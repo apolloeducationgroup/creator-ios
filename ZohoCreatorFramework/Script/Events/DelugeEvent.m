@@ -185,16 +185,13 @@
         id keyValue = [fieldDate fieldValue];
         if(keyValue != nil) {
             if([keyValue isKindOfClass:[NSString class]]) {
-                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) keyValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
-
-                [paramString appendFormat:@"&%@=%@",keyName,escapedString];
                 
+                [paramString appendFormat:@"&%@=%@",keyName,keyValue];
             }
             else if([keyValue isKindOfClass:[NSArray class]]) {
                 
                 for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
                     NSLog(@"coming to index");
-                    
                     [paramString appendFormat:@"&%@=%@",keyName,[keyValue objectAtIndex:optIndex]];
                 }
             }
@@ -249,7 +246,7 @@
     [paramString appendString:@"</fields>"];
     [paramString appendFormat:@"&sharedBy=%@",sharedBy]; */
 
-    return   [paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    return  paramString;
 //    return [paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
 }
 +(NSString *)getsubformRecordParam:(NSMutableArray *)records fieldlinkname:(NSString *)fieldlinkname
