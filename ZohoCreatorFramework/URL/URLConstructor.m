@@ -320,7 +320,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     NSString *formURL = [NSString stringWithFormat:@"sharedBy=%@&linkNameBased=true&appLinkName=%@&formLinkName=%@&",appOwner,appLinkName,formLinkName];
     formURL = [URLConstructor appendAuthToken:formURL];
     NSLog(@"new json url %@",formURL);
-//    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+//    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     return formURL;
 }
 
@@ -329,7 +329,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/OnLoad/",appLinkName,formLinkName];
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
-    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
     //// //NSLog(@"On load URL %@",formURL);
     
@@ -341,7 +341,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/OnEditLoad/",appLinkName,formLinkName];
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
-    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
     //// //NSLog(@"On Edit URL %@",formURL);
     return formURL;
@@ -352,7 +352,7 @@ int FORM_LOOKUP_ADD_FORM =5;
     NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/SubOnUser/%@/",appLinkName,formLinkName,fieldName];
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
-    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     formURL = [formURL stringByAppendingFormat:@"&refAppLinkName=%@&refFormLinkName=%@&refFieldName=%@",refAppName,refFormName,refFieldName];
     formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
     return formURL;
@@ -373,7 +373,8 @@ int FORM_LOOKUP_ADD_FORM =5;
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        //formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@", paramString];
     }
     return formURL;
 }
@@ -385,7 +386,7 @@ int FORM_LOOKUP_ADD_FORM =5;
 https://creator.zoho.com/generateJSAPI.do?
     
     if(paramString != nil) {
-formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"%@",paramString];
     }
     
 //    return @"Single_Line=&Single_Line1=&SF(SubForm).FD(t::row_1).SV(record::status)=added&SF(SubForm).FD(t::row_1).SV(Multi_Line)=&SF(SubForm).FD(t::row_1).SV(Single_Line)=riyazheehdh&authtoken=a6068ae81f07813b3c264276863792d4&scope=creatorapi&sharedBy=vignesh.rajamani&appLinkName=riyazsubformapp&formLinkName=Untitled_Form&linkNameBased=true&fieldName=SubForm&subformFieldName=Single_Line&subfcname=SF(SubForm).FD(t::row_1).SV(Single_Line)&rowseqid=t::row_1";
@@ -402,7 +403,7 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
 
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
     
     
@@ -423,7 +424,7 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
     return formURL;
 }
@@ -624,7 +625,7 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
     NSLog(@"forURL %@",formURL);
     if(paramString != nil) {
         
-        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
     }
     
@@ -640,7 +641,7 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
     return formURL;
 }
@@ -651,7 +652,7 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
     return formURL;
 }
@@ -662,7 +663,7 @@ formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPerc
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
     return formURL;
 }

@@ -152,7 +152,14 @@
     NSLog(@"deluge param %@",_delugeParams);
     URLConnector *connector = [[URLConnector alloc] initFetcherPostParam:_delugeURL :_delugeParams :[URLConnector POSTMETHOD]];
     NSString *formMetaXML = [connector apiResponse];
-    //// //NSLog(@"deluge form Meta XML %@ ",formMetaXML);
+    
+    NSLog(@"deluge form JSON %@ ",formMetaXML);
+
+    formMetaXML = [formMetaXML  stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding ];//]:[formMetaXML cStringUsingEncoding:[NSString defaultCStringEncoding]]];
+    
+    NSLog(@"deluge form JSON after decoding %@ ",formMetaXML);
+    
+    
     
     ScriptJSONParser *parser = [[ScriptJSONParser alloc] initScriptJSONParser:formMetaXML];
 //    ScriptParser *parser = [[ScriptParser alloc] initScriptParser:formMetaXML];
@@ -245,9 +252,8 @@
     }
     [paramString appendString:@"</fields>"];
     [paramString appendFormat:@"&sharedBy=%@",sharedBy]; */
-
     return  paramString;
-//    return [paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+//    return [paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];}
 }
 +(NSString *)getsubformRecordParam:(NSMutableArray *)records fieldlinkname:(NSString *)fieldlinkname
 {

@@ -82,7 +82,7 @@
         NSLog(@"post method has applied");
         [apiURLRequest setHTTPMethod:@"POST"];
         [apiURLRequest setTimeoutInterval:75.0];
-        NSLog(@"POST PARAMETER %@",_paramString);
+        NSLog(@"POST PARAMETER CHECK NOW... %@",_paramString);
         
         if(_paramString != nil)
         {
@@ -205,7 +205,7 @@
     NSError *error=nil;
     receivedData = (NSMutableData *)[NSURLConnection sendSynchronousRequest:apiURLRequest  returningResponse:&authenticationResponse  error:&error];
     _apiRawData=receivedData;
-    apiResponse = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
+    apiResponse = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     NSLog(@"request url riyaz \n\n\n %@\n\n\n",apiURLRequest.URL.absoluteString);
 
     NSLog(@"response riyaz \n\n\n %@\n\n\n",apiResponse);
@@ -223,7 +223,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    apiResponse = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
+    apiResponse = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     
     isRequestCompleted = YES;
 }
