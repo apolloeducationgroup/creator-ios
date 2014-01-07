@@ -69,7 +69,7 @@
 
 -(void) prepareConnection
 {
-    NSLog(@"Coming to prepare connection %d",requestMethod);
+    NSLog(@"Coming to prepare connection check %d",requestMethod);
     isRequestCompleted = NO;
     receivedData = [[NSMutableData alloc] init];
     apiURLRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:zohoFormAPIURL]];
