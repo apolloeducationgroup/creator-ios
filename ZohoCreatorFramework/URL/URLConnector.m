@@ -205,7 +205,7 @@
     NSError *error=nil;
     receivedData = (NSMutableData *)[NSURLConnection sendSynchronousRequest:apiURLRequest  returningResponse:&authenticationResponse  error:&error];
     _apiRawData=receivedData;
-    apiResponse = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
+    apiResponse = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     NSLog(@"request url riyaz \n\n\n %@\n\n\n",apiURLRequest.URL.absoluteString);
     
     NSLog(@"response riyaz \n\n\n %@\n\n\n",apiResponse);
