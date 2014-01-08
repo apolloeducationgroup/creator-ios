@@ -124,7 +124,7 @@ static NSString *SERVICE_NAME;
     appList = [[URLConstructor serverURL:false] stringByAppendingString:appList];
     appList = [URLConstructor appendAuthToken:appList];
     appList = [appList stringByAppendingString:@"&action=license"];
-    NSLog(@"gee sharedAppListURL %@",appList);
+    NSLog(@"gee1 sharedAppListURL %@",appList);
     
     return appList;
 }
@@ -135,7 +135,7 @@ static NSString *SERVICE_NAME;
     appList = [[URLConstructor serverURL:false] stringByAppendingString:appList];
     appList = [URLConstructor appendAuthToken:appList];
     appList = [appList stringByAppendingFormat:@"&groupid=%@",groupid];
-    NSLog(@"gee sharedAppListURL %@",appList);
+    NSLog(@"gee2 sharedAppListURL %@",appList);
     
     return appList;
 }
@@ -147,7 +147,7 @@ static NSString *SERVICE_NAME;
     appList = [URLConstructor appendAuthToken:appList];
     appList = [appList stringByAppendingString:@"&action=license"];
     appList = [appList stringByAppendingFormat:@"&workSpaceOwner=%@",workspaceowner];
-    NSLog(@"gee workSpaceAppListURL %@",appList);
+    NSLog(@"gee3 workSpaceAppListURL %@",appList);
     
     return appList;
 }

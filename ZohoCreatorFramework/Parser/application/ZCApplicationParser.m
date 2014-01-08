@@ -74,8 +74,11 @@
                 [_zcApplication setAppLinkName:string];
             }
             else if([_currentElementName isEqualToString:@"application_name"]) {
-                NSString *correctString = [NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding];
-                [_zcApplication setAppDisplayName:correctString];
+//                NSString *correctString = [NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding];
+//                NSString *correctString = [NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
+
+                
+                [_zcApplication setAppDisplayName:string];
             }
             else if([_currentElementName isEqualToString:@"created_time"]) {
                 [_zcApplication setCreatedOn:string];

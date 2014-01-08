@@ -63,6 +63,9 @@
                 
                 _zcViewFied = [[ZCViewField alloc] init];
                 //                [_zcViewFied setFieldDisplayName:[NSString stringWithCString:[[attributeDict objectForKey:@"DisplayName"] cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding]];
+                
+                [_zcViewFied setFieldDisplayName:[attributeDict objectForKey:@"DisplayName"] ];
+                
                 [_zcViewFied setFieldLinkName:[attributeDict objectForKey:@"BaseLabelName"]];
                 [_zcViewFied setFieldType:[ZCFieldList getFieldInteger:[attributeDict objectForKey:@"ComponentType"]]];
                 NSString *viewOrder = [attributeDict objectForKey:@"viewOrder"];
@@ -85,8 +88,8 @@
             }
             if([elementName isEqualToString:@"value"]) {
                 
+//                filterNAMEKey=[NSString stringWithCString:[[attributeDict valueForKey:@"display"] cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
                 filterNAMEKey=[attributeDict valueForKey:@"display"];
-
             }
             
             
@@ -513,8 +516,9 @@
                 else
                 {
                 
-                    NSString *correctString = [NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
- 
+//                    NSString *correctString = [NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
+                    NSString *correctString = string;
+
                     [_zcFieldData setFieldValue:correctString];
 
                 }
@@ -525,7 +529,9 @@
                 if([string isEqualToString:@"&nbsp;"]) {
                     string = @"";
                 }
-                NSString *correctString = [NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
+//                NSString *correctString = [NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
+                NSString *correctString =string;
+
                 if([viewField fieldType] == [ZCFieldList ZCEmail]) {
                     correctString = [ParserUtil extractEmailFromLink:correctString];
                 }
@@ -539,7 +545,9 @@
     }
     else if(_metaDataFiltersEnabled == YES) {
         if([_currentElementName isEqualToString:@"displayname"]) {
-            [filter setFilterDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding]];
+//            [filter setFilterDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding]];
+            [filter setFilterDisplayName:string];
+
         }
         else {
             NSLog(@"filter string %@",string);
@@ -553,12 +561,16 @@
     }
     else if(_metaDataCustomFiltersEnabled==YES) {
         if([_currentElementName isEqualToString:@"DisplayName"]) {
-            [customFilter setDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding]];
+//            [customFilter setDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding]];
+            
+            [customFilter setDisplayName:string];
             
         }
     }
     else if(_metaDataActionsEnabled==YES) {
-        [_viewAction setActionName:[NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding]];
+//        [_viewAction setActionName:[NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding]];
+        [_viewAction setActionName:string];
+
         
         
          if (_metaDataRowActionEnabled==YES)
@@ -600,14 +612,17 @@
     }
     else if(_fieldTagEnabled==YES) {
         if([_currentElementName isEqualToString:@"DisplayName"]) {
-            [_zcViewFied setFieldDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding]];
+//            [_zcViewFied setFieldDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding]];
+            [_zcViewFied setFieldDisplayName:string];
         }
     }
     else if(_calendarTagEnabled==YES) {
         if(_eventTagEnabled==YES) {
             if([_currentElementName isEqualToString:@"title"])  {
                 
-                _currentEventTitle = [NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
+//                _currentEventTitle = [NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding];
+                _currentEventTitle = string;
+
                 
 //                [_zcCalendarEvent setTitle:[NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding]];
             }
@@ -620,7 +635,8 @@
         
         if([_currentElementName isEqualToString:@"DisplayName"])
         {
-            [_zcView setViewDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding]];
+//            [_zcView setViewDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:NSUTF8StringEncoding] encoding:NSUTF8StringEncoding]];
+            [_zcView setViewDisplayName:string];
         }
     }
 }

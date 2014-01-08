@@ -21,7 +21,6 @@
     [self ParserXML];
     return self;
 }
-
 -(void)parserDidStartDocument:(NSXMLParser *)parser  {
     
 }
@@ -83,6 +82,8 @@
 }
 
 - (void) ParserXML  {
+    
+    NSLog(@"data riyaz in lookup");
     
     _xmlParser = [[NSXMLParser alloc] initWithData:[_xmlString dataUsingEncoding:NSUTF8StringEncoding]];
     [_xmlParser setDelegate:self];
