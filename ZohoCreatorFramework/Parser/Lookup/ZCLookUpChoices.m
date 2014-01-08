@@ -30,9 +30,7 @@
 {
     [lookUPKeysInOrder addObject:key];
     [lookUPChoicesInOrder addObject:choice];
-    
     [LookupChoices setObject:choice forKey:key];
-
     
 }
 

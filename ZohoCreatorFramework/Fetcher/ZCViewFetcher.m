@@ -136,10 +136,16 @@
     if ([formMetaXML isEqualToString:@""]) {
         [NSException raise:@"We are unable to fetch this data, sorry!" format:@"Report this problem to support@zohocreator.com"];
     }
+    NSLog(@"strinpign 1");
+    
   formMetaXML=[self stringByStrippingHTML:formMetaXML];
+    NSLog(@"strinpign 2");
+
     ViewRecordParser *view = [[ViewRecordParser alloc] initViewRecordParser:formMetaXML :_component ];
     [[view zcView] setViewParam:_zcViewParam];
+    NSLog(@"strinpign 3");
    view.zcView=[self checkViewForCalenderParam:[view zcView ]];
+    NSLog(@"strinpign 4");
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
     return [view zcView];

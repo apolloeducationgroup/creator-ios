@@ -9,6 +9,7 @@
 #import "DelugeEvent.h"
 
 #import "ZCSubFormRecords.h"
+#import "ZCEncodeUtil.h"
 @implementation DelugeEvent
 
 @synthesize delugeURL=_delugeURL,callerDelegate=_callerDelegate,delugeParams=_delugeParams;
@@ -53,7 +54,7 @@
         NSInteger taskCount = [taskList count];
         NSInteger taskIndex=0;
         
-        // //NSLog(@"task count : %d",taskCount);
+        NSLog(@"task count : %d",taskCount);
         
         for(taskIndex=0;taskIndex<taskCount;taskIndex++) {
             
@@ -185,16 +186,18 @@
         id keyValue = [fieldDate fieldValue];
         if(keyValue != nil) {
             if([keyValue isKindOfClass:[NSString class]]) {
-                
+//                keyValue= (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) keyValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+                keyValue =[ZCEncodeUtil encodeStringUsingUT8:keyValue];
+//                keyValue=[keyValue stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 [paramString appendFormat:@"&%@=%@",keyName,keyValue];
+                NSLog(@"herere");
                 
             }
             else if([keyValue isKindOfClass:[NSArray class]]) {
                 
                 for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
                     NSLog(@"coming to index");
-                    
-                    [paramString appendFormat:@"&%@=%@",keyName,[keyValue objectAtIndex:optIndex]];
+                    [paramString appendFormat:@"&%@=%@",keyName,[ZCEncodeUtil encodeStringUsingUT8:[keyValue objectAtIndex:optIndex]]];
                 }
             }
             else if ([keyValue isKindOfClass:[ZCSubFormRecords class]])
@@ -406,9 +409,7 @@
                     
                     //   SF(SubForm_1).FD(t::row_1).SV(Single_Line_1):1111
                     
-                    
-                    
-                    [param appendFormat:@"&SF(%@).FD(t::row_%i).SV(%@)=%@",fieldlinkname,recindex+1,[fieldDate fieldName ],[fieldDate fieldValue]];
+                    [param appendFormat:@"&SF(%@).FD(t::row_%i).SV(%@)=%@",fieldlinkname,recindex+1,[fieldDate fieldName ],[ZCEncodeUtil encodeStringUsingUT8:[fieldDate fieldValue]]];
                     
                     
                     
@@ -417,10 +418,11 @@
                 else if([keyValue isKindOfClass:[NSArray class]]) {
                     
                     for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
+//                        
+//                        NSString * value= (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) [keyValue objectAtIndex:optIndex],NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingASCII));
+
                         
-                        
-                        
-                        [param appendFormat:@"&SF(%@).FD(t::row_%i).MV(%@)=%@",fieldlinkname,recindex+1,[fieldDate fieldName ],[keyValue objectAtIndex:optIndex]];
+                        [param appendFormat:@"&SF(%@).FD(t::row_%i).MV(%@)=%@",fieldlinkname,recindex+1,[fieldDate fieldName ],[ZCEncodeUtil encodeStringUsingUT8: [keyValue objectAtIndex:optIndex]]];
                         
                         //                    [paramString appendFormat:@"&%@=%@",keyName,[keyValue objectAtIndex:optIndex]];
                     }
@@ -458,7 +460,7 @@
         id keyValue = [fieldDate fieldValue];
         if(keyValue != nil) {
             if([keyValue isKindOfClass:[NSString class]]) {
-                [paramString appendFormat:@"%@=%@",keyName,keyValue];
+                [paramString appendFormat:@"%@=%@",keyName,[ZCEncodeUtil encodeStringUsingUT8:keyValue]];
             }
             else if([keyValue isKindOfClass:[NSArray class]]) {
                 
@@ -484,10 +486,10 @@
         if(keyValue != nil) {
             if([keyValue isKindOfClass:[NSString class]]) {
                 if(starting) {
-                    [paramString appendFormat:@"&%@_delvar=%@",keyName,keyValue];
+                    [paramString appendFormat:@"&%@_delvar=%@",keyName,[ZCEncodeUtil encodeStringUsingUT8:keyValue]];
                 }
                 else {
-                    [paramString appendFormat:@"%@_delvar=%@",keyName,keyValue];
+                    [paramString appendFormat:@"%@_delvar=%@",keyName,[ZCEncodeUtil encodeStringUsingUT8:keyValue]];
                 }
             }
             else if([keyValue isKindOfClass:[NSArray class]]) {

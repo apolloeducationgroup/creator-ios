@@ -329,7 +329,9 @@ static NSString *SERVICE_NAME;
     NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/OnLoad/",appLinkName,formLinkName];
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
-    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+//    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+      formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",paramString];
+
     formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
     //// //NSLog(@"On load URL %@",formURL);
     
@@ -341,7 +343,9 @@ static NSString *SERVICE_NAME;
     NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/OnEditLoad/",appLinkName,formLinkName];
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
-    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",paramString];
+
+//    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
     //// //NSLog(@"On Edit URL %@",formURL);
     return formURL;
@@ -352,7 +356,9 @@ static NSString *SERVICE_NAME;
     NSString *formURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/%@/SubOnUser/%@/",appLinkName,formLinkName,fieldName];
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
-    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+//    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",paramString];
+
     formURL = [formURL stringByAppendingFormat:@"&refAppLinkName=%@&refFormLinkName=%@&refFieldName=%@",refAppName,refFormName,refFieldName];
     formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
     return formURL;
@@ -373,7 +379,9 @@ static NSString *SERVICE_NAME;
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+//        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",paramString];
+
     }
     return formURL;
 }
@@ -385,7 +393,7 @@ static NSString *SERVICE_NAME;
 https://creator.zoho.com/generateJSAPI.do?
     
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        formURL=[formURL stringByAppendingString:paramString];
     }
     
     //    return @"Single_Line=&Single_Line1=&SF(SubForm).FD(t::row_1).SV(record::status)=added&SF(SubForm).FD(t::row_1).SV(Multi_Line)=&SF(SubForm).FD(t::row_1).SV(Single_Line)=riyazheehdh&authtoken=a6068ae81f07813b3c264276863792d4&scope=creatorapi&sharedBy=vignesh.rajamani&appLinkName=riyazsubformapp&formLinkName=Untitled_Form&linkNameBased=true&fieldName=SubForm&subformFieldName=Single_Line&subfcname=SF(SubForm).FD(t::row_1).SV(Single_Line)&rowseqid=t::row_1";
@@ -402,7 +410,8 @@ https://creator.zoho.com/generateJSAPI.do?
     
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"%@",paramString];
+
     }
     
     
@@ -411,7 +420,6 @@ https://creator.zoho.com/generateJSAPI.do?
     
     formURL=[formURL stringByAppendingFormat:@"&rowseqid=t::row_%i",rownum];
     
-    NSLog(@"came here subform onuser %@  riyaz::",formURL);
     
     return formURL;
 }
@@ -423,7 +431,8 @@ https://creator.zoho.com/generateJSAPI.do?
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",paramString];
+
     }
     return formURL;
 }
@@ -624,7 +633,8 @@ https://creator.zoho.com/generateJSAPI.do?
     NSLog(@"forURL %@",formURL);
     if(paramString != nil) {
         
-        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+//        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"%@",paramString];
         
     }
     
@@ -640,7 +650,9 @@ https://creator.zoho.com/generateJSAPI.do?
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+//        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",paramString];
+
     }
     return formURL;
 }
@@ -651,7 +663,9 @@ https://creator.zoho.com/generateJSAPI.do?
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+//        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",paramString];
+
     }
     return formURL;
 }
@@ -662,7 +676,9 @@ https://creator.zoho.com/generateJSAPI.do?
     formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
     formURL = [URLConstructor appendAuthToken:formURL];
     if(paramString != nil) {
-        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+//        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",paramString];
+
     }
     return formURL;
 }

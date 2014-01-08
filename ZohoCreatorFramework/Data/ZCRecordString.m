@@ -8,7 +8,7 @@
 
 #import "ZCRecordString.h"
 #import "ZCSubFormRecords.h"
-
+#import "ZCEncodeUtil.h"
 @interface ZCRecordString(hidden)
 
 + (NSString*) recordValueXML : (ZCForm*) form : (ZCRecord*) record;
@@ -60,7 +60,9 @@
             
         }
         else {
-            returnString = [returnString stringByAppendingFormat:@"%@=%@",fieldName,[fieldData fieldValue]];
+            NSString *escapedString =[ZCEncodeUtil encodeStringUsingUT8:[fieldData fieldValue]];
+
+            returnString = [returnString stringByAppendingFormat:@"%@=%@",fieldName,escapedString];
         }
         if(index != ([fields count]-1)) {
             returnString = [returnString stringByAppendingString:@"&"];
@@ -434,6 +436,8 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                             optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
                                                         if(optionValue != nil) {
                                                             
+                                                            optionValue=[ZCEncodeUtil encodeStringUsingUT8:optionValue];
+
                                 [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
                             }
                         }
@@ -466,8 +470,10 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                 
                 NSString *URLData = [NSString stringWithFormat:@"<a href=\"%@\" title=\"%@\">%@</a>",url,urltitle,urlLinkname];
                 
-                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) URLData,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+//                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) URLData,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
                 
+                NSString *escapedString =[ZCEncodeUtil encodeStringUsingUT8:URLData];
+
                 [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
                 
             }
@@ -498,7 +504,8 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
             
                 
 //                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
-                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+//                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+                NSString *escapedString =[ZCEncodeUtil encodeStringUsingUT8:cdata];
 
 
                 [returnString appendFormat:@"<![CDATA[%@]]>",escapedString];
@@ -607,7 +614,9 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                         NSString *optionValue =  [fieldValue objectAtIndex:opt];
                         optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
                         
-                        NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+//                        NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) optionValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+
+                        NSString *escapedString =[ZCEncodeUtil encodeStringUsingUT8:optionValue];
 
                         [returnString appendFormat:@"<option><![CDATA[%@]]></option>",escapedString];
                     }
@@ -618,7 +627,8 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
                 }
                 else {
                     
-                    NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) fieldValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+//                    NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) fieldValue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+                    NSString *escapedString =[ZCEncodeUtil encodeStringUsingUT8:fieldValue];
 
                     [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
                     //                    [returnString appendString:@"</field>"];
@@ -791,9 +801,11 @@ form
                     {
                         NSString *optionValue =  [options objectAtIndex:opt];
                         optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
+                        NSString *escapedString =[ZCEncodeUtil encodeStringUsingUT8:optionValue];
+
                         //[returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
                         if(optionValue != nil) {
-                            [returnString appendFormat:@"<option>%@</option>",optionValue];
+                            [returnString appendFormat:@"<option>%@</option>",escapedString];
                         }
                     }
                 }
@@ -822,8 +834,8 @@ form
 
                 NSString *URLData = [NSString stringWithFormat:@"<a href=\"%@\" title=\"%@\">%@</a>",url,urltitle,urlLinkname];
                 
-                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) URLData,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
-
+//                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) URLData,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+                NSString *escapedString =[ZCEncodeUtil encodeStringUsingUT8:URLData];
                 [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
                 [returnString appendString:@"</field>"];
 
@@ -929,6 +941,8 @@ form
                 if (fieldvalue==Nil) {
                     fieldvalue=@"";
                 }
+//                fieldvalue= (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) fieldvalue,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingASCII));
+                fieldvalue =[ZCEncodeUtil encodeStringUsingUT8:fieldvalue];
                 [returnString appendFormat:@"<value><![CDATA[%@]]></value>",fieldvalue];
 
                 [returnString appendString:@"</field>"];
@@ -949,7 +963,7 @@ form
         if(![fieldName isEqualToString:@"ID"]) {
             id fieldValue = [dataDict objectForKey:fieldName];
             if([fieldValue isKindOfClass:[NSString class]] ) {
-                
+                fieldValue =[ZCEncodeUtil encodeStringUsingUT8:fieldValue];
                 [returnString appendFormat:@"<field name='%@'>",fieldName];
                 [returnString appendFormat:@"<value><![CDATA[%@]]></value>",fieldValue];
 
@@ -965,6 +979,8 @@ form
                     {
                         NSString *optionValue =  [options objectAtIndex:opt];
                         optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
+                        optionValue =[ZCEncodeUtil encodeStringUsingUT8:optionValue];
+
                         if(optionValue != nil) {
                             [returnString appendFormat:@"<option>%@</option>",optionValue];
                         }
@@ -1010,6 +1026,8 @@ form
                     {
                         NSString *optionValue =  [options objectAtIndex:opt];
                         optionValue = [ZCRecordString removeEndSpaceFrom:optionValue];
+                        optionValue =[ZCEncodeUtil encodeStringUsingUT8:optionValue];
+
                         //[returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
                         [returnString appendFormat:@"<option>%@</option>",optionValue];
                     }
@@ -1027,7 +1045,8 @@ form
                 NSString *urlLinkname = [dic valueForKey:@"urllinkname"];
                 NSString *URLData = [NSString stringWithFormat:@"<a href=\"%@\" title=\"%@\">%@</a>",url,urltitle,urlLinkname];
                 
-                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) URLData,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+//                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) URLData,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+                NSString *escapedString =[ZCEncodeUtil encodeStringUsingUT8:URLData];
 
                 [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
                 [returnString appendString:@"</field>"];
@@ -1044,8 +1063,10 @@ form
                         
                         NSString* cdata = [fieldData fieldValue];
                         
-                        NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+//                        NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
                         
+                        NSString *escapedString =[ZCEncodeUtil encodeStringUsingUT8:cdata];
+
                         [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
                         [returnString appendString:@"</field>"];
 
@@ -1098,8 +1119,10 @@ form
                 
                 NSString* cdata = [fieldData fieldValue];
                 
-                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
+//                NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) cdata,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
                 
+                NSString *escapedString =[ZCEncodeUtil encodeStringUsingUT8:cdata];
+
                 [returnString appendFormat:@"<value><![CDATA[%@]]></value>",escapedString];
                 [returnString appendString:@"</field>"];
                 

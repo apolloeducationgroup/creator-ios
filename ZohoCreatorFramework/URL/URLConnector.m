@@ -89,7 +89,15 @@
             NSMutableString *postString = [NSMutableString string];
             [postString setString:_paramString];
             NSString *postLength = [NSString stringWithFormat:@"%d",[postString length]];
+            
+            NSLog(@"poststring %@",postString);
+            NSData * data=[postString dataUsingEncoding:NSUTF8StringEncoding];
+            NSString * stringafterdecoding = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+            NSLog(@"string after encding %@",stringafterdecoding);
+            
             [apiURLRequest setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+            
             
             [apiURLRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
             [apiURLRequest addValue:@"application/xml" forHTTPHeaderField:@"Accept"];
@@ -203,8 +211,11 @@
     NSLog(@"vishnu length \n\n\n\n %d \n\n\n\n",     data1.length);
     NSHTTPURLResponse *authenticationResponse= nil;
     NSError *error=nil;
+    
+    
     receivedData = (NSMutableData *)[NSURLConnection sendSynchronousRequest:apiURLRequest  returningResponse:&authenticationResponse  error:&error];
     _apiRawData=receivedData;
+    
     apiResponse = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     NSLog(@"request url riyaz \n\n\n %@\n\n\n",apiURLRequest.URL.absoluteString);
     
@@ -223,7 +234,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    apiResponse = [[NSString alloc] initWithData:receivedData encoding:NSASCIIStringEncoding];
+    apiResponse = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     
     isRequestCompleted = YES;
 }

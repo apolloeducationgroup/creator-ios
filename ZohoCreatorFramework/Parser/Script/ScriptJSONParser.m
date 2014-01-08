@@ -192,7 +192,7 @@
 
 - (void) parseDelugeJSON {
     
-    NSData *jsonData = [_jsonString dataUsingEncoding:[NSString defaultCStringEncoding]];
+    NSData *jsonData = [_jsonString dataUsingEncoding:NSUTF8StringEncoding];
     id _jsonDictionary= [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
     NSLog(@"json dict %@",_jsonDictionary);
     NSLog(@"json dic class %@",[_jsonDictionary class]);

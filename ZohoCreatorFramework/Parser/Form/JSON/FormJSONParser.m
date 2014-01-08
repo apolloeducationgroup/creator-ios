@@ -37,7 +37,7 @@
 {
     @try {
         NSLog(@"Coming to JSON Parser");
-        NSData* jsonData = [_jsonString dataUsingEncoding:NSUnicodeStringEncoding];
+        NSData* jsonData = [_jsonString dataUsingEncoding:NSUTF8StringEncoding];
 //        NSData *jsonData = [_jsonString dataUsingEncoding:[NSString defaultCStringEncoding]];
         NSLog(@"jsondata %@",jsonData);
         _jsonDictionary= [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
@@ -576,7 +576,7 @@
         NSLog(@"dta %@ %@",[fieldValue class],fieldValue);
         id jsonArray;
         if ([fieldValue isKindOfClass:[NSString class]]) {
-        NSData *jsonData = [fieldValue dataUsingEncoding:NSUnicodeStringEncoding];
+        NSData *jsonData = [fieldValue dataUsingEncoding:NSUTF8StringEncoding];
          jsonArray=[NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
         }
         else if ([fieldValue isKindOfClass:[NSArray class]])
