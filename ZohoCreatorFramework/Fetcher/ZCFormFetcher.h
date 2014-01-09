@@ -29,6 +29,7 @@
     ZCComponent *_component;
     NSString *_editViewLinkName;
     NSString *_viewLinkName;
+    NSString *_urlParameters;
     NSString *_recordLinkID;
     BOOL _isSubform;
     NSString *   mainAppLinkname_forSubform;
@@ -53,12 +54,12 @@
 
 @property (nonatomic,retain) ZCForm *zcForm;
 
-- (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (ZCComponent*) component appOwner : (NSString *) appOwner;
-- (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName :(NSString*) formLinkName : (ZCComponent*) component appOwner : (NSString *) appOwner;
-+ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner;
-+ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName appOwner : (NSString *) appOwner;
+- (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (ZCComponent*) component appOwner : (NSString *) appOwner urlParameters:(NSString *)urlParameters;
+- (ZCFormFetcher *) initFormFetcher:(NSString *)appLinkName :(NSString *)viewLinkName :(ZCComponent *)component appOwner:(NSString *)appOwner urlParameters:(NSString *)urlParameters;
++ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner urlParameters:(NSString *)urlParameters ;
++ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName appOwner : (NSString *) appOwner urlParameters:(NSString *)urlParameters ;
 + (ZCFormFetcher*) initFormFetcherForBulkedit : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName appOwner : (NSString *) appOwner;
-+ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName recordLinkID : (NSString*) _recLinkID appOwner : (NSString *) appOwner;
++ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName recordLinkID : (NSString*) _recLinkID appOwner : (NSString *) appOwner ;
 - (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (ZCComponent*) component recordLinkID : (NSString*) recordLinkID appOwner : (NSString *) appOwner;
 + (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName recordLinkID : (NSString*) _recLinkID appOwner : (NSString *) appOwner;
 - (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (ZCComponent*) component viewLinkName : (NSString*) viewLinkName recordLinkID : (NSString*) recordLinkID appOwner : (NSString *) appOwner;

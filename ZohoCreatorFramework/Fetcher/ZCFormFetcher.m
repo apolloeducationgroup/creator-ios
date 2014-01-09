@@ -7,7 +7,7 @@
 //
 
 #import "ZCFormFetcher.h"
-
+#import "ZCEncodeUtil.h"
 @interface ZCFormFetcher(hidden)
 
 - (ZCForm*) fetchFromServer;
@@ -19,7 +19,7 @@
 
 @synthesize zcForm=_zcForm;
 
-+ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName recordLinkID : (NSString*) _recLinkID appOwner : (NSString *) appOwner {
++ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName recordLinkID : (NSString*) _recLinkID appOwner : (NSString *) appOwner   {
     
     ZCComponent *_comp = [[ZCComponent alloc] init];
     [_comp setLinkName:formLinkName];
@@ -42,7 +42,7 @@
     
     
 }
-+ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName  recordLinkID : (NSString*) _recLinkID appOwner : (NSString *) appOwner {
++ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName  recordLinkID : (NSString*) _recLinkID appOwner : (NSString *) appOwner  {
     
     ZCComponent *_comp = [[ZCComponent alloc] init];
     [_comp setLinkName:formLinkName];
@@ -52,23 +52,23 @@
     return fetcher;
 }
 
-+ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner {
++ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner urlParameters:(NSString *)urlParameters {
     
     ZCComponent *_comp = [[ZCComponent alloc] init];
     [_comp setLinkName:formLinkName];
     [_comp setDisplayName:formLinkName];
     [_comp setType:1];
-    ZCFormFetcher *fetcher = [[ZCFormFetcher alloc] initFormFetcher:appLinkName :_comp appOwner:appOwner];
+    ZCFormFetcher *fetcher = [[ZCFormFetcher alloc] initFormFetcher:appLinkName :_comp appOwner:appOwner urlParameters:urlParameters];
     return fetcher;
 }
 
-+ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName appOwner : (NSString *) appOwner
++ (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (NSString*) formLinkName viewLinkName : (NSString*) viewLinkName appOwner : (NSString *) appOwner urlParameters:(NSString *)urlParameters
 {
     ZCComponent *_comp = [[ZCComponent alloc] init];
     [_comp setLinkName:formLinkName];
     [_comp setDisplayName:formLinkName];
     [_comp setType:1];
-    ZCFormFetcher *fetcher = [[ZCFormFetcher alloc] initFormFetcher:appLinkName :viewLinkName :_comp appOwner:appOwner];
+    ZCFormFetcher *fetcher = [[ZCFormFetcher alloc] initFormFetcher:appLinkName :viewLinkName :_comp appOwner:appOwner urlParameters:urlParameters];
     return fetcher;
 
 }
@@ -222,7 +222,7 @@
     return self;
 }
 
-- (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (ZCComponent*) component appOwner : (NSString *) appOwner {
+- (ZCFormFetcher*) initFormFetcher : (NSString*) appLinkName : (ZCComponent*) component appOwner : (NSString *) appOwner urlParameters:(NSString *)urlParameters  {
     
     self = [super init];
     if(self) {
@@ -230,7 +230,8 @@
         self->_appLinkName = appLinkName;
         self->_component = component;
         self->_appOwner = appOwner;
-        
+        self->_urlParameters = urlParameters;
+
         if([ConnectionChecker isServerActive]) {
             
             ZOHOCreator *creator = [ZOHOCreator getObject];
@@ -299,7 +300,7 @@
     return self;
 }
 
-- (ZCFormFetcher *) initFormFetcher:(NSString *)appLinkName :(NSString *)viewLinkName :(ZCComponent *)component appOwner:(NSString *)appOwner
+- (ZCFormFetcher *) initFormFetcher:(NSString *)appLinkName :(NSString *)viewLinkName :(ZCComponent *)component appOwner:(NSString *)appOwner urlParameters:(NSString *)urlParameters
 {
     self = [super init];
     if(self) {
@@ -308,7 +309,8 @@
         self->_component = component;
         self->_appOwner = appOwner;
         self->_viewLinkName = viewLinkName;
-        
+        self->_urlParameters = urlParameters;
+
         if([ConnectionChecker isServerActive]) {
             
             ZOHOCreator *creator = [ZOHOCreator getObject];
@@ -437,6 +439,9 @@
         }
     }
     
+    if (_urlParameters.length) {
+        formMetaURL =[formMetaURL stringByAppendingFormat:@"&%@",[ZCEncodeUtil encodeStringUsingUT8:_urlParameters]];
+    }
     NSLog(@"Coming to get json");
     URLConnector *connector = [[URLConnector alloc] initFetcher:formMetaURL];
     NSString *formMetaXML = [connector apiResponse];

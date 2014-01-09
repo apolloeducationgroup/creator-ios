@@ -231,7 +231,9 @@
         else {
             if([_currentElementName isEqualToString:@"DisplayName"])
             {
-                [_zcField setFieldDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+//                [_zcField setFieldDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+                [_zcField setFieldDisplayName:string];
+
             }
             else if([_currentElementName isEqualToString:@"Type"]) {
                 [_zcField setFieldType:[string integerValue]];
@@ -256,10 +258,15 @@
                 NSLog(@"Coming to inital ");
                 NSString *tempInitial = [_zcField initialValues];
                 if(tempInitial != nil) {
-                    tempInitial = [tempInitial stringByAppendingString:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+//                    tempInitial = [tempInitial stringByAppendingString:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+                    
+                    tempInitial = [tempInitial stringByAppendingString:string];
+
                 }
                 else {
-                    tempInitial = [NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding];
+//                    tempInitial = [NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding];
+                    tempInitial = string;
+
                 }
                 NSLog(@"Coming out inital %d %@",[_zcField fieldType],[_zcField fieldDisplayName]);
                 [_zcField setInitialValues:tempInitial];
@@ -273,10 +280,14 @@
             else if([_currentElementName isEqualToString:@"Text"]) {
                 NSString *tempInitial = [_zcField initialValues];
                 if(tempInitial != nil) {
-                    tempInitial = [tempInitial stringByAppendingString:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+//                    tempInitial = [tempInitial stringByAppendingString:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+                    tempInitial = [tempInitial stringByAppendingString:string];
+
                 }
                 else {
-                    tempInitial = [NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding];
+//                    tempInitial = [NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding];
+                    tempInitial = string;
+
                 }
                 [_zcField setInitialValues:tempInitial];
             }
@@ -292,7 +303,10 @@
                 if([_zcField relatedComponent] == nil) {
                     _zcField.relatedComponent = [[ZCComponent alloc] init];
                 }
-                [[_zcField relatedComponent] setDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+//                [[_zcField relatedComponent] setDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+                
+                [[_zcField relatedComponent] setDisplayName:string];
+
                 [[_zcField relatedComponent] setZcApplication:[_zcForm zcApplication]];
             }
             else if([_currentElementName isEqualToString:@"ref_formname"]) {
@@ -332,7 +346,9 @@
             [_zcButton setButtonName:string];
         }
         else if([_currentElementName isEqualToString:@"displayname"]) {
-            [_zcButton setButtonDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+//            [_zcButton setButtonDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+            [_zcButton setButtonDisplayName:string];
+
         }
         else if([_currentElementName isEqualToString:@"sequence"]) {
             [_zcButton setSequence:[string integerValue]];

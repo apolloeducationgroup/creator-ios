@@ -117,7 +117,9 @@
          
             if([_currentElementName isEqualToString:@"Display_Name"]) {
                 [sectionsDict setObject:string forKey:@"sectionDisplayName"];
-                [_zcSection setSectionDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding]];
+//                [_zcSection setSectionDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding]];
+                [_zcSection setSectionDisplayName:string];
+
             }
             else if([_currentElementName isEqualToString:@"Link_Name"]) {
                 [sectionsDict setObject:string forKey:@"sectionLinkName"];
@@ -146,7 +148,9 @@
             
             if([_currentElementName isEqualToString:@"Display_Name"]) {
                 [columnDict setObject:string forKey:@"name"];
-                [_zcComponent setDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+//                [_zcComponent setDisplayName:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+                [_zcComponent setDisplayName:string];
+
             }
             else if([_currentElementName isEqualToString:@"Link_Name"]) {
                 [columnDict setObject:string forKey:@"link"];

@@ -299,15 +299,15 @@ static ZOHOCreator *creatorObject = nil;
     }
     return [fetcher zcForm];
 }
-+ (ZCForm*) getForm : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner {
++ (ZCForm*) getForm : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner urlParameters:(NSString *)urlParameters {
     
-    ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcher:appLinkName :formLinkName appOwner:appOwner];
+    ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcher:appLinkName :formLinkName appOwner:appOwner urlParameters:urlParameters];
     return [fetcher zcForm];
 }
 
-+ (ZCForm*) getForm : (NSString*) appLinkName : (NSString*) formLinkName :(NSString *)viewLinkName appOwner:(NSString *)appOwner {
++ (ZCForm*) getForm : (NSString*) appLinkName : (NSString*) formLinkName :(NSString *)viewLinkName appOwner:(NSString *)appOwner urlParameters:(NSString *)urlParameters {
 
-    ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcher:appLinkName :formLinkName viewLinkName:viewLinkName appOwner:appOwner];
+    ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcher:appLinkName :formLinkName viewLinkName:viewLinkName appOwner:appOwner urlParameters:urlParameters];
 
     return [fetcher zcForm];
 }
@@ -323,17 +323,17 @@ static ZOHOCreator *creatorObject = nil;
 +(ZCForm*) getSubForm : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner   mainAppLinkname:(NSString *)mainAppLinkname mainFormLinkname:(NSString *)mainFormLinkname subformFieldLinkname:(NSString *)subformFieldLinkname
 {
     
-    ZCFormFetcher *fetcher = [ZCFormFetcher initSubFormFetcher:appLinkName formLinkname:formLinkName subformmode:YES appOwner:appOwner mainAppLinkname:mainAppLinkname mainFormLinkname:mainFormLinkname subformFieldLinkname:subformFieldLinkname];
+    ZCFormFetcher *fetcher = [ZCFormFetcher initSubFormFetcher:appLinkName formLinkname:formLinkName subformmode:YES appOwner:appOwner mainAppLinkname:mainAppLinkname mainFormLinkname:mainFormLinkname subformFieldLinkname:subformFieldLinkname ];
     
     return  [fetcher zcForm];
 }
-+ (ZCView*) getView : (NSString*) appLinkName : (NSString*) viewLinkName appOwner : (NSString *) appOwner {
++ (ZCView*) getView : (NSString*) appLinkName : (NSString*) viewLinkName appOwner : (NSString *) appOwner{
     
     ZCViewFetcher *fetcher = [ZCViewFetcher initViewFetcher:appLinkName :viewLinkName appOwner:appOwner];
     return [fetcher zcView];
 }
 
-+ (ZCView*) getView : (NSString*) appLinkName : (NSString*) viewLinkName withParameter : (ZCViewParam*) viewParam appOwner : (NSString *) appOwner {
++ (ZCView*) getView : (NSString*) appLinkName : (NSString*) viewLinkName withParameter : (ZCViewParam*) viewParam appOwner : (NSString *) appOwner  {
     
     ZCViewFetcher *fetcher = [ZCViewFetcher initViewFetcher:appLinkName :viewLinkName  withParam : viewParam appOwner:appOwner];
     return [fetcher zcView];
@@ -529,7 +529,7 @@ static ZOHOCreator *creatorObject = nil;
 //    ZCApplication *app = [zohoCreator getApplication:appLinkName];
     ZCApplication *app = [zohoCreator lastAccessedApp];
 
-    ZCForm *formObject = [app getForm:formLinkName];
+    ZCForm *formObject = [app getForm:formLinkName urlparameter:Nil];
     newRecordString = [newRecordString stringByAppendingFormat:@"&%@",[ZCRecordString newRecordsStringXML:formObject:records]];
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
     [urlConnect apiResponse];
@@ -602,7 +602,7 @@ static ZOHOCreator *creatorObject = nil;
 + (ZCForm*) getIssueReportForm  {
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcher:@"ios-customer-reported-issue" :@"Issues" appOwner:@"zoho1"];
+    ZCFormFetcher *fetcher = [ZCFormFetcher initFormFetcher:@"ios-customer-reported-issue" :@"Issues" appOwner:@"zoho1" urlParameters:Nil];
     return [fetcher zcForm];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }

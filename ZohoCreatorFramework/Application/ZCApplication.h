@@ -31,8 +31,8 @@
 - (ZCSections*) getSections;
 - (ZCSections*) getSections : (BOOL) fromServer;
 - (ZCSections*) getSectionsForSharedApp : (BOOL) fromServer;
-- (ZCForm*) getForm : (NSString*) formLinkName;
-- (ZCForm*) getForm : (NSString*) formLinkName fromServer : (BOOL) fromServer;
+- (ZCForm*) getForm : (NSString*) formLinkName urlparameter:(NSString *)urlparameter;
+- (ZCForm*) getForm : (NSString*) formLinkName fromServer : (BOOL) fromServer urlparameter:(NSString *)urlparameter;
 - (ZCView*) getView : (NSString*) viewLinkName;
 - (ZCView*) getView : (NSString*) viewLinkName fromServer : (BOOL) fromServer;
 - (ZCComponent*) getComponent : (NSString*) componentLinkName;

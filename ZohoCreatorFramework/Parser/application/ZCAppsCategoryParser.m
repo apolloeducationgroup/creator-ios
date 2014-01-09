@@ -65,7 +65,9 @@
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     if (_elementType == GROUP) {
         if([_currentElementName isEqualToString:@"groupname"]) {
-            [_sharedGrp setGroupName:[NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding]];
+//            [_sharedGrp setGroupName:[NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding]];
+                    [_sharedGrp setGroupName:string];
+
         }
         else if([_currentElementName isEqualToString:@"groupid"]) {
             [_sharedGrp setGroupID:string];
@@ -74,7 +76,9 @@
     else if (_elementType == WORKSPACE)
     {
         if([_currentElementName isEqualToString:@"workspaceowner"]) {
-            [_workspace setWorkspaceowner:[NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding]];
+//            [_workspace setWorkspaceowner:[NSString stringWithCString:[string cStringUsingEncoding:NSISOLatin1StringEncoding] encoding:NSUTF8StringEncoding]];
+            [_workspace setWorkspaceowner:string];
+
         }
     }
 }

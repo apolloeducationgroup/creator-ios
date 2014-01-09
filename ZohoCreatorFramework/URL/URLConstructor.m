@@ -8,6 +8,7 @@
 
 #import "URLConstructor.h"
 #import "ZCSharedAppsEventsParamsUtil.h"
+#import "ZCEncodeUtil.h"
 @interface URLConstructor(hidden)
 
 + (NSString*) appendAuthToken : (NSString*) urlString;
@@ -217,7 +218,7 @@ static NSString *SERVICE_NAME;
     return viewURL;
 }
 
-+ (NSString*) viewURL : (NSString*) appLinkName : (NSString*) viewLinkName withParam : (ZCViewParam*) viewParam appOwner: (NSString *) appOwner{
++ (NSString*) viewURL : (NSString*) appLinkName : (NSString*) viewLinkName withParam : (ZCViewParam*) viewParam appOwner: (NSString *) appOwner {
     
     NSString *viewURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/view/%@/",appLinkName,viewLinkName];
     viewURL = [[URLConstructor serverURL:false] stringByAppendingString:viewURL];

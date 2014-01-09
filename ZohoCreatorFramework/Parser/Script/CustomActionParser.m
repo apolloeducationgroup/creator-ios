@@ -75,13 +75,17 @@
     if(_failureElement==YES) {
         
         if([_currentElementName isEqualToString:@"Msg"]) {
-            [_customActionResult setMessage:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+//            [_customActionResult setMessage:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+            [_customActionResult setMessage:string];
+
         }
     }
     else if(_successElement==YES) {
         
         if([_currentElementName isEqualToString:@"Info"]) {
-            [_customActionResult setMessage:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+//            [_customActionResult setMessage:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+            [_customActionResult setMessage:string];
+
         }
     }
     else {
@@ -90,7 +94,8 @@
         }
         else if([_currentElementName isEqualToString:@"SuccessMessage"]) {
             //// //NSLog(@"Coming to success message");
-            [_customResponse setSuccessMessage:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+//            [_customResponse setSuccessMessage:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
+            [_customResponse setSuccessMessage:string];
         }
         else if([_currentElementName isEqualToString:@"GenerateJS"]) {
             [_customResponse setDelugeTasks:nil];

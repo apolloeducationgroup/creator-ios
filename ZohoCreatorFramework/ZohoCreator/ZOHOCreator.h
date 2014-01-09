@@ -56,8 +56,8 @@
 + (NSArray*) getApplicationList;
 + (NSArray*) getSharedApplicationList;
 + (NSArray*) getSectionList : (NSString*) appLinkName appOwner : (NSString *) appOwner;
-+ (ZCForm*) getForm : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner;
-+ (ZCForm*) getForm : (NSString*) appLinkName : (NSString*) formLinkName :(NSString*) viewLinkName appOwner : (NSString *) appOwner;
++ (ZCForm*) getForm : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner urlParameters:(NSString *)urlParameters;
++ (ZCForm*) getForm : (NSString*) appLinkName : (NSString*) formLinkName :(NSString*) viewLinkName appOwner : (NSString *) appOwner urlParameters:(NSString *)urlParameters;
 + (ZCForm*) getFormforBulkedit : (NSString*) appLinkName : (NSString*) formLinkName :(NSString*) viewLinkName appOwner : (NSString *) appOwner;
 
 +(ZCForm*) getSubForm : (NSString*) appLinkName : (NSString*) formLinkName appOwner : (NSString *) appOwner   mainAppLinkname:(NSString *)mainAppLinkname mainFormLinkname:(NSString *)mainFormLinkname subformFieldLinkname:(NSString *)subformFieldLinkname;

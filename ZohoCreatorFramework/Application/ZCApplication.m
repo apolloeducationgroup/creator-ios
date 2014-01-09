@@ -68,19 +68,19 @@
     
 }
 
-- (ZCForm*) getForm: (NSString *)formLinkName {
+- (ZCForm*) getForm: (NSString *)formLinkName urlparameter:(NSString *)urlparameter{
     
     if([self hasFormObject:formLinkName]) {
         return [_formDictionary valueForKey:formLinkName];
     }
     else {
-        return [self getForm:formLinkName fromServer:YES];
+        return [self getForm:formLinkName fromServer:YES urlparameter:urlparameter];
     }
 }
 
-- (ZCForm*) getForm : (NSString*) formLinkName fromServer : (BOOL) fromServer {
+- (ZCForm*) getForm : (NSString*) formLinkName fromServer : (BOOL) fromServer urlparameter:(NSString *)urlparameter{
     
-    ZCFormFetcher *fetcher = [[ZCFormFetcher alloc] initFormFetcher:_appLinkName : [self getComponent:formLinkName] appOwner:_appOwner];
+    ZCFormFetcher *fetcher = [[ZCFormFetcher alloc] initFormFetcher:_appLinkName : [self getComponent:formLinkName] appOwner:_appOwner urlParameters:urlparameter];
     ZCForm *_form = [fetcher zcForm];
     if(_formDictionary == nil) {
         _formDictionary = [[NSMutableDictionary alloc] init];
@@ -89,17 +89,18 @@
     return _form;
 }
 
-- (ZCView*) getView :  (NSString*) viewLinkName {
+- (ZCView*) getView :  (NSString*) viewLinkName
+{
     
     if([self hasViewObject:viewLinkName]) {
         return [_viewDictionary valueForKey:viewLinkName];
     }
     else {
-        return [self getView:viewLinkName fromServer:YES];
+        return [self getView:viewLinkName fromServer:YES ];
     }
 }
 
-- (ZCView*) getView : (NSString*) viewLinkName withParameter : (ZCViewParam*) viewParam  {
+- (ZCView*) getView : (NSString*) viewLinkName withParameter : (ZCViewParam*) viewParam {
     
     ZCViewFetcher *fetcher = [[ZCViewFetcher alloc] initViewFetcher:_appLinkName :[self getComponent:viewLinkName] withParam:viewParam appOwner:_appOwner];
     ZCView *zcView = [fetcher zcView];
@@ -115,7 +116,7 @@
     
     if(fromServer==YES) {
         
-        ZCViewFetcher *fetcher = [[ZCViewFetcher alloc] initViewFetcher:_appLinkName :[self getComponent:viewLinkName] appOwner:_appOwner];
+        ZCViewFetcher *fetcher = [[ZCViewFetcher alloc] initViewFetcher:_appLinkName :[self getComponent:viewLinkName] appOwner:_appOwner ];
         ZCView *zcView = [fetcher zcView];
         if(_viewDictionary == nil) {
         	_viewDictionary = [[NSMutableDictionary alloc] init];
@@ -124,7 +125,7 @@
         return zcView;
     }
     else {
-        return [self getView:viewLinkName ];
+        return [self getView:viewLinkName];
     }
 }
 

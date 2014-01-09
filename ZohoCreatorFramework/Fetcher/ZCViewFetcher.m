@@ -27,6 +27,8 @@
     [_comp setLinkName:formLinkName];
     [_comp setDisplayName:formLinkName];
     [_comp setType:1];
+
+    
     ZCViewFetcher *fetcher = [[ZCViewFetcher alloc] initViewFetcher:appLinkName :_comp appOwner:appOwner];
     return fetcher;
 }
@@ -37,11 +39,11 @@
     [_comp setLinkName:formLinkName];
     [_comp setDisplayName:formLinkName];
     [_comp setType:1];
-    ZCViewFetcher *fetcher = [[ZCViewFetcher alloc] initViewFetcher:appLinkName :_comp withParam:viewParameter appOwner:appOwner];
+    ZCViewFetcher *fetcher = [[ZCViewFetcher alloc] initViewFetcher:appLinkName :_comp withParam:viewParameter appOwner:appOwner ];
     return fetcher;
 }
 
-- (ZCViewFetcher*) initViewFetcher : (NSString*) appLinkName : (ZCComponent*) component appOwner: (NSString *) appOwner  {
+- (ZCViewFetcher*) initViewFetcher : (NSString*) appLinkName : (ZCComponent*) component appOwner: (NSString *) appOwner {
     
     self = [super init];
     if(self) {
@@ -50,7 +52,6 @@
         self->_component = component;
         self->_zcViewParam = nil;
         self->_appOwner = appOwner;
-        
         if([ConnectionChecker isServerActive]) {
             
             self->_zcView = [self fetchFromServer];
@@ -79,7 +80,7 @@
         self->_component = component;
         self->_zcViewParam = viewParameter;
         self->_appOwner = appOwner;
-        
+
         if([ConnectionChecker isServerActive]) {
             self->_zcView = [self fetchFromServer];
         }

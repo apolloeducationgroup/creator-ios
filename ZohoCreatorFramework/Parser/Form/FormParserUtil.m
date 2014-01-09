@@ -49,7 +49,9 @@
     
     NSMutableDictionary *_optionDict = [[NSMutableDictionary alloc] initWithCapacity:[_optionList count]];
     for(NSString *_optionString in _optionList) {
-        NSData *jsonData = [_optionString dataUsingEncoding:[NSString defaultCStringEncoding]];
+//        NSData *jsonData = [_optionString dataUsingEncoding:[NSString defaultCStringEncoding]];
+        NSData *jsonData = [_optionString dataUsingEncoding:NSUTF8StringEncoding];
+
         NSDictionary *dataDic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
         if(dataDic != nil) {
             [_optionDict addEntriesFromDictionary:dataDic];
@@ -70,7 +72,9 @@
     
     
     for(NSString *_optionString in _optionList) {
-        NSData *jsonData = [_optionString dataUsingEncoding:[NSString defaultCStringEncoding]];
+//        NSData *jsonData = [_optionString dataUsingEncoding:[NSString defaultCStringEncoding]];
+        NSData *jsonData = [_optionString dataUsingEncoding:NSUTF8StringEncoding];
+
         NSDictionary *dataDic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
         if(dataDic != nil) {
             
