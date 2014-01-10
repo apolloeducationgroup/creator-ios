@@ -757,7 +757,7 @@ https://creator.zoho.com/generateJSAPI.do?
     
     lookUpchoiceURL = [URLConstructor appendAuthToken:lookUpchoiceURL];
     
-    lookUpchoiceURL =[lookUpchoiceURL stringByAppendingFormat:@"&limit=%i&appendRows=true&startindex=%i&zcRefValue=true&searchValue=%@",limit,startIndex,searchString];
+    lookUpchoiceURL =[lookUpchoiceURL stringByAppendingFormat:@"&limit=%i&appendRows=true&startindex=%i&zcRefValue=true&searchValue=%@",limit,startIndex,[ZCEncodeUtil encodeStringUsingUT8:searchString]];
     
     int formAccestype=1;
     if (viewLinkname.length) {

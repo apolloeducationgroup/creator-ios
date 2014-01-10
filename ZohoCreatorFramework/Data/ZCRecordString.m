@@ -47,7 +47,7 @@
                     result = [result stringByAppendingString:@","];
                 }
             }
-            returnString = [returnString stringByAppendingFormat:@"%@=%@",fieldName,result];
+            returnString = [returnString stringByAppendingFormat:@"%@=%@",fieldName,[ZCEncodeUtil encodeStringUsingUT8:result]];
         }
         else if(fieldType == [ZCFieldList ZCFileupload] || fieldType == [ZCFieldList ZCImage]) {
             

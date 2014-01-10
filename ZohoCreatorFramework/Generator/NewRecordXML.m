@@ -7,7 +7,7 @@
 //
 
 #import "NewRecordXML.h"
-
+#import "ZCEncodeUtil.h"
 @interface NewRecordXML(hidden)
 
 + (NSString*) constructSingleField : (ZCFieldData*) fieldData;
@@ -101,7 +101,7 @@
 
 + (NSString*) constructSingleField : (ZCFieldData*) fieldData {
     
-    return [NSString stringWithFormat:@"%@=%@",[fieldData fieldName],[fieldData fieldValue]];
+    return [NSString stringWithFormat:@"%@=%@",[fieldData fieldName],[ZCEncodeUtil encodeStringUsingUT8:[fieldData fieldValue]]];
 }
 
 + (NSString*) constructMultiField : (ZCFieldData*) fieldData {
