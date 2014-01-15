@@ -10,17 +10,9 @@
 #import "ZCLookUpChoices.h"
 @interface LookUPChoiceParser : NSObject <NSXMLParserDelegate>
 {@private
-NSXMLParser *_xmlParser;
-NSString *_xmlString;
-NSString *_currentElementName;
-    BOOL inchoices;
-    
-    NSString * key;
-
+    NSString*_jsonString;
 
 }
 @property (nonatomic,retain)ZCLookUpChoices *lookUpChoicesParm;
-@property (nonatomic,retain)NSMutableArray *choiceKeys;
-@property (nonatomic,retain)NSMutableArray *choiceValues;
-- (LookUPChoiceParser *) initLookUPChoiceParser:(NSString *) xmlString;
+- (LookUPChoiceParser *) initLookUPChoiceParser:(NSString *) jsonString;
 @end

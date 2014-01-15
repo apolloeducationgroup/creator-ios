@@ -753,13 +753,14 @@ https://creator.zoho.com/generateJSAPI.do?
 
 {
     NSString * lookUpchoiceURL=@"";
-    if (subformComponent.length) {
-        NSString * lookUpchoiceURLForSubform=[NSString stringWithFormat:@"/api/%@/xml/%@/form/%@/lookup/%@/options//&subformcomponent=%@",appOwner,appLinkName,formLinkName,subformComponent,lookupFieldName];
-        lookUpchoiceURL=lookUpchoiceURLForSubform;
-    }
-    else
+        lookUpchoiceURL=[NSString stringWithFormat:@"/api/%@/json/%@/form/%@/lookup/%@/options//",appOwner,appLinkName,formLinkName,lookupFieldName];
+
+    
+        if (subformComponent.length)
     {
-        lookUpchoiceURL=[NSString stringWithFormat:@"/api/%@/xml/%@/form/%@/lookup/%@/options//",appOwner,appLinkName,formLinkName,lookupFieldName];
+    
+        lookUpchoiceURL=[lookUpchoiceURL stringByAppendingFormat:@"&subformcomponent=%@",subformComponent];
+    
     }
     
     lookUpchoiceURL = [URLConstructor appendAuthToken:lookUpchoiceURL];
