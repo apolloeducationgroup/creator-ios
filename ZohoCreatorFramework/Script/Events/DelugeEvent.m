@@ -42,6 +42,7 @@
     NSString *formMetaXML = [connector apiResponse];
     CustomActionParser *parser = [[CustomActionParser alloc] initScriptParser:formMetaXML];
     _delugeTasks =[parser customResponse].delugeTasks;
+    NSLog(@"deluge tasks %@",_delugeTasks.taskList);
     [self performSelectorOnMainThread:@selector(executeActions) withObject:self waitUntilDone:NO];
 
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -147,7 +148,7 @@
             else if([taskType isEqualToString:@"openurl"]) {
                 NSLog(@"comming to setting openurl task");
 
-                ////// //NSLog(@"Coming to openurl task");
+            NSLog(@"Coming to openurl task");
                 OpenUrlTask *openUrlTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate openUrl : [openUrlTask urlString] withWindowType : [openUrlTask windowType] windowParameters:[openUrlTask windowParameters] application:[openUrlTask application] componentType:[openUrlTask componentType] urlParameters:[openUrlTask urlParameters]];
                 NSLog(@"exiting openurl task");
@@ -212,6 +213,7 @@
     _delugeTasks = [parser delugeTasks];
     NSLog(@"deluge tasks %@",_delugeTasks.taskList);
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+[self performSelectorOnMainThread:@selector(executeActions) withObject:self waitUntilDone:NO];
 
     return _delugeTasks;
 }

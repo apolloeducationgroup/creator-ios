@@ -17,6 +17,7 @@
 @synthesize subformRecords=_subformRecords,toolTip=_toolTip,isLookupField=_isLookupField,hasAllowNewEntries=_hasAllowNewEntries,decimalLength=_decimalLength;
 @synthesize currencyDisplay=_currencyDisplay,currencyName=_currencyName,isUrlLinkName=_isUrlLinkName,isUrlTitle=_isUrlTitle,hasVisiblity=_hasVisiblity,defaultRows=_defaultRows;
 @synthesize imageInputType=_imageInputType,hasfilter=_hasfilter;
+@synthesize isHiddenField=_isHiddenField;
 - (ZCField*) initZCField {
     
     self = [super init];

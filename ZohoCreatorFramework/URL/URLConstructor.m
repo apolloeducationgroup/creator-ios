@@ -220,7 +220,7 @@ static NSString *SERVICE_NAME;
 
 + (NSString*) viewURL : (NSString*) appLinkName : (NSString*) viewLinkName withParam : (ZCViewParam*) viewParam appOwner: (NSString *) appOwner {
     
-    NSString *viewURL = [NSString stringWithFormat:@"/api/mobile/xml/%@/view/%@/",appLinkName,viewLinkName];
+    NSString *viewURL = [NSString stringWithFormat:@"/mobileViewRecords.do?type=xml&appLinkName=%@&viewLinkName=%@&",appLinkName,viewLinkName];
     viewURL = [[URLConstructor serverURL:false] stringByAppendingString:viewURL];
     viewURL = [URLConstructor appendAuthToken:viewURL];
     viewURL = [viewURL stringByAppendingString:[URLConstructor constructViewParameter : viewParam]];

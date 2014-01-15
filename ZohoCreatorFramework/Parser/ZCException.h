@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ZCExpection : NSException
+@interface ZCException : NSException
 @property (nonatomic,strong ) NSString * inClassName;
 @property (nonatomic,strong) NSException *exception;
 -(id)initWithException:(NSException *)exeption inClass:(NSString *)class;

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 mathankumar vv. All rights reserved.
 //
 
-#import "ZCExpection.h"
+#import "ZCException.h"
 
-@implementation ZCExpection
+@implementation ZCException
 @synthesize inClassName=_inClassName,exception=_exception;
 -(id)initWithException:(NSException *)exeption inClass:(NSString *)class
 {

@@ -24,75 +24,23 @@
     self = [super init];
     if(self) {
         
-        
-        xmlString =[xmlString stringByReplacingOccurrencesOfString:@"<GenerateJS><![CDATA[" withString:@"<GenerateJS>"];
-        xmlString =[xmlString stringByReplacingOccurrencesOfString:@"</tasks>]]>" withString:@"</tasks>"];
-        
-        
-        [self getDelugeTAskXML:xmlString];
-        
-        NSRange title_range = [xmlString rangeOfString:@"<GenerateJS>"];
-        NSRange titleRange1 = [xmlString rangeOfString:@"</GenerateJS>"];
-
-        NSRange target;
-        
-        target.location = title_range.location+1;
-        
-        
-        if (!title_range.length == 0)
-            
-        {
-            
-            target.length = titleRange1.location - (title_range.location+title_range.length+1);
-            
-            ////NSLog(@"target length value is : %d",target.length);
-            
-        }
-        
-        else
-            
-        {
-            
-            target.length = 0 ;
-            
-        }
-        
-        if (title_range.location!=NSNotFound) {
-            
-            NSRange titleRange;
-            
-            titleRange.location = title_range.location+title_range.length;
-            
-            
-            titleRange.length = titleRange1.location - (title_range.location+title_range.length+title_range.length+target.length+2);
-            
-            
-            NSLog(@"title length value is :%d",titleRange.length);
-            
-            
-            NSLog(@"title gee %@",[xmlString substringWithRange:titleRange]);
-    
-            
-        }
-
-        
-        
-        
-        
-        
-        
-        
-
-        self->_xmlString = xmlString;
-        
         self->_customResponse = [[CustomActionResponse alloc] init];
+        self->_failureList = [[NSMutableArray alloc] init];
+        self->_successList = [[NSMutableArray alloc] init];
+        self->_customResponse = [[CustomActionResponse alloc] init];
+        self->_xmlString=[self getstringafterDelugeTAskXML:xmlString];
     }
     [self parseScriptXML];
     return self;
 }
--(void)getDelugeTAskXML:(NSString *)xmlString
+-(NSString *)getstringafterDelugeTAskXML:(NSString *)xmlString
 {
     
+   xmlString =[xmlString stringByReplacingOccurrencesOfString:@"<GenerateJS><![CDATA[" withString:@"<GenerateJS>"];
+    xmlString =[xmlString stringByReplacingOccurrencesOfString:@"</tasks>]]>" withString:@"</tasks>"];
+    
+    
+
         NSRange start = [xmlString rangeOfString:@"<GenerateJS>"];
         NSRange end = [xmlString rangeOfString:@"</GenerateJS>"];
         
@@ -136,22 +84,23 @@
             
             ScriptParser * sParse=[[ScriptParser alloc]initScriptParser:substringTasksXML];
             [_customResponse setDelugeTasks:[sParse delugeTasks]];
+            NSLog(@"deluge task after parse in custom action %@",[sParse delugeTasks].taskList);
+            
+            
+            xmlString =[xmlString stringByReplacingOccurrencesOfString:substringTasksXML withString:@""];
 
-            
-            
         }
+    
+    
+    
         
-        
-        
+    return xmlString;
+    
         
         
     }
 
 -(void)parserDidStartDocument:(NSXMLParser *)parser  {
-    
-    self->_customResponse = [[CustomActionResponse alloc] init];
-    self->_failureList = [[NSMutableArray alloc] init];
-    self->_successList = [[NSMutableArray alloc] init];
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict   {

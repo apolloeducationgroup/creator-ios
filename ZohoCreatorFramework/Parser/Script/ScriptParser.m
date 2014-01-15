@@ -7,6 +7,7 @@
 //
 
 #import "ScriptParser.h"
+#import "ScriptJSONParser.h"
 
 /**** start of private interface for the current class ****/
 
@@ -201,13 +202,15 @@
     else if(taskType == OPENURL_TASK) {
         
         if([_currentElementName isEqualToString:@"url"]) {
-            [delugeTask setUrlString:string];
+//            [delugeTask setUrlString:string];
+            [ScriptJSONParser setopenURLTaskparameters:delugeTask urlString:string];
         }
         else if([_currentElementName isEqualToString:@"windowtype"]) {
-            [delugeTask setWindowParameters:string];
+            [delugeTask setWindowType:string];
+
         }
         else if([_currentElementName isEqualToString:@"parameter"]) {
-            [delugeTask setWindowType:string];
+            [delugeTask setWindowParameters:string];
         }
     }
     else if(taskType == SETVARIABLE_TASK)

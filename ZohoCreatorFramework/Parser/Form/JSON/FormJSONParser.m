@@ -57,7 +57,7 @@
     @catch (NSException *exception) {
         
         NSLog(@"Exception occ IN FORM PARSING %@",exception);
-        _zcForm.exceptionOccuredInFetching =[[ZCExpection alloc]initWithException:exception inClass:[self description]];
+        _zcForm.exceptionOccuredInFetching =[[ZCException alloc]initWithException:exception inClass:[self description]];
     }
 }
 - (void) getFormGeneralInfo  : (NSDictionary*) formGeneralDict {
@@ -221,7 +221,11 @@
         if(tempValue != nil) {
             [_field setHasfilter:[tempValue boolValue]];
         }
-        
+        tempValue = [_fieldDict objectForKey:@"isHidden"];
+        if(tempValue != nil) {
+            [_field setIsHiddenField:[tempValue boolValue]];
+        }
+
         tempValue = [_fieldDict objectForKey:@"formulaexists"];
         if(tempValue != nil) {
             [_field setHasInvolvedInFormula:[tempValue boolValue]];
