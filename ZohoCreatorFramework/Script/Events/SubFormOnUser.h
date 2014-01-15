@@ -14,7 +14,7 @@
 
 
 
-- (SubFormOnUser*) initSubFormOnUser : (NSString*) _appLocal formname: (NSString*) _formLocal fieldname: (NSString*) _fieldLocal param: (NSString*) paramString appowner: (NSString*) appOwner : (id) delegate subformFieldName:(NSString *)subformFieldname rowNumberincaseOFsubofrmField:(int)rownum;
+- (SubFormOnUser*) initSubFormOnUser : (NSString*) _appLocal formname: (NSString*) _formLocal fieldname: (NSString*) _fieldLocal param: (NSString*) paramString appowner: (NSString*) appOwner : (id) delegate subformFieldName:(NSString *)subformFieldname rowNumberincaseOFsubofrmField:(int)rownum isformula:(BOOL)isformula;
 
 - (DelugeTasks*) execute;
 

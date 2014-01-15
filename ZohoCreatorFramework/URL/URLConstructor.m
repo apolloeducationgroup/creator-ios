@@ -316,6 +316,13 @@ static NSString *SERVICE_NAME;
     return formURL;
 }
 
++ (NSString*) delugeFormulaURLforSubform {
+    
+    NSString *formURL = @"/calculateFormulaAPI.do";
+    formURL = [[URLConstructor serverURL:false] stringByAppendingString:formURL];
+    return formURL;
+}
+
 + (NSString*) formOnLoadWithJSON :(NSString*) appLinkName : (NSString*) formLinkName : (NSString*) _zcRecord : (NSString*) appOwner {
     
     NSString *formURL = [NSString stringWithFormat:@"sharedBy=%@&linkNameBased=true&appLinkName=%@&formLinkName=%@&",appOwner,appLinkName,formLinkName];
@@ -901,6 +908,7 @@ https://creator.zoho.com/generateJSAPI.do?
             [returnString appendFormat:@"&%@",filterString];
         }
         
+
         NSString *criteriaString = [viewParameter getCriteriaString];
         if(criteriaString != nil) {
             [returnString appendFormat:@"&%@",criteriaString];

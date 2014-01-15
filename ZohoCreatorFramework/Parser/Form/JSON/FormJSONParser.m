@@ -226,7 +226,7 @@
         if(tempValue != nil) {
             [_field setHasInvolvedInFormula:[tempValue boolValue]];
             if (SUBFORMTAG) {
-                _zcForm.isNotSupported=YES;
+//                _zcForm.isNotSupported=YES;
             }
         }
         

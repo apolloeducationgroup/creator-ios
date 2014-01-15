@@ -8,7 +8,7 @@
 
 #import "ZCViewParam.h"
 
-
+#import "ZCEncodeUtil.h"
 @implementation ZCSort
 
 @synthesize fieldName=_fieldName,sortBy=_sortBy;
@@ -227,6 +227,7 @@
     // Type_of_App=kumar&Type_of_App_op=26&searchCrit=true
     
     if([_criteriaList count] > 0) {
+    
         
         NSMutableString *returnString = [[NSMutableString alloc] initWithString:@"searchCrit=true"];
         
@@ -236,13 +237,14 @@
             NSInteger operator = [critera operator];
             NSString *searchValue = [critera value];
             if(searchValue != nil) {
-                [returnString appendFormat:@"&%@=%@&%@_op=%d",fieldName,searchValue,fieldName,operator];
+                [returnString appendFormat:@"&%@=%@&%@_op=%d",fieldName,[ZCEncodeUtil encodeStringUsingUT8:searchValue],fieldName,operator];
             }
             else {
                 [returnString appendFormat:@"&%@_op=%d",fieldName,operator];
             }
         }
-        return [returnString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        return returnString;
+//        return [returnString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
     else {
         return nil;

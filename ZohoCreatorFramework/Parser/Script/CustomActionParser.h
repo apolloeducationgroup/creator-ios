@@ -26,6 +26,7 @@
 @private CustomActionResult *_customActionResult;
 @private NSMutableArray *_failureList;
 @private NSMutableArray *_successList;
+@private BOOL _generateJStag;
 }
 
 @property (nonatomic,retain) CustomActionResponse *customResponse;

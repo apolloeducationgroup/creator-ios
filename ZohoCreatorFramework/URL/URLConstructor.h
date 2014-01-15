@@ -66,6 +66,7 @@
 + (NSString*) subFormOnuser : (NSString*) appLinkName : (NSString*) formLinkName : (NSString*) fieldName : (NSString*) refAppName : (NSString*) refFormName : (NSString*) refFieldName : (NSString*) paramString : (NSString*) appOwner;
 + (NSString*) fieldOnUserFormaula:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) fieldLinkName : (NSString*) paramString;
 + (NSString*) delugeURL;
++ (NSString*) delugeFormulaURLforSubform;
 + (NSString*) formOnLoadWithJSON :(NSString*) appLinkName : (NSString*) formLinkName : (ZCRecord*) _zcRecord : (NSString*) appOwner;
 + (NSString*) fieldOnUserWithJSON:(NSString *)appLinkName :(NSString *)formLinkName : (NSString*) fieldLinkName : (NSString*) paramString : (NSString*) appOwner;
 + (NSString*) subFormOnuserWithJSON : (NSString*) appLinkName formLinkname: (NSString*) formLinkName fieldlinkname: (NSString*) fieldName subformFieldName:(NSString *)subformFieldname rowNumberincaseOFsubofrmField:(int)rownum param: (NSString*) paramString appowner: (NSString*) appOwner;

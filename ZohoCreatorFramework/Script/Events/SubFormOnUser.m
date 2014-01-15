@@ -27,15 +27,23 @@ self = [super init];
     }
     return self;
 }
-- (SubFormOnUser*) initSubFormOnUser:(NSString *)_appLocal formname:(NSString *)_formLocal fieldname:(NSString *)_fieldLocal param:(NSString *)paramString appowner:(NSString *)appOwner :(id)delegate subformFieldName:(NSString *)subformFieldname rowNumberincaseOFsubofrmField:(int)rownum{
+- (SubFormOnUser*) initSubFormOnUser:(NSString *)_appLocal formname:(NSString *)_formLocal fieldname:(NSString *)_fieldLocal param:(NSString *)paramString appowner:(NSString *)appOwner :(id)delegate subformFieldName:(NSString *)subformFieldname rowNumberincaseOFsubofrmField:(int)rownum isformula:(BOOL)isformula{
     
     self = [super init];
     if(self) {
         [super setCallerDelegate:delegate];
 
     [super setDelugeParams:[URLConstructor subFormOnuserWithJSON:_appLocal formLinkname:_formLocal fieldlinkname:_fieldLocal subformFieldName:subformFieldname rowNumberincaseOFsubofrmField:rownum param:paramString appowner:appOwner]];
-     [super setDelugeURL:[URLConstructor delugeURL]];
+        
+        if (isformula) {
+            
+            [super setDelugeURL:[URLConstructor delugeFormulaURLforSubform]];
 
+        }
+        else
+        {
+     [super setDelugeURL:[URLConstructor delugeURL]];
+        }
 }
     return self;
 }
