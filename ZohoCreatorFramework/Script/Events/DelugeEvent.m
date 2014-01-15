@@ -213,7 +213,7 @@
     _delugeTasks = [parser delugeTasks];
     NSLog(@"deluge tasks %@",_delugeTasks.taskList);
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-[self performSelectorOnMainThread:@selector(executeActions) withObject:self waitUntilDone:NO];
+[self performSelectorOnMainThread:@selector(executeActions) withObject:self waitUntilDone:YES];
 
     return _delugeTasks;
 }
