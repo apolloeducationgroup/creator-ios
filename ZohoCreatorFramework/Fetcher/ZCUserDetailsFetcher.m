@@ -25,9 +25,9 @@
             URLConnector *connector = [[URLConnector alloc] initFetcher:urlString];
             ZCUserParser *parser = [[ZCUserParser alloc]initZCUserParser:[connector apiResponse] ];
             _userObject = [parser userObject];
-            NSLog(@"_useer obj %@",[_userObject zuid]);
+            //NSLog@"_useer obj %@",[_userObject zuid]);
             [ZOHOCreator constructZOHOCreator:[ZOHOUser userObject]];
-            NSLog(@"_useer obj %@",[[ZOHOCreator userObject]zuid]);
+            //NSLog@"_useer obj %@",[[ZOHOCreator userObject]zuid]);
 
             NSString *filePath = [ArchiveUtil archiveFilePath:@"Login"];
             [EncodeObject encode:filePath :@"Login" :[ZOHOUser userObject]];

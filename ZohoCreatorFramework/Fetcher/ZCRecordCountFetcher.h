@@ -30,7 +30,7 @@
 
 @property NSInteger recordCount;
 
-+ (ZCRecordCountFetcher*) initRecordCountFetcher : (NSString*) appLinkName withViewLinkName: (NSString*) viewLinkName viewParams : (ZCViewParam*) viewParams appOwner : (NSString *) appOwner;
-- (ZCRecordCountFetcher*) initRecordCountFetcher : (NSString*) appLinkName withViewComponent : (ZCComponent*) component viewParams : (ZCViewParam*) viewParams appOwner : (NSString *) appOwner;
+//+ (ZCRecordCountFetcher*) initRecordCountFetcher : (NSString*) appLinkName withViewLinkName: (NSString*) viewLinkName viewParams : (ZCViewParam*) viewParams appOwner : (NSString *) appOwner;
+//- (ZCRecordCountFetcher*) initRecordCountFetcher : (NSString*) appLinkName withViewComponent : (ZCComponent*) component viewParams : (ZCViewParam*) viewParams appOwner : (NSString *) appOwner;
 
 @end

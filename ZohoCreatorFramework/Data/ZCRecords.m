@@ -29,7 +29,7 @@
 
 - (ZCRecord *) getZCRecord : (NSString*) recordID
 {
-    //////// //NSLog(@"SOlai zcrecord :::: %d, %d", [_records count], [_records indexOfObject:[_eventDict objectForKey:recordID]]);
+    //////// ////NSLog@"SOlai zcrecord :::: %d, %d", [_records count], [_records indexOfObject:[_eventDict objectForKey:recordID]]);
     return [_eventDict objectForKey:recordID];
 }
 

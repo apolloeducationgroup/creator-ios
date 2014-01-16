@@ -57,7 +57,7 @@
 
 - (ZCSectionFetcher*) initSectionFetcher : (NSString*) appLinkName appOwner:(NSString *) appOwner{
     
-    //// //NSLog(@"%@",[NSThread callStackSymbols]);
+    //// ////NSLog@"%@",[NSThread callStackSymbols]);
     self = [super init];
     if(self) {
         self->_appLinkName = appLinkName;
@@ -133,19 +133,19 @@
             sectionURL = [sectionURL stringByAppendingString:@"&action=license"];
         }
         
-        NSLog(@"Section URL %@",sectionURL);
+        //NSLog@"Section URL %@",sectionURL);
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         URLConnector *connection = [[URLConnector alloc] initFetcher:sectionURL];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         NSString *sectionXML = [connection apiResponse];
-        NSLog(@"Section XML %@",sectionXML);
+        //NSLog@"Section XML %@",sectionXML);
         @try {
             
             ZCSectionParser *parser = [[ZCSectionParser alloc] initZCSectionParser:sectionXML:_application];
             return [parser zcSections];
         }
         @catch (NSException *exception) {
-            //// //NSLog(@"Exception %@",exception);
+            //// ////NSLog@"Exception %@",exception);
             return nil;
         }
         @finally {

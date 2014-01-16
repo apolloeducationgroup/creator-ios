@@ -42,11 +42,11 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict   {
     
-    ////// //NSLog(@"Element name %@",elementName);
+    ////// ////NSLog@"Element name %@",elementName);
     if([elementName isEqualToString:@"task"]) {
         
         NSString *taskString = [attributeDict objectForKey:@"type"];
-        ////// //NSLog(@"task string %@",taskString);
+        ////// ////NSLog@"task string %@",taskString);
         if([taskString isEqualToString:@"alert"]) {
             taskType = ALERT_TASK;
             delugeTask = [[AlertTask alloc] init];
@@ -138,7 +138,7 @@
             taskType = -1;
         }
         else if([taskString isEqualToString:@"select"]) {
-            ////// //NSLog(@"Coming to select Value parser");
+            ////// ////NSLog@"Coming to select Value parser");
             taskType = SELECTVALUE_TASK;
             delugeTask = [[SelectValueTask alloc]init];
             [delugeTask setTaskType:@"select"];
@@ -148,7 +148,7 @@
             [delugeTask setFieldName:fieldName];
         }
         else if([taskString isEqualToString:@"selectall"]) {
-            ////// //NSLog(@"Coming to select All Value parser");
+            ////// ////NSLog@"Coming to select All Value parser");
             taskType = SELECTALL_TASK;
             delugeTask = [[SelectAllTask alloc]init];
             [delugeTask setTaskType:@"selectall"];
@@ -251,7 +251,7 @@
     
     if([elementName isEqualToString:@"task"]) {
         
-        //// //NSLog(@"Coming to add task");
+        //// ////NSLog@"Coming to add task");
         [_delugeTasks addTaskList:delugeTask];
         taskType=-1;
     }

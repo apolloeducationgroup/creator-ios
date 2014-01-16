@@ -65,11 +65,11 @@
 
 - (NSInteger) fetchFromServer {
     
-    NSString *formMetaURL = [URLConstructor recordCountURL:_appLinkName :[_component linkName] withParam : _viewParam appOwner:_appOwner];
-    //     //NSLog(@"form Meta URL %@",formMetaURL);
-    URLConnector *connector = [[URLConnector alloc] initFetcher:formMetaURL];
-    ViewRecordCountParser *parser =  [[ViewRecordCountParser alloc] initViewRecordCountParser:[connector apiResponse]];
-    return [parser recordCount];
+//    NSString *formMetaURL = [URLConstructor recordCountURL:_appLinkName :[_component linkName] withParam : _viewParam appOwner:_appOwner];
+//    //     ////NSLog@"form Meta URL %@",formMetaURL);
+//    URLConnector *connector = [[URLConnector alloc] initFetcher:formMetaURL];
+//    ViewRecordCountParser *parser =  [[ViewRecordCountParser alloc] initViewRecordCountParser:[connector apiResponse]];
+    return -1;
 }
 
 @end

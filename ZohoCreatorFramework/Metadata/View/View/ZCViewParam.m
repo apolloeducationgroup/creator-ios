@@ -208,7 +208,7 @@
             
             [returnString appendFormat:@";CustomFilter:%@",_customFilterID];
         }
-        NSLog(@"reti  filter string %@",returnString);
+        //NSLog@"reti  filter string %@",returnString);
         return [returnString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
     else {

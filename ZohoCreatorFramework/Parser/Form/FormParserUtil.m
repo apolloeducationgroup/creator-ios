@@ -23,8 +23,8 @@
 }
 
 + (NSMutableArray*) orderChoices : (NSMutableArray*) options : (NSMutableArray*) optionSequence {
-    // NSLog(@"Options: %@", options);
-    // NSLog(@"Option sequence %@", optionSequence);
+    // //NSLog@"Options: %@", options);
+    // //NSLog@"Option sequence %@", optionSequence);
     
     
     NSMutableArray *_returnList = [[NSMutableArray alloc] initWithCapacity:[options count]];

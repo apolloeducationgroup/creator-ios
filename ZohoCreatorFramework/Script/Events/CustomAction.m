@@ -17,7 +17,7 @@
     if(self) {
         [super setCallerDelegate:delegate];
         [super setDelugeURL:[URLConstructor customActionURL : applicationName : viewLinkName : functionId :  sharedBy :  recordIds]];
-        //// //NSLog(@"Custom Action URL %@",[super delugeURL]);
+        //// ////NSLog@"Custom Action URL %@",[super delugeURL]);
     }
     return self;
 }

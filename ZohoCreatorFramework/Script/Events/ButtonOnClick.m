@@ -16,7 +16,7 @@
 //    self = [super init];
 //    if(self) {
 //        [super setDelugeURL:[URLConstructor buttonOnClick:applicationName:formName:buttonName:paramString]];
-//        NSLog(@"Deluge URL  %@", [super delugeURL]);
+//        //NSLog@"Deluge URL  %@", [super delugeURL]);
 //        [super setCallerDelegate:delegate];
 //    }
 //    return self;

@@ -33,15 +33,15 @@ static NSMutableDictionary * dictionaryOfStringsFormFile;
     //    NSString *language = [localess displayNameForKey:NSLocaleIdentifier
     //                                             value:_la];
     //
-    ////        NSLog(@"lang   %@ %@",_la,language);
+    ////        //NSLog@"lang   %@ %@",_la,language);
     //
     //    }
     //
     //
     
     
-    //    NSLog(@"ng  %@" ,locale);
-    //    NSLog(@"%@%@",[locale objectAtIndex:0],[locale objectAtIndex:1]);
+    //    //NSLog@"ng  %@" ,locale);
+    //    //NSLog@"%@%@",[locale objectAtIndex:0],[locale objectAtIndex:1]);
     
     
     if ([languageCode isEqualToString:@"en"] ||[languageCode isEqualToString:@"zh-Hant"] ||[languageCode isEqualToString:@"ja"] ) {

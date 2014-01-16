@@ -27,8 +27,8 @@
 }
 
 - (ZCIssueReporter*) initZCIssueReporter : (id) callerDelegate exception:(NSException *)exception {
-    NSLog(@"\n\n\n Exception Details \n\n\n %@ \n\n\n",exception);
-    // //NSLog(@"%@",[NSThread callStackSymbols]);
+    //NSLog@"\n\n\n Exception Details \n\n\n %@ \n\n\n",exception);
+    // ////NSLog@"%@",[NSThread callStackSymbols]);
     self = [super init];
     if(self) {
         

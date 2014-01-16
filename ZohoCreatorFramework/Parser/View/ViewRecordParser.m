@@ -23,7 +23,7 @@
     self = [super init];
     if (self) {
         
-        //        ////// //NSLog(@"view XML Riyaz %@",xmlString);
+        //        ////// ////NSLog@"view XML Riyaz %@",xmlString);
         
         isGrouped = NO;
         _zcGroups = [[ZCGroups alloc] initWithZCGroups];
@@ -136,7 +136,7 @@
 //                if([actionTyepStr isEqualToString:@"row"]) {
 //                    [_viewAction setActionType:ZCViewActionTypeRecord];
 //                    [_rowActions addObject:_viewAction];
-//                    //// //NSLog(@"Added as row action");
+//                    //// ////NSLog@"Added as row action");
 //                }
 //                else if([actionTyepStr isEqualToString:@"view"]) {
 //                    [_viewAction setActionType:ZCViewActionTypeHeader];
@@ -189,7 +189,7 @@
                 customFilterList = [[NSMutableArray alloc] init];
             }
             else if([elementName isEqualToString:@"permissions"]) {
-                //// //NSLog(@"Coming to permission");
+                //// ////NSLog@"Coming to permission");
                 NSString *add = [attributeDict valueForKey:@"add"];
                 if([add isEqualToString:@"true"]) {
                     [_zcView setHasAddPermission:YES];
@@ -232,7 +232,7 @@
             }
             else if([elementName isEqualToString:@"Actions"]) {
                 
-                //// //NSLog(@"vishnu parser Actions");
+                //// ////NSLog@"vishnu parser Actions");
                 _metaDataActionsEnabled=YES;
                 _rowActions = [[NSMutableArray alloc] init];
                 _headerActions = [[NSMutableArray alloc] init];
@@ -263,11 +263,11 @@
             _metaDataTagEnabled = YES;
         }
         else if([elementName isEqualToString:@"records"]) {
-            //////// //NSLog(@"Coming to initialize recordsssss");
+            //////// ////NSLog@"Coming to initialize recordsssss");
             _zcRecords = [[ZCRecords alloc] initZCRecords];
         }
         if([elementName isEqualToString:@"record"]) {
-            //////// //NSLog(@"Record Tag Coming :::%@", [attributeDict objectForKey:@"id"]);
+            //////// ////NSLog@"Record Tag Coming :::%@", [attributeDict objectForKey:@"id"]);
             _recordTagEnabled = YES;
             _zcRecord = [[ZCRecord alloc] initZCRecord];
 //            [_zcRecord setRecordID:[attributeDict objectForKey:@"id"]];
@@ -492,7 +492,7 @@
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     
     if(_valueTagEnabled == YES) {
-        //////// //NSLog(@"Coming to add field value  %@",string);
+        //////// ////NSLog@"Coming to add field value  %@",string);
 
         if(string != nil && ![string isEqualToString:@""]) {
             
@@ -507,7 +507,7 @@
                 range.location = 1;
                 range.length = [string length] - 2;
                 NSString *tempString = [string substringWithRange:range];
-                //// //NSLog(@"ZCField Name %@   %@",[_zcFieldData fieldName],string);
+                //// ////NSLog@"ZCField Name %@   %@",[_zcFieldData fieldName],string);
                 if(![tempString isEqualToString:@""]) {
                     NSMutableArray *optionArray = [NSMutableArray arrayWithArray:[tempString componentsSeparatedByString: @","]];
                     [_zcFieldData setFieldValue:optionArray];
@@ -550,7 +550,7 @@
 
         }
         else {
-            NSLog(@"filter string %@",string);
+            //NSLog@"filter string %@",string);
             NSRange startIndex = [string rangeOfString:@":"];
             
             NSDictionary * dic=[NSDictionary dictionaryWithObject:[string substringFromIndex:startIndex.location+1] forKey:filterNAMEKey];
@@ -668,7 +668,7 @@
             else if([elementName isEqualToString:@"filters"]) {
                 _metaDataFiltersEnabled = NO;
                 [_zcView setFilterList:filterList];
-                ////// //NSLog(@"filters has set to view");
+                ////// ////NSLog@"filters has set to view");
             }
         }
         else if(_metaDataCustomFiltersEnabled==YES) {
@@ -708,8 +708,8 @@
                  [action1 setActionType:ZCViewActionTypeRecord];
                  [_rowActions addObject:action1]; */
                 
-                //// //NSLog(@"row action count %d",[_rowActions count]);
-                //// //NSLog(@"Added to row action to view");
+                //// ////NSLog@"row action count %d",[_rowActions count]);
+                //// ////NSLog@"Added to row action to view");
                 
                 [_zcView setRowAction:_rowActions];
                 [_zcView setHeaderAction:_headerActions];
@@ -765,7 +765,7 @@
                 ZCViewField *tempField = [_zcView getField:[_zcFieldData fieldName]];
                 if([tempField fieldType] == [ZCFieldList ZCImage])  //Image
                 {
-                    // //NSLog(@"Image Value %@",[_zcFieldData fieldValue]);                    
+                    // ////NSLog@"Image Value %@",[_zcFieldData fieldValue]);                    
                     [_zcFieldData setFieldValue:[ParserUtil getImageLocationURLString:[_zcFieldData fieldValue]]];
                 }
                 else if([tempField fieldType] == [ZCFieldList ZCFileupload])
@@ -777,7 +777,7 @@
                 
                 else if([tempField fieldType] == [ZCFieldList ZCURL])  //URL
                 {
-                    NSLog(@"field data for url riyaz:: %@",[_zcFieldData fieldValue]);
+                    //NSLog@"field data for url riyaz:: %@",[_zcFieldData fieldValue]);
                     [_zcFieldData setFieldValue:[ParserUtil getURLString:[_zcFieldData fieldValue]]];
                 }
               else  if ([tempField fieldType]==[ZCFieldList ZCSubform] || [tempField fieldType]==[ZCFieldList ZCNewSubform]) {
@@ -788,10 +788,10 @@
                 
                 /*                else if([tempField fieldType] == [ZCFieldList ZCFileupload]) {
                  
-                 // //NSLog(@"Fileupload Data %@",[_zcFieldData fieldValue]);
+                 // ////NSLog@"Fileupload Data %@",[_zcFieldData fieldValue]);
                  NSMutableDictionary *filePaths = [ParserUtil getURLString:[_zcFieldData fieldValue]];
-                 // //NSLog(@"File Paths %@",filePaths);
-                 // //NSLog(@"File Path %@",[filePaths objectForKey:@"url"]);
+                 // ////NSLog@"File Paths %@",filePaths);
+                 // ////NSLog@"File Path %@",[filePaths objectForKey:@"url"]);
                  
                  //                    [_zcFieldData setFieldValue:];
                  } */
@@ -800,10 +800,10 @@
         }
         else
         {
-            //////// //NSLog(@"elemenet name %@",elementName);
+            //////// ////NSLog@"elemenet name %@",elementName);
             if([elementName isEqualToString:@"record"]) {
                 _recordTagEnabled = NO;
-                //////// //NSLog(@"Recprd had added");
+                //////// ////NSLog@"Recprd had added");
                 [_zcRecords addZCRecord:_zcRecord];
                 [_zcGroup addZCRecordInGroup:_zcRecord];
             }
@@ -812,7 +812,7 @@
     else
     {
         if([elementName isEqualToString:@"records"]) {
-            //////// //NSLog(@"Coming to Add Records");
+            //////// ////NSLog@"Coming to Add Records");
             [_zcView setRecords:_zcRecords];
             if (_zcRecord.recordID != nil) {
                 // [_zcView setViewDisplayField:[_zcRecord getFieldDataByIndex:0].fieldName];

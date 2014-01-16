@@ -31,10 +31,10 @@
     if (self) {
         
         
-        NSLog(@"Coming to post");
+        //NSLog@"Coming to post");
         zohoFormAPIURL = ZohoFormAPIURL;
-        NSLog(@"url riyaz \n\n %@\n\n",ZohoFormAPIURL);
-        NSLog(@"PARMS STRING RIYAZ:: %@",paramString);
+        //NSLog@"url riyaz \n\n %@\n\n",ZohoFormAPIURL);
+        //NSLog@"PARMS STRING RIYAZ:: %@",paramString);
         requestMethod = method;
         self->_paramString = paramString;
         [self prepareConnection];
@@ -50,7 +50,7 @@
         zohoFormAPIURL = ZohoFormAPIURL;
         requestMethod = method;
         imageView = paramImage;
-        NSLog(@"Image Vieww Size %@",imageView);
+        //NSLog@"Image Vieww Size %@",imageView);
         [self prepareConnection];
         //        [self proceedConnection];
     }
@@ -71,7 +71,7 @@
 
 -(void) prepareConnection
 {
-    NSLog(@"Coming to prepare connection %d",requestMethod);
+    //NSLog@"Coming to prepare connection %d",requestMethod);
     isRequestCompleted = NO;
     receivedData = [[NSMutableData alloc] init];
     apiURLRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:zohoFormAPIURL]];
@@ -81,10 +81,10 @@
     }
     else if(requestMethod == 2)
     {
-        NSLog(@"post method has applied");
+        //NSLog@"post method has applied");
         [apiURLRequest setHTTPMethod:@"POST"];
         [apiURLRequest setTimeoutInterval:75.0];
-        NSLog(@"POST PARAMETER %@",_paramString);
+        //NSLog@"POST PARAMETER %@",_paramString);
         
         if(_paramString != nil)
         {
@@ -92,11 +92,11 @@
             [postString setString:_paramString];
             NSString *postLength = [NSString stringWithFormat:@"%d",[postString length]];
             
-            NSLog(@"poststring %@",postString);
+            //NSLog@"poststring %@",postString);
             NSData * data=[postString dataUsingEncoding:NSUTF8StringEncoding];
             NSString * stringafterdecoding = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             
-            NSLog(@"string after encding %@",stringafterdecoding);
+            //NSLog@"string after encding %@",stringafterdecoding);
             
             [apiURLRequest setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
             
@@ -137,8 +137,8 @@
          [apiURLRequest addValue:@"image/jpeg" forHTTPHeaderField:@"Accept"];
          NSInteger postLenght = body.length + 1;
          NSString *inStr = [NSString stringWithFormat:@"%d", postLenght];
-         NSLog(@"Image Size %d",imageData.length);
-         NSLog(@"Body Size %@",inStr);
+         //NSLog@"Image Size %d",imageData.length);
+         //NSLog@"Body Size %@",inStr);
          [apiURLRequest addValue:inStr forHTTPHeaderField:@"Content-Length"];
          [apiURLRequest addValue:@"application/xml" forHTTPHeaderField:@"Accept"];
          [apiURLRequest addValue:@"ZFormBuilder" forHTTPHeaderField:@"User-Agent"];  */
@@ -178,15 +178,15 @@
     
     /*
      
-     NSLog(@"Coming 1111");
+     //NSLog@"Coming 1111");
      [apiURLRequest setHTTPMethod:@"POST"];
      NSMutableData *body = [NSMutableData data];
      NSString *boundary = @"---------------------------14737809831466499882746641449";
-     NSLog(@"Coming 22222");
+     //NSLog@"Coming 22222");
      NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
      [apiURLRequest addValue:contentType forHTTPHeaderField:@"Content-Type"];
      NSData *imageData = UIImageJPEGRepresentation(imageView.image, 90);
-     NSLog(@"Coming 3333");
+     //NSLog@"Coming 3333");
      [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
      //        [body appendData:[@"Content-Disposition: attachment; name=\"iphoneimage\"; filename=\".jpg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
      
@@ -199,10 +199,10 @@
      [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
      [body appendData:[NSData dataWithData:imageData]];
      
-     NSLog(@"Image Data in FileUpload %@",imageData);
+     //NSLog@"Image Data in FileUpload %@",imageData);
      [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
      [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-     NSLog(@"Body Data %@",body);
+     //NSLog@"Body Data %@",body);
      [apiURLRequest setHTTPBody:body];  */
 }
 
@@ -210,7 +210,7 @@
 {
     NSData *data1 = [apiURLRequest HTTPBody];
     
-    NSLog(@"vishnu length \n\n\n\n %d \n\n\n\n",     data1.length);
+    //NSLog@"vishnu length \n\n\n\n %d \n\n\n\n",     data1.length);
     NSHTTPURLResponse *authenticationResponse= nil;
     NSError *error=nil;
     
@@ -219,9 +219,9 @@
     _apiRawData=receivedData;
     
     apiResponse = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    NSLog(@"request url riyaz \n\n\n %@\n\n\n",apiURLRequest.URL.absoluteString);
+    //NSLog@"request url riyaz \n\n\n %@\n\n\n",apiURLRequest.URL.absoluteString);
     
-    NSLog(@"response riyaz \n\n\n %@\n\n\n",apiResponse);
+    //NSLog@"response riyaz \n\n\n %@\n\n\n",apiResponse);
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response

@@ -47,7 +47,7 @@
     
     self = [super init];
     if(self) {
-        ////// //NSLog(@"Coming to initViewFetcher");
+        ////// ////NSLog@"Coming to initViewFetcher");
         self->_appLinkName = appLinkName;
         self->_component = component;
         self->_zcViewParam = nil;
@@ -75,7 +75,7 @@
     self = [super init];
     if(self) {
         
-        // //NSLog(@"init view fetcher : %@ : %@ : %@ :%@",appLinkName,[component displayName],[viewParameter getCalendarCriteria],appOwner);
+        // ////NSLog@"init view fetcher : %@ : %@ : %@ :%@",appLinkName,[component displayName],[viewParameter getCalendarCriteria],appOwner);
         self->_appLinkName = appLinkName;
         self->_component = component;
         self->_zcViewParam = viewParameter;
@@ -93,7 +93,7 @@
         [self->_zcView setApplication:[creator getApplication:appLinkName appOwner:appOwner]];
 
 //        [self->_zcView setApplication:[creator getApplication:appLinkName]];
-        NSLog(@"end of view fetcher...");
+        //NSLog@"end of view fetcher...");
     }
     return self;
 }
@@ -127,26 +127,26 @@
         viewURL = [URLConstructor viewURL: _appLinkName :[_component linkName] withParam : self->_zcViewParam appOwner:_appOwner];
     }
     
-    NSLog(@"View URL %@",viewURL);
+    //NSLog@"View URL %@",viewURL);
     
     URLConnector *connector = [[URLConnector alloc] initFetcher:viewURL];
     NSString *formMetaXML = [connector apiResponse];
     
-    NSLog(@"view Xml Meta %@",formMetaXML);
+    //NSLog@"view Xml Meta %@",formMetaXML);
     
     if ([formMetaXML isEqualToString:@""]) {
         [NSException raise:@"We are unable to fetch this data, sorry!" format:@"Report this problem to support@zohocreator.com"];
     }
-    NSLog(@"strinpign 1");
+    //NSLog@"strinpign 1");
     
   formMetaXML=[self stringByStrippingHTML:formMetaXML];
-    NSLog(@"strinpign 2");
+    //NSLog@"strinpign 2");
 
     ViewRecordParser *view = [[ViewRecordParser alloc] initViewRecordParser:formMetaXML :_component ];
     [[view zcView] setViewParam:_zcViewParam];
-    NSLog(@"strinpign 3");
+    //NSLog@"strinpign 3");
    view.zcView=[self checkViewForCalenderParam:[view zcView ]];
-    NSLog(@"strinpign 4");
+    //NSLog@"strinpign 4");
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
     return [view zcView];

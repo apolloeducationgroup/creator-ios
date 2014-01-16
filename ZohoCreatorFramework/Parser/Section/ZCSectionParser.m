@@ -132,15 +132,15 @@
                 [_zcSection setSequenceNumber:[string integerValue]];
             }
             else if([_currentElementName isEqualToString:@"Is_Hidden"]) {
-                //NSLog(@"hidden  %@",string);
+                ////NSLog@"hidden  %@",string);
                 if([string isEqualToString:@"true"]) {
                     [_zcSection setIsHidden:YES];
-                    //NSLog(@"Setting YES");
+                    ////NSLog@"Setting YES");
                 }
                 else
                 {
                     [_zcSection setIsHidden:NO];
-                    //NSLog(@"Setting NO");
+                    ////NSLog@"Setting NO");
                 }
             }
         }
@@ -166,7 +166,7 @@
             [_zcSections setHasLicense:YES];
         }
     }
-    ////// //NSLog(@"Coming out");
+    ////// ////NSLog@"Coming out");
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
@@ -234,7 +234,7 @@
         [sectionDict setObject:rowsArray forKey:@"rows"];
         [bodyArray addObject:sectionDict];
     }
-    NSLog(@"Response ::: Rows Array %@",jsonDict);
+    //NSLog@"Response ::: Rows Array %@",jsonDict);
     
     
 }

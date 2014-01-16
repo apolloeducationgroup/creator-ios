@@ -44,7 +44,7 @@ static ZOHOCreator *creatorObject = nil;
     self = [super init];
     if(self) {
         self->_zohoUser = [[ZOHOUser alloc ]initZOHOUser:userName:password];
-        ////// //NSLog(@"Auth Token %@",[self->_zohoUser authToken]);
+        ////// ////NSLog@"Auth Token %@",[self->_zohoUser authToken]);
     }
     creatorObject = self;
     return self;
@@ -75,7 +75,7 @@ static ZOHOCreator *creatorObject = nil;
 
 - (ZCApplicationList*) getWorkSpaceApplicationList : (NSString *) workspaceowner {
     
-    ////// //NSLog(@"Cominf to get application list");
+    ////// ////NSLog@"Cominf to get application list");
     
     if(_appList == nil) {
         return [self getWorkSpaceApplicationList:YES workspaceowner:workspaceowner];
@@ -100,7 +100,7 @@ static ZOHOCreator *creatorObject = nil;
 
 - (ZCAllAppsCategory *) getSharedCategoryList {
     
-    ////// //NSLog(@"Cominf to get application list");
+    ////// ////NSLog@"Cominf to get application list");
     
     if(_sharedCategoryList == nil) {
         return [self getSharedCategoryList:YES];
@@ -173,7 +173,7 @@ static ZOHOCreator *creatorObject = nil;
 
 - (ZCApplicationList*) getApplicationList {
     
-    ////// //NSLog(@"Cominf to get application list");
+    ////// ////NSLog@"Cominf to get application list");
     
     if(_appList == nil) {
         return [self getApplicationList:YES];
@@ -187,16 +187,16 @@ static ZOHOCreator *creatorObject = nil;
     
     [self getApplicationList];
     
-    NSLog(@"getapplication riyaz %@ ",appLinkName);
+    //NSLog@"getapplication riyaz %@ ",appLinkName);
     if(_appList != nil) {
         for(NSInteger index=0;index<[[_appList applicationList] count];index++) {
             
             ZCApplication *app = [[_appList applicationList] objectAtIndex:index];
-            NSLog(@"getapplication riyaz %@  %@ %@",appLinkName,app ,app.appOwner);
+            //NSLog@"getapplication riyaz %@  %@ %@",appLinkName,app ,app.appOwner);
 
             if([[app appLinkName] isEqualToString:appLinkName] && [appOwner isEqualToString:[app appOwner]] ) {
                 _currentApp = app;
-                NSLog(@"getapplication riyaz found %@ %@  %@",appLinkName,app ,app.appOwner);
+                //NSLog@"getapplication riyaz found %@ %@  %@",appLinkName,app ,app.appOwner);
 
                 
                 return app;
@@ -219,9 +219,9 @@ static ZOHOCreator *creatorObject = nil;
 
 + (NSArray*) getApplicationList {
     
-    //// //NSLog(@"get application list..");
+    //// ////NSLog@"get application list..");
     ZCApplicationList *_appList = [[ZOHOCreator getObject] getApplicationList:YES];
-    //// //NSLog(@"app list here.. %@",_appList);
+    //// ////NSLog@"app list here.. %@",_appList);
     return [_appList applicationList];
 }
 
@@ -254,7 +254,7 @@ static ZOHOCreator *creatorObject = nil;
 {
     
     
-//    NSLog(@"riyaz lookup %@",lookupfield);
+//    //NSLog@"riyaz lookup %@",lookupfield);
     
 //    NSMutableArray *childappNamesINORDER=[[NSMutableArray alloc]init];
 //    NSMutableArray *childFormNameINORDER=[[NSMutableArray alloc]init];
@@ -265,7 +265,7 @@ static ZOHOCreator *creatorObject = nil;
 //      ZCField * field=  [lookupfields objectAtIndex:index-1];
 //        ZCForm * form=[baseforms objectAtIndex:index -1];
 //        ZCApplication * app=[baseApps objectAtIndex:index -1];
-////     NSLog(@"field linkname  addtopic %@  form %@ %@",field.relatedComponent.linkName,field.relatedComponent.zcApplication.appLinkName,field.fieldName);
+////     //NSLog@"field linkname  addtopic %@  form %@ %@",field.relatedComponent.linkName,field.relatedComponent.zcApplication.appLinkName,field.fieldName);
 //        
 //
 //        [childappNamesINORDER addObject:[app appLinkName]];
@@ -371,7 +371,7 @@ static ZOHOCreator *creatorObject = nil;
     NSString *deleteRecord = [URLConstructor writeURL];
     NSString *deleteCriteriaString = [URLConstructor postAuthTokenWithAppOwner:[application appOwner]];
     deleteCriteriaString = [deleteCriteriaString stringByAppendingFormat:@"&%@",[ZCRecordString deleteRecordStringXML:[application appLinkName] withViewName:viewName:recordLinkID]];
-    //// //NSLog(@"delete string riyaz %@",deleteCriteriaString);
+    //// ////NSLog@"delete string riyaz %@",deleteCriteriaString);
     
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:deleteRecord :deleteCriteriaString :[URLConnector POSTMETHOD]];
     [urlConnect apiResponse];
@@ -387,12 +387,12 @@ static ZOHOCreator *creatorObject = nil;
     NSString *deleteCriteriaString = [URLConstructor postAuthTokenWithApplication:[[ZOHOCreator getObject ]lastAccessedApp]];
 
     deleteCriteriaString = [deleteCriteriaString stringByAppendingFormat:@"&%@",[ZCRecordString bulkDeleteRecordStringXML:appLinkName withViewLinkName:viewName:recordLinkIDs]];
-    //// //NSLog(@"delete criteria string %@",deleteCriteriaString);
+    //// ////NSLog@"delete criteria string %@",deleteCriteriaString);
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:deleteRecord :deleteCriteriaString :[URLConnector POSTMETHOD]];
     [urlConnect apiResponse];
         NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:[urlConnect apiResponse]:nil];
         [parser recordStatus];
-    NSLog(@"delete record status %i %@ %@ ",[[parser recordStatus]success],[[[parser recordStatus]error ]errorMessage ],[[[parser recordStatus ]error]generalErrorList ]);
+    //NSLog@"delete record status %i %@ %@ ",[[parser recordStatus]success],[[[parser recordStatus]error ]errorMessage ],[[[parser recordStatus ]error]generalErrorList ]);
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     return [parser recordStatus];
 }
@@ -409,7 +409,7 @@ static ZOHOCreator *creatorObject = nil;
     [urlConnect apiResponse];
     NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:[urlConnect apiResponse]:nil];
     [parser recordStatus];
-    NSLog(@"delete record status %i %@ %@ ",[[parser recordStatus]success],[[[parser recordStatus]error ]errorMessage ],[[[parser recordStatus ]error]generalErrorList ]);
+    //NSLog@"delete record status %i %@ %@ ",[[parser recordStatus]success],[[[parser recordStatus]error ]errorMessage ],[[[parser recordStatus ]error]generalErrorList ]);
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     return [parser recordStatus];
 }
@@ -423,15 +423,15 @@ static ZOHOCreator *creatorObject = nil;
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSString *updateRecord = [URLConstructor submitRecordURL];
-    //// //NSLog(@"view link name %@",viewLinkName);
+    //// ////NSLog@"view link name %@",viewLinkName);
 //    NSString *updateRecordString = [URLConstructor postAuthTokenWithApplication:[[ZOHOCreator getObject] getApplication:applicationName]];
     NSString *updateRecordString = [URLConstructor postAuthTokenWithApplication:[[ZOHOCreator getObject] lastAccessedApp]];
 
     updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@",[ZCRecordString bulkDeleteRecordStringXML:applicationName withViewLinkName:viewLinkName :records]];
-    NSLog(@"Bulk edit request %@",updateRecordString);
-    //// //NSLog(@"\n update rec string \n   %@   \n",updateRecordString);
+    //NSLog@"Bulk edit request %@",updateRecordString);
+    //// ////NSLog@"\n update rec string \n   %@   \n",updateRecordString);
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:updateRecord :updateRecordString :[URLConnector POSTMETHOD]];
-    NSLog(@"Bulk Edit Response %@",[urlConnect apiResponse]);
+    //NSLog@"Bulk Edit Response %@",[urlConnect apiResponse]);
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     return nil;
@@ -503,7 +503,7 @@ static ZOHOCreator *creatorObject = nil;
     RecordDuplicateParser *parser=[[RecordDuplicateParser alloc]initWithRecordDuplicateParser:[urlConnect apiResponse] bulkDuplicate:BulkDup];
     [parser status];
 
-    NSLog(@"duplicate record status %i",[parser status]);
+    //NSLog@"duplicate record status %i",[parser status]);
 
     return parser;
 }
@@ -517,7 +517,7 @@ static ZOHOCreator *creatorObject = nil;
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [urlConnect apiResponse];
-    // //NSLog(@"api response %@",[urlConnect apiResponse]);
+    // ////NSLog@"api response %@",[urlConnect apiResponse]);
 }
 
 + (void) submitRecordsForForm : (NSString*) formLinkName  WithApplication: (NSString*) appLinkName AndRecords : (NSMutableArray*) records{
@@ -553,7 +553,7 @@ static ZOHOCreator *creatorObject = nil;
     
     [urlConnect apiResponse];
     
-    NSLog(@"api response %@",[urlConnect apiResponse]);
+    //NSLog@"api response %@",[urlConnect apiResponse]);
     
     LookUPChoiceParser * lookupparser=[[LookUPChoiceParser alloc]initLookUPChoiceParser:[urlConnect apiResponse]];
     
@@ -581,7 +581,7 @@ static ZOHOCreator *creatorObject = nil;
         [userObject removeZCuser];
     }
     else {
-        //////// //NSLog(@"File Not Deleted");
+        //////// ////NSLog@"File Not Deleted");
     }
     
     NSHTTPCookieStorage *sharedHTTPCookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];

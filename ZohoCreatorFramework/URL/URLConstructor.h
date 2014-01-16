@@ -28,7 +28,7 @@
 + (NSString*) sectionMetaURL : (NSString*) appLinkName : (NSString*) section appOwner: (NSString *) appOwner;
 + (NSString*) viewURL : (NSString*) appLinkName : (NSString*) viewLinkName appOwner: (NSString *) appOwner;
 + (NSString*) viewURL : (NSString*) appLinkName : (NSString*) viewLinkName withParam : (ZCViewParam*) viewParam appOwner: (NSString *) appOwner;
-+ (NSString*) recordCountURL : (NSString*) appLinkName : (NSString*) viewLinkName withParam : (ZCViewParam*) viewParam appOwner: (NSString *) appOwner;
+//+ (NSString*) recordCountURL : (NSString*) appLinkName : (NSString*) viewLinkName withParam : (ZCViewParam*) viewParam appOwner: (NSString *) appOwner;
 + (NSString*) formMetaURL : (NSString*) appLinkName : (NSString*) formLinkName appOwner: (NSString *) appOwner;
 
 +(NSString *) subformMetaURL:(NSString *)appLinkName formLinkname:(NSString *)formLinkName mainAppLinkname:(NSString *)mainAppLinkname  mainFormLinkname:(NSString *)mainFormLinkname subformFieldLinkname:(NSString *)subformFieldLinkname appOwner:(NSString *)appOwner;

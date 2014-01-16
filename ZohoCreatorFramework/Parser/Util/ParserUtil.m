@@ -29,7 +29,7 @@
 + (NSMutableDictionary*) getURLString : (NSString*) rawString {
     
     if ([rawString isKindOfClass:[NSString class]]) {
-    NSLog(@"raw string urlstring: %@",rawString);
+    //NSLog@"raw string urlstring: %@",rawString);
     NSMutableDictionary *returnList = [[NSMutableDictionary alloc] init];
     if(rawString != nil && ![rawString isEqualToString:@"(null)"]) {
         
@@ -37,9 +37,9 @@
         NSRange target_range = [rawString rangeOfString:@" target = \""];
         NSRange title_range = [rawString rangeOfString:@" title = \""];
         
-        NSLog(@"href range : %@",NSStringFromRange(href_range));
-        NSLog(@"target range : %@",NSStringFromRange(target_range));
-        NSLog(@"title range : %@",NSStringFromRange(title_range));
+        //NSLog@"href range : %@",NSStringFromRange(href_range));
+        //NSLog@"target range : %@",NSStringFromRange(target_range));
+        //NSLog@"title range : %@",NSStringFromRange(title_range));
         // <a href= "http://zoho.com" target = "_blank">zoho.com</a>
         
         if(href_range.length == 0) {
@@ -66,8 +66,8 @@
         
         [returnList setObject:[rawString substringWithRange:range] forKey:@"url"];
         
-        NSLog(@"Url subString range : %@",NSStringFromRange(range));
-        NSLog(@"Url subString %@",[rawString substringWithRange:range]);
+        //NSLog@"Url subString range : %@",NSStringFromRange(range));
+        //NSLog@"Url subString %@",[rawString substringWithRange:range]);
         
         
         NSRange target;
@@ -81,7 +81,7 @@
             
             target.length = titleRange1.location - (target_range.location+target_range.length+1);
             
-            ////NSLog(@"target length value is : %d",target.length);
+            //////NSLog@"target length value is : %d",target.length);
             
         }
         
@@ -103,11 +103,11 @@
             titleRange.length = titleRange1.location - (title_range.location+title_range.length+target_range.length+target.length+2);
             
             
-            NSLog(@"title length value is :%d",titleRange.length);
+            //NSLog@"title length value is :%d",titleRange.length);
             
             [returnList setObject:[rawString substringWithRange:titleRange] forKey:@"title"];
             
-            NSLog(@"title gee %@",[rawString substringWithRange:titleRange]);
+            //NSLog@"title gee %@",[rawString substringWithRange:titleRange]);
 
         }
         
@@ -119,7 +119,7 @@
         
         [returnList setObject:[rawString substringWithRange:linkRange] forKey:@"urllinkname"];
         
-        //NSLog(@"link %@",[rawString substringWithRange:linkRange]);
+        ////NSLog@"link %@",[rawString substringWithRange:linkRange]);
         
         
         
@@ -140,7 +140,7 @@
 
 + (NSString*) getURL : (NSString*) rawString {
     
-    ////// //NSLog(@"Raw String %@",rawString);
+    ////// ////NSLog@"Raw String %@",rawString);
     if(rawString != nil && ![rawString isEqualToString:@"(null)"]) {
         
         NSRange srange = [rawString rangeOfString:@"href= \""];
@@ -171,7 +171,7 @@
 
 + (NSString*) getImageLocationURLString : (NSString*) rawString {
     
-    NSLog(@" Raw String %@",rawString);
+    //NSLog@" Raw String %@",rawString);
     
     if(rawString != nil && ![rawString isEqualToString:@"(null)"]) {
         
@@ -196,7 +196,7 @@
         }
         
         NSArray * stringarray = [rawString componentsSeparatedByString:@"/"];
-        NSLog(@"url array : %@",stringarray);
+        //NSLog@"url array : %@",stringarray);
         
 //        NSString* finalURL = [URLConstructor downloadFile:[NSString stringWithFormat:@"/%@",[stringarray lastObject]] viewLinkName:[stringarray objectAtIndex:3] :[stringarray objectAtIndex:2] :[stringarray objectAtIndex:1]];
         
@@ -237,16 +237,16 @@
     
     
 //    NSRegularExpression *regexp_Form = [NSRegularExpression regularExpressionWithPattern: @"<div elName='zc-component' formLinkName='(.*)\\' params='(.*)\\</div>"options:NSRegularExpressionCaseInsensitive error:NULL];
-    NSLog(@"QWFKLBKLXBKLSBFGKLSDBGKLSBDGKABSKBGASKGLA\n\n\n\n\n\n\n\n\n\n\n%@",rawString);
+    //NSLog@"QWFKLBKLXBKLSBFGKLSDBGKLSBDGKABSKBGASKGLA\n\n\n\n\n\n\n\n\n\n\n%@",rawString);
     rawString= [ParserUtil stringByStrippingHTML:rawString];
-    NSLog(@"\n\n\n\n\n\n\n\n\n\n\n QWFKLBKLXBKLSBFGKLSDBGKLSBDGKABSKBGASKGLA%@\n\n\n\n\n\n\n\n\n\n\n",rawString);
+    //NSLog@"\n\n\n\n\n\n\n\n\n\n\n QWFKLBKLXBKLSBFGKLSDBGKLSBDGKABSKBGASKGLA%@\n\n\n\n\n\n\n\n\n\n\n",rawString);
 
     @try {
 
         rawString=[ParserUtil extact_URL_FormSubformData:rawString];
     }
     @catch (NSException *exception) {
-        NSLog(@"exceptop in subform1 %@",exception);
+        //NSLog@"exceptop in subform1 %@",exception);
     }
     @finally {
         
@@ -256,7 +256,7 @@
         rawString=[ParserUtil extact_Image_FormSubformData:rawString];
     }
     @catch (NSException *exception) {
-        NSLog(@"exceptop in subform2%@",exception);
+        //NSLog@"exceptop in subform2%@",exception);
     }
     @finally {
         
@@ -312,22 +312,22 @@
             
             NSArray * array=[hashCode componentsSeparatedByString:@"\""];
             
-            NSLog(@"arrar %@",array);
+            //NSLog@"arrar %@",array);
             if (array.count>1) {
                 
                 linkSource=[array objectAtIndex:1];
                 
             }
 
-            NSLog(@" FormHash Code is %@", hashCode);
-            NSLog(@"range at index %i  %i",[matchURL rangeAtIndex:i].location,[matchURL rangeAtIndex:i].length);
+            //NSLog@" FormHash Code is %@", hashCode);
+            //NSLog@"range at index %i  %i",[matchURL rangeAtIndex:i].location,[matchURL rangeAtIndex:i].length);
         }
     }
     
     if (linkSource) {
         rawString=    [rawString stringByReplacingOccurrencesOfString:linkTag withString:[NSString stringWithFormat:@"<br>%@",[[ParserUtil getURLString:linkTag]objectForKey:@"url"]]];
     }
-    NSLog(@"rawstirng view %@",rawString);
+    //NSLog@"rawstirng view %@",rawString);
 
 
     return rawString;
@@ -354,7 +354,7 @@
                 
                 NSArray * array=[hashCode componentsSeparatedByString:@"\""];
                 
-                NSLog(@"arrar %@",array);
+                //NSLog@"arrar %@",array);
                 if (array.count>1) {
                     
                     imageSource=[array objectAtIndex:1];
@@ -363,8 +363,8 @@
                 
             }
             
-//            NSLog(@" FormHash Code is %@", hashCode);
-//            NSLog(@"range at index %i  %i",[matchImage rangeAtIndex:i].location,[matchImage rangeAtIndex:i].length);
+//            //NSLog@" FormHash Code is %@", hashCode);
+//            //NSLog@"range at index %i  %i",[matchImage rangeAtIndex:i].location,[matchImage rangeAtIndex:i].length);
         }
     }
     

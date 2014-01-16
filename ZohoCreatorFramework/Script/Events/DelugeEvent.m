@@ -37,12 +37,12 @@
 - (CustomActionResponse*) executeCustomAction {
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    NSLog(@"Post has commented");
+    //NSLog@"Post has commented");
     URLConnector *connector = [[URLConnector alloc] initFetcherPost:_delugeURL :[URLConnector POSTMETHOD]];
     NSString *formMetaXML = [connector apiResponse];
     CustomActionParser *parser = [[CustomActionParser alloc] initScriptParser:formMetaXML];
     _delugeTasks =[parser customResponse].delugeTasks;
-    NSLog(@"deluge tasks %@",_delugeTasks.taskList);
+    //NSLog@"deluge tasks %@",_delugeTasks.taskList);
     [self performSelectorOnMainThread:@selector(executeActions) withObject:self waitUntilDone:NO];
 
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -51,144 +51,144 @@
 
 - (void) executeActions {
     
-    NSLog(@"coming to execute Action");
+    //NSLog@"coming to execute Action");
     if([_delugeTasks noScript]==NO) {
         
         NSMutableArray *taskList = [_delugeTasks taskList];
         NSInteger taskCount = [taskList count];
         NSInteger taskIndex=0;
         
-        NSLog(@"task count : %d",taskCount);
+        //NSLog@"task count : %d",taskCount);
         
         for(taskIndex=0;taskIndex<taskCount;taskIndex++) {
             
             DelugeTask *task = [taskList objectAtIndex:taskIndex];
             NSString *taskType = [task taskType];
             
-            // //NSLog(@"tasktype is : %@",taskType);
+            // ////NSLog@"tasktype is : %@",taskType);
             
             if([taskType isEqualToString:@"alert"]) {
-                NSLog(@"comming to setting alert task");
+                //NSLog@"comming to setting alert task");
 
                 AlertTask *alertTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate showAlert: [alertTask message]];
-                NSLog(@"exiting alert task");
+                //NSLog@"exiting alert task");
 
             }
             
             else if([taskType isEqualToString:@"show"]) {
-                NSLog(@"comming to setting show task");
+                //NSLog@"comming to setting show task");
 
                 ShowTask *showTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate showField:[showTask formName] :[showTask fieldName] subformName:[showTask subformName]];
-                NSLog(@"exiting show task");
+                //NSLog@"exiting show task");
 
             }
             else if([taskType isEqualToString:@"hide"]) {
-                NSLog(@"comming to setting hide task");
+                //NSLog@"comming to setting hide task");
 
                 HideTask *showTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate hideField:[showTask formName] :[showTask fieldName]  subformName:[showTask subformName]];
-                NSLog(@"exiting hide task");
+                //NSLog@"exiting hide task");
 
             }
             else if([taskType isEqualToString:@"enable"]) {
-                NSLog(@"comming to setting enable task");
+                //NSLog@"comming to setting enable task");
 
                 ShowTask *enableTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate enableField:[enableTask formName] :[enableTask fieldName] subformName:[enableTask subformName]];
-                NSLog(@"exiting enable task");
+                //NSLog@"exiting enable task");
 
             }
             else if([taskType isEqualToString:@"disable"]) {
-                NSLog(@"comming to setting disable task");
+                //NSLog@"comming to setting disable task");
 
                 DisableTask *showTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate disableField:[showTask formName] :[showTask fieldName] subformName:[showTask subformName]];
-                NSLog(@"exiting disable task");
+                //NSLog@"exiting disable task");
 
             }
             else if([taskType isEqualToString:@"addvalue"]) {
-                NSLog(@"comming to setting addvalue task");
+                //NSLog@"comming to setting addvalue task");
 
                 AddValueTask *addValue = [taskList objectAtIndex:taskIndex];
                 
-                // //NSLog(@"%@addvalue fieldvalue is :",[addValue fieldValues]);
-                // //NSLog(@"%@addvalue fieldname is :",[addValue fieldName]);
+                // ////NSLog@"%@addvalue fieldvalue is :",[addValue fieldValues]);
+                // ////NSLog@"%@addvalue fieldname is :",[addValue fieldName]);
                 
                 [_callerDelegate addValues:[addValue formName] :[addValue fieldName] :[addValue fieldValues] rowNumberForSubform:[addValue rowNumber_Subform] subformName:[ addValue subformName]];
                 
-                NSLog(@"exiting addvalue task");
+                //NSLog@"exiting addvalue task");
 
             }
             else if([taskType isEqualToString:@"removevalue"]) {
-                NSLog(@"comming to setting removevalue task");
+                //NSLog@"comming to setting removevalue task");
 
                 AddValueTask *addValue = [taskList objectAtIndex:taskIndex];
                 
                 [_callerDelegate addValues:[addValue formName] :[addValue fieldName] :[addValue fieldValues] rowNumberForSubform:[addValue rowNumber_Subform] subformName:[ addValue subformName]];
-                NSLog(@"exiting removevalue task");
+                //NSLog@"exiting removevalue task");
 
             }
             else if([taskType isEqualToString:@"clear"]) {
-                NSLog(@"comming to setting clear task");
+                //NSLog@"comming to setting clear task");
                 ClearTask *clearTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate clearValue:[clearTask formName] :[clearTask fieldName] rowNumberForSubform:[clearTask rowNumber_Subform] subformName:[ clearTask subformName]];
-                NSLog(@"exiting clear task");
+                //NSLog@"exiting clear task");
 
             }
             else if([taskType isEqualToString:@"setvalue"]) {
-                NSLog(@"comming to setting setvalue task");
+                //NSLog@"comming to setting setvalue task");
                 SetVariableTask *setVariable = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate setFieldValue:[setVariable formName]: [ setVariable fieldName]:[setVariable fieldValue] rowNumberForSubform:[setVariable rowNumber_Subform] subformName:[ setVariable subformName] ];
-                NSLog(@"exiting  setvalue task");
+                //NSLog@"exiting  setvalue task");
 
             }
             
             else if([taskType isEqualToString:@"openurl"]) {
-                NSLog(@"comming to setting openurl task");
+                //NSLog@"comming to setting openurl task");
 
-            NSLog(@"Coming to openurl task");
+            //NSLog@"Coming to openurl task");
                 OpenUrlTask *openUrlTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate openUrl : [openUrlTask urlString] withWindowType : [openUrlTask windowType] windowParameters:[openUrlTask windowParameters] application:[openUrlTask application] componentType:[openUrlTask componentType] urlParameters:[openUrlTask urlParameters]];
-                NSLog(@"exiting openurl task");
+                //NSLog@"exiting openurl task");
 
             }
             else if([taskType isEqualToString:@"reloadform"]) {
-                NSLog(@"comming to setting reloadform task");
+                //NSLog@"comming to setting reloadform task");
 
                 ReloadFormTask *reloadTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate reloadForm: [reloadTask formName]];
-                NSLog(@"comming to setting reloadform task");
+                //NSLog@"comming to setting reloadform task");
 
                 
             }
             else if([taskType isEqualToString:@"select"]) {
-                NSLog(@"comming to setting select task");
+                //NSLog@"comming to setting select task");
 
                 SelectValueTask *selectValueTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate selectValue:[selectValueTask formName] withFieldName:[selectValueTask fieldName] andValues:[selectValueTask selectValues]rowNumberForSubform:[selectValueTask rowNumber_Subform] subformName:[ selectValueTask subformName]];
-                NSLog(@"exiting select task");
+                //NSLog@"exiting select task");
 
             }
             else if([taskType isEqualToString:@"selectall"]) {
-                NSLog(@"exiting selectall task");
+                //NSLog@"exiting selectall task");
 
                 SelectAllTask *selectAllTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate selectAllValues:[selectAllTask formName] withFieldName:[selectAllTask fieldName]rowNumberForSubform:[selectAllTask rowNumber_Subform] subformName:[ selectAllTask subformName]];
             }
             else if([taskType isEqualToString:@"deselect"]) {
-                NSLog(@"exiting deselect task");
+                //NSLog@"exiting deselect task");
 
                 DeSelectValueTask *deSelectTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate deSelectValue:[deSelectTask formName] withFieldName:[deSelectTask fieldName] andValues:[deSelectTask deSelectValues]rowNumberForSubform:[deSelectTask rowNumber_Subform] subformName:[ deSelectTask subformName]];
             }
             else if([taskType isEqualToString:@"deselectall"]) {
-                NSLog(@"exiting deselectall task");
+                //NSLog@"exiting deselectall task");
 
                 DeSelectAll *deSelectAllTask = [taskList objectAtIndex:taskIndex];
                 [_callerDelegate deSelectAllValues:[deSelectAllTask formName] withFieldName:[deSelectAllTask fieldName]rowNumberForSubform:[deSelectAllTask rowNumber_Subform] subformName:[ deSelectAllTask subformName]];
-                NSLog(@"exiting  deselectall task");
+                //NSLog@"exiting  deselectall task");
 
             }
         }
@@ -202,16 +202,16 @@
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    NSLog(@"deluge param %@",_delugeParams);
+    //NSLog@"deluge param %@",_delugeParams);
     URLConnector *connector = [[URLConnector alloc] initFetcherPostParam:_delugeURL :_delugeParams :[URLConnector POSTMETHOD]];
     NSString *formMetaXML = [connector apiResponse];
-    //// //NSLog(@"deluge form Meta XML %@ ",formMetaXML);
+    //// ////NSLog@"deluge form Meta XML %@ ",formMetaXML);
     
     ScriptJSONParser *parser = [[ScriptJSONParser alloc] initScriptJSONParser:formMetaXML];
     //    ScriptParser *parser = [[ScriptParser alloc] initScriptParser:formMetaXML];
     
     _delugeTasks = [parser delugeTasks];
-    NSLog(@"deluge tasks %@",_delugeTasks.taskList);
+    //NSLog@"deluge tasks %@",_delugeTasks.taskList);
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 [self performSelectorOnMainThread:@selector(executeActions) withObject:self waitUntilDone:YES];
 
@@ -243,20 +243,20 @@
                 keyValue =[ZCEncodeUtil encodeStringUsingUT8:keyValue];
 //                keyValue=[keyValue stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 [paramString appendFormat:@"&%@=%@",keyName,keyValue];
-                NSLog(@"herere");
+                //NSLog@"herere");
                 
             }
             else if([keyValue isKindOfClass:[NSArray class]]) {
                 
                 for(NSInteger optIndex=0;optIndex<[keyValue count];optIndex++) {
-                    NSLog(@"coming to index");
+                    //NSLog@"coming to index");
                     [paramString appendFormat:@"&%@=%@",keyName,[ZCEncodeUtil encodeStringUsingUT8:[keyValue objectAtIndex:optIndex]]];
                 }
             }
             else if ([keyValue isKindOfClass:[ZCSubFormRecords class]])
             {
                 
-                NSLog(@"subform records riyaz");
+                //NSLog@"subform records riyaz");
                 NSMutableArray * recordstoAdd=[[NSMutableArray alloc]init];
                 //               [recordstoAdd addObjectsFromArray:[keyValue recordsToAdd]];
                 //                [recordstoAdd addObjectsFromArray:[keyValue recordsToUpdate]];
@@ -279,7 +279,7 @@
      NSMutableString *paramString = [NSMutableString string];
      NSMutableDictionary *_dictionary = [_record record];
      
-     //// //NSLog(@"record dict : %@",_dictionary);
+     //// ////NSLog@"record dict : %@",_dictionary);
      
      NSEnumerator *keyEnum = [_dictionary keyEnumerator];
      NSString *keyName;
@@ -287,14 +287,14 @@
      while((keyName = [keyEnum nextObject]) != nil) {
      ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
      id keyValue = [fieldDate fieldValue];
-     //        //// //NSLog(@"Key Value for key Name %@ %@",keyName,keyValue);
-     //// //NSLog(@"field name %@  %@",[fieldDate fieldName],[fieldDate fieldValue]);
+     //        //// ////NSLog@"Key Value for key Name %@ %@",keyName,keyValue);
+     //// ////NSLog@"field name %@  %@",[fieldDate fieldName],[fieldDate fieldValue]);
      if(keyValue != nil) {
      if([keyValue isKindOfClass:[NSString class]]) {
      [paramString appendFormat:@"<field name=\'%@\'><value><![CDATA[%@]]></value></field>",keyName,keyValue];
      }
      else if([keyValue isKindOfClass:[NSMutableArray class]]) {
-     //// //NSLog(@"Array   %@",keyValue);
+     //// ////NSLog@"Array   %@",keyValue);
      if([keyValue count] > 0) {
      [paramString appendFormat:@"<field name=\'%@\'><value><![CDATA[%@]]></value></field>",keyName,[keyValue objectAtIndex:0]];
      }
@@ -496,7 +496,7 @@
     //param= [param stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     
-    NSLog(@"subformREcordPArm riyaz %@",param);
+    //NSLog@"subformREcordPArm riyaz %@",param);
     return param;
     
     
@@ -535,7 +535,7 @@
     while((keyName = [keyEnum nextObject]) != nil) {
         ZCFieldData *fieldDate = [_dictionary valueForKey:keyName];
         id keyValue = [fieldDate fieldValue];
-        ////// //NSLog(@"Key Value for key Name %@ %@",keyName,keyValue);
+        ////// ////NSLog@"Key Value for key Name %@ %@",keyName,keyValue);
         if(keyValue != nil) {
             if([keyValue isKindOfClass:[NSString class]]) {
                 if(starting) {

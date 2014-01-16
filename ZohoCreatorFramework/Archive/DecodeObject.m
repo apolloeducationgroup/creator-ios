@@ -22,9 +22,9 @@
 + (id) decode : (NSString*) fileName : (NSString*) keyName
 {
     NSData *data = [[NSData alloc] initWithContentsOfFile:fileName];
-    ////// //NSLog(@"decode before...");
+    ////// ////NSLog@"decode before...");
     NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-    ////// //NSLog(@"decode after...");
+    ////// ////NSLog@"decode after...");
     id object =[unarchiver decodeObjectForKey:keyName];
     [unarchiver finishDecoding];
     return object;

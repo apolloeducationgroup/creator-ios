@@ -24,7 +24,7 @@
 }
 
 - (DelugeTasks*) execute {
-    NSLog(@"fieldonuser");
+    //NSLog@"fieldonuser");
     return [super execute];
 }
 

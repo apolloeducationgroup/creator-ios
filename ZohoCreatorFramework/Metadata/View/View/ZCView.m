@@ -131,7 +131,7 @@
      }
      @catch (NSException *exception) {
      
-     // //NSLog(@"exp zcview  %@  %@",[exception name],[exception description]);
+     // ////NSLog@"exp zcview  %@  %@",[exception name],[exception description]);
      reporter = [[ZCIssueReporter alloc] initZCIssueReporter:self exception:exception];
      [[[UIApplication sharedApplication] keyWindow] addSubview:reporter.view];
      }
@@ -140,7 +140,7 @@
      }
      }
      
-     //// //NSLog(@"flerelist %@",fieldList);
+     //// ////NSLog@"flerelist %@",fieldList);
      return fieldList;*/
 }
 
@@ -206,7 +206,7 @@
 }
 -(void)submitIssue
 {
-    //// //NSLog(@"EXEPTION OCCURED IN ZCVIEW report issue");
+    //// ////NSLog@"EXEPTION OCCURED IN ZCVIEW report issue");
     
     [reporter.view removeFromSuperview];
     
@@ -256,10 +256,10 @@
 
 - (NSInteger) recordCountFromServer {
     
-    ZCRecordCountFetcher *recordCount = [ZCRecordCountFetcher initRecordCountFetcher:[_application appLinkName] withViewLinkName:_viewLinkName viewParams : _viewParam appOwner:_application.appOwner];
-    _recordCount = [recordCount  recordCount];
+//    ZCRecordCountFetcher *recordCount = [ZCRecordCountFetcher initRecordCountFetcher:[_application appLinkName] withViewLinkName:_viewLinkName viewParams : _viewParam appOwner:_application.appOwner];
+//    _recordCount = [recordCount  recordCount];
     
-    return _recordCount;
+    return -1;
 }
 
 

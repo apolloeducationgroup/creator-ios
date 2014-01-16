@@ -56,7 +56,7 @@
 }
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict   {
     
-    NSLog(@"element name %@",elementName);
+    //NSLog@"element name %@",elementName);
     if(_addElementTag == YES || _updateElementTag==YES || _deleteElementTag == YES ) {
         
         if(_valueElementTag == YES) {
@@ -82,7 +82,7 @@
                     _field = [[ZCFieldData alloc] init];
                     [_field setFieldName:[attributeDict objectForKey:@"name"]];
                     _fieldElementTag = YES;
-                    //// //NSLog(@" field name %@",[_field fieldName]);
+                    //// ////NSLog@" field name %@",[_field fieldName]);
                 }
             }
         }
@@ -90,7 +90,7 @@
         {
             if([elementName isEqualToString:@"url"]) {
                 _openURLURLTag=YES;
-                NSLog(@"openURl url");
+                //NSLog@"openURl url");
                 
             }
             
@@ -102,7 +102,7 @@
         }
         
         else {
-            NSLog(@"Coming to value tag in values  %@",elementName);
+            //NSLog@"Coming to value tag in values  %@",elementName);
             if([elementName isEqualToString:@"values"]) {
                 _valueElementTag = YES;
             }
@@ -118,7 +118,7 @@
                 _openURLTag = YES;
                  _recordStatus.openUrltask= [[OpenUrlTask alloc] init];
                 [_recordStatus.openUrltask setTaskType:@"openurl"];
-                NSLog(@"openurltask_ %@",_recordStatus.openUrltask);
+                //NSLog@"openurltask_ %@",_recordStatus.openUrltask);
 
             }
 
@@ -147,7 +147,7 @@
     }
     else {
         if([elementName isEqualToString:@"add"]) {
-            //// //NSLog(@"Record has Init");
+            //// ////NSLog@"Record has Init");
             _record = [[ZCRecord alloc] initZCRecord];
             _addElementTag = YES;
         }
@@ -183,7 +183,7 @@
                 [_zcRecordError setErrorCode:string];
             }
             else if(_errorMessage==YES) {
-                ////// //NSLog(@"Error Message  %@",string);
+                ////// ////NSLog@"Error Message  %@",string);
                 [_zcRecordError setErrorMessage:string];
             }
         }
@@ -196,7 +196,7 @@
     }
     else if ( _openURLTypeTag==YES)
     {
-        NSLog(@"openurl tag %@",string);
+        //NSLog@"openurl tag %@",string);
         [_recordStatus.openUrltask setWindowType:string];
         _openURLTypeTag=NO;
     }
@@ -206,14 +206,14 @@
     
 //        [_recordStatus.openUrltask setUrlString:string];
         
-        NSLog(@"open URL task url %@",string);
+        //NSLog@"open URL task url %@",string);
         _recordStatus.openUrltask =[ScriptJSONParser setopenURLTaskparameters:_recordStatus.openUrltask urlString:string];
         
         
         _openURLURLTag=NO;
     }
     else if(_statusElementTag == YES) {
-        NSLog(@"Status Element Tag is coming");
+        //NSLog@"Status Element Tag is coming");
         if([string isEqualToString:@"Success"]) {
             [_recordStatus setSuccess:YES];
         }
@@ -235,7 +235,7 @@
                 NSString *errorMessage = [string substringWithRange:range];
                 errorMessage = [errorMessage stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                 ;
-                ////// //NSLog(@"error msggggggg %@",errorMessage);
+                ////// ////NSLog@"error msggggggg %@",errorMessage);
                 
                 NSRange nextrange;
                 NSRange fieldrange = [errorMessage rangeOfString:@"*"];
@@ -247,7 +247,7 @@
                         NSString *errorFieldName = [[errorMessage substringToIndex:fieldrange.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                         NSString *fieldErrorMessage;
                         
-                        ////// //NSLog(@"11 error Fieldname  %@",errorFieldName);
+                        ////// ////NSLog@"11 error Fieldname  %@",errorFieldName);
                         
                         nextrange = [errorMessage rangeOfString:@","];
                         
@@ -257,13 +257,13 @@
                             newRange.length = nextrange.location  - (fieldrange.location-1) - 2;
                             fieldErrorMessage = [errorMessage substringWithRange:newRange];
                             errorMessage = [errorMessage substringFromIndex:nextrange.location+1];
-                            ////// //NSLog(@"Error Message %@",errorMessage);
+                            ////// ////NSLog@"Error Message %@",errorMessage);
                         }
                         else {
                             fieldErrorMessage = [errorMessage substringFromIndex:fieldrange.location+1];
-                            ////// //NSLog(@"Else error mess %@",fieldErrorMessage);
+                            ////// ////NSLog@"Else error mess %@",fieldErrorMessage);
                         }
-                        //  ////// //NSLog(@"errrrrrrrrrr   %@",errorFieldName);
+                        //  ////// ////NSLog@"errrrrrrrrrr   %@",errorFieldName);
                         
                         
                         
@@ -278,7 +278,7 @@
                         
                         
 //                        NSRegularExpression *regexp_View = [NSRegularExpression regularExpressionWithPattern: @"SF(.*\\"options:NSRegularExpressionCaseInsensitive error:NULL];
-//                        NSLog(@"fsa");
+//                        //NSLog@"fsa");
                         
                         
                         if (errorFieldName.length>4) {
@@ -313,7 +313,7 @@
                         ////                        NSPredicate *predicate3 = [NSPredicate predicateWithFormat:@"SELF MATCHES 'singleValuedParam(.*)'"];
                         ////                        BOOL result3=[predicate3 evaluateWithObject:errorFieldName];
                         
-                        ////// //NSLog(@"checked msg \n\n %@  \n\n %@ \n\n %@",errorMessage,errorFieldName,fieldErrorMessage);
+                        ////// ////NSLog@"checked msg \n\n %@  \n\n %@ \n\n %@",errorMessage,errorFieldName,fieldErrorMessage);
                         
                         if ([errorFieldName isEqualToString:@"null"] ) {
                             //----------------------->> supposed to be subform error API mistake  [generalErrorlist addObject:fieldErrorMessage];
@@ -334,7 +334,7 @@
                                     [_zcRecordError addFieldError:fieldError];
                                     
                                     //                                [self getsubform:errorFieldName];
-//                                    NSLog(@"errrr %@ %@  %@",errorFieldName,fieldErrorMessage,fieldError);
+//                                    //NSLog@"errrr %@ %@  %@",errorFieldName,fieldErrorMessage,fieldError);
                                 }
                                 
                             }
@@ -348,14 +348,14 @@
                                 [_zcRecordError addFieldError:fieldError];
                                 
                                 //                                [self getsubform:errorFieldName];
-//                                NSLog(@"errrr %@ %@  %@",errorFieldName,fieldErrorMessage,fieldError);
+//                                //NSLog@"errrr %@ %@  %@",errorFieldName,fieldErrorMessage,fieldError);
 
                             
                             }
                             
                         }
                     }
-                    ////// //NSLog(@" next Range %d",nextrange.length);
+                    ////// ////NSLog@" next Range %d",nextrange.length);
                     
                     
                     
@@ -382,8 +382,8 @@
                 [optionList addObject:string];
             }
             else {
-                //////// //NSLog(@"Setting Value %@",string);
-                //// //NSLog(@"Field value has set");
+                //////// ////NSLog@"Setting Value %@",string);
+                //// ////NSLog@"Field value has set");
                 [_field setFieldValue:string];
             }
         }
@@ -416,7 +416,7 @@
                 }
                 else {
                     if([elementName isEqualToString:@"field"]) {
-                        //// //NSLog(@"Add field to record %@  %@",[_field fieldName],[_field fieldValue]);
+                        //// ////NSLog@"Add field to record %@  %@",[_field fieldName],[_field fieldValue]);
                         [_record addZCFieldData:_field];
                         _fieldElementTag = NO;
                     }
@@ -437,26 +437,26 @@
             if([elementName isEqualToString:@"add"]) {
                 [_record setForm:_form];
                 [_recordStatus setRecord:_record];
-                //// //NSLog(@"Record has setted in status object %@",_record);
+                //// ////NSLog@"Record has setted in status object %@",_record);
                 _addElementTag = NO;
             }
             else if([elementName isEqualToString:@"update"]) {
                 [_record setForm:_form];
                 [_recordStatus setRecord:_record];
-                //// //NSLog(@"Record has setted in status object %@",_record);
+                //// ////NSLog@"Record has setted in status object %@",_record);
                 _updateElementTag = NO;
             }
             
             else if([elementName isEqualToString:@"delete"]) {
                 [_record setForm:_form];
                 [_recordStatus setRecord:_record];
-                //// //NSLog(@"Record has setted in status object %@",_record);
+                //// ////NSLog@"Record has setted in status object %@",_record);
                 _deleteElementTag = NO;
             }
             else if([elementName isEqualToString:@"combinedlookupvalue"]) {
                 [_record setForm:_form];
                 [_recordStatus setRecord:_record];
-                //// //NSLog(@"Record has setted in status object %@",_record);
+                //// ////NSLog@"Record has setted in status object %@",_record);
                 _combinedlookupvalueTag = NO;
             }
             else if([elementName isEqualToString:@"openurl"]) {
@@ -495,7 +495,7 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     
     
-    NSLog(@"record error %@ %@",[_zcRecordError fieldErrorList],[_zcRecordError subFormFieldErrorsDictionary]);
+    //NSLog@"record error %@ %@",[_zcRecordError fieldErrorList],[_zcRecordError subFormFieldErrorsDictionary]);
     
 }
 
@@ -535,7 +535,7 @@
     }
     
     
-    NSLog(@"arr osdfsa %@ %@ %@",fieldName,subformfieldName,rowNum);
+    //NSLog@"arr osdfsa %@ %@ %@",fieldName,subformfieldName,rowNum);
         
     ZCSubFormFieldError * subformFieldError=[[ZCSubFormFieldError alloc ]init];
     [subformFieldError setSubFormLinkname:fieldName];
@@ -543,7 +543,7 @@
     [subformFieldError setFieldName:subformfieldName];
     [subformFieldError setErrorMessage:errorMsg];
     
-    NSLog(@"subformFielderror   \n\n %@  \n\n %@  \n\n  %@ %@",fieldName,rowNum,subformfieldName,errorMsg);
+    //NSLog@"subformFielderror   \n\n %@  \n\n %@  \n\n  %@ %@",fieldName,rowNum,subformfieldName,errorMsg);
     
     [_zcRecordError addSubFormFieldFieldError:subformFieldError];
 }
@@ -569,12 +569,12 @@
 -(void)generateSubformError:(NSString *) OriginalErrorString :(NSString *)errorFieldName
 
 {
-    //  ////// //NSLog(@"result  %i   \n  ",result1,errorFieldName);
+    //  ////// ////NSLog@"result  %i   \n  ",result1,errorFieldName);
     
     // formData(template::row_1).singleValuedParam(Mobile_number)*Enter a valid number for  Mobile number. Email_1*Enter a valid email address for  Email 1
     
     
-NSLog(@"\n\n  eeror mrgsubform    \n\n  %@  \n\n   %@\n\n  \n",OriginalErrorString,errorFieldName);
+//NSLog@"\n\n  eeror mrgsubform    \n\n  %@  \n\n   %@\n\n  \n",OriginalErrorString,errorFieldName);
     
     
     NSRange fieldrange = [OriginalErrorString rangeOfString:errorFieldName];
@@ -582,7 +582,7 @@ NSLog(@"\n\n  eeror mrgsubform    \n\n  %@  \n\n   %@\n\n  \n",OriginalErrorStri
     
     NSRange endrange = [intermediate rangeOfString:@"."];
     
-    ////// //NSLog(@"inter medi   %@     %i",intermediate,endrange.location);
+    ////// ////NSLog@"inter medi   %@     %i",intermediate,endrange.location);
     NSString * ErrorMessageForSubform;
     if (endrange.location<=intermediate.length)
     {
@@ -592,7 +592,7 @@ NSLog(@"\n\n  eeror mrgsubform    \n\n  %@  \n\n   %@\n\n  \n",OriginalErrorStri
         ErrorMessageForSubform=[NSString stringWithString:intermediate];
     
     
-    //  ////// //NSLog(@"final sirn   \n\n\n\n\n %@\n\n\n\n\n\n",ErrorMessageForSubform);
+    //  ////// ////NSLog@"final sirn   \n\n\n\n\n %@\n\n\n\n\n\n",ErrorMessageForSubform);
     
     NSArray *subformParmaRray=[errorFieldName componentsSeparatedByString:@"."];
     
@@ -600,7 +600,7 @@ NSLog(@"\n\n  eeror mrgsubform    \n\n  %@  \n\n   %@\n\n  \n",OriginalErrorStri
     int  formRecordRow;
     NSString * singleValuedParam;
     
-    ////// //NSLog(@"subformparmArray %@ ",subformParmaRray);
+    ////// ////NSLog@"subformparmArray %@ ",subformParmaRray);
     for (int j=0; j<subformParmaRray.count; j++)
         
     {
@@ -646,7 +646,7 @@ NSLog(@"\n\n  eeror mrgsubform    \n\n  %@  \n\n   %@\n\n  \n",OriginalErrorStri
     [subformFieldError setFieldName:singleValuedParam];
     [subformFieldError setErrorMessage:ErrorMessageForSubform];
     
-    ////// //NSLog(@"subformFielderror   \n\n %@  \n\n %i \n\n %@  \n\n  %@",subFormDetails,formRecordRow,singleValuedParam,ErrorMessageForSubform);
+    ////// ////NSLog@"subformFielderror   \n\n %@  \n\n %i \n\n %@  \n\n  %@",subFormDetails,formRecordRow,singleValuedParam,ErrorMessageForSubform);
     
     [_zcRecordError addSubFormFieldFieldError:subformFieldError];
     

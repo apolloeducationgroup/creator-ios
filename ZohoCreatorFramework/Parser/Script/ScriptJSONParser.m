@@ -176,9 +176,9 @@
         }
     }
     
-    NSLog(@"open URLTASK %@",[openurltask urlString]);
-    NSLog(@"open URLTASK %@",[openurltask urlParameters]);
-    NSLog(@"open URLTASK %@",[openurltask application]);
+    //NSLog@"open URLTASK %@",[openurltask urlString]);
+    //NSLog@"open URLTASK %@",[openurltask urlParameters]);
+    //NSLog@"open URLTASK %@",[openurltask application]);
     
     
     
@@ -194,8 +194,8 @@
     
     NSData *jsonData = [_jsonString dataUsingEncoding:NSUTF8StringEncoding];
     id _jsonDictionary= [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
-    NSLog(@"json dict %@",_jsonDictionary);
-    NSLog(@"json dic class %@",[_jsonDictionary class]);
+    //NSLog@"json dict %@",_jsonDictionary);
+    //NSLog@"json dic class %@",[_jsonDictionary class]);
     
     
     if(_jsonDictionary != nil) {
@@ -204,7 +204,7 @@
         for(NSInteger index=0;index<[_jsonDictionary count];index++) {
             
             id delugeTask = [self taskFinder:[_jsonDictionary objectAtIndex:index]];
-            NSLog(@"Task had added");
+            //NSLog@"Task had added");
             if (delugeTask) {
             [_delugeTasks addTaskList:delugeTask];
             }
@@ -216,7 +216,7 @@
                 
             }
 
-            NSLog(@"Task had added");
+            //NSLog@"Task had added");
         }
         }
         else if([_jsonDictionary isKindOfClass:[NSDictionary class]])
@@ -248,7 +248,7 @@
     
     NSString *task = [taskDict objectForKey:@"task"];
     NSInteger taskNumber = [task integerValue];
-    NSLog(@"coming to task Finder %d",taskNumber);
+    //NSLog@"coming to task Finder %d",taskNumber);
     switch (taskNumber) {
             
                         case 1302:
@@ -278,7 +278,7 @@
         case 1002:
             return [self deSelectValueTask:taskDict];
         case 280:
-            NSLog(@"Coming to open Url task parser");
+            //NSLog@"Coming to open Url task parser");
             return [self openUrlTask:taskDict];
         case 71:
             return [self infoTask:taskDict];

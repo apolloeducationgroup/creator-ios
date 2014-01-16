@@ -16,7 +16,7 @@
     if(self) {
         [super setDelugeURL:[URLConstructor subFormAddRow:applicationName:formName:fieldName:paramString]];
         [super setCallerDelegate:delegate];
-        ////// //NSLog(@"Sub Form Add Deluge URL %@",[super delugeURL]);
+        ////// ////NSLog@"Sub Form Add Deluge URL %@",[super delugeURL]);
     }
     return self;
 }

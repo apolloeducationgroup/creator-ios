@@ -57,7 +57,7 @@
     ZCHTMLView *htmlView = [[ZCHTMLView alloc] init];
     [htmlView setHtmlContent:rawHTML];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    //// //NSLog(@"raw html %@",rawHTML);
+    //// ////NSLog@"raw html %@",rawHTML);
     return htmlView;
 }
 

@@ -18,7 +18,7 @@
     if(self)  {
         _events = [[NSMutableArray alloc] init];
         
-        //NSLog(@"events counts is : %d",[_events count]);
+        ////NSLog@"events counts is : %d",[_events count]);
         
         
         _eventsForDate = [[NSMutableDictionary alloc] init];
@@ -45,7 +45,7 @@
 
 - (NSMutableArray *) getEventsDate: (NSDate *) fromDate andToDate: (NSDate *) toDate;
 {
-    //  ////// //NSLog(@"Solai eventsDagetEventsDatete :::: %@ :::: %@ :::: %d :::: ", fromDate, toDate, [_eventsForDate count]);
+    //  ////// ////NSLog@"Solai eventsDagetEventsDatete :::: %@ :::: %@ :::: %d :::: ", fromDate, toDate, [_eventsForDate count]);
     
     NSString *keydate = [_mapDateFormat stringFromDate:fromDate];
     NSMutableArray *eventsDate = [[NSMutableArray alloc] init];

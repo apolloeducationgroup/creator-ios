@@ -49,11 +49,11 @@
     }
     
     if (subformRecords) {
-        NSLog(@"element name %@",elementName);
+        //NSLog@"element name %@",elementName);
         if ([elementName isEqualToString:@"record"])
         {
             
-            //        NSLog(@"attriburte dict %@",attributeDict);
+            //        //NSLog@"attriburte dict %@",attributeDict);
             
             _currentElementName=elementName;
             
@@ -89,7 +89,7 @@
         }
     }
     
-    //    NSLog(@"element name %@",elementName);
+    //    //NSLog@"element name %@",elementName);
     if(_baseType == BASE_RESULT)  {
         
         if(_resultType==RESULT_NONE) {
@@ -190,16 +190,16 @@
         
         if ([_currentElementName isEqualToString:@"value"] )
         {
-            NSLog(@"element valuewwwwwwww %@",string);
+            //NSLog@"element valuewwwwwwww %@",string);
             
             
             ZCFieldData * data=[[ZCFieldData alloc]init];
             [data setFieldName:_subformrecordElementName];
             [data setFieldValue:string];
-            //        NSLog(@"element name subof  %@ %@",_subformElementName,string);
+            //        //NSLog@"element name subof  %@ %@",_subformElementName,string);
             int recordindex=[[subformrecordArray objectAtIndex:numberOfSubformRecords-1]count];
             
-            //        NSLog(@"number of sub recs %i %i %@",numberOfSubformRecords,recordindex,subformrecordArray);
+            //        //NSLog@"number of sub recs %i %i %@",numberOfSubformRecords,recordindex,subformrecordArray);
             [[[subformrecordArray objectAtIndex:numberOfSubformRecords-1]objectAtIndex:recordindex-1 ]addZCFieldData:data];
             
             
@@ -212,14 +212,14 @@
         
         if(_fieldElementType == FIELD_OPTIONS) {
             
-            //// //NSLog(@"new option %d",_newOption);
+            //// ////NSLog@"new option %d",_newOption);
             if(_newOption==YES) {
                 [_optionsListSequence addObject:_currentElementName];
                 [_optionsList addObject:string];
-                // //NSLog(@"Current Option Seq %@",_currentElementName);
-                // //NSLog(@"Current Option Strig %@",string);
+                // ////NSLog@"Current Option Seq %@",_currentElementName);
+                // ////NSLog@"Current Option Strig %@",string);
                 _newOption = NO;
-                NSLog(@"New option end");
+                //NSLog@"New option end");
             }
             else {
                 
@@ -255,7 +255,7 @@
                 [_zcField setCurrencyType:string];
             }
             else if([_currentElementName isEqualToString:@"Initial"]) {
-                NSLog(@"Coming to inital ");
+                //NSLog@"Coming to inital ");
                 NSString *tempInitial = [_zcField initialValues];
                 if(tempInitial != nil) {
 //                    tempInitial = [tempInitial stringByAppendingString:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
@@ -268,9 +268,9 @@
                     tempInitial = string;
 
                 }
-                NSLog(@"Coming out inital %d %@",[_zcField fieldType],[_zcField fieldDisplayName]);
+                //NSLog@"Coming out inital %d %@",[_zcField fieldType],[_zcField fieldDisplayName]);
                 [_zcField setInitialValues:tempInitial];
-                NSLog(@"Coming out inital ");
+                //NSLog@"Coming out inital ");
             }
             
             
@@ -313,7 +313,7 @@
                 if([_zcField relatedComponent] == nil) {
                     _zcField.relatedComponent = [[ZCComponent alloc] init];
                 }
-                // //NSLog(@"Coming to set ref_formname %@",string);
+                // ////NSLog@"Coming to set ref_formname %@",string);
                 [[_zcField relatedComponent] setLinkName:string];
                 //                [[_zcField relatedComponent] setZcApplication:[_zcForm zcApplication]];
             }
@@ -329,14 +329,14 @@
                     _zcField.relatedComponent = [[ZCComponent alloc] init];
                 }
                 [[_zcField relatedComponent] setZcApplication:application];
-                // //NSLog(@"Coming to set app name %@",string);
-                //                // //NSLog(@"app owner name %@",[_zcField ])
+                // ////NSLog@"Coming to set app name %@",string);
+                //                // ////NSLog@"app owner name %@",[_zcField ])
             }
             else if([_currentElementName isEqualToString:@"ref_addtext"]) {
                 [_zcField setAddNewLinkText:string];
             }
             
-            // //NSLog(@"Current element name %@",_currentElementName);
+            // ////NSLog@"Current element name %@",_currentElementName);
             
         }
     }
@@ -403,7 +403,7 @@
     }
     else if(hasSuccessMessage==YES) {
         
-        ////// //NSLog(@"Success Message has set");
+        ////// ////NSLog@"Success Message has set");
         [_zcForm setSuccessMessage:string];
         hasSuccessMessage=NO;
     }
@@ -456,15 +456,15 @@
                 
                 if([elementName isEqualToString:@"Choices"]) {
                     
-                    NSLog(@"Coming to end of choices");
+                    //NSLog@"Coming to end of choices");
                     _optionsList = [FormParserUtil orderChoices:_optionsList:_optionsListSequence];
-                    NSLog(@"Coming to end of choices 1");
+                    //NSLog@"Coming to end of choices 1");
                     NSArray *parsedOptions = [FormParserUtil parseOptions:_optionsList];
-                    NSLog(@"Coming to end of choices 2");
+                    //NSLog@"Coming to end of choices 2");
                     [_zcField setOptions:[parsedOptions objectAtIndex:1]];
-                    NSLog(@"Coming to end of choices 3");
+                    //NSLog@"Coming to end of choices 3");
                     [_zcField setOptionkeys:[parsedOptions objectAtIndex:0]];
-                    NSLog(@"coming end of choices");
+                    //NSLog@"coming end of choices");
                     _fieldElementType = FIELD_NONE;
                 }
                 else if([elementName isEqualToString:@"onChangeExists"]) {
@@ -559,7 +559,7 @@
         [_zcButton setButtonType:64];
         [_zcForm addZCButton:_zcButton];
     }
-    //    NSLog(@"zcfieds subformrecs1111 %i",[subformrecordArray count]);
+    //    //NSLog@"zcfieds subformrecs1111 %i",[subformrecordArray count]);
     
     
     if (subformrecordArray.count) {

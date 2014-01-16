@@ -13,18 +13,18 @@
 - (ZCAppsCategoryListFetcher *)initZCAppsCategoryListFetcher  {
     
     self = [super init];
-    //////// //NSLog(@"Init Applist fetcher");
+    //////// ////NSLog@"Init Applist fetcher");
     if (self) {
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         NSString *zcAppListFile = [ArchiveUtil appListPath];
-        //////// //NSLog(@"Coming to App Fetcher");
+        //////// ////NSLog@"Coming to App Fetcher");
         if([ConnectionChecker isServerActive])
         {
             NSString *myappListURL = [URLConstructor allAppsCategoryListURL];
             URLConnector *fetcher = [[URLConnector alloc] initFetcherPost:myappListURL:[URLConnector GETMETHOD]];
             NSString *xmlString = [fetcher apiResponse];
-            //// //NSLog(@" appList XML : %@",xmlString);
+            //// ////NSLog@" appList XML : %@",xmlString);
             ZCAppsCategoryParser *parser = [[ZCAppsCategoryParser alloc] initZCAppsCategoryParser:xmlString];
             self->_allAppsCategoryList = [parser allAppsCategory];
             [EncodeObject encode:zcAppListFile :@"AllAppsCategoryList" :self->_allAppsCategoryList];

@@ -25,7 +25,7 @@
         
         ZCField *_zcField = [[zcForm fields] objectAtIndex:fieldIndex];
         ZCFieldData *fieldData =  [zcRecord getFieldData:[_zcField fieldName]];
-        ////// //NSLog(@"Vishnu fieldname %@ === %d",[fieldData fieldName],[_zcField fieldType]);
+        ////// ////NSLog@"Vishnu fieldname %@ === %d",[fieldData fieldName],[_zcField fieldType]);
         
         if([_zcField fieldType] == [ZCFieldList ZCSingleLine]) {
             recordString = [recordString stringByAppendingFormat:@"%@&",[NewRecordXML constructSingleField:fieldData]];
@@ -52,7 +52,7 @@
             recordString = [recordString stringByAppendingFormat:@"%@&",[NewRecordXML constructSingleField:fieldData]];
         }
         else if([_zcField fieldType] == [ZCFieldList ZCPercentage]) {
-            ////// //NSLog(@"Coming to ZCPercentage %@",[fieldData fieldValue]);
+            ////// ////NSLog@"Coming to ZCPercentage %@",[fieldData fieldValue]);
             recordString = [recordString stringByAppendingFormat:@"%@&",[NewRecordXML constructSingleField:fieldData]];
         }
         else if([_zcField fieldType] == [ZCFieldList ZCCurrency]) {

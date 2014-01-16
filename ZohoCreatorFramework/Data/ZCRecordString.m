@@ -24,7 +24,7 @@
 
 + (NSString*) newRecordString : (ZCForm*) form : (ZCRecord*) record {
     
-    ////// //NSLog(@"apppppppplication       %@",[form application]);
+    ////// ////NSLog@"apppppppplication       %@",[form application]);
     
     NSMutableArray *fields = [form fields];
     
@@ -69,7 +69,7 @@
         }
     }
     
-    ////// //NSLog(@"return string %@",returnString);
+    ////// ////NSLog@"return string %@",returnString);
     return returnString;
 }
 
@@ -127,7 +127,7 @@
 
 + (NSString*) newUpdateRcordStringXML : (ZCForm*) form : (ZCRecord*) record : (NSString*) viewLinkName {
     
-    NSLog(@"newUpdateRecordStringXML");
+    //NSLog@"newUpdateRecordStringXML");
     NSMutableString *recordXML = [[NSMutableString alloc] init];
     [recordXML appendFormat:@"XMLString=<ZohoCreator><applicationlist><application name='%@'><viewlist><view name='%@'><update>",[[form application] appLinkName],viewLinkName];
     ZCFieldData *fieldData = [record getFieldData:@"ID"];
@@ -388,7 +388,7 @@
         NSInteger fieldType = [field fieldType];
         
         ZCFieldData *fieldData = [[record record] objectForKey:fieldName];
-NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
+//NSLog@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
         
         if([fieldData fieldValue] != nil) {
             
@@ -483,7 +483,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
             else {
                 [returnString appendFormat:@"<value>"];
 
-                //                ////// //NSLog(@"Field Name %@ ==== %@",[fieldData fieldName],[fieldData fieldValue]);
+                //                ////// ////NSLog@"Field Name %@ ==== %@",[fieldData fieldName],[fieldData fieldValue]);
                 
                 NSString* cdata=@"";
                 if([[fieldData fieldValue]isKindOfClass:[NSString class]])
@@ -517,7 +517,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
     }
 }
 
-//    NSLog(@"retu %@",returnString);
+//    //NSLog@"retu %@",returnString);
 //    NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(                                                                                                                NULL,(__bridge CFStringRef) returnString,NULL,CFSTR("!*'();:@&=+$,/?%#[]\" "),kCFStringEncodingUTF8));
 
     return returnString;
@@ -562,7 +562,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
     [recordXML appendFormat:@"</criteria>"];
     [recordXML appendString:@"</duplicate>"];
     [recordXML appendString:@"</view></viewlist></application></applicationlist></ZohoCreator>"];
-    // //NSLog(@"duplicate XML %@",recordXML);
+    // ////NSLog@"duplicate XML %@",recordXML);
     return  recordXML;
 }
 
@@ -578,7 +578,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
         [recordXML appendString:@"</add>"];
     }
     [recordXML appendString:@"</view></viewlist></application></applicationlist></ZohoCreator>"];
-    // //NSLog(@"duplicate XML %@",recordXML);
+    // ////NSLog@"duplicate XML %@",recordXML);
     return  recordXML;
 }
 
@@ -594,7 +594,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
 
 + (NSString*) recordValueXML:(NSDictionary*) fieldDict {
     
-    // //NSLog(@"field Dict %@",fieldDict);
+    // ////NSLog@"field Dict %@",fieldDict);
     NSMutableString *returnString = [NSMutableString string];
     NSEnumerator *fieldEnum = [fieldDict keyEnumerator];
     NSString *fieldName;
@@ -603,7 +603,7 @@ NSLog(@"Vishnu ::::::  %@ %@",[fieldData fieldValue],[fieldData fieldName]);
         ZCFieldData *fieldData = [fieldDict objectForKey:fieldName];
         if(fieldData != nil) {
             id fieldValue = [fieldData fieldValue];
-            // //NSLog(@"field Value %@ %@",fieldValue,[fieldValue class]);
+            // ////NSLog@"field Value %@ %@",fieldValue,[fieldValue class]);
             if(fieldValue != nil) {
                 [returnString appendFormat:@"<field name='%@'>",fieldName];
                 
@@ -671,12 +671,12 @@ form
 //    while(fieldName=[fieldNames nextObject])
 //    {
 //        
-//        //        NSLog(@"fieldname %@",fieldName);
+//        //        //NSLog@"fieldname %@",fieldName);
 //        if(![fieldName isEqualToString:@"ID"])
 //            
 //        {
 //            id fieldValue = [[[record record] objectForKey:fieldName]fieldValue ];
-//            NSLog(@"fieldvalue %@",[fieldValue class]);
+//            //NSLog@"fieldvalue %@",[fieldValue class]);
 //            
 //            if([fieldValue isKindOfClass:[NSString class]] ) {
 //                
@@ -694,7 +694,7 @@ form
 //                [returnString appendFormat:@"<field name='%@'>",fieldName];
 //
 //                NSArray *options =fieldValue;
-//                NSLog(@"option value for update %@",options);
+//                //NSLog@"option value for update %@",options);
 //                [returnString appendString:@"<options>"];
 //                if(options != nil && [options count] > 0 )//&& [options isMemberOfClass:[NSArray class]] )
 //                {
@@ -717,7 +717,7 @@ form
 //                [returnString appendFormat:@"<field name='%@'>",fieldName];
 //                
 //                NSArray *options =[fieldValue allValues];
-//                NSLog(@"option value for update %@",options);
+//                //NSLog@"option value for update %@",options);
 //                [returnString appendString:@"<options>"];
 //                if(options != nil && [options count] > 0 )//&& [options isMemberOfClass:[NSArray class]] )
 //                {
@@ -764,7 +764,7 @@ form
         
         
         
-        //NSLog(@"fieldvaluew %@  ----  %@",[fieldData fieldName],[fieldData fieldValue]);
+        ////NSLog@"fieldvaluew %@  ----  %@",[fieldData fieldName],[fieldData fieldValue]);
         
         
         
@@ -884,7 +884,7 @@ form
                     
                     
                     
-                    ////// //NSLog(@"\n\n subform string %@\n\n",SubFormrecordXML);
+                    ////// ////NSLog@"\n\n subform string %@\n\n",SubFormrecordXML);
                     [subformRECORDSXML appendString:SubFormrecordXML];
                     updatateRecordCount++;
                 }
@@ -901,7 +901,7 @@ form
                     NSString * SubFormRecordString=[NSString stringWithFormat:@"%@", [ZCRecordString recordXMLforSubformRecord:zcSubform :SubFOrmRecord]];
                     [SubFormrecordXML appendString:SubFormRecordString];
                     [SubFormrecordXML appendString:@"</add>"];
-            NSLog(@"\n\n subform string %@\n\n",SubFormrecordXML);
+            //NSLog@"\n\n subform string %@\n\n",SubFormrecordXML);
                     [subformRECORDSXML appendString:SubFormrecordXML];
                     addrecCount++;
                 }
@@ -914,7 +914,7 @@ form
                     [SubFormrecordXML appendFormat:@"<delete ID=\"%@\">",[[[SubFOrmRecord record] objectForKey:@"ID" ]fieldValue] ];
                     
                     [SubFormrecordXML appendString:@"</delete>"];
-                    ////// //NSLog(@"\n\n subform string %@\n\n",SubFormrecordXML);
+                    ////// ////NSLog@"\n\n subform string %@\n\n",SubFormrecordXML);
                     [subformRECORDSXML appendString:SubFormrecordXML];
                     deleteREcordCount++;
                 }
@@ -924,7 +924,7 @@ form
                 [returnString appendString:@"</field>"];
 
                 
-                //                NSLog(@"subformrecord xml riyaz:: %@",subformRECORDSXML);
+                //                //NSLog@"subformrecord xml riyaz:: %@",subformRECORDSXML);
                 
             }
             else if (fieldType ==[ZCFieldList ZCFileupload] || fieldType ==[ZCFieldList ZCImage]|| fieldType ==[ZCFieldList ZCFormula])
@@ -971,7 +971,7 @@ form
             else if([fieldValue isKindOfClass:[NSArray class]]) {
                 
                 NSArray *options =fieldValue;
-                //// //NSLog(@"option value for update %@",options);
+                //// ////NSLog@"option value for update %@",options);
                 [returnString appendString:@"<options>"];
                 if(options != nil && [options count] > 0 )//&& [options isMemberOfClass:[NSArray class]] )
                 {
@@ -1007,7 +1007,7 @@ form
         ZCField *field = [fields objectAtIndex:index];
         NSString *fieldName = [field fieldName];
         NSInteger fieldType = [field fieldType];
-        NSLog(@"fieldnamerecordvaluexml %@", fieldName);
+        //NSLog@"fieldnamerecordvaluexml %@", fieldName);
         
         ZCFieldData *fieldData = [[record record] objectForKey:fieldName];
         
@@ -1018,7 +1018,7 @@ form
                 [returnString appendFormat:@"<field name='%@'>",fieldName];
                 
                 NSArray *options = [fieldData fieldValue];
-                //// //NSLog(@"Option Values %@",options);
+                //// ////NSLog@"Option Values %@",options);
                 [returnString appendString:@"<options>"];
                 if(options != nil )//&& [options isMemberOfClass:[NSArray class]] )
                 {
@@ -1059,7 +1059,7 @@ form
                     {
                         [returnString appendFormat:@"<field name='%@'>",fieldName];
                         
-                        NSLog(@"Field Name %@ ==== %@",[fieldData fieldName],[fieldData fieldValue]);
+                        //NSLog@"Field Name %@ ==== %@",[fieldData fieldName],[fieldData fieldValue]);
                         
                         NSString* cdata = [fieldData fieldValue];
                         
@@ -1078,12 +1078,12 @@ form
             }
             else if(fieldType == [ZCFieldList ZCSubform] || fieldType ==[ZCFieldList ZCNewSubform])
             {
-                NSLog(@"It is a subform");
+                //NSLog@"It is a subform");
                 [returnString appendFormat:@"<field name='%@'>",fieldName];
                 
                 //   ZCField * fieldLocal=[form getFieldByName:[field fieldName]];
                 
-                NSLog(@"record to add %@",[[fieldData fieldValue] recordsToAdd]);
+                //NSLog@"record to add %@",[[fieldData fieldValue] recordsToAdd]);
                 ZCForm * zcSubform=[[fieldData fieldValue]zcSubForm];
 
                 NSMutableArray * subFormRec=[NSMutableArray arrayWithArray:[[fieldData fieldValue] recordsToAdd]];
@@ -1102,7 +1102,7 @@ form
                     NSString * SubFormRecordString=[NSString stringWithFormat:@"%@", [ZCRecordString recordXMLforSubformRecord:zcSubform :SubFOrmRecord]];
                     [SubFormrecordXML appendString:SubFormRecordString];
                     [SubFormrecordXML appendString:@"</add>"];
-                    ////// //NSLog(@"\n\n subform string %@\n\n",SubFormrecordXML);
+                    ////// ////NSLog@"\n\n subform string %@\n\n",SubFormrecordXML);
                     [subformRECORDSXML appendString:SubFormrecordXML];
                     recCount++;
                 }
@@ -1119,7 +1119,7 @@ form
             else {
                 [returnString appendFormat:@"<field name='%@'>",fieldName];
                 
-                NSLog(@"Field Name %@ ==== %@",[fieldData fieldName],[fieldData fieldValue]);
+                //NSLog@"Field Name %@ ==== %@",[fieldData fieldName],[fieldData fieldValue]);
                 
                 NSString* cdata = [fieldData fieldValue];
                 

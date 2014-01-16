@@ -48,7 +48,7 @@
         
         target.location = start.location+start.length;
         
-        NSLog(@"start %@ end %@",NSStringFromRange(start),NSStringFromRange(end));
+        //NSLog@"start %@ end %@",NSStringFromRange(start),NSStringFromRange(end));
         
         if (!start.length == 0 && end.length!=0 )
             
@@ -75,16 +75,16 @@
             
             
             
-            NSLog(@"title length value is :%d",target.length);
+            //NSLog@"title length value is :%d",target.length);
             
             
-            NSLog(@"title gee %@",[xmlString substringWithRange:target]);
+            //NSLog@"title gee %@",[xmlString substringWithRange:target]);
             
             NSString * substringTasksXML=[xmlString substringWithRange:target];
             
             ScriptParser * sParse=[[ScriptParser alloc]initScriptParser:substringTasksXML];
             [_customResponse setDelugeTasks:[sParse delugeTasks]];
-            NSLog(@"deluge task after parse in custom action %@",[sParse delugeTasks].taskList);
+            //NSLog@"deluge task after parse in custom action %@",[sParse delugeTasks].taskList);
             
             
             xmlString =[xmlString stringByReplacingOccurrencesOfString:substringTasksXML withString:@""];
@@ -105,7 +105,7 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict   {
     
-    NSLog(@"did start element name : %@",elementName);
+    //NSLog@"did start element name : %@",elementName);
     
     if(_failureElement==YES) {
         
@@ -159,7 +159,7 @@
             [_customResponse setExecutionType:string];
         }
         else if([_currentElementName isEqualToString:@"SuccessMessage"]) {
-            //// //NSLog(@"Coming to success message");
+            //// ////NSLog@"Coming to success message");
 //            [_customResponse setSuccessMessage:[NSString stringWithCString:[string cStringUsingEncoding:decodeUIChar] encoding:NSUTF8StringEncoding]];
             [_customResponse setSuccessMessage:string];
         }
@@ -167,27 +167,27 @@
 //            [_customResponse setDelugeTasks:nil];
         }
         
-        NSLog(@"g element name : %@ & value : %@",_currentElementName,string);
+        //NSLog@"g element name : %@ & value : %@",_currentElementName,string);
     }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     
-    NSLog(@"did end element name : %@",elementName);
+    //NSLog@"did end element name : %@",elementName);
     
     if(_failureElement==YES) {
         
         if ([elementName isEqualToString:@"Failure"]) {
             [_failureList addObject:_customActionResult];
-                        NSLog(@"failure custom action %@",_failureList);
+                        //NSLog@"failure custom action %@",_failureList);
 
             
 //            _failureElement=NO;
         }
         else if([elementName isEqualToString:@"FailureRecords"]) {
             _failureElement =NO;
-//            NSLog(@"failure custom action %@",_customActionResult);
-            NSLog(@"failure custom action %@",_failureList);
+//            //NSLog@"failure custom action %@",_customActionResult);
+            //NSLog@"failure custom action %@",_failureList);
             [_customResponse setFailureRecordList:_failureList];
         }
     }

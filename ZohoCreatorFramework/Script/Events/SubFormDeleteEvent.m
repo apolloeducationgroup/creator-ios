@@ -17,7 +17,7 @@
         
         
         
-        //NSLog(@"ondelete parm stirng riyaz %@",paramString);
+        ////NSLog@"ondelete parm stirng riyaz %@",paramString);
         
         [super setDelugeURL:[URLConstructor subFormDeleteRow:applicationName:formName:fieldName:paramString]];
         [super setCallerDelegate:delegate];

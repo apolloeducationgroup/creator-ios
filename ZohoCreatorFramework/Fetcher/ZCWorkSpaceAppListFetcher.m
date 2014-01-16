@@ -15,7 +15,7 @@
 - (ZCWorkSpaceAppListFetcher*) initWorkSpaceAppListFetcher:(NSString *)workspaceowner  {
     
     self = [super init];
-    //////// //NSLog(@"Init Applist fetcher");
+    //////// ////NSLog@"Init Applist fetcher");
     if (self) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
@@ -25,7 +25,7 @@
             NSString *myappListURL = [URLConstructor workSpaceAppListURL:workspaceowner];
             URLConnector *fetcher = [[URLConnector alloc] initFetcherPost:myappListURL:[URLConnector GETMETHOD]];
             NSString *xmlString = [fetcher apiResponse];
-            //////// //NSLog(@" appList XML : %@",xmlString);
+            //////// ////NSLog@" appList XML : %@",xmlString);
             ZCApplicationParser *parser = [[ZCApplicationParser alloc ]initApplicationParser:xmlString];
             self->_applicationList = [parser applicationList];
             [EncodeObject encode:zcAppListFile :@"WorkSpaceAppList" :self->_applicationList];        }

@@ -131,7 +131,7 @@
 
 - (ZCComponent*) createComponent : (NSString*) componentLinkName {
     
-    // //NSLog(@"%@",[NSThread callStackSymbols]);
+    // ////NSLog@"%@",[NSThread callStackSymbols]);
     if(_sections == nil) {
         [self getSections:YES];
     }
@@ -156,7 +156,7 @@
 
 - (ZCComponent*) getComponent : (NSString*) componentLinkName {
     
-    NSLog(@"stack zcapp%@",[NSThread callStackSymbols]);
+    //NSLog@"stack zcapp%@",[NSThread callStackSymbols]);
     if(_sections == nil) {
         [self getSections:YES];
     }

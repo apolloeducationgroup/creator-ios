@@ -40,8 +40,8 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict   {
     
-    //    NSLog(@"element name %@",elementName);
-    //    NSLog(@"dict : %@",attributeDict);
+    //    //NSLog@"element name %@",elementName);
+    //    //NSLog@"dict : %@",attributeDict);
     _elementname=Nil;
     if([elementName isEqualToString:@"form"]) {
         
@@ -81,7 +81,7 @@
     
     
     
-    //        NSLog(@"dict : %@",attributeDict);
+    //        //NSLog@"dict : %@",attributeDict);
     //        NSString *recCountString = [attributeDict valueForKey:@"value"];
     //        _recordCount = [recCountString integerValue];
     
@@ -90,7 +90,7 @@
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     
     
-    //    NSLog(@"found char %@",string);
+    //    //NSLog@"found char %@",string);
     
     if([_elementname isEqualToString:@"criteria"] && !_bulkDuplicate) {
         
@@ -99,7 +99,7 @@
         
         [fieldkeyvaluepair setObject:[NSNumber numberWithLongLong:[[array objectAtIndex:1]longLongValue]] forKey:@"CriteriaID"];
         
-        //         NSLog(@"fieldkey calue %@ %@",array,fieldkeyvaluepair);
+        //         //NSLog@"fieldkey calue %@ %@",array,fieldkeyvaluepair);
         
         
     }
@@ -177,7 +177,7 @@
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     
     
-    //    NSLog(@"end element name %@",elementName);
+    //    //NSLog@"end element name %@",elementName);
     
     
 }

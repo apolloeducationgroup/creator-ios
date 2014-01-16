@@ -100,7 +100,7 @@ NSString *stringFromDate = [returnDateFormatter stringFromDate:date_data];
             }
             else if([_currentElementName isEqualToString:@"created_time"]) {
                 string =[self getDateWithFormat:string];
-                NSLog(@"string %@",string);
+                //NSLog@"string %@",string);
                 [_zcApplication setCreatedOn:string];
             }
             else if([_currentElementName isEqualToString:@"sharedBy"]) {

@@ -67,8 +67,8 @@
 //    if(self) {
 //        [super setCallerDelegate:delegate];
 //        [super setDelugeURL:[URLConstructor fieldOnUser:_appLocal :_formLocal:_fieldLocal:paramString]];
-//        //// //NSLog(@"On User URL %@",[super delugeURL]);
-//        //// //NSLog(@"deluge initiated...with app : %@, form : %@, field : %@, param : %@ delegate class : %@",_appLocal,_formLocal,_fieldLocal,paramString,[delegate class]);
+//        //// ////NSLog@"On User URL %@",[super delugeURL]);
+//        //// ////NSLog@"deluge initiated...with app : %@, form : %@, field : %@, param : %@ delegate class : %@",_appLocal,_formLocal,_fieldLocal,paramString,[delegate class]);
 //    }
 //    return self;
 //}

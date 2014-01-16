@@ -32,7 +32,7 @@ static ZOHOUser *userCredential = nil;
         
         NSString *filePath = [ArchiveUtil archiveFilePath:@"Login"];
         ZOHOUser *user = [DecodeObject decode:filePath :@"Login"];
-        //////// //NSLog(@"ZOHO User %@",user);
+        //////// ////NSLog@"ZOHO User %@",user);
         if(user != nil) {
             userCredential = user;
             return userCredential;
@@ -55,10 +55,10 @@ static ZOHOUser *userCredential = nil;
         if([ConnectionChecker isServerActive])
         {
             NSString *accountURL = [URLConstructor accountsURL:userName:password];
-            //// //NSLog(@"Accounts URL %@",accountURL);
+            //// ////NSLog@"Accounts URL %@",accountURL);
             URLConnector *connection = [[URLConnector alloc] initFetcherPost:accountURL :[URLConnector POSTMETHOD] ];
             NSString *accountResponse = [connection apiResponse];
-            //// //NSLog(@"%@",accountResponse);
+            //// ////NSLog@"%@",accountResponse);
             NSRange srange = [accountResponse rangeOfString:@"AUTHTOKEN="];
             NSRange erange = [accountResponse rangeOfString:@"RESULT="];
             NSRange causeRange=[accountResponse rangeOfString:@"CAUSE="];

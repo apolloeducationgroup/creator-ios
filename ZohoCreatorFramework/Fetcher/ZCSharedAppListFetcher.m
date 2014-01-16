@@ -15,17 +15,17 @@
 - (ZCSharedAppListFetcher*) initSharedAppListFetcher  {
     
     self = [super init];
-    //////// //NSLog(@"Init Applist fetcher");
+    //////// ////NSLog@"Init Applist fetcher");
     if (self) {
         
         NSString *zcAppListFile = [ArchiveUtil appListPath];
-        //////// //NSLog(@"Coming to App Fetcher");
+        //////// ////NSLog@"Coming to App Fetcher");
         if([ConnectionChecker isServerActive])
         {
             NSString *myappListURL = [URLConstructor sharedAppListURL];
             URLConnector *fetcher = [[URLConnector alloc] initFetcherPost:myappListURL:[URLConnector GETMETHOD]];
             NSString *xmlString = [fetcher apiResponse];
-            //// //NSLog(@" appList XML : %@",xmlString);
+            //// ////NSLog@" appList XML : %@",xmlString);
             ZCApplicationParser *parser = [[ZCApplicationParser alloc ]initApplicationParser:xmlString];
             self->_applicationList = [parser applicationList];
             [EncodeObject encode:zcAppListFile :@"SharedAppList" :self->_applicationList];
@@ -43,19 +43,19 @@
 - (ZCSharedAppListFetcher*) initSharedAppListFetcherForGroup : (NSString *) groupId  {
     
     self = [super init];
-    //////// //NSLog(@"Init Applist fetcher");
+    //////// ////NSLog@"Init Applist fetcher");
     if (self) {
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
         NSString *zcAppListFile = [ArchiveUtil appListPath];
-        //////// //NSLog(@"Coming to App Fetcher");
+        //////// ////NSLog@"Coming to App Fetcher");
         if([ConnectionChecker isServerActive])
         {
             NSString *myappListURL = [URLConstructor sharedAppListURL:groupId];
             URLConnector *fetcher = [[URLConnector alloc] initFetcherPost:myappListURL:[URLConnector GETMETHOD]];
             NSString *xmlString = [fetcher apiResponse];
-            //// //NSLog(@" appList XML : %@",xmlString);
+            //// ////NSLog@" appList XML : %@",xmlString);
             ZCApplicationParser *parser = [[ZCApplicationParser alloc ]initApplicationParser:xmlString];
             self->_applicationList = [parser applicationList];
             [EncodeObject encode:zcAppListFile :@"SharedAppList" :self->_applicationList];

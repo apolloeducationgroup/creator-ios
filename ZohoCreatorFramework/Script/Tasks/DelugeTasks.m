@@ -25,7 +25,7 @@
     if (task !=nil) {
     [_taskList addObject:task];
     }
-    NSLog(@"tasklist %@",_taskList);
+    //NSLog@"tasklist %@",_taskList);
 
 }
 

@@ -55,7 +55,7 @@
 
 - (ZCFieldData*) getFieldData : (NSString*) fieldName {
     
-    //// //NSLog(@"Record %@",_record);
+    //// ////NSLog@"Record %@",_record);
     return [_record objectForKey:fieldName];
 }
 
@@ -71,7 +71,7 @@
 
 - (ZCRecordStatus*) addRecord {
     
-    NSLog(@"In add record");
+    //NSLog@"In add record");
     if([self->_form application] == nil) {
         [NSException raise:@"Application" format:@"Application Object Missing"];
         return NO;
@@ -83,7 +83,7 @@
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
     
     NSString *response = [urlConnect apiResponse];
-    NSLog(@"addrecord response \n \n %@ \n\n",response);
+    //NSLog@"addrecord response \n \n %@ \n\n",response);
     NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:_form];
     [self setErrorinSubformRecord:[parser recordStatus]];
     return [parser recordStatus];
@@ -143,7 +143,7 @@
 {
 
 
-    NSLog(@"In add record with ViewLinkname");
+    //NSLog@"In add record with ViewLinkname");
     if([self->_form application] == nil) {
         [NSException raise:@"Application" format:@"Application Object Missing"];
         return NO;
@@ -158,7 +158,7 @@
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
     
     NSString *response = [urlConnect apiResponse];
-    NSLog(@"addrecord response \n \n %@ \n\n",response);
+    //NSLog@"addrecord response \n \n %@ \n\n",response);
     NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:_form];
     [self setErrorinSubformRecord:[parser recordStatus]];
     return [parser recordStatus];
@@ -166,7 +166,7 @@
 - (ZCRecordStatus*) addRecordForFormInAddToPickListChildappNamesINORDER:(NSArray *)childappNamesINORDER childFormNameINORDER:(NSArray *)childFormNameINORDER baseFieldNameINORDER:(NSArray *)baseFieldNameINORDER recordID :(NSString *)recID viewLinkname:(NSString *)viewLinkname
  {
     
-    NSLog(@"In add record");
+    //NSLog@"In add record");
     if([self->_form application] == nil) {
         [NSException raise:@"Application" format:@"Application Object Missing"];
         return NO;
@@ -188,7 +188,7 @@
 //    newRecordString = [newRecordString stringByAppendingFormat:@"&zc_lookupCount=%i",childFormNameINORDER.count];
 //    newRecordString = [newRecordString stringByAppendingFormat:@"&formAccessType=5"];
 //    
-//    NSLog(@"recLinkID %@ %@",recID,viewLinkname);
+//    //NSLog@"recLinkID %@ %@",recID,viewLinkname);
 //    if (recID.length) {
 //        newRecordString = [newRecordString stringByAppendingFormat:@"&recLinkID=%@",recID];
 //    }
@@ -206,7 +206,7 @@
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:newRecord :newRecordString :[URLConnector POSTMETHOD]];
     
     NSString *response = [urlConnect apiResponse];
-    NSLog(@"addrecord response \n \n %@ \n\n",response);
+    //NSLog@"addrecord response \n \n %@ \n\n",response);
     NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:_form];
      [self setErrorinSubformRecord:[parser recordStatus]];
     return [parser recordStatus];
@@ -228,11 +228,11 @@
     [idFieldData setFieldValue:self.recordID];
     [self addZCFieldData:idFieldData];
     updateRecordString = [updateRecordString stringByAppendingFormat:@"&%@",[ZCRecordString newUpdateRcordStringXML:self->_form :self :viewLinkName]];
-    NSLog(@"Update record string %@",updateRecordString);
+    //NSLog@"Update record string %@",updateRecordString);
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:updateRecord :updateRecordString :[URLConnector POSTMETHOD]];
     NSString *response = [urlConnect apiResponse];
     NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:_form];
-    NSLog(@"%@",[parser recordStatus]);
+    //NSLog@"%@",[parser recordStatus]);
     [self setErrorinSubformRecord:[parser recordStatus]];
     return [parser recordStatus];
 }
@@ -249,10 +249,10 @@
     NSString *deleteRecord = [URLConstructor writeURL];
     NSString *deleteCriteriaString = [URLConstructor postAuthTokenWithAppOwner];
     deleteCriteriaString = [deleteCriteriaString stringByAppendingFormat:@"&%@",[ZCRecordString deleteRecordStringXML:self->_form :self]];
-    //// //NSLog(@"Coming to delete %@",deleteCriteriaString);
+    //// ////NSLog@"Coming to delete %@",deleteCriteriaString);
     URLConnector *urlConnect = [[URLConnector alloc] initFetcherPostParam:deleteRecord :deleteCriteriaString :[URLConnector POSTMETHOD]];
     NSString *response = [urlConnect apiResponse];
-    //// //NSLog(@"Response XML %@",response);
+    //// ////NSLog@"Response XML %@",response);
     NewRecordParser *parser = [[NewRecordParser alloc] initRecordParser:response:_form];
     return [parser recordStatus];
 }
@@ -270,24 +270,24 @@
                 
                 NSString *uploadURL = [URLConstructor uploadURL:[self.form.application appLinkName] :[self.form linkName] :fieldName :recordID :@"file" :[self.form.application appOwner]viewLinkname:viewLinkname];
                 
-                NSLog(@"file name %@",fieldName);
-                NSLog(@"URL for Image Upload   %@",uploadURL);
+                //NSLog@"file name %@",fieldName);
+                //NSLog@"URL for Image Upload   %@",uploadURL);
                 
                 
                 URLConnector *url = [[URLConnector alloc] initFetcherPostImage:uploadURL :newImage :[URLConnector MULTIPARTPOST]];
-                NSLog(@" Image Response %@",[url apiResponse]);
+                //NSLog@" Image Response %@",[url apiResponse]);
             }
             
             else {
                 
                 NSString *uploadURL = [URLConstructor uploadURL:[self.form.application appLinkName] :[self.form linkName] :fieldName :recordID :@"file" :[self.form.application appOwner]viewLinkname:viewLinkname];
                 
-                NSLog(@"file name %@",fieldName);
+                //NSLog@"file name %@",fieldName);
                 
                 uploadURL=[uploadURL stringByAppendingString:@"&operation=delete"];
-                NSLog(@"URL for Image Upload  delete  %@",uploadURL);
+                //NSLog@"URL for Image Upload  delete  %@",uploadURL);
                 URLConnector *url = [[URLConnector alloc] initFetcherPostImage:uploadURL :Nil :[URLConnector MULTIPARTPOST]];
-                NSLog(@" Image Response %@",[url apiResponse]);
+                //NSLog@" Image Response %@",[url apiResponse]);
             }
 
         }
@@ -301,7 +301,7 @@
 
 - (BOOL)  uploadFiles : (NSString*) recordID viewLinkname:(NSString *)viewLinkname {
     
-    NSLog(@"Coming to upload files11111");
+    //NSLog@"Coming to upload files11111");
     
     NSArray *imageFields = [self.form getFileUploadFields];
     if(imageFields != nil && imageFields.count > 0) {
@@ -314,11 +314,11 @@
                 
                 NSString *uploadURL = [URLConstructor uploadURL:[self.form.application appLinkName] :[self.form linkName] :fieldName :recordID :@"file" :[self.form.application appOwner] viewLinkname:viewLinkname];
                 
-                //NSLog(@"image upload url riyaz :: %@",uploadURL);
+                ////NSLog@"image upload url riyaz :: %@",uploadURL);
                 
                 
                 URLConnector *url = [[URLConnector alloc] initFetcherPostImage:uploadURL :newImage :[URLConnector MULTIPARTPOST]];
-                NSLog(@" Image Response %@",[url apiResponse]);
+                //NSLog@" Image Response %@",[url apiResponse]);
             }
         }
     }

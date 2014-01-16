@@ -34,7 +34,7 @@
 
 - (ZCRecord*) getRecord {
     
-    //// //NSLog(@"record object %@",_record);
+    //// ////NSLog@"record object %@",_record);
     return _record;
 }
 

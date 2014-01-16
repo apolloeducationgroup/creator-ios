@@ -36,30 +36,30 @@
 - (void) convertJSONToZCForm
 {
     @try {
-        NSLog(@"Coming to JSON Parser");
+        //NSLog@"Coming to JSON Parser");
         NSData* jsonData = [_jsonString dataUsingEncoding:NSUTF8StringEncoding];
 //        NSData *jsonData = [_jsonString dataUsingEncoding:[NSString defaultCStringEncoding]];
-        NSLog(@"jsondata %@",jsonData);
+        //NSLog@"jsondata %@",jsonData);
         _jsonDictionary= [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
         if(_jsonDictionary != nil) {
-            NSLog(@"Coming inside");
+            //NSLog@"Coming inside");
             NSDictionary *_responseDict = [_jsonDictionary objectForKey:@"response"];
             [self getFormGeneralInfo:_responseDict];
             NSArray *_buttonRawList = [_responseDict objectForKey:@"buttons"];
             if ([_responseDict objectForKey:@"captcha"]) {
                 [_zcForm setIsNotSupported:YES];
             }
-            NSLog(@"_button Raw Info %@",[_buttonRawList class]);
+            //NSLog@"_button Raw Info %@",[_buttonRawList class]);
             [self getButtonInfo:_buttonRawList];
             NSArray *_fieldRawList = [_responseDict objectForKey:@"fields"];
-            NSLog(@"Coming to fetch getFieldInfo");
+            //NSLog@"Coming to fetch getFieldInfo");
             [self getFieldInfo:_fieldRawList :_zcForm];
 
         }
     }
     @catch (NSException *exception) {
         
-        NSLog(@"Exception occ IN FORM PARSING %@",exception);
+        //NSLog@"Exception occ IN FORM PARSING %@",exception);
         _zcForm.exceptionOccuredInFetching =[[ZCException alloc]initWithException:exception inClass:[self description]];
     }
 }
@@ -91,7 +91,7 @@
     
     
     id temp = [formGeneralDict valueForKey:@"hasaddonload"];
-    NSLog(@"type of on laod %@",[temp class]);
+    //NSLog@"type of on laod %@",[temp class]);
     
     BOOL _hasOnLoad = [[formGeneralDict valueForKey:@"hasaddonload"] boolValue];
     BOOL _haseditOnload = [[formGeneralDict valueForKey:@"haseditonload"] boolValue];
@@ -99,7 +99,7 @@
     [_zcForm setHasOnLoad:_hasOnLoad];
     [_zcForm setHasEditOnLoad:_haseditOnload];
     /*
-     NSLog(@"Cominf IOnnnnnnn");
+     //NSLog@"Cominf IOnnnnnnn");
      
      if([_hasOnLoad isEqualToString:@"0"]) {
      [_zcForm setHasOnLoad:NO];
@@ -107,7 +107,7 @@
      else {
      [_zcForm setHasOnLoad:YES];
      }
-     NSLog(@"Coming outtttt");
+     //NSLog@"Coming outtttt");
      
      */
     
@@ -119,7 +119,7 @@
         [_zcForm setIsStateful:NO];
     }
     
-    NSLog(@"json Dic %@",_jsonDictionary);
+    //NSLog@"json Dic %@",_jsonDictionary);
 }
 
 
@@ -141,11 +141,11 @@
         [_button setButtonActionType:[_buttonActType integerValue]];
         NSInteger buttonInt = [_buttonType integerValue];
         [_button setButtonType:buttonInt];
-        NSLog(@"button type %d",buttonInt);
+        //NSLog@"button type %d",buttonInt);
         
         [_button setSequence:[_sequenceNum integerValue]];
         [_zcForm addZCButton:_button];
-        NSLog(@"Button has added %@",[_button buttonDisplayName]);
+        //NSLog@"Button has added %@",[_button buttonDisplayName]);
     }
 }
 -(BOOL)subformHASUnsupportedFields:(ZCField *)field
@@ -190,6 +190,14 @@
         
         NSString *_fieldTypeRawString = [_fieldDict objectForKey:@"type"];
         [_field setFieldType:[_fieldTypeRawString integerValue]];
+        
+        
+        
+        if ([_field fieldType]==[ZCFieldList ZCPayment] || [_field fieldType]==[ZCFieldList ZCCrm])
+        {
+        
+            _zcForm.isNotSupported=YES;
+        }
         
         
         
@@ -362,12 +370,12 @@
 
         if ([_field fieldType]!=[ZCFieldList ZCSubform] && [_field fieldType]!=[ZCFieldList ZCNewSubform]) {
         tempValue = [_fieldDict objectForKey:@"refapplication"];
-        NSLog(@"ref application %@",tempValue);
+        //NSLog@"ref application %@",tempValue);
         if(tempValue != nil) {
             ZCApplication *_refApp = [[ZCApplication alloc] init];
             [_refApp setAppDisplayName:tempValue];
             [_refApp setAppLinkName:tempValue];
-            NSLog(@"Application Owner %@",[_application appOwner]);
+            //NSLog@"Application Owner %@",[_application appOwner]);
             [_refApp setAppOwner:[_application appOwner]];
             
             tempValue = [_fieldDict objectForKey:@"refform"];
@@ -400,13 +408,13 @@
             
             [_subFormData.fields removeObjectsAtIndexes:notesindexSet];
             [_field setSubForm:_subFormData];
-            NSLog(@"SubForm Data has added");
+            //NSLog@"SubForm Data has added");
         }
         
         
         
         tempValue = [_fieldDict objectForKey:@"value"];
-        NSLog(@"test log riyaz value tag starts %@",tempValue);
+        //NSLog@"test log riyaz value tag starts %@",tempValue);
         if(tempValue != nil) {
 //            [_field setInitialValues:tempValue];
 
@@ -477,7 +485,7 @@
 
         }
         
-        NSLog(@"test log riyaz value tag ends %@",tempValue);
+        //NSLog@"test log riyaz value tag ends %@",tempValue);
 
         tempValue = [_fieldDict objectForKey:@"subformrecords"];
         if(tempValue != nil) {
@@ -486,19 +494,19 @@
 
         
         }
-        NSLog(@"field initial val %@  %@",_field.initialValues, _field.fieldName);
+        //NSLog@"field initial val %@  %@",_field.initialValues, _field.fieldName);
 
         if (SUBFORMTAG)
         {
             
-            NSLog(@"subform tag");
+            //NSLog@"subform tag");
             
             if ( [self subformHASUnsupportedFields:_field])
             {
                 
                 [_zcForm setIsNotSupported:YES];
                 
-                NSLog(@"form is not supported");
+                //NSLog@"form is not supported");
                 //    [NSException raise:@"Form not Supported" format:@" FORM NOT SUPPORTED DUE TO UNSUPPORTED SUBFORM FIELDS"];
                 
             }
@@ -580,7 +588,7 @@
     if (type==[ZCFieldList ZCMultiSelect] || type ==[ZCFieldList ZCCheckbox] || type ==[ZCFieldList ZCLookupCheckbox] || type==[ZCFieldList ZCLookupMultiSelect]  || type==[ZCFieldList ZCRadio] || type==[ZCFieldList ZCDropdown] ) {
         
         
-        NSLog(@"dta %@ %@",[fieldValue class],fieldValue);
+        //NSLog@"dta %@ %@",[fieldValue class],fieldValue);
         id jsonArray;
         if ([fieldValue isKindOfClass:[NSString class]]) {
         NSData *jsonData = [fieldValue dataUsingEncoding:NSUTF8StringEncoding];
@@ -595,7 +603,7 @@
         {
             jsonArray=[NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)fieldValue];
         }
-        NSLog(@"json array riyaz %@ %@",fieldname,jsonArray);
+        //NSLog@"json array riyaz %@ %@",fieldname,jsonArray);
 //        NSMutableDictionary * choicesDict=[[NSMutableDictionary alloc]init];
 //        for (NSDictionary * choiceDic in jsonArray ) {
 //            [choicesDict setValue:[choiceDic objectForKey:@"value"] forKey:[choiceDic objectForKey:@"key"]];            

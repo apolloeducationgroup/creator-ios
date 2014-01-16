@@ -41,7 +41,7 @@ static NSString *SERVICE_NAME;
     formURL = [formURL stringByAppendingString:@"&metaData=complete&zcRefValue=true"];
     
     
-    NSLog(@"frm URL %@",appOwner);
+    //NSLog@"frm URL %@",appOwner);
     //    formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
     return formURL;
 }
@@ -74,7 +74,7 @@ static NSString *SERVICE_NAME;
     //    formURL = [formURL stringByAppendingFormat:@"&zc_lookupCount=%i",childFormNameINORDER.count];
     //    formURL = [formURL stringByAppendingFormat:@"&formAccessType=5"];
     //
-    //    NSLog(@"recLinkID %@ %@",recID,viewLinkname);
+    //    //NSLog@"recLinkID %@ %@",recID,viewLinkname);
     //    if (recID.length) {
     //        formURL = [formURL stringByAppendingFormat:@"&recLinkID=%@",recID];
     //    }
@@ -113,7 +113,7 @@ static NSString *SERVICE_NAME;
     appList = [[URLConstructor serverURL:false] stringByAppendingString:appList];
     appList = [URLConstructor appendAuthToken:appList];
     appList = [appList stringByAppendingString:@"&action=license"];
-    NSLog(@"gee appListURL %@",appList);
+    //NSLog@"gee appListURL %@",appList);
     
     return appList;
 }
@@ -125,7 +125,7 @@ static NSString *SERVICE_NAME;
     appList = [[URLConstructor serverURL:false] stringByAppendingString:appList];
     appList = [URLConstructor appendAuthToken:appList];
     appList = [appList stringByAppendingString:@"&action=license"];
-    NSLog(@"gee1 sharedAppListURL %@",appList);
+    //NSLog@"gee1 sharedAppListURL %@",appList);
     
     return appList;
 }
@@ -136,7 +136,7 @@ static NSString *SERVICE_NAME;
     appList = [[URLConstructor serverURL:false] stringByAppendingString:appList];
     appList = [URLConstructor appendAuthToken:appList];
     appList = [appList stringByAppendingFormat:@"&groupid=%@",groupid];
-    NSLog(@"gee2 sharedAppListURL %@",appList);
+    //NSLog@"gee2 sharedAppListURL %@",appList);
     
     return appList;
 }
@@ -148,7 +148,7 @@ static NSString *SERVICE_NAME;
     appList = [URLConstructor appendAuthToken:appList];
     appList = [appList stringByAppendingString:@"&action=license"];
     appList = [appList stringByAppendingFormat:@"&workSpaceOwner=%@",workspaceowner];
-    NSLog(@"gee3 workSpaceAppListURL %@",appList);
+    //NSLog@"gee3 workSpaceAppListURL %@",appList);
     
     return appList;
 }
@@ -158,7 +158,7 @@ static NSString *SERVICE_NAME;
     NSString *appList = @"/api/xml/allappscategory/";
     appList = [[URLConstructor serverURL:false] stringByAppendingString:appList];
     appList = [URLConstructor appendAuthToken:appList];
-    NSLog(@"gee allAppsCategoryListURL %@",appList);
+    //NSLog@"gee allAppsCategoryListURL %@",appList);
     
     return appList;
 }
@@ -170,7 +170,7 @@ static NSString *SERVICE_NAME;
     sectionMeta = [URLConstructor appendAuthToken:sectionMeta];
     sectionMeta = [sectionMeta stringByAppendingFormat:@"&sharedBy=%@",appOwner];
     
-    //// //NSLog(@"Section Meta URL %@",sectionMeta);
+    //// ////NSLog@"Section Meta URL %@",sectionMeta);
     return sectionMeta;
 }
 
@@ -234,7 +234,7 @@ static NSString *SERVICE_NAME;
     downloadURL = [[URLConstructor serverURL:false] stringByAppendingString:downloadURL];
     downloadURL = [URLConstructor appendAuthToken:downloadURL];
     
-    NSLog(@"image download url %@",downloadURL);
+    //NSLog@"image download url %@",downloadURL);
     return downloadURL;
 }
 
@@ -327,7 +327,7 @@ static NSString *SERVICE_NAME;
     
     NSString *formURL = [NSString stringWithFormat:@"sharedBy=%@&linkNameBased=true&appLinkName=%@&formLinkName=%@&",appOwner,appLinkName,formLinkName];
     formURL = [URLConstructor appendAuthToken:formURL];
-    NSLog(@"new json url %@",formURL);
+    //NSLog@"new json url %@",formURL);
     //    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     return formURL;
 }
@@ -341,7 +341,7 @@ static NSString *SERVICE_NAME;
       formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",paramString];
 
     formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
-    //// //NSLog(@"On load URL %@",formURL);
+    //// ////NSLog@"On load URL %@",formURL);
     
     return formURL;
 }
@@ -355,7 +355,7 @@ static NSString *SERVICE_NAME;
 
 //    formURL = [formURL stringByAppendingFormat:@"&xmlString=%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     formURL = [formURL stringByAppendingFormat:@"&sharedBy=%@",appOwner];
-    //// //NSLog(@"On Edit URL %@",formURL);
+    //// ////NSLog@"On Edit URL %@",formURL);
     return formURL;
 }
 
@@ -423,7 +423,7 @@ https://creator.zoho.com/generateJSAPI.do?
     }
     
     
-    NSLog(@"came here subform onuser %@  riyaz::",formURL);
+    //NSLog@"came here subform onuser %@  riyaz::",formURL);
     formURL=[formURL stringByAppendingFormat:@"&subformFieldName=%@",subformFieldname];
     
     formURL=[formURL stringByAppendingFormat:@"&rowseqid=t::row_%i",rownum];
@@ -638,7 +638,7 @@ https://creator.zoho.com/generateJSAPI.do?
     
     NSString *formURL = [NSString stringWithFormat:@"sharedBy=%@&linkNameBased=true&appLinkName=%@&formLinkName=%@&buttonName=%@&",appOwner,appLinkName,formLinkName,buttonName];
     formURL = [URLConstructor appendAuthToken:formURL];
-    NSLog(@"forURL %@",formURL);
+    //NSLog@"forURL %@",formURL);
     if(paramString != nil) {
         
 //        formURL = [formURL stringByAppendingFormat:@"%@",[paramString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
@@ -646,7 +646,7 @@ https://creator.zoho.com/generateJSAPI.do?
         
     }
     
-    NSLog(@"forURL %@",formURL);
+    //NSLog@"forURL %@",formURL);
     return formURL;
     
     
@@ -727,7 +727,7 @@ https://creator.zoho.com/generateJSAPI.do?
     //
     NSString * authenticationUrl=[NSString stringWithFormat:@"%@/login?scopes=ZohoCreator/creatorapi,ZohoContacts/photoapi&serviceurl=%@&hide_fp=false&hide_remember=true&hide_signup=true&hide_gsignup=false&hidegooglesignin=false",[URLConstructor accountsURL],[URLConstructor serverURL:YES]];
     
-    NSLog(@"auth riyaz url :: %@",authenticationUrl);
+    //NSLog@"auth riyaz url :: %@",authenticationUrl);
     //    NSString * authenticationUrl=[NSString stringWithFormat:@"https://accounts.zoho.com/login?scopes=JProxy/jmobileapi,ZohoShow/DataAPI&serviceurl=https://creator.zoho.com&hide_fp=false&hide_remember=true&hide_gsignup=false&hidegooglesignin=false&getticket=true"];
     
     //        hide_remember (true / false) - Used to hide Keep me Signed in option.
@@ -804,30 +804,30 @@ https://creator.zoho.com/generateJSAPI.do?
 {
     NSString * paramString=[[NSString alloc]init];
     paramString=[paramString stringByAppendingString:[URLConstructor postAuthToken]];
-    NSLog(@"param  string %@",paramString);
+    //NSLog@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingString:params];
     
     paramString =[paramString stringByAppendingFormat:@"&sharedBy=%@",appOwner];
-    //    NSLog(@"param  string %@",paramString);
+    //    //NSLog@"param  string %@",paramString);
     
     
     paramString =[paramString stringByAppendingFormat:@"&appLinkName=%@",appLinkName];
-    //    NSLog(@"param  string %@",paramString);
+    //    //NSLog@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingFormat:@"&formLinkName=%@",formLinkName];
-    //    NSLog(@"param  string %@",paramString);
+    //    //NSLog@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingFormat:@"&linkNameBased=true"];
-    //    NSLog(@"param  string %@",paramString);
+    //    //NSLog@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingFormat:@"&rowactiontype=onaddrow"];
-    //    NSLog(@"param  string %@",paramString);
+    //    //NSLog@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingFormat:@"&rowseqid=t::row_%i",numberofsubformEntries];
-    //    NSLog(@"param  string %@",paramString);
+    //    //NSLog@"param  string %@",paramString);
     
-    //    NSLog(@"param  string %@",paramString);
+    //    //NSLog@"param  string %@",paramString);
     
     
     //        [param appendFormat:@"&rowseqid=t::row_%i",records.count];
@@ -843,25 +843,25 @@ https://creator.zoho.com/generateJSAPI.do?
 +(NSString *)subFormONDELETERowWithAppLinkname:(NSString *)appLinkName formLinkName:(NSString *)formLinkName fieldLinkName:(NSString *)fieldLinkName deleteRowNumber:(int)deleteRowNumber appOwner:(NSString *)appOwner recordParm:(NSString *)params {
     NSString * paramString=[[NSString alloc]init];
     paramString=[paramString stringByAppendingString:[URLConstructor postAuthToken]];
-    //    NSLog(@"param  string %@",paramString);
+    //    //NSLog@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingString:params];
     
     paramString =[paramString stringByAppendingFormat:@"&sharedBy=%@",appOwner];
-    //    NSLog(@"param  string %@",paramString);
+    //    //NSLog@"param  string %@",paramString);
     
     
     paramString =[paramString stringByAppendingFormat:@"&appLinkName=%@",appLinkName];
-    //    NSLog(@"param  string %@",paramString);
+    //    //NSLog@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingFormat:@"&formLinkName=%@",formLinkName];
-    //    NSLog(@"param  string %@",paramString);
+    //    //NSLog@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingFormat:@"&linkNameBased=true"];
-    //    NSLog(@"param  string %@",paramString);
+    //    //NSLog@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingFormat:@"&rowactiontype=ondeleterow"];
-    //    NSLog(@"param  string %@",paramString);
+    //    //NSLog@"param  string %@",paramString);
     
     paramString =[paramString stringByAppendingFormat:@"&rowseqid=t::row_%i",deleteRowNumber];
     

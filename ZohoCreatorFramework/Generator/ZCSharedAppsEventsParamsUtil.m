@@ -16,7 +16,7 @@
     
     
     
-    NSLog(@"riyaz lookup %@",fields);
+    //NSLog@"riyaz lookup %@",fields);
     
         NSMutableArray *childappNamesINORDER=[[NSMutableArray alloc]init];
         NSMutableArray *childFormNameINORDER=[[NSMutableArray alloc]init];
@@ -27,7 +27,7 @@
           ZCField * field=  [fields objectAtIndex:index-1];
             ZCForm * form=[forms objectAtIndex:index -1];
             ZCApplication * app=[apps objectAtIndex:index -1];
-         NSLog(@"field linkname  addtopic %@  form %@ %@",field.relatedComponent.linkName,field.relatedComponent.zcApplication.appLinkName,field.fieldName);
+         //NSLog@"field linkname  addtopic %@  form %@ %@",field.relatedComponent.linkName,field.relatedComponent.zcApplication.appLinkName,field.fieldName);
     
     
             [childappNamesINORDER addObject:[app appLinkName]];
@@ -111,7 +111,7 @@ zc_childlabelname_1:Lookup_plus_add
 zc_childlabelname_2:xxxx
 
     */
-    NSLog(@"recLinkID %@ %@",recordID,viewLinkname);
+    //NSLog@"recLinkID %@ %@",recordID,viewLinkname);
     if (recordID.length) {
         paramString = [paramString stringByAppendingFormat:@"&recLinkID=%@",recordID];
     }

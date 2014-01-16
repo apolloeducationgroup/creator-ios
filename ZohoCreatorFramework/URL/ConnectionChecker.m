@@ -31,12 +31,12 @@
     
     BOOL isReachable = flags & kSCNetworkFlagsReachable;
     if (isReachable) {
-        // //////// //NSLog(@"isReachable YES");
+        // //////// ////NSLog@"isReachable YES");
     }
     else {
-        // //////// //NSLog(@"isReachable NO");
+        // //////// ////NSLog@"isReachable NO");
     }
-    NSLog(@"Rechablity %d",isReachable);
+    //NSLog@"Rechablity %d",isReachable);
     return isReachable;
 }
 
