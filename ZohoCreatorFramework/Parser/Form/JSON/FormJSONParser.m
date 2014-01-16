@@ -224,7 +224,7 @@
         if(tempValue != nil) {
             [_field setHasfilter:[tempValue boolValue]];
         }
-        tempValue = [_fieldDict objectForKey:@"isHidden"];
+        tempValue = [_fieldDict objectForKey:@"ishidden"];
         if(tempValue != nil) {
             [_field setIsHiddenField:[tempValue boolValue]];
         }

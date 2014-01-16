@@ -1052,7 +1052,7 @@ form
                 [returnString appendString:@"</field>"];
                 
             }
-            else if(fieldType == [ZCFieldList ZCFileupload] || fieldType == [ZCFieldList ZCImage]) {
+            else if(fieldType == [ZCFieldList ZCFileupload] || fieldType == [ZCFieldList ZCImage] ) {
                 
                 
                 if ( [[fieldData fieldValue]isKindOfClass:[NSString class]])
@@ -1111,6 +1111,10 @@ form
                 
                 [returnString appendString:@"</field>"];
                 
+            }
+            else if (fieldType ==[ZCFieldList ZCFormula])
+            {
+            
             }
             else {
                 [returnString appendFormat:@"<field name='%@'>",fieldName];

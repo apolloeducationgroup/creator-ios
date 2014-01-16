@@ -682,7 +682,7 @@
                 
                 if(customFilterList != nil &&  [customFilterList count] > 0) {
                     customFilter = [[ZCViewCustomFilter alloc] init];
-                    [customFilter setDisplayName:@"All Records"];
+                    [customFilter setDisplayName:_zcView.viewDisplayName];
                     [customFilter setFilterID:nil];
                     [customFilterList insertObject:customFilter atIndex:0];
                 }
