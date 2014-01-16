@@ -46,6 +46,9 @@
             NSDictionary *_responseDict = [_jsonDictionary objectForKey:@"response"];
             [self getFormGeneralInfo:_responseDict];
             NSArray *_buttonRawList = [_responseDict objectForKey:@"buttons"];
+            if ([_responseDict objectForKey:@"captcha"]) {
+                [_zcForm setIsNotSupported:YES];
+            }
             NSLog(@"_button Raw Info %@",[_buttonRawList class]);
             [self getButtonInfo:_buttonRawList];
             NSArray *_fieldRawList = [_responseDict objectForKey:@"fields"];

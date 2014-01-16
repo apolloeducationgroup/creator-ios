@@ -61,6 +61,24 @@
     }
 }
 
+-(NSString *)getDateWithFormat:(NSString *)date
+{
+    
+    
+  NSDateFormatter *commingDateFormat  = [[NSDateFormatter alloc] init];
+    [commingDateFormat setDateFormat:@"yyyy-MM-dd HH:mm:sss.S"];
+    NSDateFormatter *returnDateFormatter  = [[NSDateFormatter alloc] init];
+    [returnDateFormatter setDateFormat:@"MMM dd, yyyy"];
+NSDate *date_data=[commingDateFormat dateFromString:date];
+
+    
+NSString *stringFromDate = [returnDateFormatter stringFromDate:date_data];
+
+    
+    return stringFromDate;
+    
+}
+
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     
     if(_elementType==APPLICATION_LIST_TAG)  {
@@ -81,6 +99,8 @@
                 [_zcApplication setAppDisplayName:string];
             }
             else if([_currentElementName isEqualToString:@"created_time"]) {
+                string =[self getDateWithFormat:string];
+                NSLog(@"string %@",string);
                 [_zcApplication setCreatedOn:string];
             }
             else if([_currentElementName isEqualToString:@"sharedBy"]) {
