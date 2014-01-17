@@ -82,9 +82,6 @@
     [recordXML appendString:@"</add></form></formlist></application></applicationlist></ZohoCreator>"];
     return  recordXML;
 }
-
-
-
 + (NSString*) newRecordStringXMLWithViewLinkname:(NSString *)viewLinkname form: (ZCForm*) form  record: (ZCRecord*) record  {
     
     NSMutableString *recordXML = [[NSMutableString alloc] init];
@@ -805,7 +802,7 @@ form
 
                         //[returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
                         if(optionValue != nil) {
-                            [returnString appendFormat:@"<option>%@</option>",escapedString];
+                            [returnString appendFormat:@"<option><![CDATA[%@]]></option>",escapedString];
                         }
                     }
                 }
@@ -982,7 +979,7 @@ form
                         optionValue =[ZCEncodeUtil encodeStringUsingUT8:optionValue];
 
                         if(optionValue != nil) {
-                            [returnString appendFormat:@"<option>%@</option>",optionValue];
+                            [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
                         }
                     }
                 }
@@ -1029,7 +1026,7 @@ form
                         optionValue =[ZCEncodeUtil encodeStringUsingUT8:optionValue];
 
                         //[returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
-                        [returnString appendFormat:@"<option>%@</option>",optionValue];
+                        [returnString appendFormat:@"<option><![CDATA[%@]]></option>",optionValue];
                     }
                 }
                 [returnString appendString:@"</options>"];
