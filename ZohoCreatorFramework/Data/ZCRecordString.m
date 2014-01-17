@@ -659,13 +659,13 @@ form
     //    <field name="Email" ><value>pnandhini@zohocorp.com</value></field>
     //    </update>
     NSMutableString *returnString = [[NSMutableString alloc] init];
-    NSEnumerator *fieldNames =  [[record record] keyEnumerator];
-    NSString *fieldName;
+//    NSEnumerator *fieldNames =  [[record record] keyEnumerator];
+//    NSString *fieldName;
     
     [returnString appendFormat:@"<update ID=\"%@\">",[[record.record objectForKey:@"ID" ]fieldValue] ];
     
     
-    returnString =[returnString stringByAppendingString:[ self recordXMLforSubformRecord:form :record ]];
+    [returnString appendString:[ self recordXMLforSubformRecord:form :record ]];
     return returnString;
 //    
 //    while(fieldName=[fieldNames nextObject])

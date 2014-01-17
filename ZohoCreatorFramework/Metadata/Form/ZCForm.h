@@ -51,4 +51,6 @@ enum UPCOMING_FIELDS {
 - (NSArray*) getFileUploadFields;
 - (NSArray*) getImageFields;
 - (NSArray*) getFieldsByType : (NSInteger) fieldType;
+- (NSInteger) hasUpComingField;
+
 @end

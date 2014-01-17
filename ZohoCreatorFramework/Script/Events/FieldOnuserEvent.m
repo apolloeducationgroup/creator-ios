@@ -44,7 +44,7 @@
             //            [super setDelugeURL:[URLConstructor fieldOnUser:_appLocal :_formLocal:_fieldLocal:paramString]];
             _subform=YES;
 //                subformOnuser=[[SubFormOnUser alloc]initSubFormOnUser:_appLocal :_formLocal :_fieldLocal :paramString :appowner :delegate subformFieldName:subformFieldname rowNumberincaseOFsubofrmField:rownum];
-        subformOnuser=[[SubFormOnUser alloc]initSubFormOnUser:_appLocal formname:_formLocal fieldname:_fieldLocal param:paramString appowner:appowner :delegate subformFieldName:subformFieldname rowNumberincaseOFsubofrmField:rownum isformula:Nil];
+        subformOnuser=[[SubFormOnUser alloc]initSubFormOnUser:_appLocal formname:_formLocal fieldname:_fieldLocal param:paramString appowner:appowner :delegate subformFieldName:subformFieldname rowNumberincaseOFsubofrmField:rownum isformula:NO];
 //            fieldonuser=[[FieldOnUser alloc]initFieldOnUser:_appLocal :_formLocal :_fieldLocal :paramString :delegate:appowner ];
             
         }

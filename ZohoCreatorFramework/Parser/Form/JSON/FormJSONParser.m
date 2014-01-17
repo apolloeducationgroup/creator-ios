@@ -90,7 +90,7 @@
     
     
     
-    id temp = [formGeneralDict valueForKey:@"hasaddonload"];
+//    id temp = [formGeneralDict valueForKey:@"hasaddonload"];
     //NSLog@"type of on laod %@",[temp class]);
     
     BOOL _hasOnLoad = [[formGeneralDict valueForKey:@"hasaddonload"] boolValue];

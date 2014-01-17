@@ -252,7 +252,7 @@
                 }
             }
             else if([_currentElementName isEqualToString:@"CurrencyType"]) {
-                [_zcField setCurrencyType:string];
+                [_zcField setCurrencyType:[string integerValue ]];
             }
             else if([_currentElementName isEqualToString:@"Initial"]) {
                 //NSLog@"Coming to inital ");

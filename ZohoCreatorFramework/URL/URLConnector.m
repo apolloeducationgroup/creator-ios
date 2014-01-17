@@ -93,8 +93,8 @@
             NSString *postLength = [NSString stringWithFormat:@"%d",[postString length]];
             
             //NSLog@"poststring %@",postString);
-            NSData * data=[postString dataUsingEncoding:NSUTF8StringEncoding];
-            NSString * stringafterdecoding = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            NSData * data=[postString dataUsingEncoding:NSUTF8StringEncoding];
+//            NSString * stringafterdecoding = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             
             //NSLog@"string after encding %@",stringafterdecoding);
             
@@ -157,7 +157,7 @@
         
         [postbody appendData:[[NSString stringWithFormat:@"name=\"userfile\"; filename=\"%@.jpg\"\r\n", filename] dataUsingEncoding:NSUTF8StringEncoding]];
         
-        [postbody appendData:[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         NSData *imageData = UIImageJPEGRepresentation(imageView.image, 90);
         [postbody appendData:[NSData dataWithData:imageData]];
         [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -208,7 +208,7 @@
 
 - (void) proceedConnection
 {
-    NSData *data1 = [apiURLRequest HTTPBody];
+//    NSData *data1 = [apiURLRequest HTTPBody];
     
     //NSLog@"vishnu length \n\n\n\n %d \n\n\n\n",     data1.length);
     NSHTTPURLResponse *authenticationResponse= nil;

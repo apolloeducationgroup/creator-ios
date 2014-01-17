@@ -231,7 +231,7 @@
                 NSRange range;
                 range.location =srange.location + 1;
                 range.length = [string length] - (srange.location + 1);
-                NSString *OriginalErrorString =[NSString stringWithString:string];
+//                NSString *OriginalErrorString =[NSString stringWithString:string];
                 NSString *errorMessage = [string substringWithRange:range];
                 errorMessage = [errorMessage stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
                 ;
