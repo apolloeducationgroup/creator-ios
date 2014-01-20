@@ -219,13 +219,9 @@
     _apiRawData=receivedData;
     
     apiResponse = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+    //NSLog@"request url riyaz \n\n\n %@\n\n\n",apiURLRequest.URL.absoluteString);
     
-    
-    NSLog(@"request url riyaz \n\n\n %@\n\n\n",apiURLRequest.URL.absoluteString);
-    
-    NSLog(@"response riyaz \n\n\n %@\n\n\n",apiResponse);
-    
-    
+    //NSLog@"response riyaz \n\n\n %@\n\n\n",apiResponse);
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
