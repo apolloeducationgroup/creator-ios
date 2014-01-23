@@ -42,7 +42,7 @@
     NSString *formMetaXML = [connector apiResponse];
     CustomActionParser *parser = [[CustomActionParser alloc] initScriptParser:formMetaXML];
     _delugeTasks =[parser customResponse].delugeTasks;
-    //NSLog@"deluge tasks %@",_delugeTasks.taskList);
+NSLog(@"deluge tasks %@",_delugeTasks.taskList);
     [self performSelectorOnMainThread:@selector(executeActions) withObject:self waitUntilDone:NO];
 
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
