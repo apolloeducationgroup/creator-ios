@@ -92,7 +92,7 @@
             [postString setString:_paramString];
             NSString *postLength = [NSString stringWithFormat:@"%d",[postString length]];
             
-            //NSLog@"poststring %@",postString);
+            NSLog(@"poststring %@",postString);
 //            NSData * data=[postString dataUsingEncoding:NSUTF8StringEncoding];
 //            NSString * stringafterdecoding = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             
