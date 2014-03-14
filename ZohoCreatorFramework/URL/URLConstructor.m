@@ -786,7 +786,6 @@ https://creator.zoho.com/generateJSAPI.do?
     
     return lookUpchoiceURL;
     
-    //https://creator.localzoho.com/api/charles/xml/sales-data123/form/Lookup_testing/lookup/Sales_Data/options//authtoken=eb7285f9bd1b913cd8ebb8b1abb25d4b&scope=creatorapi&limit=50&appendRows=true&startindex=0&zcRefValue=true&searchValue=cha
     
     
 }
