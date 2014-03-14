@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>E1A72DB9-BA7D-4349-B93A-661781ADE799</string>
+	<string>8B5A0F29-E681-45C6-95D8-0BC80FF52DE2</string>
 	<key>IDESourceControlProjectName</key>
 	<string>ZohoCreatorFramework</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>57F86AD2-24C9-49A5-A3EB-45F6C16177B9</key>
-		<string>https://github.com/zoho/creator-ios.git</string>
+		<key>F33FCD77-9AB2-4C83-87F1-16F29B4A4322</key>
+		<string>https://github.com/zoho/creator-ios</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ZohoCreatorFramework.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>57F86AD2-24C9-49A5-A3EB-45F6C16177B9</key>
+		<key>F33FCD77-9AB2-4C83-87F1-16F29B4A4322</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/zoho/creator-ios.git</string>
+	<string>https://github.com/zoho/creator-ios</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>57F86AD2-24C9-49A5-A3EB-45F6C16177B9</string>
+	<string>F33FCD77-9AB2-4C83-87F1-16F29B4A4322</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>57F86AD2-24C9-49A5-A3EB-45F6C16177B9</string>
+			<string>F33FCD77-9AB2-4C83-87F1-16F29B4A4322</string>
 			<key>IDESourceControlWCCName</key>
 			<string>creator-ios</string>
 		</dict>

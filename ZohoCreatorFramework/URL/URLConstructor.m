@@ -89,15 +89,6 @@ static NSString *SERVICE_NAME;
     
     return formURL;
     
-    //https://creator.zoho.com/api/riyazmd/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&formAccessType=5&zc_lookupCount=1&zc_childappname_1=all-fields&zc_childformname_1=Lookup&zc_childlabelname_1=Lookup_plus_add
-    
-    
-    //https://creator.zoho.com/api/all-fields/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&zc_childappname_1=all-fields&zc_childformname_1=all-fields&zc_childlabelname_1=Lookup_plus_add&zc_lookupCount=1&formAccessType=5
-    
-    //https://creator.zoho.com/api/all-fields/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&zc_childappname_1=Single_Line&zc_childformname_1=Single_Line&zc_childlabelname_1=Lookup_plus_add&zc_lookupCount=1&formAccessType=5
-    //https://creator.zoho.com/api/all-fields/json/all-fields/form/Single_Line/fields/authtoken=803356c6d1cbf52dfabb68f0ce8a99ff&scope=creatorapi&metaData=complete&zc_childappname_1=Single_Line&zc_childformname_1=Single_Line&zc_childlabelname_1=Lookup_plus_add&zc_lookupCount=1&formAccessType=5
-    
-    
 }
 
 + (NSString*) formURL : (NSString*) appLinkName formName : (NSString*) formLinkName viewName:(NSString*) viewLinkName withApplicationOwner: (NSString *) appOwner
